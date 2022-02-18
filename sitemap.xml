@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+<url>
+  <loc>https://unhall0w3d.github.io/</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/10/22/verify-trace-levels-using-sql-cisco-unified-communications.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/08/30/calculating-virtual-memory-usage-on-ucvos-using-snmp.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/07/27/check-phone-and-sip-trunk-registration-with-zeep.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/06/15/vmware-esxi-boot-device-discovery.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/06/14/health-checks-imp-cups-im-presence.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/05/14/building-a-toolbelt-for-unified-communications-using-python.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/05/01/using-beautifulsoup-to-parse-cisco-phone-gui-python.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/04/07/sql-query-cisco-jabber-video-calling-enabled-option.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/02/12/automating-memory-checks-cisco-vcs-python.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2021/01/08/verifying-memory-usage-cisco-vcs-using-python.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://unhall0w3d.github.io/2020/06/01/python-checking-device-registration-cucm.html</loc>
+  <lastmod>2022-02-18T02:49:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
