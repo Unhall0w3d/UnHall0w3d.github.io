@@ -3,7 +3,9 @@ title: "Automating Memory Checks on Cisco VCS using Python"
 date: 2021-02-12T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
-  - Blog
+  - Telepresence
+  - Cisco
+  - Python
 tags:
   - Cisco VCS
   - Cisco Expressway

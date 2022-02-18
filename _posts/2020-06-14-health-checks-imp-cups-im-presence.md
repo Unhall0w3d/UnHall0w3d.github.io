@@ -3,7 +3,8 @@ title: "Health Checks - IMP/CUPS - IM & Presence"
 date: 2021-06-14T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
-  - Blog
+  - Cisco
+  - Unified Communications
 tags:
   - Health Checks
   - Server Health

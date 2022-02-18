@@ -3,7 +3,8 @@ title: "Calculating Virtual Memory Usage on UC VOS using SNMP"
 date: 2021-08-30T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
-  - Blog
+  - Cisco
+  - Unified Communications
 tags:
   - CUCM
   - SNMP

@@ -3,7 +3,7 @@ title: "VMWare ESXi Boot Device Discovery"
 date: 2021-06-15T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
-  - Blog
+  - VMWare
 tags:
   - esxcli
   - Command Line

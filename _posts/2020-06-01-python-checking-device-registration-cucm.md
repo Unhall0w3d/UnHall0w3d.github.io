@@ -1,16 +1,27 @@
 ---
-layout: post
-title:  "Cisco Call Manager - Checking Device Registration using Python"
-date:   2020-06-01
-excerpt: "In this post I talk about a script I wrote up to check for device registrations based on device pool, text file, or all devices on the cluster with the ability to query the existing device pools. Check it out, it was handy then, might be handy now."
-tags: automation ccm cisco ciscophone phone unified communications manager communicationsmanager healthcheck health check phone python python3 register report requests script unregister tool scripts
-sitemap:
-    priority: 0.7
-    lastmod: 2022-02-17
-    changefreq: weekly
+title: "Cisco Call Manager - Checking Device Registration using Python"
+date: 2021-06-01T08:00:00-05:00
+excerpt_separator: "<!--more-->"
+categories:
+  - Cisco
+  - Python
+tags:
+  - CUCM
+  - Python
+  - Python3
+  - Cisco Unified Communications Manager
+  - Callmanager
+  - AXL
+  - automation
+  - scripting
+  - Unified Communications
+  - Cisco UC
+  - Cisco
 ---
 
 Hey! You there! Yes, you! Are you sick of only checking Cisco Phone registration in Cisco Unified Communications Manager through the GUI, having to take the time to log in, wait for web pages to load, have a maximum pagination of 250 phones and having to search strictly by defined search parameters in the GUI? Want to be able to search for a custom list of phones and verify their registration state? What about by device pool, or all phones? Boy, do I have a script for you.
+
+<!--more-->
 
 Now to start, scripting for me isn't necessarily about creating the most efficient, the most feature complete script in the world. It is, however, about creating a purpose built tool (and readme file!) that can be digested, understood, and used by both Junior and Senior engineers alike and produces the expected results reliably. Could I make some changes and remove a function? Probably. Could I condense down some of the lines and loops? Certainly. There is always room for optimization, however, premature optimization can lead you down a rabbit hole and lead to you never completing your script or program at all.
 

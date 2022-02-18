@@ -3,7 +3,8 @@ title: "Check Phone and SIP Trunk Registration with Zeep"
 date: 2021-07-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
-  - Blog
+  - Cisco
+  - Python
 tags:
   - CUCM
   - Python
