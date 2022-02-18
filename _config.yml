@@ -32,7 +32,7 @@ repository: "UnHall0w3d/UnHall0w3d.github.io"
 # Theme settings
 minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 teaser: /assets/images/mainpicture_mountains.jfif
-logo: /assets/images/icon.jpg
+logo: /assets/images/icon.png
 search: true
 og_image: /assets/images/mainpicture_mountains.jfif
 tag_archive:
