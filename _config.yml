@@ -7,86 +7,142 @@
 #
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
+#
+# If you need help with YAML syntax, here are some quick references for you:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
 # Site settings
 # These are used to personalize your new site. If you look in the HTML files,
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: MM
-email:
+
+locale: "en-US"
+title: NOC Thoughts
+subtitle: Mad Rantings of a Caffeine Addicted Engineer
+email: nocthoughts@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-twitter_username: username
-github_username: username
-minimal_mistakes_skin: default
+  NOC Thoughts -  authored by Ken Perry - is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communicationsland of fun... and bugs. Lots of bugs.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+repository: "UnHall0w3d/UnHall0w3d.github.io"
+
+# Theme settings
+minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+teaser: /assets/images/mainpicture_mountains.jfif
+logo: /assets/images/android-chrome-192x192.png
 search: true
+og_image: /assets/images/mainpicture_mountains.jfif
+tag_archive:
+  type: liquid
+  path: /tags/
+atom_feed:
+  hide: true
+
+# Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-30994747-1"
+    anonymize_ip: false
+
+# SEO
+bing_site_verification: ""
+
+# Social sharing
+twitter_username: thoughtsnoc
+github_username: UnHall0w3d
+linkedin_username: kperryuc
+social:
+  name: Kenneth Perry
+  links:
+    - https://twitter.com/thoughtsnoc
+    - https://www.linkedin.com/in/kperryuc
+    - https://github.com/UnHall0w3d
+
+# Site author
+author:
+  name: "Kenneth Perry"
+  location: "Syracuse, NY"
+  avatar: "/assets/images/author-avatar.jpg"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/UnHall0w3d"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/kperryuc"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/thoughtsnoc"
+    - label: "Networking Tools"
+      icon: "fas fa-fw fa-toolbox"
+      url: "https://tools.yaklin.ca"
 
 # Build settings
-markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes
-# Outputting
-permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-include:
-  - _pages
-
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 # Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
 # exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
 #   - Gemfile
 #   - Gemfile.lock
-#   - node_modules
+#   - node_modules/
 #   - vendor/bundle/
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
 
+# Conversion
+markdown: kramdown
+highlighter: rouge
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Outputting
+output_ext: .html
+permalink: /:year/:month/:day/:title:output_ext
+paginate: 10
+paginate_path: /page:num/
+timezone: America/New_York # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
 # Plugins (previously gems:)
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-seo-tag
   - jekyll-gist
   - jekyll-feed
-  - jemoji
   - jekyll-include-cache
 
-author:
-  name   : "First Lastname"
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
-  links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+# Archives
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
 
-footer:
-  links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
-
+# Defaults
 defaults:
   # _posts
   - scope:
@@ -96,20 +152,15 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: true
       share: true
       related: true
+      show_date: true
+      toc: true
+      toc_sticky: true
   # _pages
   - scope:
-      path: "_pages"
+      path: ""
       type: pages
     values:
       layout: single
       author_profile: true
-
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/
