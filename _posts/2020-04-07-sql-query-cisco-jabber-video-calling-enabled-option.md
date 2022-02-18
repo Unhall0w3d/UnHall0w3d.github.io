@@ -1,6 +1,6 @@
 ---
 title: "SQL Query - Cisco Jabber Video Calling Enabled Option"
-date: 2021-04-07T08:00:00-05:00
+date: 2020-04-07T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - SQL

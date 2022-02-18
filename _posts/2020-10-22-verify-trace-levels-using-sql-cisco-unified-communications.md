@@ -1,6 +1,6 @@
 ---
 title: "Verify Trace Levels using SQL on Cisco Unified Communications"
-date: 2021-10-22T08:00:00-05:00
+date: 2020-10-22T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - SQL
