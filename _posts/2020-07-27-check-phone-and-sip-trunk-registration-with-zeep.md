@@ -24,6 +24,12 @@ tags:
   - WSDL
 ---
 
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
+     crossorigin="anonymous">
+     </script>
+</head>
+
 As I probe different ways to pull information from Cisco Unified Communications Manager I often run across other modules that I can try in the future. My last attempts at pulling phone registration status from CUCM utilized requests, XML storing/parsing, DB dips for targeted phone checks and a little more. This time I tried to take a more simple approach… simple in the sense that we don’t dip into the DB, we don’t use ASTSAPI (which has a 200 device limit), and we don’t statically define SOAP messages to send in requests.
 
 <!--more-->

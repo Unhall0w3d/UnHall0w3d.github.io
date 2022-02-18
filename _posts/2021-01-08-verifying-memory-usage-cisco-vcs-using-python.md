@@ -20,6 +20,11 @@ tags:
   - Telepresence
 ---
 
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
+     crossorigin="anonymous">
+     </script>
+</head>
 
 <a href="#" class="image main"><img src="{{ "/assets/images/scriptss1.PNG" | absolute_url }}" alt="" /></a>
 

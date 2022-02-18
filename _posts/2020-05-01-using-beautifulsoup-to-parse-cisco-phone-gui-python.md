@@ -22,6 +22,12 @@ tags:
   - Database
 ---
 
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
+     crossorigin="anonymous">
+     </script>
+</head>
+
 <span class="image fit"><img src="{{ "/assets/images/beautifulsoup4.png" | absolute_url }}" alt="" /></span>
 
 I want to start this blog post off by prefacing the below script I'm providing by stating that I am not formally trained, nor have I studied at length Python or coding in general. I completed a Visual Basic VB.Net 2005 college level course back in highschool (11 years ago, as of 2020). From there I did absolutely nothing related to coding. About 3-4 years ago I had a small hand in producing a sample script (in bash) that would log into a Cisco Unified Communications Manager (or IM&P, or CUC, or CER... you get the deal. Any VOS appliance) and run a list of commands against the server CLI and pipe all output to a text file. Not only was it shoddy, but it ran commands against a server even if we knew there would be no output. For example, "show cuc cluster status" against a CUCM is going to error out as a command... but that was my first attempt at automating pulling health check data. Later on this project was picked up by my colleagues and converted first to PHP, then Python -- and then expanded to include a whole host of UC related technologies.

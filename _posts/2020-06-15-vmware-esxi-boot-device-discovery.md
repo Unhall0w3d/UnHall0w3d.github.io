@@ -15,6 +15,12 @@ tags:
   - Unix
 ---
 
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
+     crossorigin="anonymous">
+     </script>
+</head>
+
 <span class="image fit"><img src="{{ "/assets/images/esxibootdevicediscovery.png" | absolute_url }}" alt="" /></span>
 The view after SSHing into an ESXi Host. In this picture we check the version of ESXi running on the system.
 

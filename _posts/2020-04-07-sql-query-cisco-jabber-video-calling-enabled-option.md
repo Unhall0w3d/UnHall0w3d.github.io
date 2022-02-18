@@ -21,6 +21,12 @@ tags:
   - Database
 ---
 
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
+     crossorigin="anonymous">
+     </script>
+</head>
+
 Another day, another query. This time the request was not up for interpretation in terms of 'Can you pull this kind of data from CUCM?' where I can take a look at what might provide the most useful, actionable data relating to what was asked for... no. This time we get a screenshot of the Product Specific Configuration Layout element of "Video Calling" (see below). We're able to do this but it's not as straight forward as a typical query against the 'device' table for an attribute like the 'description' of a phone.
 
 <!--more-->
