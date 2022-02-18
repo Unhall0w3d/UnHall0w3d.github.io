@@ -1,5 +1,5 @@
 ---
-title: "Updating Primary Extensions on End User Profile - The Fun Way"
+title: "Updating 'Accept and Relay' SMTP Relay Addresses En Masse"
 date: 2020-01-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
