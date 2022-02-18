@@ -44,23 +44,23 @@ Reporting output is stored as two .txt files with one device's status per line. 
 
 ## Invoking the Script and Selecting an Option
 
-<span class="image fit"><img src="{{ "/images/phoneregcheck1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck1.png" | absolute_url }}" alt="" /></span>
 
 ## User Input Collection
 
-<span class="image fit"><img src="{{ "/images/phoneregcheck2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck2.png" | absolute_url }}" alt="" /></span>
 
 ## Option 1 Only - Device Pool Selection
 
-<span class="image fit"><img src="{{ "/images/phoneregcheck3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck3.png" | absolute_url }}" alt="" /></span>
 
 ## Informational...
 
-<span class="image fit"><img src="{{ "/images/phoneregcheck4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck4.png" | absolute_url }}" alt="" /></span>
 
 ## Status Report
 
-<span class="image fit"><img src="{{ "/images/phoneregcheck5.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck5.png" | absolute_url }}" alt="" /></span>
 
 And there we go. Looking at the contents of the file we can see some of the data related to the phones if registered. For unregistered devices we simply state that the device isn't registered.
 

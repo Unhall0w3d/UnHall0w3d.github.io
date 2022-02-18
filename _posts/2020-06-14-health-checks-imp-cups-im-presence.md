@@ -20,7 +20,7 @@ tags:
   - Restart
 ---
 
-<span class="image fit"><img src="{{ "/images/rtmt1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/rtmt1.png" | absolute_url }}" alt="" /></span>
 
 And here it is, my list of commands and checks that I run against IM & Presence nodes for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide.
 
@@ -80,23 +80,23 @@ run sql select * from enterprisenode - Reports back IM&P node information and su
 
 ## Alert Central - RTMT
 
-<span class="image fit"><img src="{{ "/images/rtmt2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/rtmt2.png" | absolute_url }}" alt="" /></span>
 
 ## System Summary - RTMT
 
-<span class="image fit"><img src="{{ "/images/rtmt3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/rtmt3.png" | absolute_url }}" alt="" /></span>
 
 ## IM&P Summary - RTMT
 
-<span class="image fit"><img src="{{ "/images/rtmt4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/rtmt4.png" | absolute_url }}" alt="" /></span>
 
 ## Cisco Jabber Summary - RTMT
 
-<span class="image fit"><img src="{{ "/images/rtmt5.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/rtmt5.png" | absolute_url }}" alt="" /></span>
 
 ## Database Summary - RTMT
 
-<span class="image fit"><img src="{{ "/images/rtmt6.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/rtmt6.png" | absolute_url }}" alt="" /></span>
 
 For health checks, I don't download Reports from the Cisco Unified Reporting feature, as it does not contain data that I'd want to refer to for verification. They are however helpful, at times, in troubleshooting issues on the system and getting deeper insights into database replication/setup, for example.
 
@@ -104,7 +104,7 @@ Another useful set of tools are the System Troubleshooter and System Dashboard l
 
 ## System Dashboard - IM&P
 
-<span class="image fit"><img src="{{ "/images/systemdashboard.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/systemdashboard.png" | absolute_url }}" alt="" /></span>
 
 The system dashboard provides you an overview of the entire system. Critical to check for most deployments are the System, Topology, and Cisco Jabber panels. If Inter-Clustering, Federated Domains, Calendar Integration, or Microsoft RCC Control features are used in your environment it is advised to review these panels. The page view is below. The most critical for me to check is that the Troubleshooter Status is a nice green check mark, we don’t have any unassigned nodes and no unassigned users.
 
@@ -114,18 +114,18 @@ The system troubleshooter will initiate a slew of built in tests against the fea
 
 ## System Troubleshooter and Sync Agent Troubleshooter
 
-<span class="image fit"><img src="{{ "/images/systemtroubleshooter.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/systemtroubleshooter.png" | absolute_url }}" alt="" /></span>
 
 ## Presence Engine, SIP Proxy, Microsoft RCC, Calendaring and Inter-Clustering Troubleshooter
 
-<span class="image fit"><img src="{{ "/images/systemtroubleshooter2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/systemtroubleshooter2.png" | absolute_url }}" alt="" /></span>
 
 ## Topology, Cisco Jabber, External Database, 3rd Party Compliance & LDAP Connection Troubleshooter
 
-<span class="image fit"><img src="{{ "/images/systemtroubleshooter3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/systemtroubleshooter3.png" | absolute_url }}" alt="" /></span>
 
 ## LDAP, XCP, and User Troubleshooter
 
-<span class="image fit"><img src="{{ "/images/systemtroubleshooter4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/systemtroubleshooter4.png" | absolute_url }}" alt="" /></span>
 
 I hope this list of checks is useful the next time you implement changes, upgrades, reboots or other impactful work on your Cisco IM&P deployment. Understanding the state of your system before a change (and documenting it well) will allow you to more quickly spot problems on the other side. If you have any steps I’ve neglected here, please feel free to let me know! I’m always looking to expand my skillset and knowledge of useful commands and tools! Well, that's it for now! Make sure to follow the blog to get alerts on new posts, check out the social links, or NOC Thoughts Discord!

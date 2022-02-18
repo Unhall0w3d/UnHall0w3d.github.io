@@ -21,7 +21,7 @@ tags:
   - Database
 ---
 
-<span class="image fit"><img src="{{ "/images/nocthoughtstb1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/nocthoughtstb1.png" | absolute_url }}" alt="" /></span>
 
 In my last post I share a script that I created with the help and guidance of some current and former colleagues. It used BeautifulSoup and regular expression to parse html code and return some data to determine the Device Name, Registration State and Model Number of a given phone regardless of the phone type, it just needed to be http accessible and not require a login. Though that last requirement hasn't changed (yet), I had issues appropriately searching for regular expressions using BS4.
 

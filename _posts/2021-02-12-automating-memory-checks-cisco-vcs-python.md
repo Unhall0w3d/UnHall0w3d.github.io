@@ -167,7 +167,7 @@ If you require invoking a virtual environment you likely already know how to do 
 
 Finally, we’ll want to take a look at how the data is reported. The email should comain in from “name@domain.com” as configured on your Linux/SMTP — e.g. (LinuxVM1@voip.local), the subject should be “Expressway Healthchecks” and the body will contain the below data. It could be sent as an attachment, however, I did not want to deal with encoding/constructing/composing the email - if a more secure method is desired you may want to do this another way. I was able to set up a rule in Outlook for “Subject Contains” and “Sender Is” to direct it to a new folder.
 
-<span class="image fit"><img src="{{ "/images/sanitizedemail.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/sanitizedemail.png" | absolute_url }}" alt="" /></span>
 
 Example Email sent by the Script containing output from Expressway/VCS
 

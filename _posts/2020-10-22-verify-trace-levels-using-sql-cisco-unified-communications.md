@@ -21,7 +21,7 @@ tags:
   - Cisco
 ---
 
-<a href="#" class="image main"><img src="{{ "/images/verifytracelevels.PNG" | absolute_url }}" alt="" /></a>
+<a href="#" class="image main"><img src="{{ "/assets/images/verifytracelevels.PNG" | absolute_url }}" alt="" /></a>
 
 Hey there! I bet you’ve got experience troubleshooting issues in a UC VOS device, like CallManager, UCCX, CER or otherwise… and you’ve likely had to increase trace levels to Detailed because of a request from Cisco TAC or because you know that the detailed tracing is needed to diagnose the issue and see what’s causing it. And I bet you always lower those trace levels back to what they were when you started, right? Well… we might tell ourselves we do, but we’re all human and we all forget things from time to time.
 

@@ -15,7 +15,7 @@ tags:
   - Unix
 ---
 
-<span class="image fit"><img src="{{ "/images/esxibootdevicediscovery.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/esxibootdevicediscovery.png" | absolute_url }}" alt="" /></span>
 The view after SSHing into an ESXi Host. In this picture we check the version of ESXi running on the system.
 
 Oh how I love ISV1 SmartNET contracts. Provided that we have an ISV1 contract available we’re able to contact Cisco TAC to assist in VMWare ESXi Hypervisor issues. It’s a wonderful thing, really, as it provides us with engineers specialized in supporting the hypervisor in a more in depth way, and with respect to the Cisco UCS chassis hardware. Now, Cisco typically sends out initial information gathering emails when an SR is open. For Hypervisor issues the most common question I am asked is “what is the hypervisor booting from?”.

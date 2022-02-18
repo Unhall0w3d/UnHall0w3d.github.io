@@ -19,7 +19,7 @@ tags:
 ---
 
 
-<a href="#" class="image main"><img src="{{ "/images/scriptss1.PNG" | absolute_url }}" alt="" /></a>
+<a href="#" class="image main"><img src="{{ "/assets/images/scriptss1.PNG" | absolute_url }}" alt="" /></a>
 
 Today I had the same question that many, many people have had throughout history: “How do I do *this particular thing* better, or faster?” or, in the IT space, how do I automate this? What is this exactly, you might ask? Well, it’s in the title... but to explain what I was doing we’re going to need a bit of story time.
 
