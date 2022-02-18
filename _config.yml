@@ -77,9 +77,9 @@ author:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/thoughtsnoc"
-    - label: "Networking Tools"
-      icon: "fas fa-fw fa-toolbox"
-      url: "https://tools.yaklin.ca"
+    - label: "Discord"
+      icon: "fas fa-fw fa-discord"
+      url: "https://discord.gg/VSAJUEyRjC"
 
 # Build settings
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
