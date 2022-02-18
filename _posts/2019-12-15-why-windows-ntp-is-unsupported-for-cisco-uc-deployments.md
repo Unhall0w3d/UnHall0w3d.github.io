@@ -1,6 +1,6 @@
 ---
 title: "Why Windows NTP (sNTP) is Unsupported for Cisco UC Deployments"
-date: 2020-12-15T08:00:00-05:00
+date: 2019-12-15T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Unified Communications
