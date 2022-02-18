@@ -1,6 +1,6 @@
 ---
-title: "Health Checks - CUC - Unity Connection"
-date: 2019-11-25T08:00:00-05:00
+title: "Health Checks - CUCM - CallManager"
+date: 2020-06-14T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Cisco
@@ -10,10 +10,10 @@ tags:
   - Server Health
   - Cisco
   - Cisco UC
-  - Unity Connection
+  - Cisco Callmanager
+  - Callmanager
+  - CUCM
   - Unified Communications
-  - CUC
-  - Voicemail
   - Action Plan
   - Reboot
   - Restart
@@ -27,13 +27,13 @@ tags:
 
 <span class="image fit"><img src="{{ "/assets/images/cuchealthcheck1.png" | absolute_url }}" alt="" /></span>
 
-Now for the third technology on my list, Cisco Unity Connection. And for this I've provided the list of commands and checks that I run against CUC nodes (7.x-12.x)  for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide, or that would affect call processing.
+And here it is, my list of commands and checks that I run against CUCM nodes (7.x-12.x)  for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide.
 
 I pull this data to refer back to in the event that the change has disrupted dbrepliction, endpoint registration status, inter-cluster communication, intra-cluster communication, service status, anything. Consider this output a "CYA" for later. Something to refer back to to confirm all is as it was prior to the change, with whatever exceptions should exist (e.g. IP address changed should reflect in post-change "show network eth0 detail" output.
 
-So without further adieu, this is my personal list
+So without further adieu, this is my personal list:
 
-## Health Check Commands [CUC]
+## Health Check Commands [CUCM]
 
 ### show status
 
@@ -88,11 +88,9 @@ Provides a list of all core files found. Core files are generated whenever a ser
 
 *To analyze the backtrace of a core file, issue utils core active analyze <filename>*
 
-### show cuc cluster status
+### show risdb query misc phone phonefailed cmnode cmgroup cti ctiextn uone huntlist ctimlist gateway sip mediaresource h323
 
-Command used to verify the current state of the cluster. This will display whether the Pub or Sub is Primary, what node is Secondary, what the status is (e.g. Split Brain Resolution, Normal, etc.).
-
-*It is not advised to proceed with changes when the cluster is in an unfavorable state, such as Sub acting Primary or Split Brain Resolution. The underlying issue (service crashing, WAN/LAN outages, IOWAIT, etc.) should be resolved prior to fixing SBR.*
+Pulls the RIS Database data for the related entries. Assists in confirming all endpoints, such as media resources, h323 devices, MGCP gateways, SIP Trunks, Hunt Lists and more register. Allows us to check the registration state pre and post change.
 
 ## Screenshots
 
@@ -104,44 +102,20 @@ Command used to verify the current state of the cluster. This will display wheth
 
 <span class="image fit"><img src="{{ "/assets/images/cuchealthcheck3.png" | absolute_url }}" alt="" /></span>
 
-In addition to the above, it may be prudent to log into CUCM and verify the state of the SIP Trunk to CUC (SIP Integration) or voicemail ports (SCCP Integration). There's a few additional elements from the GUI we should collect too, and I've listed them below.
+## Registered Phones/Devices (Cluster) -  RTMT
 
-### Cisco Unified CM Administration > Device > Trunk
+<span class="image fit"><img src="{{ "/assets/images/cucmhealthcheck4.png" | absolute_url }}" alt="" /></span>
 
-<span class="image fit"><img src="{{ "/assets/images/videocalling4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/cucmhealthcheck5.png" | absolute_url }}" alt="" /></span>
 
-### Cisco Unity Connection Administration > Mailbox Storage > Mailbox Stores
+## Database Summary - RTMT
 
-Confirm status of the mailbox store, current usage details.
+<span class="image fit"><img src="{{ "/assets/images/cucmhealthcheck6.png" | absolute_url }}" alt="" /></span>
 
-### Cisco Unity Connection Serviceability > Tools > Cluster Management
+For health checks, I don't download Reports from the Cisco Unified Reporting feature, as it does not contain data that I'd want to refer to for verification. They are however helpful, at times, in troubleshooting issues on the system and getting deeper insights into database replication/setup, for example.
 
-Take a screenshot to identify the status of each node, we should see the Pub as Primary and Sub as Secondary. This is akin to "show cuc cluster status" in the CLI.
+And I typically don't just want to trust the CUCM node alone, I also want to refer to RTMT and endpoint [IOS/IOS-XE/CUC/EXPRESSWAY/etc] output for devices that are associated with the change and may be indirectly impacted. Those devices are not covered here, please refer to the relevant health check post for commands to review from the far end.
 
-### Log in to Enterprise/Prime License Manager
+So what do you look for when you perform scheduled work? Are you the run-and-gun type that just performs the changes and shrugs at health checks (heathen!) or do you verify against your own personal check list of commands? I'd love to hear it! Think I forgot something important? Let me know! We can all benefit from getting in the habit of defining and following better practices and documentation strategies!
 
-Take note of any License or Product Instance Alerts. Also verify that the Last Successful Synchronization was recent. If desired, prompt a manual sync. Also verify License Usage for the proper instance.
-
-## Verification Steps
-
-### Leave a voicemail
-
-Retrieve it from an internal phone and externally via Global Access Number (or relevant DID that routes in to Unity).
-
-### Verify MWI
-
-Ensure it turns on/off as VM is left/retrieved.
-
-### Verify Message Timestamps
-
-Ensure that there are no issues related to the timing with which messages are sent. If voicemail is left at 10:13, it shouldn't show a massively different date/time.
-
-### System Call Handlers
-
-If you are utilizing SCH, verify the proper Greetings are playing for relevant call handlers. Verify the TUI options work appropriately.
-
-These checks can be performed prior to the scheduled (or impromptu) work, as well as after for comparisons sake, and to document the relative health of the applications at the time. This can be useful in identifying that your change didn't break something as all was tested good at 2AM on Saturday Morning, and that something else likely broke between then and 8AM on Monday when folks start complaining.
-
-So what do you look for when you perform scheduled work? I'd love to hear it! Think I forgot something important? Let me know! We can all benefit from getting in the habit of defining and following better practices and documentation strategies!
-
-That's it for now! Make sure to follow the blog to get alerts on new posts, check out my Twitter (@kperryuc) where you can also ask UC and DC related questions, suggest post topics, or talk about anything!
+That's it for now! Make sure to follow the blog to get alerts on new posts, check out my Twitter (@kperryuc) where you can also ask UC and DC related questions, suggest post topics, or talk about anything! You can also join our Discord!
