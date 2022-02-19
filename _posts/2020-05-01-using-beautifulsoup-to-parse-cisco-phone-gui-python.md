@@ -1,5 +1,5 @@
 ---
-title: "Using BeautifulSoup To Parse Cisco Phone WebGUI - Python"
+title: "Using BS4 To Parse Cisco Phone WebGUI"
 date: 2020-05-01T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

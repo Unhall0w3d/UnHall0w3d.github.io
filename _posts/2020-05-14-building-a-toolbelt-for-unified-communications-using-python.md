@@ -1,5 +1,5 @@
 ---
-title: "Building a Toolbelt for Unified Communications - Using Python"
+title: "Building a Toolbelt for UC w/ Python"
 date: 2020-05-14T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

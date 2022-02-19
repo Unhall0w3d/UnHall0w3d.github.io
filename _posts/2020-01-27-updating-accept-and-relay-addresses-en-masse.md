@@ -1,5 +1,5 @@
 ---
-title: "Updating 'Accept and Relay' SMTP Relay Addresses En Masse"
+title: "Bulk Accept and Relay Config Update SQL"
 date: 2020-01-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

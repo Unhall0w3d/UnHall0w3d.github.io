@@ -1,5 +1,5 @@
 ---
-title: "Updating Primary Extensions on End User Profile - The Fun Way"
+title: "Updating Primary Extensions The Fun Way"
 date: 2020-02-06T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

@@ -1,5 +1,5 @@
 ---
-title: "Is Home Cluster Enabled? What Service Profile Is Assigned?"
+title: "Home Cluster And Service Profile Check"
 date: 2019-06-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
