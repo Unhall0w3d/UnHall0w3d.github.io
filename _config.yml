@@ -15,7 +15,7 @@ email: nocthoughts@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   NOC Thoughts -  authored by Ken Perry - is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communicationsland of fun... and bugs. Lots of bugs.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://unhall0w3d.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 repository: "UnHall0w3d/UnHall0w3d.github.io"
 
