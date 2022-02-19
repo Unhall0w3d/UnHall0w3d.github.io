@@ -19,6 +19,7 @@ On the personal side I am a father to my son, Max, husband to my Anthropologist 
 I started the NOC Thoughts blog as a way to give back to the IT community, bloggers, and folks that helped me along my way as well. Whether it was command syntax, use cases, informational posts or the occasionally necro’d thread on Cisco Support Forums holding the ever-so-important correct answer, I learned and gained a lot from the free flow of information from one engineer to another, and I want to be a part of that beautiful process.
 
 And as always, my thoughts, comments, and posts are my own and do not reflect on any other individual or company by which I associate.
+
 ## Certifications
 
 [CCNP Collaboration](https://www.youracclaim.com/badges/2d279524-027b-4122-9464-4f0a7c8ff84a/public_url)
