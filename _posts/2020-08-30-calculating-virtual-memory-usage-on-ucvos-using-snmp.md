@@ -1,6 +1,6 @@
 ---
 title: "Calculating Virtual Memory Usage on UC VOS using SNMP"
-layout: post
+layout: single
 date: 2020-08-30T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

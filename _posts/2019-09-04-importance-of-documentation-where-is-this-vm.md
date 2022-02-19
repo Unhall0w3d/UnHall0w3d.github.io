@@ -1,6 +1,6 @@
 ---
 title: "Importance of Documentation - ESXi to VM"
-layout: post
+layout: single
 date: 2019-09-04T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

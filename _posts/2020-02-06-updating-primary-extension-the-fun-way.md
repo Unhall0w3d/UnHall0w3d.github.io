@@ -1,6 +1,6 @@
 ---
 title: "Updating Primary Extensions The Fun Way"
-layout: post
+layout: single
 date: 2020-02-06T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

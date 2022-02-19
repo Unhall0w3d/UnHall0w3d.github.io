@@ -1,6 +1,6 @@
 ---
 title: "Using BS4 To Parse Cisco Phone WebGUI"
-layout: post
+layout: single
 date: 2020-05-01T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

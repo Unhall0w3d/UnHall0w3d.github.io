@@ -1,6 +1,6 @@
 ---
 title: "CDR Export to Billing Server Failing"
-layout: post
+layout: single
 date: 2019-07-25T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

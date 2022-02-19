@@ -1,6 +1,6 @@
 ---
 title: "Automating Memory Checks on Cisco VCS using Python"
-layout: post
+layout: single
 date: 2021-02-12T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

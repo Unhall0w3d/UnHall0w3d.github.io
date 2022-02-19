@@ -1,6 +1,6 @@
 ---
 title: "Who has Jabber? Where are they?"
-layout: post
+layout: single
 date: 2020-02-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

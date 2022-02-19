@@ -1,6 +1,6 @@
 ---
 title: "Securing SCCP Media Resources in IOS"
-layout: post
+layout: single
 date: 2019-11-18T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

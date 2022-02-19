@@ -1,6 +1,6 @@
 ---
 title: "Call Block or IOS/XE on SIP/H.323"
-layout: post
+layout: single
 date: 2019-08-21T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

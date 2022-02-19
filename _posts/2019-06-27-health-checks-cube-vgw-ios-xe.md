@@ -1,6 +1,6 @@
 ---
 title: "Health Checks - CUBE/VGW - IOS/XE"
-layout: post
+layout: single
 date: 2019-06-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

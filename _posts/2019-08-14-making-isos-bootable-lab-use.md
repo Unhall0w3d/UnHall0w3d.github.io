@@ -1,6 +1,6 @@
 ---
 title: "Making ISOs Bootable for Lab Use"
-layout: post
+layout: single
 date: 2019-08-14T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

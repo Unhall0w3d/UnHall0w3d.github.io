@@ -1,6 +1,6 @@
 ---
 title: "Home Cluster And Service Profile Check"
-layout: post
+layout: single
 date: 2019-06-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

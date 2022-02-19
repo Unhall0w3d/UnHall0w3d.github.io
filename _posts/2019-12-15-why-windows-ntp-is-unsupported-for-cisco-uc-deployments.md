@@ -1,6 +1,6 @@
 ---
 title: "Windows NTP Is Not Supported In Cisco UC"
-layout: post
+layout: single
 date: 2019-12-15T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
