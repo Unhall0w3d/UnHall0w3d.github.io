@@ -12,7 +12,6 @@ tags:
   - Cisco UC
   - IM & Presence
   - IM&P
-  - IM & P
   - Unified Communications
   - Cisco Jabber
   - Jabber
