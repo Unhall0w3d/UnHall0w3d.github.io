@@ -101,24 +101,14 @@ The exception to being easy and straight forward is the Virtual Network Editor.
     %USERPROFILE%\Downloads\?WinServ2012_r2.iso (or relevant iso location)File > New Virtual Machine
 4. Version of Windows to Install
     Windows Server 2012 R2 Standard
-5. Full Name
-    <user defined>
-6. Password/Confirm
-    <user defined>
+5. Full Name - User defined
+6. Password/Confirm - User defined
 7. Hit Next w/o a CD-Key
     Click Yes
-8. VM Name
-    <user defined>
-9. Location
-    <user defined>
-    I stored this in E:\VirtualMachines\Win2012R2
-10. Size
-    60GB
-    Store as a Single Disk
-11. Customize Hardware
-    Change Network Adapter 0
-        NAT --> Bridged
-
+8. VM Name - User defined
+9. Location - User defined
+10. Size - 60GB - Store as a Single Disk
+11. Customize Hardware - Change Network Adapter 0 - NAT --> Bridged
 12. Save
 13. Power On
 
