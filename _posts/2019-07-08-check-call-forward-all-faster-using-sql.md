@@ -1,5 +1,5 @@
 ---
-title: "Check Call orward All Configs Faster Using SQL"
+title: "Check Call Forward All Configs Faster Using SQL"
 date: 2019-07-08T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
