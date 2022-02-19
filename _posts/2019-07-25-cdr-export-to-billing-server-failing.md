@@ -28,6 +28,8 @@ tags:
 
 Billing servers are used in UC environments to collect CDR/CMR data and display them (ideally in a much better fashion than CDR Analysis & Reporting), make them searchable and provide insights into cause codes, call durations, endpoint utilization and more. And when they work, they typically work great. Could be Variphy, Splunk, a custom billing server you're developing. Doesn't really matter which it is, but typically as long as the user account has permissions for SFTP, proper access to the desired directory, and the IP is reachable on Port 22 it all just works. Until it doesn't.
 
+<!--more-->
+
 In our configuration for the Billing Servers we operate on an Active/Standby config with a Virtual IP that is shared between the two. When a failover occurs the Secondary becomes active on the VIP and takes over. We just so happen to have had a failover on 7/15/2019 and have not received CDRs since.
 
 ## Review and Troubleshooting
