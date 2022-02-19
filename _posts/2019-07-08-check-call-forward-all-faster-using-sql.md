@@ -16,12 +16,6 @@ tags:
   - Database
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 There's an SQL query I run against CUCM Pub in instances where a user has call forward enabled and I have a suspicion this is causing the problem, but I don't always want to build out an SSH port forwarding tunnel to get into the GUI and check. This can be used when you want to check a single user, or, for every call forward enabled in the environment.
 
 <!--more-->

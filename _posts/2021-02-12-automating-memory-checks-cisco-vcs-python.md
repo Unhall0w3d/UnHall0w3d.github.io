@@ -20,12 +20,6 @@ tags:
   - Telepresence
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 ## Relevance
 
 As a follow-up to my prior post [Verifying Memory Usage on VCS using Python](https://www.nocthoughts.com/blog/verifying-memory-usage-on-cisco-vcsexpressway-using-python-paramiko) I’d like to spotlight some changes that were made to the script on GitHub, why the changes were made, point out the readme file and also provide some examples of the output/emails that serve as notifications to the engineers responsible for monitoring the VCS/Expressway’s memory utilization.

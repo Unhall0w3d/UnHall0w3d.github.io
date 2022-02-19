@@ -19,12 +19,6 @@ tags:
   - Log Review
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 <span class="image fit"><img src="{{ "/assets/images/uccxcalldrop1.png" | absolute_url }}" alt="" /></span>
 
 This one's a bit of a mess, and I'll provide some context that I did not have the benefit of knowing going into it. The issue was reported as "Calling XXX XXX XXXX and pressing Option 2 for French results in the call dropping." I was given the 800 number to call to replicate the issue, which was nice. No known date for the last time it worked, no known changes to the UCCX script or environment that would impact this particular call flow. I've heard this a few times.

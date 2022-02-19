@@ -16,12 +16,6 @@ tags:
   - Database
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 So given that I work for a Virtual NOC/MSP in a Day 2 setting it's fairly often that I'm thrown into a random request for data. It could be for the Home Cluster enablement on a given (or all) End Users on UCM (we have a post for that!) or it could be for a dump of all the dialable numbers in the environment, or all route patterns.. or anything. This query is one I like to use when the meat and potatoes of what we need is the DN/Pattern, Description, and possible modifications that would take place during digit analysis.
 
 <!--more-->

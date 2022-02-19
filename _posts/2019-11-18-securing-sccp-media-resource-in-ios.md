@@ -17,12 +17,6 @@ tags:
   - Unified Communications
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 An interesting change I was involved in recently that was more of an oddity to me was setting up a CA in IOS, signing a certificate for Media Resources and registering it against a secure CCM cluster. Most of the clients I have had the pleasure of working with did not secure, or need to secure their UC environment for SRTP. And as many folks will say, you can read about something all you want but you don't really get a firm grasp on it until you get your feet wet.
 
 <!--more-->

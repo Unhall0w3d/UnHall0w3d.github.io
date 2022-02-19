@@ -15,12 +15,6 @@ tags:
   - Cisco
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 So once again it's lab season as I'll be re-certifying in the CCNP Collaboration exam, as I don't want to lose my CCNP Data Center/Collab and my CCNA Route/Switch and Wireless certifications. I definitely don't want to run the gauntlet taking the exams again, even with the new cert system Cisco announced at Cisco Live! this year. With that said one of the troubles of setting up the lab (for me) is often getting my hands on a bootable image of UCM. Every time I try and make an image bootable using something like Ultra ISO, Magic ISO or similar tools there's always a size limit (300MB) or some other issue that gets in the way of making the ISO image I do have on hand bootable.
 
 <!--more-->

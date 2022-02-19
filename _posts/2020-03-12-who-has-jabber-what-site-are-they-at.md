@@ -18,12 +18,6 @@ tags:
   - Informix
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 The requests just keep coming... and always for a slightly different set of information requiring the combination of multiple SQL queries or the development of a new one if I don't have a base query to build off of. For this request the title says it all - who has a Jabber profile/uses Jabber and what site are they at? But wait, just as I thought this request was complete, like a self-fulfilling prophecy another set of data was requested. Take a look below to see what was added to the query and what the output looks like once we make the change.
 
 <!--more-->

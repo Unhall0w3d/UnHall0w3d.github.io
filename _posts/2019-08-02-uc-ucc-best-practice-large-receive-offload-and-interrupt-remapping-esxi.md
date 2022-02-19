@@ -21,12 +21,6 @@ tags:
   - UCCX
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 Over the past few years I've been involved fairly often (from the ESXi/UCS perspective) in troubleshooting issues with network latency/connectivity wherein only a single VM is impacted. One example that comes to mind is  UCC VMs that encounter network issues and delays over the private link between the A and B Sides. Usually the network team gets involved first to ensure there were no issues on the private link itself, or any devices associated with it. The VMs are also cleared as a cause of the issue during initial review (when seeing the issue typically occurs downstream).
 
 <!--more-->

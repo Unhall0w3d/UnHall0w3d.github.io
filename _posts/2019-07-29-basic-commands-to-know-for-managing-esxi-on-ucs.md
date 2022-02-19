@@ -14,12 +14,6 @@ tags:
   - UCS-C
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 Every so often I need to perform a CIMC Firmware upgrade due to a bug, such as the infamous memory leak per bug [CSCun88303](https://quickview.cloudapps.cisco.com/quickview/bug/CSCun88303), [CSCus63934](https://quickview.cloudapps.cisco.com/quickview/bug/CSCus63934); noted under Field Notice [FN63943](https://www.cisco.com/c/en/us/support/docs/field-notices/639/fn63943.html) for which I've either drafted the Method of Procedure document (to detail the upgrade), or have actually performed the upgrade well over 50 times for this bug alone. (This is not a flex. It wasn't fun.) When I do, part of the initial steps in the process after determining we are hitting the bug is, what CIMC version is compatible with the ESXi version we are running, and based on the bug details, what version can we move to that has the fix that our chassis supports.
 
 <!--more-->

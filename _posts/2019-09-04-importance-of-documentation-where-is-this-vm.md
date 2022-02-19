@@ -12,12 +12,6 @@ tags:
   - RVTools
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 ## Preface
 
 Now, if you're in an environment where you have access to vCenter, or, you have a small deployment in which you only have two ESXi hosts with a Primary and Secondary/DR site, this likely isn't going to help you. Similarly, if you're using a Network Monitoring service or product that has API polling capabilities, you may already have this visualized for you.

@@ -20,12 +20,6 @@ tags:
   - Gateway
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 As mentioned on the blog, I work for a Managed Services Provider. As such I am not a prototypical System Admin that knows a particular environment in and out, backwards and sideways. Often times I am injected into environments and issues that have been ongoing for hours, or days, with only the notes from the previous engineers to go off of. Other times I'm tasked with performing software upgrades or configuration changes based on recommendations from another engineer. There's no quick reference or dashboard that I can check in the environment to say "YEP, we're all good, let's move ahead!". I have to log in to the devices manually and pull a set of output to verify the health of a device before I want to proceed.
 
 <!--more-->

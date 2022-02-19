@@ -16,12 +16,6 @@ tags:
   - UCCE
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 So here's another "Priority 1" or "Sev 1" issue that I troubleshot last week, and oh boy, it was an interesting one.
 
 <!--more-->

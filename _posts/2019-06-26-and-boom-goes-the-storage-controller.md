@@ -17,12 +17,6 @@ tags:
   - Virtualization
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 Story time. It's a wonderful day in early April. The birds are singing, Spring is upon us. We had a lovely drive in to work, it was an easy morning. We break for lunch and have some pizza delivered to work for the team to share. Just a great day.
 
 <!--more-->

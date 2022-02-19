@@ -18,12 +18,6 @@ tags:
   - vCenter
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 Here we go. Setting up a home lab for vCSA, ESXi and Windows Server for DNS. This is the guide I created, and steps I followed to get the very beginnings of my home lab set up. This won't work for everyone as I understand most of us don't run around with overblown home systems, but if you have the spare hardware it's very possible to get some exposure to the UC Servers in lab.
 
 This lab setup makes use of VMWare Workstation 14/15, and utilizes the hardware I have in my home PC in order to split up resources and get the most bang for my buck.

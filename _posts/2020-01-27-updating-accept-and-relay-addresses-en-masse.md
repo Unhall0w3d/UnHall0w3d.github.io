@@ -17,12 +17,6 @@ tags:
   - SQL
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 <span class="image fit"><img src="{{ "/assets/images/acceptandrelay1.png" | absolute_url }}" alt="" /></span>
 
 ## Update

@@ -19,12 +19,6 @@ tags:
   - Cisco
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 Hey! You there! Yes, you! Are you sick of only checking Cisco Phone registration in Cisco Unified Communications Manager through the GUI, having to take the time to log in, wait for web pages to load, have a maximum pagination of 250 phones and having to search strictly by defined search parameters in the GUI? Want to be able to search for a custom list of phones and verify their registration state? What about by device pool, or all phones? Boy, do I have a script for you.
 
 <!--more-->

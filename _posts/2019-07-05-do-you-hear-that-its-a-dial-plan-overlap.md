@@ -16,12 +16,6 @@ tags:
   - Dial Plan
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 ## User Report & Context
 
 All users at Site A is experiencing issues making calls from Site A (Santarem) in Brazil to Site B when calling from Cisco IP Phone. When calling from Cisco Jabber the call works fine.

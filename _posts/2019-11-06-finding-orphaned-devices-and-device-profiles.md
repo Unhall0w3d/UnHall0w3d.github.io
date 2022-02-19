@@ -16,12 +16,6 @@ tags:
   - Cisco Callmanager
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 <span class="image fit"><img src="{{ "/assets/images/orphaneddevices1.png" | absolute_url }}" alt="" /></span>
 
 So I haven't been doing much SQL work lately as, due to the holidays and other factors, it's been pretty quiet. The occasional phone firmware upgrade here, troubleshooting call quality/audio routing issues there, and some Cisco Unity SMTP Smart Host and assorted issues sprinkled throughout the past few weeks. So imagine my delight (hehe) when asked by a colleague about an SQL query to find devices that do not have an end user assignment.

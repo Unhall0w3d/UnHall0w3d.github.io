@@ -20,13 +20,6 @@ tags:
   - IM & Presence
   - IM&P
 ---
-
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 ## Intent
 
 Pull a list of users where Home Cluster (islocaluser) is Enabled (t) only. Do not display if the user does not have Home Cluster enabled (f). We also want to do the following:

@@ -16,13 +16,6 @@ tags:
   - Informix
   - SQL
 ---
-
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 ## Intent
 As part of the process of upgrading phones to new firmware I've formed a habit of verifying if there are any phones of the particular model (or models) that I'm upgrading that have a static phone load assignment. Now, there's a few reasons you might want a static phone load including but not limited to:
 

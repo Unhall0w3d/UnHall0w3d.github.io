@@ -18,12 +18,6 @@ tags:
   - Cisco Unified Border Element
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 A common request that we get is to perform call blocking. It's usually due to an irate customer, irate former employee, or general solicitations. By now our clients have call blocking configs in place at most/all sites, or on their primary/secondary CUBEs (or CCM, which I'll cover in another post), so for these requests it's typically as easy as adding an additional line to the config to block a new number. But for now we can act as if we have an IOS CUBE (SIP to SIP) with no call blocking configured, and we can whip up a quick config to satisfy the client requirements.
 
 <!--more-->

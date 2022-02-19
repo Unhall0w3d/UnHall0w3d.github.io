@@ -24,12 +24,6 @@ tags:
   - Virtual Memory
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 So if you’re here you’re likely aware that there are multiple ways that we can review system resource utilization on a Cisco UC VOS appliance — we’ll use Cisco Unified Communications Manager for this example. Of course we can utilize RTMT to take a look at graphs showing resource utilization over time, we can review CLI based commands such as ```show process using-most cpu|memory```, ```show process load cpu|memory```, or even ```show perf query class Memory```. We can also poll usage remotely using SNMP, and I’d like to show you how we can calculate Virtual Memory utilization as a percentage using data returned by SNMP, then verify it in the CLI.
 
 <!--more-->

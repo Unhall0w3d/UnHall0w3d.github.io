@@ -20,12 +20,6 @@ tags:
   - Cisco
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 Billing servers are used in UC environments to collect CDR/CMR data and display them (ideally in a much better fashion than CDR Analysis & Reporting), make them searchable and provide insights into cause codes, call durations, endpoint utilization and more. And when they work, they typically work great. Could be Variphy, Splunk, a custom billing server you're developing. Doesn't really matter which it is, but typically as long as the user account has permissions for SFTP, proper access to the desired directory, and the IP is reachable on Port 22 it all just works. Until it doesn't.
 
 <!--more-->

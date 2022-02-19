@@ -17,12 +17,6 @@ tags:
   - SQL
 ---
 
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7351461893377144"
-     crossorigin="anonymous">
-     </script>
-</head>
-
 <span class="image fit"><img src="{{ "/assets/images/ccmsync1.png" | absolute_url }}" alt="" /></span>
 
 With Cisco's Unified Communications Manager and Unity Connection products we have a few options when it comes to user accounts for both Endpoint/Permissions management, and Voicemail/Greeting management. We can by default create local users, which are maintained within UCM and CUC itself. We can optionally integrate with LDAP Authentication and/or LDAP Synchronization, which allows us to pull in users from LDAP given certain criteria (e.g. AD & CUCM's LDAP Search Filters). And somewhere in the middle we have the option to pull in users from CUCM to CUC via "CUCM End User Integration".
