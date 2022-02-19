@@ -1,44 +1,32 @@
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# theme                  : "minimal-mistakes-jekyll"
+remote_theme             : "mmistakes/minimal-mistakes"
+minimal_mistakes_skin    : "contrast" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
-locale: "en-US"
-title: NOC Thoughts
-subtitle: Mad Rantings of a Caffeine Addicted Engineer
-email: nocthoughts@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  NOC Thoughts -  authored by Ken Perry - is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communicationsland of fun... and bugs. Lots of bugs.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://unhall0w3d.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+# Site Settings
+locale                   : "en-US"
+title                    : "NOC Thoughts"
+title_separator          : "-"
+subtitle                 : "Mad Rantings of a Caffeine Addicted Engineer" # site tagline that appears below site title in masthead
+name                     : "Kenneth Perry"
+description              : "NOC Thoughts -  authored by Ken Perry - is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communicationsland of fun... and bugs. Lots of bugs."
+url                      : "https://unhall0w3d.github.io" # the base hostname & protocol for your site e.g.
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
+repository               : unhall0w3d/mind-enigma # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+logo                     : /assets/images/icon.png # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 
-repository: "UnHall0w3d/UnHall0w3d.github.io"
+# breadcrumbs            : false # true, false (default)
+words_per_minute         : 200
+search                   : true # true, false (default)
+search_full_content      : true # true, false (default)
+search_provider          : lunr # lunr (default), algolia, google
 
-# Theme settings
-minimal_mistakes_skin: "contrast" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
-teaser: /assets/images/mainpicture_mountains.jfif
-logo: /assets/images/icon.png
-search: true
-og_image: /assets/images/mainpicture_mountains.jfif
-atom_feed:
-  hide: true
+# SEO Related
+google_site_verification : Y1CkVnDQ_3LJT3zEgKbLYIwX2EJP8eMi8xOtjej9Hps
+bing_site_verification   : U9DqCCYp_eVCJSUkVJFCWm2e0u13w5g6Pehd0xMe9mo
 
-# Analytics
-analytics:
-  provider: "google-gtag"
-  google:
-    tracking_id: "UA-30994747-1"
-    anonymize_ip: false
-
-# SEO
-bing_site_verification: ""
-
-# Social sharing
+# Social Sharing
 twitter_username: thoughtsnoc
 github_username: UnHall0w3d
 linkedin_username: kperryuc
@@ -48,12 +36,23 @@ social:
     - https://twitter.com/thoughtsnoc
     - https://www.linkedin.com/in/kperryuc
     - https://github.com/UnHall0w3d
+og_image                 : # Open Graph/Twitter default site image
 
-# Site author
+# Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-30994747-1"
+    anonymize_ip: false
+
+
+# Site Author
 author:
   name: "Kenneth Perry"
   location: "Syracuse, NY"
+  bio: "UC Engineer By Day | Sleep Deprived By Night"
   avatar: "/assets/images/author-avatar.jpg"
+  email: nocthoughts@gmail.com
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -67,32 +66,36 @@ author:
     - label: "Discord"
       icon: "fab fa-fw fa-discord"
       url: "https://discord.gg/VSAJUEyRjC"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:nocthoughts@gmail.com"
 
-# Build settings
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# Site Footer
+footer:
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/thoughtsnoc"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/UnHall0w3d"
+    - label: "Discord"
+      icon: "fab fa-fw fa-discord"
+      url: "https://discord.gg/VSAJUEyRjC"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/kperryuc"
+
+# Encoding
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
 # Conversion
 markdown: kramdown
 highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 
 # Markdown Processing
 kramdown:
@@ -108,9 +111,10 @@ kramdown:
 # Outputting
 output_ext: .html
 permalink: /:year/:month/:day/:title:output_ext
-paginate: 10
+paginate: 10 # amount of posts to show
 paginate_path: /page:num/
 timezone: America/New_York # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
 
 # Plugins (previously gems:)
 plugins:
@@ -129,6 +133,7 @@ whitelist:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+
 
 # Archives
 category_archive:

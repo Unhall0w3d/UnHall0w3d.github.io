@@ -75,11 +75,11 @@ objectid                              altfirstname  altlastname  displayname    
 bad09f3d-c1a9-480a-ac2a-08043039f341  null          null         Veronica Hernandez  8376642243762633   4376263398376642   Veronica   Hernandez  1                7dcd1a6e-0e4f-4d57-bdd5-4eb8b14444af  e3db4398-e0e6-4ef2-bdd5-a07e19759b20  null        0           null  null        veronica.hernandez  9252654       3814074e-173b-4a0e-8bb7-278b36de33d4  bad09f3d-c1a9-480a-ac2a-08043039f341  0                        null
 ```
 
-# Step 3
+## Step 3
 
 Verify there are no outstanding dependencies for the given user on CUC. This will make sure the user is not bound to a system call handler.
 
-### CLI:
+### CLI
 
 ```text
 run cuc dbquery unitydirdb select objectid from tbl_callaction where targethandlerobjectid IN (select callhandlerobjectid from vw_subscriber where alias='veronica.hernandez')
@@ -87,7 +87,7 @@ run cuc dbquery unitydirdb select objectid from tbl_callaction where targethandl
 No records found
 ```
 
-### GUI:
+### GUI
 
 ```text
 0 dependencies successfully found for Veronica Hernandez.
@@ -97,7 +97,7 @@ No records found
 
 Run a csp_UserDelete operation using cuc dbquery/SQL against the objectid that was pulled previously for the given user. This will perform a deletion as we would expect.
 
-```
+```text
 run cuc dbquery unitydirdb EXECUTE PROCEDURE csp_UserDelete (pObjectId = 'bad09f3d-c1a9-480a-ac2a-08043039f341')
 
 Rows: 0

@@ -23,7 +23,7 @@ tags:
      </script>
 </head>
 
-<span class="image fit"><img src="{{ "/assets/images/primaryextensionerror1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/primaryextensionerror1.png" | absolute_url }}" alt="The error that pops up on a single user in CCM End User page." /></span>
 
 Today's post covers a workaround-turned-update-method for the 'Primary Extension' field in CUCM's End User Page. We were asked to build out a new DN and assign it to the user and although all the pre-work was done, when trying to modify the Primary Extension entry to the new DN, we received an error. The error we hit is shown below.
 
