@@ -136,13 +136,17 @@ An initial reboot should be performed to finish installing VMware Tools.
 
 1. *Network Adapter > Open Network and Sharing Center > Change Adapter Settings > Ethernet 0 > Properties*
 2. *Internet Protocol Version 4 (TCP/IPv4) > Properties*
-    Use the following IP address: (Change to match your internal network address space, and default gateway -- these are sample settings)
-        10.255.255.164 <-- IP within /24 network of 10.255.255.X
-        255.255.255.0 <-- /24 Subnet Mask
-        10.255.255.1 <-- Default GW/Router to ISP
-    Use the following DNS server addresses (Change the 2nd to match your internal network DNS ip -- these are sample settings)
-        127.0.0.1 <-- Localhost (DNS server)
-        10.255.255.1 <-- Default GW/Router to ISP
+
+    ```text
+        Use the following IP address: (Change to match your internal network address space, and default gateway -- these are sample settings)
+            10.255.255.164 <-- IP within /24 network of 10.255.255.X
+            255.255.255.0 <-- /24 Subnet Mask
+            10.255.255.1 <-- Default GW/Router to ISP
+        Use the following DNS server addresses (Change the 2nd to match your internal network DNS ip -- these are sample settings)
+            127.0.0.1 <-- Localhost (DNS server)
+            10.255.255.1 <-- Default GW/Router to ISP
+    ```
+
 3. Click OK
 4. Close
 
