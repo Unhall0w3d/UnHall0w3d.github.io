@@ -1,5 +1,6 @@
 ---
 title: "Verify Trace Levels using SQL on Cisco UC"
+layout: post
 date: 2020-10-22T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

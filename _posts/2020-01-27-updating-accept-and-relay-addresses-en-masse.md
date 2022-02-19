@@ -1,5 +1,6 @@
 ---
 title: "Bulk Accept and Relay Config Update SQL"
+layout: post
 date: 2020-01-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

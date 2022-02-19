@@ -1,5 +1,6 @@
 ---
 title: "VMWare ESXi Boot Device Discovery"
+layout: post
 date: 2020-06-15T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

@@ -1,5 +1,6 @@
 ---
 title: "Do You Hear That? It's a Dial Plan Overlap! Run!"
+layout: post
 date: 2019-07-05T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

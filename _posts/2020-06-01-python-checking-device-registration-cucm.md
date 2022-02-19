@@ -1,5 +1,6 @@
 ---
 title: "Checking Device Registration Using Python"
+layout: post
 date: 2020-06-01T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

@@ -1,5 +1,6 @@
 ---
 title: "Building a Toolbelt for UC w/ Python"
+layout: post
 date: 2020-05-14T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

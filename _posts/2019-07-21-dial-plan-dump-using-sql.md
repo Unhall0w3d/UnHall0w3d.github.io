@@ -1,5 +1,6 @@
 ---
 title: "Dial Plan Dump using SQL"
+layout: post
 date: 2019-07-21T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

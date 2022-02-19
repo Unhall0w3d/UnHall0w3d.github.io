@@ -1,5 +1,6 @@
 ---
 title: "VCS/Expressway 8.7 & Old Host Keys"
+layout: post
 date: 2019-06-24T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

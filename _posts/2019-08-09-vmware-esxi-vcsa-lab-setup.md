@@ -1,5 +1,6 @@
 ---
 title: "VMWare ESXi & VCSA Lab Setup - VMWare Workstation 14/15"
+layout: post
 date: 2019-08-09T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

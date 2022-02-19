@@ -1,5 +1,6 @@
 ---
 title: "Health Checks - CUCM - CallManager"
+layout: post
 date: 2020-06-14T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
