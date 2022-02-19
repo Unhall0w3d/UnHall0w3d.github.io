@@ -50,7 +50,7 @@ analytics:
 author:
   name: "Kenneth Perry"
   location: "Syracuse, NY"
-  bio: "UC Engineer By Day | Sleep Deprived By Night"
+  bio: "UC Engineer By Day - Sleep Deprived By Night"
   avatar: "/assets/images/author-avatar.jpg"
   email: nocthoughts@gmail.com
   links:
@@ -66,9 +66,6 @@ author:
     - label: "Discord"
       icon: "fab fa-fw fa-discord"
       url: "https://discord.gg/VSAJUEyRjC"
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:nocthoughts@gmail.com"
 
 # Site Footer
 footer:
@@ -85,6 +82,9 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/kperryuc"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:nocthoughts@gmail.com"
 
 # Encoding
 encoding: "utf-8"
