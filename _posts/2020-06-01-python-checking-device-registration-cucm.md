@@ -1,5 +1,5 @@
 ---
-title: "Cisco Call Manager - Checking Device Registration using Python"
+title: "Checking Device Registration Using Python"
 date: 2020-06-01T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
