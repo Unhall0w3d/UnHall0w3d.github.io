@@ -23,7 +23,7 @@ tags:
 
 ## Relevance
 
-As a follow-up to my prior post [Verifying Memory Usage on VCS using Python](https://www.nocthoughts.com/blog/verifying-memory-usage-on-cisco-vcsexpressway-using-python-paramiko) I’d like to spotlight some changes that were made to the script on GitHub, why the changes were made, point out the readme file and also provide some examples of the output/emails that serve as notifications to the engineers responsible for monitoring the VCS/Expressway’s memory utilization.
+As a follow-up to my prior post [Verifying Memory Usage on VCS using Python](https://nocthoughts.com/2021/01/08/verifying-memory-usage-cisco-vcs-using-python.html) I’d like to spotlight some changes that were made to the script on GitHub, why the changes were made, point out the readme file and also provide some examples of the output/emails that serve as notifications to the engineers responsible for monitoring the VCS/Expressway’s memory utilization.
 
 <!--more-->
 

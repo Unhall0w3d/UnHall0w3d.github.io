@@ -29,7 +29,7 @@ And maybe you do know. But maybe you contract out to a service desk with enginee
 
 I typically name it "ClientName_ESXi_to_VM_Mapping_vX.y.xlsx", and I won't get into semantics when it comes to versioning and document naming, as your org will have its own standard.
 
-This document allows us to organize per sheet the chassis that a given ESXi host sits on, as well as what VMs are on. Makes sense, that's what I've been going on about since I started the post. Really, it's quite a simple document, and you can utilize [RVTools](https://www.nocthoughts.com/blog/2019/07/26/esxi-vcenter-data-pull-using-rvtools) to quickly gather the information for export.
+This document allows us to organize per sheet the chassis that a given ESXi host sits on, as well as what VMs are on. Makes sense, that's what I've been going on about since I started the post. Really, it's quite a simple document, and you can utilize [RVTools](https://www.robware.net/rvtools/) to quickly gather the information for export.
 
 ## Pulling The Data
 
