@@ -1,5 +1,5 @@
 ---
-title: "Calculating Virtual Memory Usage on UC VOS using SNMP"
+title: "Calculating VMEM Usage on Cisco UC"
 layout: single
 date: 2020-08-30T08:00:00-05:00
 excerpt_separator: "<!--more-->"

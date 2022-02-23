@@ -1,5 +1,5 @@
 ---
-title: "Basic Commands To Know For Managing ESXi on Cisco UCS-C"
+title: "Basic Commands For ESXi on UCS"
 layout: single
 date: 2019-07-29T08:00:00-05:00
 excerpt_separator: "<!--more-->"

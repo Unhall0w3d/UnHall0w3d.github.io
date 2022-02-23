@@ -1,5 +1,5 @@
 ---
-title: "Check Phone and SIP Trunk Registration with Zeep"
+title: "Check Phone and SIP Trunk using ZEEP"
 layout: single
 date: 2020-07-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"

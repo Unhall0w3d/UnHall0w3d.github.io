@@ -1,5 +1,5 @@
 ---
-title: "Mobile Agents, CTIOS, and Service Crashes -- Oh My!"
+title: "Mobile Agents, CTIOS, & Crashes"
 layout: single
 date: 2019-07-17T08:00:00-05:00
 excerpt_separator: "<!--more-->"

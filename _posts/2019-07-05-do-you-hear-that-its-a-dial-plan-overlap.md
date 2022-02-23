@@ -1,5 +1,5 @@
 ---
-title: "Do You Hear That? It's a Dial Plan Overlap! Run!"
+title: "Detecting a Dial Plan Overlap"
 layout: single
 date: 2019-07-05T08:00:00-05:00
 excerpt_separator: "<!--more-->"
