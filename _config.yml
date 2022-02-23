@@ -9,7 +9,7 @@ title_separator          : "-"
 subtitle                 : "Mad Rantings of a Caffeine Addicted Engineer" # site tagline that appears below site title in masthead
 name                     : "Kenneth Perry"
 description              : "NOC Thoughts -  authored by Ken Perry - is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communicationsland of fun... and bugs. Lots of bugs."
-url                      : "https://unhall0w3d.github.io" # the base hostname & protocol for your site e.g.
+url                      : "https://www.nocthoughts.com" # the base hostname & protocol for your site e.g.
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : unhall0w3d/mind-enigma # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"

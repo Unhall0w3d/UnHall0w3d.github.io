@@ -25,7 +25,7 @@ The requests just keep coming... and always for a slightly different set of info
 
 The answer is straight forward, but also not... depending on how granularly you build out certain configurations such as Device Pools. Does your BUE_DP actually mean Buenos Aires, or does it include 3 or 4 surrounding sites that, even though they share a config should be tracked separately? I don't know! But you should. And that is where the beauty is for some of these data pulls. I get you the data that meets your ask, but the real trouble (which is usually on the requester, or some data manipulation folk) is understanding some of the nuances to site naming conventions, site grouping based on geography, etc.
 
-So here we go, how do we go about pulling information on who has a Jabber Profile or is enabled for Jabber (without looking at specific CSFs, as some don't have phone profiles) within UCM? Well, we have a query for that already that we can modify or build off of to satisfy this request. We talked about it [in this post](https://unhall0w3d.github.io/2019/06/20/is-home-cluster-enabled-what-service-profile-is-used.html).
+So here we go, how do we go about pulling information on who has a Jabber Profile or is enabled for Jabber (without looking at specific CSFs, as some don't have phone profiles) within UCM? Well, we have a query for that already that we can modify or build off of to satisfy this request. We talked about it [in this post](https://www.nocthoughts.com/2019/06/20/is-home-cluster-enabled-what-service-profile-is-used.html).
 
 ## Root Query - Where It All Starts
 
