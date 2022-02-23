@@ -15,31 +15,6 @@ layout: null
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://nocthoughts.com/posts/</loc>
-  <lastmod>2022-02-23T15:51:24+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nocthoughts.com/categories/</loc>
-  <lastmod>2022-02-23T15:51:24+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nocthoughts.com/tags/</loc>
-  <lastmod>2022-02-23T15:51:24+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nocthoughts.com/about/</loc>
-  <lastmod>2022-02-23T15:51:24+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nocthoughts.com/privacypolicy.html</loc>
-  <lastmod>2022-02-23T15:51:24+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://nocthoughts.com/2021/02/12/automating-memory-checks-cisco-vcs-python.html</loc>
   <lastmod>2022-02-23T15:51:24+00:00</lastmod>
   <priority>0.80</priority>
