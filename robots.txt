@@ -43,6 +43,6 @@
 #
 #
 #
-# Allow Allow
-user-agent: *
-Allow: /
+# Allow All
+User-agent: *
+Disallow:
