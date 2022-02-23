@@ -20,9 +20,9 @@ tags:
   - Cisco
 ---
 
-Hey! You there! Yes, you! Are you sick of only checking Cisco Phone registration in Cisco Unified Communications Manager through the GUI, having to take the time to log in, wait for web pages to load, have a maximum pagination of 250 phones and having to search strictly by defined search parameters in the GUI? Want to be able to search for a custom list of phones and verify their registration state? What about by device pool, or all phones? Boy, do I have a script for you.
+## When You Really Want To Use Python
 
-<!--more-->
+Hey! You there! Yes, you! Are you sick of only checking Cisco Phone registration in Cisco Unified Communications Manager through the GUI, having to take the time to log in, wait for web pages to load, have a maximum pagination of 250 phones and having to search strictly by defined search parameters in the GUI?<!--more--> Want to be able to search for a custom list of phones and verify their registration state? What about by device pool, or all phones? Boy, do I have a script for you.
 
 Now to start, scripting for me isn't necessarily about creating the most efficient, the most feature complete script in the world. It is, however, about creating a purpose built tool (and readme file!) that can be digested, understood, and used by both Junior and Senior engineers alike and produces the expected results reliably. Could I make some changes and remove a function? Probably. Could I condense down some of the lines and loops? Certainly. There is always room for optimization, however, premature optimization can lead you down a rabbit hole and lead to you never completing your script or program at all.
 
@@ -56,23 +56,23 @@ Reporting output is stored as two .txt files with one device's status per line. 
 
 ## Invoking the Script and Selecting an Option
 
-<span class="image fit"><img src="{{ "/assets/images/phoneregcheck1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck1.png" | absolute_url }}" alt="The view of the menu when spawning the script." /></span>
 
 ## User Input Collection
 
-<span class="image fit"><img src="{{ "/assets/images/phoneregcheck2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck2.png" | absolute_url }}" alt="Required information is collected by user from INPUT." /></span>
 
 ## Option 1 Only - Device Pool Selection
 
-<span class="image fit"><img src="{{ "/assets/images/phoneregcheck3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck3.png" | absolute_url }}" alt="This only appears if you filter by Device Pool." /></span>
 
 ## Informational...
 
-<span class="image fit"><img src="{{ "/assets/images/phoneregcheck4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck4.png" | absolute_url }}" alt="It's informational." /></span>
 
 ## Status Report
 
-<span class="image fit"><img src="{{ "/assets/images/phoneregcheck5.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/phoneregcheck5.png" | absolute_url }}" alt="A status report when the script is completed." /></span>
 
 And there we go. Looking at the contents of the file we can see some of the data related to the phones if registered. For unregistered devices we simply state that the device isn't registered.
 

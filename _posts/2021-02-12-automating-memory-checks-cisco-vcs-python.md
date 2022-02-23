@@ -21,11 +21,9 @@ tags:
   - Telepresence
 ---
 
-## Relevance
+## Gotta Do It With Faster... With No Hands
 
-As a follow-up to my prior post [Verifying Memory Usage on VCS using Python](https://nocthoughts.com/2021/01/08/verifying-memory-usage-cisco-vcs-using-python.html) I’d like to spotlight some changes that were made to the script on GitHub, why the changes were made, point out the readme file and also provide some examples of the output/emails that serve as notifications to the engineers responsible for monitoring the VCS/Expressway’s memory utilization.
-
-<!--more-->
+As a follow-up to my prior post [Verifying Memory Usage on VCS using Python](https://nocthoughts.com/2021/01/08/verifying-memory-usage-cisco-vcs-using-python.html), I’d like to spotlight some changes that were made to the script on GitHub.<!--more--> I would also like to explain why the changes were made, and point out the readme file and also provide some examples of the output/emails that serve as notifications to the engineers responsible for monitoring the VCS/Expressway’s memory utilization.
 
 I’ll start by recapping the issue. On certain versions of VCS/Expressway x8.#.# there exists a memory leak that, if left unchecked, will cause the VCS/Expressway server to become unresponsive not only to GUI/CLI access but also for MRA logins or other typical Expressway functions. After working with Cisco TAC to confirm the memory leak, they recommended that we perform regular reboots of the affected servers until we are able to upgrade to x12.#.#. This upgrade will go through (eventually) for many reasons — UC Platform in it’s entirely will be upgraded to 12.x, Apple’s APN changes will also require the upgrade (see this link for more details on that [Apple APN Changes](https://www.cisco.com/c/dam/en/us/td/docs/voice_ip_comm/cucm/push_notifications/APNSUpdates.pdf), and simply to move away from a bugged version.
 
@@ -170,7 +168,7 @@ If you require invoking a virtual environment you likely already know how to do 
 
 Finally, we’ll want to take a look at how the data is reported. The email should comain in from “name@domain.com” as configured on your Linux/SMTP — e.g. (LinuxVM1@voip.local), the subject should be “Expressway Healthchecks” and the body will contain the below data. It could be sent as an attachment, however, I did not want to deal with encoding/constructing/composing the email - if a more secure method is desired you may want to do this another way. I was able to set up a rule in Outlook for “Subject Contains” and “Sender Is” to direct it to a new folder.
 
-<span class="image fit"><img src="{{ "/assets/images/sanitizedemail.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/sanitizedemail.png" | absolute_url }}" alt="Example of the notification email sent by the script." /></span>
 
 Example Email sent by the Script containing output from Expressway/VCS
 

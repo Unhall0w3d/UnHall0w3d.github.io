@@ -18,7 +18,7 @@ tags:
   - SQL
 ---
 
-## Intent
+## What is our mission?
 
 To pull a list of device defaults (like the Device > Device Defaults GUI page) to gather the device default firmware for a set of phones. In this case we are specifically pulling the device defaults only for phones where the count > 0). I do this for two reasons:
 

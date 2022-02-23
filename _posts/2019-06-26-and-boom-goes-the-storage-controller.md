@@ -18,16 +18,15 @@ tags:
   - Virtualization
 ---
 
+## The Story Begins
+
 Story time. It's a wonderful day in early April. The birds are singing, Spring is upon us. We had a lovely drive in to work, it was an easy morning. We break for lunch and have some pizza delivered to work for the team to share. Just a great day.
 
 <!--more-->
 
-## The Story Begins
-
 Boom. All of this changes as a UCS-C server blows up. Resident VMs, a mixture of CUCM nodes as well as a CVP server and two Agent PGs all stop responding to ICMP. Hypervisor's still responding though. We start to get reports of agents kicked out of Finesse. Phones having failed over to a secondary, or tertiary node. This is the last thing we want on such a nice day.
 
 The first thing I do is take a quick second to try to understand what issues are happening and potential root causes. I think about what is the most likely cause, or causes for a particular issue and do a quick spot check. Is this something that can easily be checked in a minute or two? If so, let's check real quick while we firm up the details from the user reports. Knowing -- through our preferred monitoring application -- that we lost ICMP on the aforementioned servers, I immediately want to check the UCS Chassis and Hypervisor. We log in to ESXi and are graced with powered on VMs. "This doesn't make sense", I said. So I pop open the console to CUCM. Then CVP. As I move along I witness the same thing -- a non-responsive console. The VMs are stuck.
-
 
 ## Into The Action
 

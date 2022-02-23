@@ -23,11 +23,11 @@ tags:
   - Database
 ---
 
-<span class="image fit"><img src="{{ "/assets/images/nocthoughtstb1.png" | absolute_url }}" alt="" /></span>
+## Like Batman's Belt, But Not As Cool
 
-In my last post I share a script that I created with the help and guidance of some current and former colleagues. It used BeautifulSoup and regular expression to parse html code and return some data to determine the Device Name, Registration State and Model Number of a given phone regardless of the phone type, it just needed to be http accessible and not require a login. Though that last requirement hasn't changed (yet), I had issues appropriately searching for regular expressions using BS4.
+<span class="image fit"><img src="{{ "/assets/images/nocthoughtstb1.png" | absolute_url }}" alt="The NOC Thoughts Toolbelt (WIP)" /></span>
 
-<!--more-->
+In my last post I share a script that I created with the help and guidance of some current and former colleagues. It used BeautifulSoup and regular expression to parse html code and return some data to determine the Device Name, Registration State and Model Number of a given phone regardless of the phone type, it just needed to be http accessible and not require a login.<!--more--> Though that last requirement hasn't changed (yet), I had issues appropriately searching for regular expressions using BS4.
 
 What's funny, or perhaps not funny, is that every Stack Overflow post and nearly every conversation with my colleagues lead to the same comment being made, even if we were able to work on the script and 'make it better' or 'make it do more'... that comment was "Don't use regular expressions with BeautifulSoup, do this instead." The this was different depending on who I was talking to but it primarily boiled down to pulling down the data as XML and parsing that instead... so that's what I did.
 

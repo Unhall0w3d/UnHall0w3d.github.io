@@ -18,9 +18,9 @@ tags:
   - Unified Communications
 ---
 
-An interesting change I was involved in recently that was more of an oddity to me was setting up a CA in IOS, signing a certificate for Media Resources and registering it against a secure CCM cluster. Most of the clients I have had the pleasure of working with did not secure, or need to secure their UC environment for SRTP. And as many folks will say, you can read about something all you want but you don't really get a firm grasp on it until you get your feet wet.
+## Gotta Secure Those Media Resources
 
-<!--more-->
+An interesting change I was involved in recently that was more of an oddity to me was setting up a CA in IOS, signing a certificate for Media Resources and registering it against a secure CCM cluster.<!--more--> Most of the clients I have had the pleasure of working with did not secure, or need to secure their UC environment for SRTP. And as many folks will say, you can read about something all you want but you don't really get a firm grasp on it until you get your feet wet.
 
 And get my feet wet I did! I made an initial mistake in disabling the "Cisco Cert Change Notification" service which prevented the certificates from automagically propagating from the Pub to Sub trust stores. This caused me some confusion when the CFB wouldn't register, I ended up double checking the specific CUCM list that SCCP was using and verified the cert didn't exist, so I re-enabled the service across the board and re-checked. Bam. Cert existed, CFB registered. Stressful 10-15 minutes while I sat and thunk about what might have been wrong.
 

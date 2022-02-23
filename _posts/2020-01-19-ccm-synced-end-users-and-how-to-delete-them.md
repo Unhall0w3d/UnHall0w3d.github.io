@@ -18,23 +18,27 @@ tags:
   - SQL
 ---
 
-<span class="image fit"><img src="{{ "/assets/images/ccmsync1.png" | absolute_url }}" alt="" /></span>
+## When You Delete The Parent Before The Child
 
-With Cisco's Unified Communications Manager and Unity Connection products we have a few options when it comes to user accounts for both Endpoint/Permissions management, and Voicemail/Greeting management. We can by default create local users, which are maintained within UCM and CUC itself. We can optionally integrate with LDAP Authentication and/or LDAP Synchronization, which allows us to pull in users from LDAP given certain criteria (e.g. AD & CUCM's LDAP Search Filters). And somewhere in the middle we have the option to pull in users from CUCM to CUC via "CUCM End User Integration".
+With Cisco's Unified Communications Manager and Unity Connection products we have a few options when it comes to user accounts for both Endpoint/Permissions management, and Voicemail/Greeting management. We can by default create local users, which are maintained within UCM and CUC itself.
 
 <!--more-->
+
+We can optionally integrate with LDAP Authentication and/or LDAP Synchronization, which allows us to pull in users from LDAP given certain criteria (e.g. AD & CUCM's LDAP Search Filters). And somewhere in the middle we have the option to pull in users from CUCM to CUC via "CUCM End User Integration".
+
+<span class="image fit"><img src="{{ "/assets/images/ccmsync1.jpg" | absolute_url }}" alt="This server rack looks clean." /></span>
 
 What this allows us to do is define local users within Cisco Unified Communications Manager, assign permissions and device ownership, and then sync the user to Cisco Unity Connection to inherit certain information (extension, alias, first/last name, etc.). This helps to achieve an LDAP-like experience while also maintaining isolated user accounts. We get the swiftness of a sync but only after the users are manually defined in UCM.
 
 When a user is integrated via CCM End User, within Unity, we will see the below banner Status message. This is an indication that the user is not local, or LDAP Synced. It has been synced from the AXL (CUCM) Server.
 
-<span class="image fit"><img src="{{ "/assets/images/ccmsync2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/ccmsync2.png" | absolute_url }}" alt="Status message that shows when an end user is CM Integrated." /></span>
 
 An issue I commonly run into when working in client environments where CCM End User Sync is used, is that green engineers (MACD, Jr. Engineers, Low level service desk folk) often do not understand the requirements when deleting this type of user. For example, the necessity to delete a CCM Synced End User from the UC Secondary Applications prior to deleting the user from Cisco Unified Communications Manager directly. For an example, if we only have CUC and CUCM in our environment and use CCM End User Sync, we'd want to delete the user from Cisco Unity Connection prior to deleting the user from Cisco Unified Communications Manager.
 
 When this process isn't followed there is a break in communication between the CUC and CUCM. An attempt to delete a voicemail box for the given user in CUC, when it does not exist in CUCM, results in a java.lang error in the GUI and no action is taken. A screenshot of this error is shown below.
 
-<span class="image fit"><img src="{{ "/assets/images/ccmsync3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/ccmsync3.png" | absolute_url }}" alt="Error from CUC perspective when CM End User is already deleted." /></span>
 
 Now, when it comes to resolving an issue like this, we can't just rebuild the user on the CUCM side as the objectid/identifier that is assigned to the user will not be identical. We would still run into the same error when attempting to remove the user from CUC (per testing in Lab on CCM 10.5.2Su9). So because we are limited in our options the next best bet is to run a user deletion through the database. For this, we'll need the CLI. See below for the pre/post verification steps, as well as the deletion process.
 
@@ -112,7 +116,7 @@ No records found
 
 Verify in the GUI that the given user no longer appears.  As this example showed an old format (first.last) and new format (random-ish) username, we can see the newer format 'hernanvr' is still maintained but 'veronica.hernandez' is now deleted, and the extension previously assigned can again be used within CUC.
 
-<span class="image fit"><img src="{{ "/assets/images/ccmsync4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/ccmsync4.png" | absolute_url }}" alt="GUI based verification." /></span>
 
 And there we go. A breakdown in proper process for user deletions results in a multi-step action against the database. Not exactly desirable, but the method exists for a reason. Ideally we would prefer that all user deletions, additions, modifications take place in proper order with all possible considerations made before action is taken... but... we live in the real world, which is why it's important to know about these alternate methods of tackling the issues we face.
 

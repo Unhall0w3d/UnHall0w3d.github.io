@@ -21,9 +21,9 @@ tags:
   - Gateway
 ---
 
-As mentioned on the blog, I work for a Managed Services Provider. As such I am not a prototypical System Admin that knows a particular environment in and out, backwards and sideways. Often times I am injected into environments and issues that have been ongoing for hours, or days, with only the notes from the previous engineers to go off of. Other times I'm tasked with performing software upgrades or configuration changes based on recommendations from another engineer. There's no quick reference or dashboard that I can check in the environment to say "YEP, we're all good, let's move ahead!". I have to log in to the devices manually and pull a set of output to verify the health of a device before I want to proceed.
+## 𝄞 This Is How We Do It 𝄞
 
-<!--more-->
+As mentioned on the blog, I work for a Managed Services Provider. As such I am not a prototypical System Admin that knows a particular environment in and out, backwards and sideways. Often times I am injected into environments and issues that have been ongoing for hours, or days, with only the notes from the previous engineers to go off of.<!--more--> Other times I'm tasked with performing software upgrades or configuration changes based on recommendations from another engineer. There's no quick reference or dashboard that I can check in the environment to say "YEP, we're all good, let's move ahead!". I have to log in to the devices manually and pull a set of output to verify the health of a device before I want to proceed.
 
 Now over time I've built out Bash scripts to perform the work for me based on a set of credentials and IPs passed through the script, and I'll mostly need to concern myself with simply reviewing the output once the script has finished piping the output out to a file. The problem with this method is that when new engineers are on-boarded or promoted and need to follow a similar process I find that it is counter-intuitive to first point them to the script. I want the engineers to understand what output we are pulling from, where are we pulling it from, and why.
 

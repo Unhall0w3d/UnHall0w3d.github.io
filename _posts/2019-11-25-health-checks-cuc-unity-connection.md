@@ -20,9 +20,11 @@ tags:
   - Restart
 ---
 
-<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck1.png" | absolute_url }}" alt="" /></span>
+## 𝄞 This Is How We Do It 𝄞
 
-Now for the third technology on my list, Cisco Unity Connection. And for this I've provided the list of commands and checks that I run against CUC nodes (7.x-12.x)  for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide, or that would affect call processing.
+Now for the third technology on my list, Cisco Unity Connection. And for this I've provided the list of commands and checks that I run against CUC nodes (7.x-12.x) for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide, or that would affect call processing. <!--more-->
+
+<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck1.png" | absolute_url }}" alt="RTMT Overview Page" /></span>
 
 I pull this data to refer back to in the event that the change has disrupted dbrepliction, endpoint registration status, inter-cluster communication, intra-cluster communication, service status, anything. Consider this output a "CYA" for later. Something to refer back to to confirm all is as it was prior to the change, with whatever exceptions should exist (e.g. IP address changed should reflect in post-change "show network eth0 detail" output.
 
@@ -93,17 +95,17 @@ Command used to verify the current state of the cluster. This will display wheth
 
 ### Alert Central - RTMT
 
-<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck2.png" | absolute_url }}" alt="Alert Central view in RTMT for all critical events on the cluster." /></span>
 
 ### System Summary - RTMT
 
-<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck3.png" | absolute_url }}" alt="System Summary page for VMEM, CPU and Common Partition usage." /></span>
 
 In addition to the above, it may be prudent to log into CUCM and verify the state of the SIP Trunk to CUC (SIP Integration) or voicemail ports (SCCP Integration). There's a few additional elements from the GUI we should collect too, and I've listed them below.
 
 ### Cisco Unified CM Administration > Device > Trunk
 
-<span class="image fit"><img src="{{ "/assets/images/videocalling4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/videocalling4.png" | absolute_url }}" alt="CCM Device > Trunk page for the relevant trunks." /></span>
 
 ### Cisco Unity Connection Administration > Mailbox Storage > Mailbox Stores
 

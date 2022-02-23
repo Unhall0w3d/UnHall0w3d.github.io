@@ -15,11 +15,9 @@ tags:
 
 ## Preface
 
-Now, if you're in an environment where you have access to vCenter, or, you have a small deployment in which you only have two ESXi hosts with a Primary and Secondary/DR site, this likely isn't going to help you. Similarly, if you're using a Network Monitoring service or product that has API polling capabilities, you may already have this visualized for you.
+Now, if you're in an environment where you have access to vCenter, or, you have a small deployment in which you only have two ESXi hosts with a Primary and Secondary/DR site, this likely isn't going to help you. Similarly, if you're using a Network Monitoring service or product that has API polling capabilities, you may already have this visualized for you.<!--more-->
 
 You have two sites, "SYR" and "BLD" and you name your devices accordingly, so simply having the list of IPs and Hostnames is sufficient to know what's where. However, there's still a scenario for small deployments where this may be a "nice to have", and in medium to large deployments this is a "must have".
-
-<!--more-->
 
 As an engineer at a Managed Services Provider (MSP), and with my scope of managed devices including the UCS-C/E/B Chassis, UCSM/CIMC, ESXi (5.x-6.x), and the UC VMs on top of them, and considering most of our clients are multinationals with clusters in the US/North America, EMEA, APAC, and auxilliary sites it's often an annoyance to try to track down where a VM is resident without access to vCenter. Is it on "ESXi1, 2 or 3" in Africa? Who knows. Likely unless a document such as what I will describe exists for your org, you probably don't know off hand. And it certainly takes longer to attempt logging into each of the hosts to validate what's resident rather than checking a document quickly.
 
@@ -101,7 +99,7 @@ Example: FCH1999333SS
 
 With this data collected, we fill in our Excel sheet. The way I've found this easiest to understand and explain to fellow engineers is to name the worksheet the ESXi hostname, and include the CIMC/VM details within the worksheet. See the screenshot below.
 
-<span class="image fit"><img src="{{ "/assets/images/importantdocumentation1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/importantdocumentation1.png" | absolute_url }}" alt="Excel Sheet display of the collected data." /></span>
 
 Bam. I've now got a document I can refer to quickly to determine what's where, that you can provide to any service desk or auxilliary support teams to reference (ideally at a centrally located Sharepoint or similar location. Treat it as a live doc and update as you go!)
 

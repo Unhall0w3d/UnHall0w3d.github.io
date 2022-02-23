@@ -18,13 +18,15 @@ tags:
   - SQL
 ---
 
-<span class="image fit"><img src="{{ "/assets/images/primaryextensionerror1.png" | absolute_url }}" alt="The error that pops up on a single user in CCM End User page." /></span>
+## How to Update Primary Extensions the Fun Way
 
 Today's post covers a workaround-turned-update-method for the 'Primary Extension' field in CUCM's End User Page. We were asked to build out a new DN and assign it to the user and although all the pre-work was done, when trying to modify the Primary Extension entry to the new DN, we received an error. The error we hit is shown below.
 
-This error generated for any kind of change on just this one user account. Whether you modified their primary extension, self service user id, home cluster -- even if you just clicked save -- it would produce this error. Ultimately while troubleshooting THAT issue, we found that the Name Dialing entry on the end user page did not match the user's LastFirst, so there was a mismatch. CUCM didn't like that. We blanked out the Name Dialing entry, saved (SUCCESSFULLY!), and it autopopulated a new, updated, proper LastFirst entry, which fixed our issue trying to edit this end user.
-
 <!--more-->
+
+<span class="image fit"><img src="{{ "/assets/images/primaryextensionerror1.png" | absolute_url }}" alt="The error that pops up on a single user in CCM End User page." /></span>
+
+This error generated for any kind of change on just this one user account. Whether you modified their primary extension, self service user id, home cluster -- even if you just clicked save -- it would produce this error. Ultimately while troubleshooting THAT issue, we found that the Name Dialing entry on the end user page did not match the user's LastFirst, so there was a mismatch. CUCM didn't like that. We blanked out the Name Dialing entry, saved (SUCCESSFULLY!), and it autopopulated a new, updated, proper LastFirst entry, which fixed our issue trying to edit this end user.
 
 But while looking into workarounds or ways we could fix the Primary Extension configuration through SQL, or AXL (we went with straight CLI based SQL), we stumbled upon an interesting method to accomplish the task of updating the Primary or IPCC extensions on the End User's configuration.
 

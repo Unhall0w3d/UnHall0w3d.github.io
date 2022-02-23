@@ -19,9 +19,13 @@ tags:
   - Informix
 ---
 
-The requests just keep coming... and always for a slightly different set of information requiring the combination of multiple SQL queries or the development of a new one if I don't have a base query to build off of. For this request the title says it all - who has a Jabber profile/uses Jabber and what site are they at? But wait, just as I thought this request was complete, like a self-fulfilling prophecy another set of data was requested. Take a look below to see what was added to the query and what the output looks like once we make the change.
+## Who Is Your Father And What Does He Do?
+
+The requests just keep coming... and always for a slightly different set of information requiring the combination of multiple SQL queries or the development of a new one if I don't have a base query to build off of.
 
 <!--more-->
+
+For this request the title says it all - who has a Jabber profile/uses Jabber and what site are they at? But wait, just as I thought this request was complete, like a self-fulfilling prophecy another set of data was requested. Take a look below to see what was added to the query and what the output looks like once we make the change.
 
 The answer is straight forward, but also not... depending on how granularly you build out certain configurations such as Device Pools. Does your BUE_DP actually mean Buenos Aires, or does it include 3 or 4 surrounding sites that, even though they share a config should be tracked separately? I don't know! But you should. And that is where the beauty is for some of these data pulls. I get you the data that meets your ask, but the real trouble (which is usually on the requester, or some data manipulation folk) is understanding some of the nuances to site naming conventions, site grouping based on geography, etc.
 
@@ -82,7 +86,7 @@ What these allow us to do is compare and combine the foreign key (device) in dev
 run sqlselect eu.userid, d.name as devicename, dp.name as devicepool, eu.islocaluser as homecluster, ucp.name as serviceprofile, n.dnorpattern as DN from device as dinner join devicepool as dp on d.fkdevicepool=dp.pkidinner join enduserdevicemap as eudm on eudm.fkdevice=d.pkidinner join enduser as eu on eudm.fkenduser=eu.pkidinner join ucserviceprofile as ucp on ucp.pkid=eu.fkucserviceprofileinner join devicenumplanmap as dmap on dmap.fkdevice=d.pkidinner join numplan as n on dmap.fknumplan=n.pkidwhere eu.islocaluser='t'order by eu.userid
 ```
 
-And what does the output then look like? Well, it looks like this: 
+And what does the output then look like? Well, it looks like this:
 
 ```text
 userid devicename devicepool homecluster serviceprofile dn

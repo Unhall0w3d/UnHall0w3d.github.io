@@ -17,7 +17,10 @@ tags:
   - Telepresence
 ---
 ## A Wild Permission Denied Has Appeared
+
 So here I am trying to access a VCS-C/VCS-E pair using SSH like I would for any other device any other day. I load up PuTTY and jump to a linux box (proxy) and attempt to SSH to the VCS.  Imagine my dismay when attempting to log in to the VCS server I am greeted with a permission denied error.
+
+<!--more-->
 
 ```text
 ken@ubuntu:~$ ssh admin@10.10.10.10

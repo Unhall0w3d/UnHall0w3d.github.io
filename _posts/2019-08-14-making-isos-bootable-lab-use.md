@@ -16,9 +16,9 @@ tags:
   - Cisco
 ---
 
-So once again it's lab season as I'll be re-certifying in the CCNP Collaboration exam, as I don't want to lose my CCNP Data Center/Collab and my CCNA Route/Switch and Wireless certifications. I definitely don't want to run the gauntlet taking the exams again, even with the new cert system Cisco announced at Cisco Live! this year. With that said one of the troubles of setting up the lab (for me) is often getting my hands on a bootable image of UCM. Every time I try and make an image bootable using something like Ultra ISO, Magic ISO or similar tools there's always a size limit (300MB) or some other issue that gets in the way of making the ISO image I do have on hand bootable.
+## For When You Just Need It To Boot
 
-<!--more-->
+So once again it's lab season as I'll be re-certifying in the CCNP Collaboration exam, as I don't want to lose my CCNP Data Center/Collab and my CCNA Route/Switch and Wireless certifications. I definitely don't want to run the gauntlet taking the exams again, even with the new cert system Cisco announced at Cisco Live! this year.<!--more--> With that said one of the troubles of setting up the lab (for me) is often getting my hands on a bootable image of UCM. Every time I try and make an image bootable using something like Ultra ISO, Magic ISO or similar tools there's always a size limit (300MB) or some other issue that gets in the way of making the ISO image I do have on hand bootable.
 
 Enter this solution, gracefully provided by a colleague years ago in order to alleviate such issues, and in lab-time fashion I have to dig through my resources to find the steps.
 
@@ -38,9 +38,7 @@ Now that that's out of the way, let's move on to the quite simple steps in getti
 
 ### Step 2
 
-Extract the cdrtools-latest.zip file to a folder, e.g. C:\ISO
-
-<span class="image fit"><img src="{{ "/assets/images/bootable1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable1.png" | absolute_url }}" alt="Extract the cdrtools-latest.zip file to a folder, e.g. C:\ISO" /></span>
 
 ### Step 3
 
@@ -48,15 +46,11 @@ Download your *.ISO Image, e.g. "UCSInstall_UCOS_12.5.1.11900-146.sgn.iso"
 
 ### Step 4
 
-Decompress the *.ISO using 7-zip or similar.
-
-<span class="image fit"><img src="{{ "/assets/images/bootable2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable2.png" | absolute_url }}" alt="Decompress the *.ISO using 7-zip or similar." /></span>
 
 ### Step 5
 
-Open an administrative CMD or PWSH prompt within the specified decompressed ISO folder
-
-<span class="image fit"><img src="{{ "/assets/images/bootable3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable3.png" | absolute_url }}" alt="Open an administrative CMD or PWSH prompt within the specified decompressed ISO folder." /></span>
 
 ### Step 6
 
@@ -66,13 +60,13 @@ Issue the following command, invoking the mkisofs.exe executable from the cdrtoo
 C:\ISO\mkisofs.exe -A "CDROM" -V "CDROM" -p "Cisco" -J -R -r -v -T -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o C:\UCBootable_12.5.sgn.iso . <--- the . is required at the end.
 ```
 
-<span class="image fit"><img src="{{ "/assets/images/bootable4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable4.png" | absolute_url }}" alt="Issuing the command to make the ISO bootable." /></span>
 
-<span class="image fit"><img src="{{ "/assets/images/bootable5.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable5.png" | absolute_url }}" alt="The command providing updates and completing its work." /></span>
 
 Output file:
 
-<span class="image fit"><img src="{{ "/assets/images/bootable6.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable6.png" | absolute_url }}" alt="File exported by the command in Step 6." /></span>
 
 ### Step 7
 
@@ -82,11 +76,11 @@ Mount the ISO and ensure it's bootable. Clean up the unwanted loose files. (Opti
 
 ## Voila - IT LIVES!
 
-<span class="image fit"><img src="{{ "/assets/images/bootable7.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable7.png" | absolute_url }}" alt="Proof that the ISO is now bootable." /></span>
 
-<span class="image fit"><img src="{{ "/assets/images/bootable8.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable8.png" | absolute_url }}" alt="Installer Prompts are working as expected." /></span>
 
-<span class="image fit"><img src="{{ "/assets/images/bootable9.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/bootable9.png" | absolute_url }}" alt="CUCM is visible as a valid product to install." /></span>
 
 Now there is another step we could take, which is to modify the contents of the ISO image before re-containerizing it in order to remove the checks it performs to say "Does the presented hardware combination meet our requirements"  to allow us to trim down even further what resources must be allocated for install, for ultra-thin LAB deployments. I'll explore that in another post, as it's not really a requirement and more a nice-to-have for those seeking the maximum bang for their buck when it comes to resource availability.
 

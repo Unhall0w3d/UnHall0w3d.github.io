@@ -22,9 +22,10 @@ tags:
   - UCCX
 ---
 
-Over the past few years I've been involved fairly often (from the ESXi/UCS perspective) in troubleshooting issues with network latency/connectivity wherein only a single VM is impacted. One example that comes to mind is  UCC VMs that encounter network issues and delays over the private link between the A and B Sides. Usually the network team gets involved first to ensure there were no issues on the private link itself, or any devices associated with it. The VMs are also cleared as a cause of the issue during initial review (when seeing the issue typically occurs downstream).
+## Let's Talk About Best Practices
 
-<!--more-->
+Over the past few years I've been involved fairly often (from the ESXi/UCS perspective) in troubleshooting issues with network latency/connectivity wherein only a single VM is impacted. One example that comes to mind is  UCC VMs that encounter network issues and delays over the private link between the A and B Sides.
+<!--more--> Usually the network team gets involved first to ensure there were no issues on the private link itself, or any devices associated with it. The VMs are also cleared as a cause of the issue during initial review (when seeing the issue typically occurs downstream).
 
 So when I start my review I want to keep relevant documentation in mind, specifically the virtualization requirements from Cisco regarding Large Receive Offload and a VMware KB relating to vHBA and PCI devices encountering issues when using Interrupt Remapping. Having IR and LRO enabled can lead to a degredation in UC/UCC App performance and although as of v8.6+ it is not required to be turned off, it's still recommended "if issues are encountered".  With the relevant documentation linked below, I'll detail the review and remediation steps.
 
@@ -47,7 +48,7 @@ For this command the following returns are possible:
 1. False - IR is not disabled
 2. True - IR is disabled
 
-<span class="image fit"><img src="{{ "/assets/images/irlro1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro1.png" | absolute_url }}" alt="Command output for current status of Interrupt Remapping." /></span>
 
 ### Second Thing... Second? Software And Hardware LRO Settings
 
@@ -66,7 +67,7 @@ For these commands the possible returns are:
 1. 1 - Enabled
 2. 0 - Disabled
 
-<span class="image fit"><img src="{{ "/assets/images/irlro2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro2.png" | absolute_url }}" alt="Command output for current status of Large Receive Offload." /></span>
 
 ## Remediation Steps - Interrupt Remapping & LRO
 
@@ -84,19 +85,19 @@ Gracefully shut down Guest OS's, e.g. "utils system shutdown".
 
 Place the ESXi host into Maintenance Mode, e.g. "esxcli system maintenanceMode set --enable true"
 
-<span class="image fit"><img src="{{ "/assets/images/irlro3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro3.png" | absolute_url }}" alt="Putting ESXi in Maintenance Mode." /></span>
 
 ### Step 4 - Change IR
 
 Modify the IR Value using ESXCFG, e.g. "esxcfg-advcfg -k TRUE iovDisableIR
 
-<span class="image fit"><img src="{{ "/assets/images/irlro4.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro4.png" | absolute_url }}" alt="Setting "Disable IR" to True." /></span>
 
 ### Step 5 - Change LRO
 
 Modify the LRO Settings to "0" using ESXCFG, e.g. "esxcfg-advcfg -s 0 /Net/VmxnetSwLROSL"
 
-<span class="image fit"><img src="{{ "/assets/images/irlro5.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro5.png" | absolute_url }}" alt="Setting LRO to Disabled." /></span>
 
 Just to note the console look is different, I did these steps separately and used Powershell for most of it, and ConEmu w/ Ubuntu Theme for this session. Oops!
 
@@ -104,13 +105,13 @@ Just to note the console look is different, I did these steps separately and use
 
 Save the config, e.g. "auto-backup.sh"
 
-<span class="image fit"><img src="{{ "/assets/images/irlro6.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro6.png" | absolute_url }}" alt="Let's perform a backup." /></span>
 
 ### Step 7 - Reboot
 
 Perform a reboot on the ESXi host.
 
-<span class="image fit"><img src="{{ "/assets/images/irlro7.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro7.png" | absolute_url }}" alt="Give it a reboot!" /></span>
 
 ## Verification & Post Change
 
@@ -120,19 +121,19 @@ Now that the setting has been modified, config saved and the ESXi host restarted
 
 Verify iovDisableIR is set to TRUE
 
-<span class="image fit"><img src="{{ "/assets/images/irlro8.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro8.png" | absolute_url }}" alt="Command output verifying IR is Disabled." /></span>
 
 ## Step 2 - Verify LRO
 
 Verify LRO settings are set to "0".
 
-<span class="image fit"><img src="{{ "/assets/images/irlro9.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro9.png" | absolute_url }}" alt="Command output verifying LRO is Disabled." /></span>
 
 ## Step 3 - Maintenance Mode Off
 
 Turn Maintenance Mode Off
 
-<span class="image fit"><img src="{{ "/assets/images/irlro10.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/irlro10.png" | absolute_url }}" alt="Taking ESXi back out of maintenance mode." /></span>
 
 There we go. We're ready to power on the VMs in the desired order (if such an order exists) and proceed to VM health checks and testing.
 

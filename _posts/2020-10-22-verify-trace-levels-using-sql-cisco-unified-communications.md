@@ -24,11 +24,11 @@ tags:
   - Cisco
 ---
 
-<a href="#" class="image main"><img src="{{ "/assets/images/verifytracelevels.PNG" | absolute_url }}" alt="" /></a>
+## Elevated Traces are Risky
 
-Hey there! I bet you’ve got experience troubleshooting issues in a UC VOS device, like CallManager, UCCX, CER or otherwise… and you’ve likely had to increase trace levels to Detailed because of a request from Cisco TAC or because you know that the detailed tracing is needed to diagnose the issue and see what’s causing it. And I bet you always lower those trace levels back to what they were when you started, right? Well… we might tell ourselves we do, but we’re all human and we all forget things from time to time.
+Hey there! I bet you’ve got experience troubleshooting issues in a UC VOS device, like CallManager, UCCX, CER or otherwise… and you’ve likely had to increase trace levels to Detailed because of a request from Cisco TAC or because you know that the detailed tracing is needed to diagnose the issue and see what’s causing it.<!--more--> And I bet you always lower those trace levels back to what they were when you started, right? Well… we might tell ourselves we do, but we’re all human and we all forget things from time to time.
 
-<!--more-->
+<span class="image fit"><img src="{{ "/assets/images/verifytracelevels.png" | absolute_url }}" alt="Example output of the verification sql query." /></span>
 
 And because we all forget things from time to time I think it’s a great idea to check our environment(s) to ensure that there aren’t any debugs running that aren’t needed, or increased trace levels where they aren’t needed. For me, it’s not an arbitrary thing… you see… in my younger years while troubleshooting an issue on an IM&P Cluster where presence statuses weren’t updating or displaying correctly, I elevated a few traces to Detailed level. One of which was the Cisco XCP Router process. Captured the issue in tracing, downloaded it locally but never set the trace levels back to their default level. This was on a Saturday afternoon. I don’t work Sunday… Monday… or Tuesday. And boy, was Monday morning fun for the folks working.
 

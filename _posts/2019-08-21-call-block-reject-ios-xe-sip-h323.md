@@ -19,16 +19,18 @@ tags:
   - Cisco Unified Border Element
 ---
 
-A common request that we get is to perform call blocking. It's usually due to an irate customer, irate former employee, or general solicitations. By now our clients have call blocking configs in place at most/all sites, or on their primary/secondary CUBEs (or CCM, which I'll cover in another post), so for these requests it's typically as easy as adding an additional line to the config to block a new number. But for now we can act as if we have an IOS CUBE (SIP to SIP) with no call blocking configured, and we can whip up a quick config to satisfy the client requirements.
+## Gotta Block Those Calls, Man.
 
-<!--more-->
+A common request that we get is to perform call blocking. It's usually due to an irate customer, irate former employee, or general solicitations. By now our clients have call blocking configs in place at most/all sites, or on their primary/secondary CUBEs (or CCM, which I'll cover in another post), so for these requests it's typically as easy as adding an additional line to the config to block a new number.<!--more--> But for now we can act as if we have an IOS CUBE (SIP to SIP) with no call blocking configured, and we can whip up a quick config to satisfy the client requirements.
 
 [Supporting Documentation](http://www.cisco.com/c/en/us/support/docs/voice/call-routing-dial-plans/64020-number-voice-translation-profiles.html)
 
-## Request
+## Client request for Call Blocking
+
 We have been receiving calls from 3152223333, an irate former employee. Can we please initiate call blocking against this number?
 
 ## Review Steps
+
 Depending on the deployment, some steps may be skipped, but as I can work 30+ deployments in a given week, it's difficult to remember exactly what's set up, where, at all times.
 
 ### Review CDR Data

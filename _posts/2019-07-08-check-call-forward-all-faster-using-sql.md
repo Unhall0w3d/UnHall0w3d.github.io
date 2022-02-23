@@ -17,13 +17,15 @@ tags:
   - Database
 ---
 
+## How to Check CFWD Configs using SQL - Faster
+
 There's an SQL query I run against CUCM Pub in instances where a user has call forward enabled and I have a suspicion this is causing the problem, but I don't always want to build out an SSH port forwarding tunnel to get into the GUI and check. This can be used when you want to check a single user, or, for every call forward enabled in the environment.
 
 <!--more-->
 
 What's useful about this query is that it will report back call forwards enabled on a specific line, but will also tie that line to the specific device name (CSF, CIPC, SEP, etc.) where it is enabled, so we can glean information about shared lines from this query as well.
 
-## Intent
+## What is our mission?
 
 To pull a list of phones (SEP, CSF, CUIC, CIPC, etc.) that have call forward enabled on an associated line.
 

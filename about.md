@@ -6,7 +6,7 @@ permalink: /about/
 ---
 ## About Me
 
-<span class="image left"><img src="{{ "/assets/images/me.jpg" | absolute_url }}" alt="" /></span>
+<span class="image left"><img src="{{ "/assets/images/me.jpg" | absolute_url }}" alt="Every About page needs a picture! This one's... well... me!" /></span>
 
 Hey there! If you’re here you must be curious about who I am and what I do, right? Well, my name is Ken Perry and I function as a Senior UC Engineer (Level 3) at a Managed Services Provider. Through my UC Journey thus far I have functioned as a front line Service Desk engineer (with all the glory that entails), a Senior UC Engineer focusing on supporting/administrating/maintaining Cisco UC deployments including UCM, CUC, CER, IM&P, UCCX, IOS Gateways/VGs, CUBE, ESXi Hypervisor, Cisco UCS-C/B/E, UCSM and UCS Central, Unified SIP Proxy and more, typically in 20+ separate environments on a weekly basis. It can get crazy. I have also functioned as a “Day 1” implementation engineer building out “pilot” or “proof of concept” environments, including creating documentation and how-to training videos.
 

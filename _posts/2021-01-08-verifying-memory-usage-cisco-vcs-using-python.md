@@ -21,11 +21,13 @@ tags:
   - Telepresence
 ---
 
-<a href="#" class="image main"><img src="{{ "/assets/images/scriptss1.PNG" | absolute_url }}" alt="" /></a>
+## Gotta Do It Faster
 
 Today I had the same question that many, many people have had throughout history: “How do I do *this particular thing* better, or faster?” or, in the IT space, how do I automate this? What is this exactly, you might ask? Well, it’s in the title... but to explain what I was doing we’re going to need a bit of story time.
 
 <!--more-->
+
+<a href="#" class="image main"><img src="{{ "/assets/images/scriptss1.PNG" | absolute_url }}" alt="The script!" /></a>
 
 Recently I was tasked with performing health checks against Cisco VCS/Expressway devices due to a bug in one of the x8.x.x versions that results in a memory leak leading to an unresponsive Expressway server. This came about due to a Sev 1 event in which the client had an unresponsive, but otherwise healthy (good, healthy data coming back for relevant monitoring, system resource utilization, etc.)… however… at one point or another I stumbled upon a [Cisco Support Forum](https://community.cisco.com/t5/telepresence-and-video/expressway-memory-usage/td-p/3743732) post while looking at SNMP polling and specifically OIDs for Expressway where it was discussed that there is a better way to review memory utilization, and that’s directly in the CLI.
 

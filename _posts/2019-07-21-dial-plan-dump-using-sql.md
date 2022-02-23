@@ -17,11 +17,11 @@ tags:
   - Database
 ---
 
-So given that I work for a Virtual NOC/MSP in a Day 2 setting it's fairly often that I'm thrown into a random request for data. It could be for the Home Cluster enablement on a given (or all) End Users on UCM (we have a post for that!) or it could be for a dump of all the dialable numbers in the environment, or all route patterns.. or anything. This query is one I like to use when the meat and potatoes of what we need is the DN/Pattern, Description, and possible modifications that would take place during digit analysis.
+## Context
 
-<!--more-->
+I get a lot of reporting requests. It could be for the Home Cluster enablement on a given (or all) End Users on UCM (we have a post for that!) or it could be for a dump of all the dialable numbers in the environment, or all route patterns.. or anything.<!--more--> Often, I need to write up a new query to satisfy the reuqest... and this is one I like to use when the meat and potatoes of what we need is the DN/Pattern, Description, and possible modifications that would take place during digit analysis.
 
-## Purpose
+## What are we trying to find out?
 
 1. What do the egress route patterns look like? Do we prefix any digits in the pattern (e.g. 8, 9)? If we do prefix, do we prefix before a dot? If so, we must be discarding PreDot. (If not there's probably an issue!).
 2. What do our used internal DNs look like? This is usually in an environment where DIDs are not assigned to users and instead internal DNs are used.
@@ -29,7 +29,7 @@ So given that I work for a Virtual NOC/MSP in a Day 2 setting it's fairly often 
 
 With just a little bit of data you can get a big picture into how an environment operates and is designed.
 
-## Intent
+## What is our mission?
 
 To pull all DNs, Translation, Transformation and Route Patterns as well as their associated Partition (so duplicate DNs in different Partitions show as well), whether they discard digits (e.g. PreDot), what digits are Prefixed, and what the Called Party Transformation is, if set.
 

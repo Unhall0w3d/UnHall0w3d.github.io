@@ -21,9 +21,9 @@ tags:
   - Cisco
 ---
 
-Billing servers are used in UC environments to collect CDR/CMR data and display them (ideally in a much better fashion than CDR Analysis & Reporting), make them searchable and provide insights into cause codes, call durations, endpoint utilization and more. And when they work, they typically work great. Could be Variphy, Splunk, a custom billing server you're developing. Doesn't really matter which it is, but typically as long as the user account has permissions for SFTP, proper access to the desired directory, and the IP is reachable on Port 22 it all just works. Until it doesn't.
+## Let's Talk Billing Servers
 
-<!--more-->
+Billing servers are used in UC environments to collect CDR/CMR data and display them (ideally in a much better fashion than CDR Analysis & Reporting), make them searchable and provide insights into cause codes, call durations, endpoint utilization and more.<!--more--> And when they work, they typically work great. Could be Variphy, Splunk, a custom billing server you're developing. Doesn't really matter which it is, but typically as long as the user account has permissions for SFTP, proper access to the desired directory, and the IP is reachable on Port 22 it all just works. Until it doesn't.
 
 In our configuration for the Billing Servers we operate on an Active/Standby config with a Virtual IP that is shared between the two. When a failover occurs the Secondary becomes active on the VIP and takes over. We just so happen to have had a failover on 7/15/2019 and have not received CDRs since.
 
@@ -93,15 +93,15 @@ So we know that it's failing to send to the billing server, and we know it's due
 
 ### Primary
 
-<span class="image fit"><img src="{{ "/assets/images/cdrexport1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/cdrexport1.png" | absolute_url }}" alt="NMAP Query against Billing Server "Primary" node." /></span>
 
 ### Secondary
 
-<span class="image fit"><img src="{{ "/assets/images/cdrexport2.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/cdrexport2.png" | absolute_url }}" alt="NMAP Query against Billing Server "Secondary" node." /></span>
 
 I copied out the output regarding the ssh2-enum-algos into notepad++ and compared. What I found is that the secondary server was only offering a small set of algorithms and the one CUCM's CDR Repository Manager wanted to use was not included.
 
-<span class="image fit"><img src="{{ "/assets/images/cdrexport3.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/cdrexport3.png" | absolute_url }}" alt="Let's do a stare and compare using NP++." /></span>
 
 From here it was out of my hands, this was sent back to the appropriate team that manages the billing server to perform remediation against the secondary server to get CDRs back up and running!
 

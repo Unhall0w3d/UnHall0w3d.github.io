@@ -25,9 +25,9 @@ tags:
   - Virtual Memory
 ---
 
-So if you’re here you’re likely aware that there are multiple ways that we can review system resource utilization on a Cisco UC VOS appliance — we’ll use Cisco Unified Communications Manager for this example. Of course we can utilize RTMT to take a look at graphs showing resource utilization over time, we can review CLI based commands such as ```show process using-most cpu|memory```, ```show process load cpu|memory```, or even ```show perf query class Memory```. We can also poll usage remotely using SNMP, and I’d like to show you how we can calculate Virtual Memory utilization as a percentage using data returned by SNMP, then verify it in the CLI.
+## This Process Is Burned Into My Mind
 
-<!--more-->
+So if you’re here you’re likely aware that there are multiple ways that we can review system resource utilization on a Cisco UC VOS appliance — we’ll use Cisco Unified Communications Manager for this example.<!--more--> Of course we can utilize RTMT to take a look at graphs showing resource utilization over time, we can review CLI based commands such as ```show process using-most cpu|memory```, ```show process load cpu|memory```, or even ```show perf query class Memory```. We can also poll usage remotely using SNMP, and I’d like to show you how we can calculate Virtual Memory utilization as a percentage using data returned by SNMP, then verify it in the CLI.
 
 Now in my capacity as a ‘Day 2’ Engineer at a Managed Services Provider, and having the MSP I work for design it’s own scripts, tests, methods, and platform for monitoring a myriad of devices, UC included, I at times am assisting in the creation of a new test method, assisting in modifying existing monitoring for more accurate reporting, or looking at possibly older or defunct scripts that are no longer required, are an old method that will be deprecated, or tests that simply don’t provide the value they were intended to provide. It’s all part of the life cycle.
 

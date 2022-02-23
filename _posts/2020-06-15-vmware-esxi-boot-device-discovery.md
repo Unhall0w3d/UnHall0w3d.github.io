@@ -16,12 +16,11 @@ tags:
   - Unix
 ---
 
-<span class="image fit"><img src="{{ "/assets/images/esxibootdevicediscovery.png" | absolute_url }}" alt="" /></span>
-The view after SSHing into an ESXi Host. In this picture we check the version of ESXi running on the system.
+## We Need To Know Where It Boots From
 
-Oh how I love ISV1 SmartNET contracts. Provided that we have an ISV1 contract available we’re able to contact Cisco TAC to assist in VMWare ESXi Hypervisor issues. It’s a wonderful thing, really, as it provides us with engineers specialized in supporting the hypervisor in a more in depth way, and with respect to the Cisco UCS chassis hardware. Now, Cisco typically sends out initial information gathering emails when an SR is open. For Hypervisor issues the most common question I am asked is “what is the hypervisor booting from?”.
+<span class="image fit"><img src="{{ "/assets/images/esxibootdevicediscovery.png" | absolute_url }}" alt="The view after SSHing into an ESXi Host. In this picture we check the version of ESXi running on the system." /></span>
 
-<!--more-->
+Oh how I love ISV1 SmartNET contracts. Provided that we have an ISV1 contract available we’re able to contact Cisco TAC to assist in VMWare ESXi Hypervisor issues.<!--more--> It’s a wonderful thing, really, as it provides us with engineers specialized in supporting the hypervisor in a more in depth way, and with respect to the Cisco UCS chassis hardware. Now, Cisco typically sends out initial information gathering emails when an SR is open. For Hypervisor issues the most common question I am asked is “what is the hypervisor booting from?”.
 
 Now, normally you’d think that we could answer that off the top of our heads, right? Small/medium sized companies may have at most 4 or 8 UCS chassis for Unified Collaborations, and typically they are all configured in a similar manner… however I have the joy of supporting a wide variety of deployments, so it’s not always the same. Because of this I have documented some commands that assist in identifying the boot device (FlexFlash, Local LSI, SAN) in order to give Cisco the data that they need. Even if it isn’t associated with a Cisco TAC SR, it’s still useful to know these details and how to pull them. I like to know multiple ways to pull a set of information, and in this case we could identify boot device by checking:
 

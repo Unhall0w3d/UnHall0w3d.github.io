@@ -25,9 +25,9 @@ tags:
   - WSDL
 ---
 
-As I probe different ways to pull information from Cisco Unified Communications Manager I often run across other modules that I can try in the future. My last attempts at pulling phone registration status from CUCM utilized requests, XML storing/parsing, DB dips for targeted phone checks and a little more. This time I tried to take a more simple approach… simple in the sense that we don’t dip into the DB, we don’t use ASTSAPI (which has a 200 device limit), and we don’t statically define SOAP messages to send in requests.
+## Let's Try Out ZEEP
 
-<!--more-->
+As I probe different ways to pull information from Cisco Unified Communications Manager I often run across other modules that I can try in the future. My last attempts at pulling phone registration status from CUCM utilized requests, XML storing/parsing, DB dips for targeted phone checks and a little more.<!--more--> This time I tried to take a more simple approach… simple in the sense that we don’t dip into the DB, we don’t use ASTSAPI (which has a 200 device limit), and we don’t statically define SOAP messages to send in requests.
 
 Instead this time I still use requests, but in conjunction with [Zeep](https://docs.python-zeep.org/en/master/). Zeep is a SOAP client for Python. As per Zeep’s own quick introduction, “Zeep inspects the WSDL document and generates the corresponding code to use the services and types in the document. This provides an easy to use programmatic interface to a SOAP server.” Now, as a non-programmer writing very specific use-case scripts, I don’t find many of the modules particularly easy to use… but I presume that comes with time, skill, and training/experience. This wasn’t the case with Zeep. It took about an hour or two of trial and error utilizing the WSDL/Schema and looking at Zeep’s sample scripts to understand what I needed to do, and how.
 
@@ -154,13 +154,13 @@ input.txt file containing device/trunk names. One per line. File is expected to 
 
 ## Script Behavior - Phones
 
-<span class="image fit"><img src="{{ "/assets/images/scriptbehavior_phones.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/scriptbehavior_phones.png" | absolute_url }}" alt="Example of script run against Phones." /></span>
 
 Example of script behavior, requested input, output formatting when checking phone registration.
 
 ## Script Behavior - Trunks
 
-<span class="image fit"><img src="{{ "/assets/images/scriptbehavior_trunks.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/scriptbehavior_trunks.png" | absolute_url }}" alt="Example of script run against Trunks." /></span>
 
 Example of script behavior, requested input, output formatting when checking trunk registration.
 

@@ -15,9 +15,9 @@ tags:
   - UCS-C
 ---
 
-Every so often I need to perform a CIMC Firmware upgrade due to a bug, such as the infamous memory leak per bug [CSCun88303](https://quickview.cloudapps.cisco.com/quickview/bug/CSCun88303), [CSCus63934](https://quickview.cloudapps.cisco.com/quickview/bug/CSCus63934); noted under Field Notice [FN63943](https://www.cisco.com/c/en/us/support/docs/field-notices/639/fn63943.html) for which I've either drafted the Method of Procedure document (to detail the upgrade), or have actually performed the upgrade well over 50 times for this bug alone. (This is not a flex. It wasn't fun.) When I do, part of the initial steps in the process after determining we are hitting the bug is, what CIMC version is compatible with the ESXi version we are running, and based on the bug details, what version can we move to that has the fix that our chassis supports.
+## Let's talk about ESXi and UCS
 
-<!--more-->
+Every so often I need to perform a CIMC Firmware upgrade due to a bug, such as the infamous memory leak per bug [CSCun88303](https://quickview.cloudapps.cisco.com/quickview/bug/CSCun88303), [CSCus63934](https://quickview.cloudapps.cisco.com/quickview/bug/CSCus63934); noted under Field Notice [FN63943](https://www.cisco.com/c/en/us/support/docs/field-notices/639/fn63943.html)...<!--more--> for which I've either drafted the Method of Procedure document (to detail the upgrade), or have actually performed the upgrade well over 50 times for this bug alone. (This is not a flex. It wasn't fun.) When I do, part of the initial steps in the process after determining we are hitting the bug is, what CIMC version is compatible with the ESXi version we are running, and based on the bug details, what version can we move to that has the fix that our chassis supports.
 
 The compatibility matrix I use is here: https://ucshcltool.cloudapps.cisco.com/public/ , and having that is great on it's own, but some of the details asked for -- specifically the Operating System Version and Processor Version I usually don't have in documentation, and if I do, 9/10 times it's not up to date (it's an unfortunate reality for many of us). So what I thought might be useful is to detail some commands that I used regularly.
 

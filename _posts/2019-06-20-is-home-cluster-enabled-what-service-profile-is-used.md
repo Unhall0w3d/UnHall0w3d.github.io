@@ -21,7 +21,7 @@ tags:
   - IM & Presence
   - IM&P
 ---
-## Intent
+## What is our mission?
 
 Pull a list of users where Home Cluster (islocaluser) is Enabled (t) only. Do not display if the user does not have Home Cluster enabled (f). We also want to do the following:
 
