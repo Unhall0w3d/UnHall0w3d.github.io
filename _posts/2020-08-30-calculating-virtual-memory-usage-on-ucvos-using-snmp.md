@@ -15,8 +15,6 @@ tags:
   - Callmanager
   - UC VOS
   - UC
-  - snmpwalk
-  - snmptable
   - UCCX
   - Unified Communications
   - Cisco UC

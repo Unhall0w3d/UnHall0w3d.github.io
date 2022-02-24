@@ -10,7 +10,6 @@ tags:
   - Command Line
   - ESXi
   - VMWare
-  - Shell
   - VMWare ESXi
   - Linux
   - Unix

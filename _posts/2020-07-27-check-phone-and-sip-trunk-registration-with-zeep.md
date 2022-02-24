@@ -10,19 +10,14 @@ tags:
   - CUCM
   - Python
   - Python3
-  - zeep
   - Cisco Unified Communications Manager
   - Callmanager
-  - requests
   - AXL
   - automation
   - scripting
-  - RISPort
   - Unified Communications
   - Cisco UC
   - Cisco
-  - RISService
-  - WSDL
 ---
 
 ## Let's Try Out ZEEP
