@@ -21,7 +21,7 @@ tags:
 
 I have to admit, I haven't been doing much SQL work lately as... due to the holidays and other factors... it's been pretty quiet. The occasional phone firmware upgrade here, troubleshooting call quality/audio routing issues there, and some Cisco Unity SMTP Smart Host and assorted issues sprinkled throughout the past few weeks.<!--more--> So imagine my delight (hehe) when asked by a colleague about an SQL query to find devices that do not have an end user assignment.
 
-<span class="image fit"><img src="{{ "/assets/images/orphaneddevices1.png" | absolute_url }}" alt="" /></span>
+<span class="image fit"><img src="{{ "/assets/images/orphaneddevices1.png" | absolute_url }}" alt="CCM Data Dictionary for 'device' table." /></span>
 
 What I'm going to show you is a quick and lazy way of pulling the data, followed by a more concise way of pulling what we need. The lazy way will require we use Excel (or Sheets, or other applicable data manipulation program).
 
