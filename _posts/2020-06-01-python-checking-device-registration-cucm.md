@@ -64,6 +64,8 @@ Reporting output is stored as two .txt files with one device's status per line. 
 
 ## Option 1 Only - Device Pool Selection
 
+This only appears if you filter by Device Pool.
+
 <span class="image fit"><img src="{{ "/assets/images/phoneregcheck3.png" | absolute_url }}" alt="This only appears if you filter by Device Pool." /></span>
 
 ## Informational...

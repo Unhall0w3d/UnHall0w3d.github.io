@@ -28,6 +28,7 @@ This one's a bit of a mess, and I'll provide some context that I did not have th
 
 I was given the 800 number to call to replicate the issue, which was nice. No known date for the last time it worked, no known changes to the UCCX script or environment that would impact this particular call flow. I've heard this a few times.
 
+Region Relationships, with loctions, dictate bandwidth allocation on UCM.
 <span class="image fit"><img src="{{ "/assets/images/uccxcalldrop1.png" | absolute_url }}" alt="Region Relationships, with loctions, dictate bandwidth allocation on UCM." /></span>
 
 Now something I want you to understand is that working in a multitude of environments, and typically only for a few hours at a time, I do not have the ability to memorize every change that takes place for our clients. All of the changes performed  are of course tracked internally with indicents/cases that we can refer to for documentation, however, the client also makes their own changes, and at times also contracts other companies to perform work (site moves, SIP migrations, etc.) if they feel they can get a better deal or have existing contracts that they can leverage.

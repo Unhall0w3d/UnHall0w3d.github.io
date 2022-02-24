@@ -30,6 +30,7 @@ Another day, another query. This time the request was not up for interpretation 
 This time we get a screenshot of the Product Specific Configuration Layout element of "Video Calling" (see below). We're able to do this but it's not as straight forward as a typical query against the 'device' table for an attribute like the 'description' of a phone.
 
 <span class="image fit"><img src="{{ "/assets/images/videocalling1.png" | absolute_url }}" alt="Product Specific Configuration Layout element depicting whether Video Calling is Enabled or Disabled - CUCM Device > Phone" /></span>
+Product Specific Configuration Layout element depicting whether Video Calling is Enabled or Disabled - CUCM Device > Phone
 
 The request comes in as "Would you please check if a report can be created for all Asia region users (CSFxxxxxx) that have this Video Calling option "Enabled"? The attachment accompanied the request. Immediately I think of what attributes I need to pull based on the request, which I now, and which I don't know. So we'll have the name (device name) and description (device description) from the Device table. That's a given. The next is to think about where the Video Calling "Product Specific Configuration Layout" is held. For this I performed a "run sql select * from device" presuming the data to be stored there. It's not.
 
@@ -81,10 +82,12 @@ run sql select d.name, d.description, d4k.xml from device as d inner join device
 
 ## Altered Query -- Output
 
+The output provides all user devices (CSF/Jabber) where Video Calling is enabled via Product Specific Layout, indicating manual enablement.
 <span class="image fit"><img src="{{ "/assets/images/videocalling4.png" | absolute_url }}" alt="The output provides all user devices (CSF/Jabber) where Video Calling is enabled via Product Specific Layout, indicating manual enablement." /></span>
 
-Now that we know what devices have been enabled manually, we can parse for the devices that have it disabled manually. To do this we need to edit our '1' to a '0'. Remember our caveat, if the user has the Product Specific Layout option for Video Calling set to '0' (disabled) but they do not check the option to override the Common Phone Profile, it won't apply. This is akin to a 'best effort' or 'as best as we can get' query. This is my Worksheet 3 in Excel   
+Now that we know what devices have been enabled manually, we can parse for the devices that have it disabled manually. To do this we need to edit our '1' to a '0'. Remember our caveat, if the user has the Product Specific Layout option for Video Calling set to '0' (disabled) but they do not check the option to override the Common Phone Profile, it won't apply. This is akin to a 'best effort' or 'as best as we can get' query. This is my Worksheet 3 in Excel
 
+The output provides all user devices (CSF/Jabber) where Video Calling is disabled via Product Specific Layout, indicating manual disablement.
 <span class="image fit"><img src="{{ "/assets/images/videocalling5.png" | absolute_url }}" alt="The output provides all user devices (CSF/Jabber) where Video Calling is disabled via Product Specific Layout, indicating manual disablement." /></span>
 
 Where do we go from here? Well, what I chose to do as explained previously is to translate this data (copy + paste) to Excel, Worksheet 1 being the "All users" pull, Worksheet 2 being the "Manually Enabled Users" pull, and Worksheet 3 being the "Manually Disabled Users" pull. Once the data is posted into Excel we select Column A and use the "Data" Ribbon tab to find the "Text to Columns" option. We then set the Text to Columns to match our data type - Delimited or Fixed Width, and sort all three worksheets so the attributes are in cell columns matching their type - Name, Description, XML.
@@ -107,6 +110,7 @@ Column E (Manually Enabled) has the following formula along the entire column
 =VLOOKUP(A3,'CSF Video Enabled Manually'!$A$3:$A$180,1,FALSE)
 ```
 
+A view of what the report rows look like after the formula is applied. Headers left to right are “Device”, “Description”, “Device Pool”, “XML”
 <span class="image fit"><img src="{{ "/assets/images/videocalling6.png" | absolute_url }}" alt="A view of what the report rows look like after the formula is applied. Headers left to right are “Device”, “Description”, “Device Pool”, “XML”" /></span>
 
 Now, as is the case with almost any report that I've pulled there's always the request for additional information. Usually something they wanted from the get-go but didn't mention or didn't know they wanted when the initial request came through. In our case it was to attempt to identify the site these users are at. To do this I've utilized the Device Pool associated with the user's phone. If there is no more granular depiction within CUCM (Location field?) then this is what we'll end up going with. So the only query I end up modifying is my initial "all users" query as that page displays the colorized data (and is really what they want to be looking at). To this we add the dp.name (from devicepool table represented as dp) and we related the foreign key of the devicepool assigned to the device (fkdevicepool in device as d) to the pkid of the device pool (pkid in devicepool as dp). 
@@ -119,6 +123,7 @@ run sql select d.name, d.description, d4k.xml, dp.name as devicepool from device
 
 ## Expanded Query - Output
 
+Modified version of my initial query to include the device pool assigned to the given device.
 <span class="image fit"><img src="{{ "/assets/images/videocalling7.png" | absolute_url }}" alt="Modified version of my initial query to include the device pool assigned to the given device." /></span>
 
 The caveats mentioned were sent to the client in the email containing the report, as well as a quick explainer on how to interpret the data (such as below). When I can't make it clean and easily understandable, you might say I've failed... and maybe I have. But I'm not particularly great at organizing data so that it's digestable by others, especially when it comes to Excel.
@@ -133,6 +138,7 @@ If the CSF name in “Column A” is RED, video calling is disabled *manually*.
 
 The caveats that I noted in my previous email are still relevant.
 
+Visual representation of the color scheme described above.
 <span class="image fit"><img src="{{ "/assets/images/videocalling8.png" | absolute_url }}" alt="Visual representation of the color scheme described above." /></span>
 
 
