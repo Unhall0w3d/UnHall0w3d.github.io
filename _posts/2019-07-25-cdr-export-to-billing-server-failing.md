@@ -93,13 +93,13 @@ So we know that it's failing to send to the billing server, and we know it's due
 
 ### Primary
 
-<span class="image fit"><img src="{{ "/assets/images/cdrexport1.png" | absolute_url }}" alt="NMAP Query against Billing Server "Primary" node." /></span>
+<span class="image fit"><img src="{{ "/assets/images/cdrexport1.png" | absolute_url }}" alt="NMAP Query against Billing Server Primary node." /></span>
 
 ### Secondary
 
 I copied out the output regarding the ssh2-enum-algos into notepad++ and compared. What I found is that the secondary server was only offering a small set of algorithms and the one CUCM's CDR Repository Manager wanted to use was not included.
 
-<span class="image fit"><img src="{{ "/assets/images/cdrexport2.png" | absolute_url }}" alt="NMAP Query against Billing Server "Secondary" node." /></span>
+<span class="image fit"><img src="{{ "/assets/images/cdrexport2.png" | absolute_url }}" alt="NMAP Query against Billing Server Secondary node." /></span>
 
 From here it was out of my hands, this was sent back to the appropriate team that manages the billing server to perform remediation against the secondary server to get CDRs back up and running!
 
