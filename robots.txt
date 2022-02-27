@@ -42,7 +42,8 @@
 #      |_______|   |_______|
 #
 #
-#
+# Sitemap Location
+Sitemap: https://www.nocthoughts.com/sitemap.xml
 # Allow All
 User-agent: *
 Disallow:
