@@ -12,22 +12,22 @@ layout: null
 <url>
 	<loc>https://nocthoughts.com/posts/</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.8</priority>
+	<priority>0.5</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/categories/</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.8</priority>
+	<priority>0.5</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/tags/</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.8</priority>
+	<priority>0.5</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/about/</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.8</priority>
+	<priority>0.5</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/privacypolicy.html</loc>
@@ -37,191 +37,191 @@ layout: null
 <url>
 	<loc>https://nocthoughts.com/2022/02/23/2020-04-07-sql-query-cisco-jabber-video-calling-enabled-option.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2021/02/12/automating-memory-checks-cisco-vcs-python.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2021/01/08/verifying-memory-usage-cisco-vcs-using-python.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/10/22/verify-trace-levels-using-sql-cisco-unified-communications.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/08/30/calculating-virtual-memory-usage-on-ucvos-using-snmp.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/07/27/check-phone-and-sip-trunk-registration-with-zeep.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/06/15/vmware-esxi-boot-device-discovery.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/06/14/health-checks-imp-cups-im-presence.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/06/14/health-checks-cucm-callmanager.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/06/01/python-checking-device-registration-cucm.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/05/14/building-a-toolbelt-for-unified-communications-using-python.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/05/01/using-beautifulsoup-to-parse-cisco-phone-gui-python.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/02/20/who-has-jabber-what-site-are-they-at.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/02/20/call-drops-after-uccx-option-selected-call-sent-to-agent.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/02/06/updating-primary-extension-the-fun-way.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/01/27/updating-accept-and-relay-addresses-en-masse.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2020/01/19/ccm-synced-end-users-and-how-to-delete-them.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/12/15/why-windows-ntp-is-unsupported-for-cisco-uc-deployments.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/11/25/health-checks-cuc-unity-connection.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/11/18/securing-sccp-media-resource-in-ios.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/11/06/finding-orphaned-devices-and-device-profiles.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/09/04/importance-of-documentation-where-is-this-vm.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/08/21/call-block-reject-ios-xe-sip-h323.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/08/14/making-isos-bootable-lab-use.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/08/09/vmware-esxi-vcsa-lab-setup.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/08/02/uc-ucc-best-practice-large-receive-offload-and-interrupt-remapping-esxi.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/07/29/basic-commands-to-know-for-managing-esxi-on-ucs.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/07/25/cdr-export-to-billing-server-failing.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/07/21/dial-plan-dump-using-sql.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/07/17/mobile-agents-ctios-and-service-crashes-oh-my.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/07/08/check-call-forward-all-faster-using-sql.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/07/05/do-you-hear-that-its-a-dial-plan-overlap.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/06/27/health-checks-cube-vgw-ios-xe.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/06/26/and-boom-goes-the-storage-controller.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/06/24/vcs-87-and-old-host-keys.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/06/21/pulling-device-defaults-like-a-pro.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/06/21/identifying-static-phone-loads.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://nocthoughts.com/2019/06/20/is-home-cluster-enabled-what-service-profile-is-used.html</loc>
 	<lastmod>2022-02-28T01:31:34+01:00</lastmod>
-	<priority>0.4</priority>
+	<priority>0.8</priority>
 </url>
 </urlset>
