@@ -18,7 +18,6 @@ tags:
   - Unified Communications
   - Reports
   - Cisco Phone
-  - Status Report
   - Cisco Jabber
   - Database
 ---

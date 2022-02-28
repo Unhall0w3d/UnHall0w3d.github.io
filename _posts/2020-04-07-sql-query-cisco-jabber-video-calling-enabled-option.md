@@ -16,7 +16,6 @@ tags:
   - Cisco Jabber
   - Reports
   - Unified Communications
-  - Status Report
   - Cisco Jabber
   - Telepresence
   - Database

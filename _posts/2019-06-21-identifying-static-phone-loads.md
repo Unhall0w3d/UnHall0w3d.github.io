@@ -17,7 +17,8 @@ tags:
   - Informix
   - SQL
 ---
-## What is our mission?
+## What Is Our Mission
+
 As part of the process of upgrading phones to new firmware I've formed a habit of verifying if there are any phones of the particular model (or models) that I'm upgrading that have a static phone load assignment. Now, there's a few reasons you might want a static phone load including but not limited to:
 
 <!--more-->
@@ -30,7 +31,7 @@ The thing with manual phone loads is just that -- they're manually assigned. It 
 
 ## Relevant Data/Attributes and Tables
 
-As with many of the queries I run, I like to define the attributes I am pulling from the Informix DB to be easier to understand and so that the data can be conveyed to a client, architect, whoever without much/any modification or manipulation. In this case we are dealing with the following attributes and tables:
+As with many of the queries I run, I like to define the attributes I am pulling from the Informix DB to be easier to understand and so that the data can be conveyed to a client, architect, whoever without much/any modification or manipulation. In this case we are dealing with the following attributes and tables.
 
 ### Attributes
 

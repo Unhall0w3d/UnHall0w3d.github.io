@@ -17,7 +17,7 @@ tags:
   - Cisco Callmanager
 ---
 
-## A New Query Approaches!
+## A New Query Approaches
 
 I have to admit, I haven't been doing much SQL work lately as... due to the holidays and other factors... it's been pretty quiet. The occasional phone firmware upgrade here, troubleshooting call quality/audio routing issues there, and some Cisco Unity SMTP Smart Host and assorted issues sprinkled throughout the past few weeks.<!--more--> So imagine my delight (hehe) when asked by a colleague about an SQL query to find devices that do not have an end user assignment.
 

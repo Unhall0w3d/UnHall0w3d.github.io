@@ -21,7 +21,7 @@ tags:
   - Cisco Presence Server
 ---
 
-## Windows NTP Is A No Go
+## Windows NTP Is A No-Go
 
 So as we all know as part of the UC VOS Deployments, NTP Servers are one element that needs to be configured during install time... and occasionally needs to be updated as things change on the network.  For those of you unsure of what devices are UC VOS, please see the list below.
 
