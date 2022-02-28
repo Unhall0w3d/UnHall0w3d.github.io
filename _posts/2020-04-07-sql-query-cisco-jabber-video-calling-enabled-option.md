@@ -1,5 +1,5 @@
 ---
-title: "Check if "Video Calling" is Enabled w/ SQL"
+title: "Jabber Video Calling SQL Query"
 layout: single
 date: 2020-04-07T08:00:00-05:00
 excerpt_separator: "<!--more-->"
