@@ -1,6 +1,7 @@
 ---
 title: "Calculating VMEM Usage on Cisco UC"
 layout: single
+classes: wide
 date: 2020-08-30T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

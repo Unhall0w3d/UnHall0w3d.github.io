@@ -1,6 +1,7 @@
 ---
 title: "UC & UCC Best Practice - LRO and IR on ESXi"
 layout: single
+classes: wide
 date: 2019-08-02T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

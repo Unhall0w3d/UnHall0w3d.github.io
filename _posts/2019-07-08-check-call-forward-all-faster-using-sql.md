@@ -1,6 +1,7 @@
 ---
 title: "Check Call Forward Configs Using SQL"
 layout: single
+classes: wide
 date: 2019-07-08T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

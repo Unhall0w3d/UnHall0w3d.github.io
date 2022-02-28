@@ -1,6 +1,7 @@
 ---
 title: "Verifying Memory Usage on Cisco VCS"
 layout: single
+classes: wide
 date: 2021-01-08T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

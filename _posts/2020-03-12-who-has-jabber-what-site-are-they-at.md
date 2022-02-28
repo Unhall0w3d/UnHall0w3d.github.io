@@ -1,6 +1,7 @@
 ---
 title: "Who has Jabber? Where are they?"
 layout: single
+classes: wide
 date: 2020-02-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

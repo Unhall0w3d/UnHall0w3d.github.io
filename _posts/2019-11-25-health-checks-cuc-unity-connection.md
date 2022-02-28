@@ -1,6 +1,7 @@
 ---
 title: "Health Checks - CUC - Unity Connection"
 layout: single
+classes: wide
 date: 2019-11-25T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

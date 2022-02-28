@@ -1,6 +1,7 @@
 ---
 title: "Basic Commands For ESXi on UCS"
 layout: single
+classes: wide
 date: 2019-07-29T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

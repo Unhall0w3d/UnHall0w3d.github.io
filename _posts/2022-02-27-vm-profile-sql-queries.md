@@ -1,6 +1,7 @@
 ---
 title: "Voice Mail Profile SQL Queries"
 layout: single
+classes: wide
 date: 2022-02-27T20:30:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

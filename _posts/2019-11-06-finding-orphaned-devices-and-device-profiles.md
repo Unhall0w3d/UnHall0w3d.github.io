@@ -1,6 +1,7 @@
 ---
 title: "Finding Orphaned Devices & Device Profiles"
 layout: single
+classes: wide
 date: 2019-11-06T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

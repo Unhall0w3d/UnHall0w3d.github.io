@@ -1,6 +1,7 @@
 ---
 title: "Call Drops On Agent Delivery"
 layout: single
+classes: wide
 date: 2020-02-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

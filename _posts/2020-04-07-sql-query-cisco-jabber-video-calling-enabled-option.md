@@ -1,6 +1,7 @@
 ---
 title: "Jabber Video Calling SQL Query"
 layout: single
+classes: wide
 date: 2020-04-07T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

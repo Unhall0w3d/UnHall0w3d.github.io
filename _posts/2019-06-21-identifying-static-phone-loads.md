@@ -1,6 +1,7 @@
 ---
 title: "Identifying Static Phone Loads With SQL"
 layout: single
+classes: wide
 date: 2019-06-21T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

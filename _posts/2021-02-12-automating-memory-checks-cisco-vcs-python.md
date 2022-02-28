@@ -1,6 +1,7 @@
 ---
 title: "Automating Memory Checks for Cisco VCS"
 layout: single
+classes: wide
 date: 2021-02-12T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:

@@ -1,6 +1,7 @@
 ---
 title: "CCM Synced End Users -- And How To Delete Them"
 layout: single
+classes: wide
 date: 2020-01-19T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
