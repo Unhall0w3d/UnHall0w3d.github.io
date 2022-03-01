@@ -159,12 +159,12 @@ run sql select count(dnorpattern) from numplan as np where (np.fkvoicemessagingp
 
 (count)
 =======
-3
+4
 ```
 
 ### Full Send
 
-Now that we know we're only getting 3 returns, we can run the big query. Again, there were *many* hits when ran for the actual audit. Let's give this query a shot.
+Now that we know we're only getting 4 returns, we can run the big query. Again, there were *many* hits when ran for the actual audit. Let's give this query a shot.
 
 ```text
 run sql select np.dnorpattern as dn, np.description, np.cfbvoicemailenabled as CFBusyExt, np.cfbintvoicemailenabled as CFBusyInt, np.cfnavoicemailenabled as CFNoAnExt, np.cfnaintvoicemailenabled as CFNoAnInt, np.pffvoicemailenabled as CFNoCovExt, np.pffintvoicemailenabled as CFNoCovInt, np.cfdfvoicemailenabled as CFCTIFail, np.cfurvoicemailenabled as CFUnRegExt, np.cfurintvoicemailenabled as CFUnRegInt, vmp.name as VMProfile, vmp.description as VMDescription from numplan as np inner join voicemessagingprofile as vmp on np.fkvoicemessagingprofile=vmp.pkid where (np.fkvoicemessagingprofile = '00000000-1111-0000-0000-000000000000' or np.fkvoicemessagingprofile) and (np.cfnavoicemailenabled = 't' or np.cfbvoicemailenabled = 't' or np.cfbintvoicemailenabled = 't' or np.cfnavoicemailenabled = 't' or np.cfnaintvoicemailenabled = 't' or np.pffvoicemailenabled = 't' or np.pffintvoicemailenabled = 't' or np.cfdfvoicemailenabled = 't' or np.cfurvoicemailenabled = 't' or np.cfurintvoicemailenabled = 't')
