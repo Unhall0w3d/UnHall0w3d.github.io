@@ -8,7 +8,7 @@ title                    : "The NOC Thoughts Blog"
 title_separator          : "-"
 subtitle                 : "Mad Rantings of a Caffeine Addicted Engineer" # site tagline that appears below site title in masthead
 name                     : "Kenneth Perry"
-description              : "NOC Thoughts is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communicationsland of fun... and bugs."
+description              : "NOC Thoughts is a blog for interesting issues, lessons learned, useful scripts and more in Cisco's Unified Communications land of fun... and bugs."
 url                      : "https://www.nocthoughts.com" # the base hostname & protocol for your site e.g.
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : unhall0w3d/mind-enigma # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
