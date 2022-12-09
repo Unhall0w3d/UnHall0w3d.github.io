@@ -10,7 +10,7 @@ categories:
   - Unified Communications
 tags:
   - IOS-XE
-  - Health Check
+  - Health Checks
   - Action Plan
   - Gateway
   - Reboot
@@ -19,7 +19,6 @@ tags:
   - Cisco Unified Border Element
   - IOS
   - VGW
-  - Gateway
 ---
 
 ## 𝄞 This Is How We Do It 𝄞
