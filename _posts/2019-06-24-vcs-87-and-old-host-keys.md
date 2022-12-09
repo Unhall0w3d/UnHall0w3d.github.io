@@ -5,7 +5,7 @@ classes: wide
 date: 2019-06-24T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
-  - Telepresence
+  - Unified Communications
   - Cisco
 tags:
   - Cisco VCS
