@@ -23,9 +23,7 @@ tags:
 
 ## 𝄞 This Is How We Do It 𝄞
 
-And here it is, my list of commands and checks that I run against CUCM nodes (7.x-12.x)  for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide.<!--more-->
-
-<span class="image fit"><img src="{{ "/assets/images/cuchealthcheck1.png" | absolute_url }}" alt="RTMT Overview Page." /></span>
+And here it is, my list of commands and checks that I run against CUCM nodes (7.x-12.x)  for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide.
 
 I pull this data to refer back to in the event that the change has disrupted dbrepliction, endpoint registration status, inter-cluster communication, intra-cluster communication, service status, anything. Consider this output a "CYA" for later. Something to refer back to to confirm all is as it was prior to the change, with whatever exceptions should exist (e.g. IP address changed should reflect in post-change "show network eth0 detail" output.
 
