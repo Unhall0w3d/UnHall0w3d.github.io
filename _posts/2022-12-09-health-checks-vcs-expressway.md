@@ -17,6 +17,8 @@ tags:
   - Telepresence
 ---
 
+## 𝄞 This Is How We Do It 𝄞
+
 And here it is, my list of commands and checks that I run against Cisco VCS-C/E & Expressway-C/E servers for most changes that take place. It's useful output to collect prior to changing configurations, Upgrades, Restarts -- anything that makes a change system-wide or otherwise has the opportunity to "break" the system.<!--more-->
 
 I pull this data to refer back to in the event that the change has disrupted endpoint registration status, inter-cluster communication, intra-cluster communication, MRA, zone connectivity, anything. Consider this output a "CYA" for later. Something to refer back to and confirm all is as it was prior to the change, with applicable exceptions/changes seen in the post-change output.
