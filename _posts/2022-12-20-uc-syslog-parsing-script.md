@@ -2,7 +2,7 @@
 title: "Cisco UCSyslogParser Script"
 layout: single
 classes: wide
-date: 2022-12-14T08:00:00-05:00
+date: 2022-12-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Cisco
