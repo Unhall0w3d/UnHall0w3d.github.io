@@ -7,7 +7,7 @@ excerpt_separator: "<!--more-->"
 categories:
   - SQL
   - Cisco
-  - Uniied Communications
+  - Unified Communications
 tags:
   - Cisco Unified Communications Manager
   - Cisco
