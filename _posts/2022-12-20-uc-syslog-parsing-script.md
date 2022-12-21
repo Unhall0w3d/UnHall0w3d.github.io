@@ -212,7 +212,7 @@ def netrequests():
         _sshconn.close()
 ```
 
-Now... this... this next part is something you'd see on https://www.reddit.com/r/programminghorror ... It's not for the faint of heart and honestly gave this man nightmares as, in his pursuit of using **pyparsing** because of how *fun* it would be, he created an absolute *abomination* of a function. When I asked him what he had done, only the screams of some cthulhu-esque nature could be heard. As ffar as I understand it creates static variables to match everything from the way the date to syslog contents appear in a given message and evaluates what exists within the message and what doesn't, slaps it all together into a payload, and passes it on. I think.
+Now... this... this next part is something you'd see on https://www.reddit.com/r/programminghorror ... It's not for the faint of heart and honestly gave this man nightmares as, in his pursuit of using **pyparsing** because of how *fun* it would be, he created an absolute *abomination* of a function. When I asked him what he had done, only the screams of some cthulhu-esque nature could be heard. As far as I understand it creates static variables to match everything from the way the date to syslog contents appear in a given message and evaluates what exists within the message and what doesn't, slaps it all together into a payload, and passes it on. I think.
 
 ```text
 class Parser(object):
