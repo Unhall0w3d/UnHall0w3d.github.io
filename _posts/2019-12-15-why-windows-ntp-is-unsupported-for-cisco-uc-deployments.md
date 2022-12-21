@@ -7,19 +7,15 @@ excerpt_separator: "<!--more-->"
 categories:
   - Unified Communications
   - Cisco
-  - Windows
+  - Microsoft Windows
 tags:
   - Cisco Unity Connection
   - Cisco
-  - Cisco Unity
-  - Cisco UC
   - Cisco Emergency Responder
   - Unified Communications
-  - Cisco UCCX
-  - UCCX
-  - Contact Center Express
-  - Cisco IM&P
-  - Cisco Presence Server
+  - Cisco Unified Contact Center Express
+  - Cisco Unified IM & Presence
+  - Cisco Unified Communications Manager
 ---
 
 ## Windows NTP Is A No-Go

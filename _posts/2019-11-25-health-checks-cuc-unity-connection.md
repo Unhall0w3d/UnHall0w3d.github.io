@@ -9,16 +9,10 @@ categories:
   - Unified Communications
 tags:
   - Health Checks
-  - Server Health
   - Cisco
-  - Cisco UC
-  - Unity Connection
+  - Cisco Unity Connection
   - Unified Communications
-  - CUC
-  - Voicemail
   - Action Plan
-  - Reboot
-  - Restart
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

@@ -9,18 +9,12 @@ categories:
   - Cisco
   - Unified Communications
 tags:
-  - Informix
-  - Cisco Callmanager
   - Cisco
-  - Cisco UC
-  - Call Manager
-  - Cisco Unity
+  - Cisco Unity Connection
   - Reports
   - Unified Communications
   - Database
   - Unity Connection
-  - CUC
-  - Voicemail
 ---
 
 ## Another Audit Using SQL

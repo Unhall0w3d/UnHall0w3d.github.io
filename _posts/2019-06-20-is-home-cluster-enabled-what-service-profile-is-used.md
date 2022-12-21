@@ -9,18 +9,12 @@ categories:
   - Cisco
   - SQL
 tags:
-  - Cisco Callmanager
   - Cisco
-  - Cisco UC
-  - Call Manager
   - Database
   - Unified Communications
-  - Informix
-  - Jabber
   - Cisco Jabber
-  - SQL
-  - IM & Presence
-  - IM&P
+  - Cisco Unified IM & Presence
+  - Cisco Unified Communications Manager
 ---
 ## What Is Our Mission
 

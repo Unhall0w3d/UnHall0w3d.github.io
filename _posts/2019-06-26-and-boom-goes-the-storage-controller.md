@@ -6,17 +6,14 @@ date: 2019-06-26T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Cisco
-  - UCS
+  - Cisco UCS
   - Unified Communications
 tags:
-  - UCS
-  - UCS-C
-  - Storage
   - Cisco UCS
-  - Crash
+  - Cisco UCS-C
+  - Storage
   - Cisco
   - Data Center
-  - Virtualization
 ---
 
 ## The Story Begins

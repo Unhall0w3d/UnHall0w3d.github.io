@@ -6,18 +6,14 @@ date: 2020-02-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Contact Center
+  - Unified Communications
   - Cisco
 tags:
   - UCCX
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
-  - Contact Center Express
-  - Contact Center
-  - Traces
+  - Cisco Unified Contact Center Express
   - Unified Communications
-  - Logs
   - Log Review
 ---
 

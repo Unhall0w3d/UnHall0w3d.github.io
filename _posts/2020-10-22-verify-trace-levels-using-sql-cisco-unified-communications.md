@@ -9,20 +9,13 @@ categories:
   - Cisco
   - Unified Communications
 tags:
-  - CUCM
-  - CER
-  - CUC
-  - Cisco Unity
+  - Cisco Unity Connection
   - Cisco Unified Communications Manager
-  - Callmanager
-  - UC VOS
-  - UC
-  - Informix
-  - SQL
-  - UCCX
+  - Cisco Unified Contact Center Express
+  - Cisco Emergency Responder
+  - Database
+  - Cisco 
   - Unified Communications
-  - Cisco UC
-  - Cisco
 ---
 
 ## Elevated Traces are Risky

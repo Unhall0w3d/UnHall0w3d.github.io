@@ -6,18 +6,14 @@ date: 2020-04-07T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - SQL
+  - Unified Communications
   - Cisco
 tags:
-  - Informix
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
-  - Jabber
   - Cisco Jabber
   - Reports
   - Unified Communications
-  - Cisco Jabber
   - Telepresence
   - Database
 ---

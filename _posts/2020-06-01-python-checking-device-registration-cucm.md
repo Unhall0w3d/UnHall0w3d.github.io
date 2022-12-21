@@ -8,16 +8,11 @@ categories:
   - Cisco
   - Python
 tags:
-  - CUCM
   - Python
-  - Python3
   - Cisco Unified Communications Manager
-  - Callmanager
   - AXL
-  - automation
-  - scripting
+  - Automation
   - Unified Communications
-  - Cisco UC
   - Cisco
 ---
 

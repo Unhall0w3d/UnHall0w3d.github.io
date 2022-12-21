@@ -6,12 +6,11 @@ date: 2019-09-04T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - VMWare
+  - General
 tags:
-  - ESXi
   - VMWare
-  - Documentation
-  - Excel
-  - RVTools
+  - VMWare ESXi
+  - General
 ---
 
 ## Preface

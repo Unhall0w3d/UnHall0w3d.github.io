@@ -6,14 +6,14 @@ date: 2019-07-29T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Cisco
-  - UCS
+  - Cisco UCS
   - VMWare
 tags:
   - Cisco
-  - ESXi
   - VMWare
-  - UCS
-  - UCS-C
+  - VMware ESXi
+  - Cisco UCS
+  - Cisco UCS-C
 ---
 
 ## Let's talk about ESXi and UCS

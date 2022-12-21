@@ -6,18 +6,12 @@ date: 2019-08-21T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Cisco
-  - IOS
+  - IOS/XE
   - Unified Communications
 tags:
-  - IOS-XE
-  - Call Block
-  - Dial Plan
-  - Gateway
-  - Dial Peer
-  - IOS
-  - Cisco
-  - CUBE
+  - IOS/XE
   - Cisco Unified Border Element
+  - Unified Communications
 ---
 
 ## Gotta Block Those Calls, Man

@@ -8,20 +8,10 @@ categories:
   - Cisco
   - Unified Communications
 tags:
-  - CUCM
-  - SNMP
-  - CUC
-  - Cisco Unity
+  - Cisco Unity Connection
   - Cisco Unified Communications Manager
-  - Callmanager
-  - UC VOS
-  - UC
-  - UCCX
-  - Unified Communications
-  - Cisco UC
+  - Cisco Unified Contact Center Express
   - Cisco
-  - Contact Center Express
-  - Virtual Memory
 ---
 
 ## This Process Is Burned Into My Mind

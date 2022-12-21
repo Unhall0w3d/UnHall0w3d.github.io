@@ -9,23 +9,23 @@ categories:
   - Cisco
   - IOS/XE
 tags:
-  - Cisco CUBE
+  - Cisco Unified Border Element
   - Cisco
   - SCCP
   - Media Resource
   - Security
   - Certificates
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Unified Communications
 ---
 
 ## Gotta Secure Those Media Resources
 
-An interesting change I was involved in recently that was more of an oddity to me was setting up a CA in IOS, signing a certificate for Media Resources and registering it against a secure CCM cluster.<!--more--> Most of the clients I have had the pleasure of working with did not secure, or need to secure their UC environment for SRTP. And as many folks will say, you can read about something all you want but you don't really get a firm grasp on it until you get your feet wet.
+An interesting change I was involved in recently that was more of an oddity to me was setting up a CA in IOS, signing a certificate for Media Resources and registering it against a secure CCM cluster.<!--more--> Most of the clients I have had the pleasure of working with did not secure, or need to secure their UC environment for SRTP. And as many folks will say, you can read about something all you want, but you don't really get a firm grasp on it until you get your feet wet.
 
-And get my feet wet I did! I made an initial mistake in disabling the "Cisco Cert Change Notification" service which prevented the certificates from automagically propagating from the Pub to Sub trust stores. This caused me some confusion when the CFB wouldn't register, I ended up double checking the specific CUCM list that SCCP was using and verified the cert didn't exist, so I re-enabled the service across the board and re-checked. Bam. Cert existed, CFB registered. Stressful 10-15 minutes while I sat and thunk about what might have been wrong.
+And get my feet wet I did! I made an initial mistake in disabling the "Cisco Cert Change Notification" service which prevented the certificates from automagically propagating from the Pub to Sub trust stores. This caused me some confusion when the CFB wouldn't register, I ended up double-checking the specific CUCM list that SCCP was using and verified the cert didn't exist, so I re-enabled the service across the board and re-checked. Bam. Cert existed, CFB registered. Stressful 10-15 minutes while I sat and thunk about what might have been wrong.
 
-But to learn from my experience (and mistake), below is a mock up of the configuration used to stand up a CA, a trustpoint for the CFB resource, enroll/sign the certificate and export it out. The steps are also provided for the CUCM portion in order to get the newly secured media resource to register.
+But to learn from my experience (and mistake), below is a mockup of the configuration used to stand up a CA, a trustpoint for the CFB resource, enroll/sign the certificate and export it out. The steps are also provided for the CUCM portion in order to get the newly secured media resource to register.
 
 ## The Process
 
@@ -151,4 +151,4 @@ crypto pki export CUBE_CFB_2 pem terminal
 
 And that's it! An initially daunting (due to lack of experience) task made easy. Do abide by any security requirements your org has, as you may have additional considerations that I did not, and may require some changes to the configuration.
 
-As always I hope this has been helpful, especially in outlining the required config elements and steps to secure Media Resources on IOS for registration with CUCM. For socials you can follow or reach out to me in the comments here, on Twitter (@kperryuc), and on LinkedIn.
+As always I hope this has been helpful, especially in outlining the required config elements and steps to secure Media Resources on IOS for registration with CUCM. For socials, you can follow or reach out to me in the comments here, on Twitter (@kperryuc), and on LinkedIn.

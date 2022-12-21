@@ -9,17 +9,11 @@ categories:
   - Unified Communications
 tags:
   - Health Checks
-  - Server Health
   - Cisco
-  - Cisco UC
-  - IM & Presence
-  - IM&P
+  - Cisco Unified IM & Presence
   - Unified Communications
   - Cisco Jabber
-  - Jabber
   - Action Plan
-  - Reboot
-  - Restart
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

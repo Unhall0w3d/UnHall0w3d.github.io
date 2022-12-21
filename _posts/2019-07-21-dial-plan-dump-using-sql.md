@@ -7,12 +7,10 @@ excerpt_separator: "<!--more-->"
 categories:
   - SQL
   - Cisco
+  - Unified Communications
 tags:
-  - Informix
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
   - Reports
   - Unified Communications
   - Database

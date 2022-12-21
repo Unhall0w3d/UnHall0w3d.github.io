@@ -11,12 +11,8 @@ categories:
 tags:
   - Cisco Unity Connection
   - Cisco
-  - Cisco Unity
-  - Cisco UC
   - Database
   - Unified Communications
-  - Informix
-  - SQL
 ---
 ## Update
 

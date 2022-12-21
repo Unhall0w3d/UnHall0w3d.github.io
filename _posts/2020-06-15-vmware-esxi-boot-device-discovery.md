@@ -7,13 +7,8 @@ excerpt_separator: "<!--more-->"
 categories:
   - VMWare
 tags:
-  - esxcli
-  - Command Line
-  - ESXi
   - VMWare
   - VMWare ESXi
-  - Linux
-  - Unix
 ---
 
 ## We Need To Know Where It Boots From

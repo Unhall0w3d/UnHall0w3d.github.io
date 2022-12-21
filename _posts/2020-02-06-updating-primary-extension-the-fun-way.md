@@ -9,14 +9,11 @@ categories:
   - Cisco
   - SQL
 tags:
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
   - Cisco UC
-  - Call Manager
   - Database
   - Unified Communications
-  - Informix
-  - SQL
 ---
 
 ## How to Update Primary Extensions the Fun Way

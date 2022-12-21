@@ -7,15 +7,12 @@ excerpt_separator: "<!--more-->"
 categories:
   - SQL
   - Cisco
+  - Uniied Communications
 tags:
-  - CTIOS
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
-  - Contact Center
+  - Cisco Uniied Contact Center
   - Unified Communications
-  - UCCE
 ---
 
 ## Today's Topic - Mobile Agents using CTIOS and some crashes.

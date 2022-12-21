@@ -9,16 +9,10 @@ categories:
   - Unified Communications
 tags:
   - Health Checks
-  - Server Health
   - Cisco
-  - Cisco UC
-  - Cisco Callmanager
-  - Callmanager
-  - CUCM
   - Unified Communications
   - Action Plan
-  - Reboot
-  - Restart
+  - Cisco Unified Communications Manager
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

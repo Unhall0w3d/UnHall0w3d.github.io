@@ -6,16 +6,13 @@ date: 2020-05-01T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Python
+  - Unified Communications
   - Cisco
 tags:
   - Automation
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
-  - Script
   - Python
-  - Python3
   - Unified Communications
   - Reports
   - Cisco Phone

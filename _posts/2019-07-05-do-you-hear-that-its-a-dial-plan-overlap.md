@@ -8,14 +8,10 @@ categories:
   - Unified Communications
   - Cisco
 tags:
-  - Cisco Callmanager
-  - Cisco Unified Communications
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
   - Reports
   - Unified Communications
-  - Dial Plan
 ---
 
 ## User Report & Context

@@ -6,18 +6,15 @@ date: 2020-02-20T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Unified Communications
+  - SQL
   - Cisco
 tags:
-  - Jabber
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
   - Cisco Jabber
   - Database
   - SQL
   - Unified Communications
-  - Informix
 ---
 
 ## Who Is Your Father And What Does He Do?

@@ -9,11 +9,8 @@ categories:
   - Unified Communications
 tags:
   - Health Checks
-  - Server Health
   - Cisco
-  - Cisco UC
   - Unified Communications
-  - Health Checks
   - Telepresence
 ---
 

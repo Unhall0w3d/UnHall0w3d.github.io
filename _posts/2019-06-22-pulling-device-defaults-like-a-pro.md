@@ -9,14 +9,10 @@ categories:
   - Cisco
   - SQL
 tags:
-  - Cisco Callmanager
+  - Cisco Unified Communications Manager
   - Cisco
-  - Cisco UC
-  - Call Manager
   - Database
   - Unified Communications
-  - Informix
-  - SQL
 ---
 
 ## What Is Our Mission

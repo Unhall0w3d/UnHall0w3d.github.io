@@ -7,18 +7,10 @@ excerpt_separator: "<!--more-->"
 categories:
   - Cisco
   - Unified Communications
-  - Linux
 tags:
-  - CUCM
   - Cisco Unified Communications Manager
-  - Callmanager
-  - UC VOS
-  - UC
-  - SFTP
-  - CDR
   - Call Detail Record
   - Unified Communications
-  - Cisco UC
   - Cisco
 ---
 

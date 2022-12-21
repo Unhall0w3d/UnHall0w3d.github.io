@@ -11,13 +11,9 @@ categories:
 tags:
   - Cisco VCS
   - Cisco Expressway
-  - Expressway
-  - VCS
   - Python
   - Paramiko
-  - Scripts
   - Unified Communications
-  - Cisco UC
   - Cisco
   - Telepresence
 ---

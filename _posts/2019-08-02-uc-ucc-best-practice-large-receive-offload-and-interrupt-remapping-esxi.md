@@ -7,20 +7,15 @@ excerpt_separator: "<!--more-->"
 categories:
   - VMWare
   - Unified Communications
-  - Contact Center
+  - Cisco Unified Contact Center
   - Cisco
-  - ESXi
 tags:
-  - ESXi
   - VMWare
-  - Linux
+  - VMWare ESXi
   - Cisco
-  - UCC
-  - UC
+  - Cisco Unified Contact Center
+  - Cisco Unified Communications Manager
   - Unified Communications
-  - Call Manager
-  - UCCE
-  - UCCX
 ---
 
 ## Let's Talk About Best Practices

@@ -7,14 +7,12 @@ excerpt_separator: "<!--more-->"
 categories:
   - VMWare
   - Unified Communications
+  - Cisco
 tags:
-  - cdrtools
-  - Linux
   - Powershell
   - Lab
-  - ISO
-  - Software
   - Cisco
+  - VMWare
 ---
 
 ## For When You Just Need It To Boot

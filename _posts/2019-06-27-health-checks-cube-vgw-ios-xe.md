@@ -6,19 +6,14 @@ date: 2019-06-27T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - Cisco
-  - IOS
+  - IOS/XE
   - Unified Communications
 tags:
-  - IOS-XE
+  - IOS/XE
   - Health Checks
   - Action Plan
-  - Gateway
-  - Reboot
   - Cisco
-  - CUBE
   - Cisco Unified Border Element
-  - IOS
-  - VGW
 ---
 
 ## 𝄞 This Is How We Do It 𝄞
