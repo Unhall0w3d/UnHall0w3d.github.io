@@ -14,7 +14,9 @@ tags:
 
 ## Trying Something New In The New Year
 
-Well... 2023 is here and with it a rush to ban [ChatGPT](https://chat.openai.com) from being used in academia, [MidJourney](https://midjourney.com/home/) causing controversy with its use in [creating AI generated artwork](https://time.com/6240569/ai-childrens-book-alice-and-sparkle-artists-unhappy/#:~:text=But%20the%20book%2C%20Alice%20and,the%20specter%20of%20replacing%20them) for a Children's book that was sold on Amazon. So with the new year I decided that I'd try something new. That "something new" is ChatGPT. <!--more-->
+Well... 2023 is here and with it a rush to ban [ChatGPT](https://chat.openai.com) from being used in academia, [MidJourney](https://midjourney.com/home/) causing controversy with its use in [creating AI generated artwork](https://time.com/6240569/ai-childrens-book-alice-and-sparkle-artists-unhappy/#:~:text=But%20the%20book%2C%20Alice%20and,the%20specter%20of%20replacing%20them) for a Children's book that was sold on Amazon, and Kanye West still being... well... Kanye West. I guess some things are just the same as 2022.<!--more--> 
+
+And just like 2022 my curiosity hasn't changed. Although I tend to stay within my realm of Cisco UC when it comes to blog posts and Python scripting, I decided that in 2023 I wanted to start messing with a new API (VMWare's vAPI)... and so naturally I started off the new year using ChatGPT as a creation and research tool to query vAPI for usable data, and to perform actions on the vAPI endpoint. 
 
 ### What I Used ChatGPT For
 
