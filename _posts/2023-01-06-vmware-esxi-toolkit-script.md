@@ -14,7 +14,7 @@ tags:
 
 ## Trying Something New In The New Year
 
-Well... 2023 is here and with it a rush to ban [ChatGPT](https://chat.openai.com) from being used in academia, [MidJourney](https://midjourney.com/home/) causing controversy with its use in [creating AI generated artwork](https://time.com/6240569/ai-childrens-book-alice-and-sparkle-artists-unhappy/#:~:text=But%20the%20book%2C%20Alice%20and,the%20specter%20of%20replacing%20them) for a Children's book that was sold on Amazon. So with the new year I decided that I'd try something new. That "something new" is ChatGPT.
+Well... 2023 is here and with it a rush to ban [ChatGPT](https://chat.openai.com) from being used in academia, [MidJourney](https://midjourney.com/home/) causing controversy with its use in [creating AI generated artwork](https://time.com/6240569/ai-childrens-book-alice-and-sparkle-artists-unhappy/#:~:text=But%20the%20book%2C%20Alice%20and,the%20specter%20of%20replacing%20them) for a Children's book that was sold on Amazon. So with the new year I decided that I'd try something new. That "something new" is ChatGPT. <!--more-->
 
 ### What I Used ChatGPT For
 
