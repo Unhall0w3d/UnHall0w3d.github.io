@@ -108,7 +108,7 @@ Option 8... quits. Yeah. It also tears down the SSH and HTTPs connections that w
 
 ### In Summary
 
-Overall I think this was a very interesting script creation process and method. In total I think I spent about 30 hours when it came to ideation, creation, testing, iteration, retesting and preparations for 'release-ready' state. There's always ways to improve, and given my lack of vAPI/pyvim/pyvmomi usage prior to the creation of this script, I'd say I've learned quite a bit, though it doesn't directly translate into better code. Still working on that.
+Overall I think this was a very interesting script creation process and method. In total I think I spent about 30 hours when it came to ideation, creation, testing, iteration, retesting and preparations for 'release-ready' state. This also includes downloading and installing VMWare Workstation 17, VMWare ESXi 6.7U2, and Lubuntu as a guest VM within ESXi to test the applicable script functions. There's always ways to improve, and given my lack of vAPI/pyvim/pyvmomi usage prior to the creation of this script, I'd say I've learned quite a bit, though it doesn't directly translate into better code. Still working on that.
 
 ## Where To Get The Script
 
