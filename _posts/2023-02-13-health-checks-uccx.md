@@ -114,6 +114,10 @@ From the GUI of UCCX Publisher, take a screenshot of the UCCX Serviceability Pag
 
 If applicable, and if possible, perform test calls to critical Toll Free Numbers/DIDs that route to UCCX. Ensure proper scripts are hit, options work, any pre-delivery audio required is playing, etc. You'll want to verify this pre- & post-change to verify there are no issues with the call queues.
 
+## Automating the Process
+
+If you're interested in automating the CLI output collection and potentially speeding up the process I've created a basic python script to log in to UCCX via CLI, collect the data, and store it in a file. The script can be found [here](https://github.com/Unhall0w3d/mind-enigma/blob/master/Health%20Check%20Scripts/uccxHealthCheck.py). I often use scripts like this to perform the CLI checks and grab GUI/RTMT screenshots simultaneously. Less time collecting means more time reviewing.
+
 ## Finishing Up
 
 At this point your pre-change health checks should have been completed and documented (saved to an applicable internal location, attached to a ticket, etc.), your change completed, and verification steps completed. If something's wrong, you'll likely see it during the verification steps and testing steps. If you don't verify and test, it's possible your users will catch the issue before you. We want to minimize those instances as much as possible with thorough testing.
