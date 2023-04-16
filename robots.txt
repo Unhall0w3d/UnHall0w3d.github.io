@@ -43,7 +43,7 @@
 #
 #
 # Sitemap Location
-Sitemap: https://nocthoughts.com/sitemap.xml
+Sitemap: https://www.nocthoughts.com/sitemap.xml
 # Disallow nothing
 User-agent: *
 Disallow:
