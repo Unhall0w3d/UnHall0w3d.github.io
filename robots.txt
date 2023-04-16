@@ -44,9 +44,6 @@
 #
 # Sitemap Location
 Sitemap: https://nocthoughts.com/sitemap.xml
-# Allow All
-User-agent: *
-Allow: /
 # Disallow nothing
 User-agent: *
 Disallow:
