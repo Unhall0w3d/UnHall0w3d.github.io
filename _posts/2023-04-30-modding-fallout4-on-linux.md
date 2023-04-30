@@ -17,7 +17,7 @@ tags:
 
 ## And Now For Something A Little Different
 
-Hey there! A little off topic to most that visit that blog, normally I'm prattling on about Cisco Unified Communications! Not today... normally when I don't have anything interesting to talk about I just don't post. But with the 30 day Linux challenge that's underway it gives me opportunities to cover issues and things I ran into on Linux and hopefully help someone!
+Hey there! A little off topic to most that visit that blog, normally I'm prattling on about Cisco Unified Communications! Not today...<!--more--> normally when I don't have anything interesting to talk about I just don't post. But with the 30 day Linux challenge that's underway it gives me opportunities to cover issues and things I ran into on Linux and hopefully help someone!
 
 So after switching to Arch Linux and wanting to do a little gaming... and a lot of preparation... I decided I would set up one of the games that I enjoy playing when I have a few solid hours to put into progression. That's Fallout 4... but not just any Fallout 4, modded Fallout 4. I think we all have to admit that the modding community is what gives the Elder Scrolls games such permanence in people's game library. It can be as ridiculous as you want... want to kill a (dragon) Thomas the Tank and absorb it's soul? You can do that. Want to play as an anime cat girl? You can do that. Want to have anthropomorphic My Little Pony characters as followers? I don't, but you might... and you can do that!
 
