@@ -97,10 +97,11 @@ A few things to make sure you have installed before starting... namely protontri
     a. Click the drop-down and change it from Fallout 4 to the SKSE entry you made. 
     b. Press Tilde (~) to open the console in the game
     c. Type "getf4seversion" and confirm there's valid output showing the version, as shown below.
+```
     
 <a href="#" class="image main"><img src="{{ "/assets/images/f4se.png" | absolute_url }}" alt="f4se is active" /></a>
-    
 
+```
 12. Installing Mods
     a. Open Mod Organizer 2 back up and click on Tools > Profiles
     b. Click the Default profile and click "Copy"
@@ -120,7 +121,8 @@ sResourceDataDirsFinal=
 --
 
     h. At this point things should work. Download a mod using the nxm link and confirm that Mod Organizer 2 downloads the files.
-    
+```
+
 <a href="#" class="image main"><img src="{{ "/assets/images/f4mo2.png" | absolute_url }}" alt="Mod Organizer 2" /></a>
     
 ## Time To Play
