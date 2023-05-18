@@ -1,5 +1,5 @@
 ---
-title: "Automating SSL Cert Trust Install"
+title: "Linux - Automating SSL Cert Trust Install"
 layout: single
 classes: wide
 date: 2023-05-16T08:00:00-05:00
