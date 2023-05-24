@@ -297,7 +297,7 @@
         <priority>0.5</priority>
     </url>
     <url>
-        <log>https://nocthoughts.com/2023/05/23/automating-mremote-putty-session-creation.html</loc>
+        <loc>https://nocthoughts.com/2023/05/23/automating-mremote-putty-session-creation.html</loc>
         <lastmod>2023-05-23</lastmod>
         <changefreq>always<changefreq>
         <priority>0.5</priority>
