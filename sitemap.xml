@@ -303,6 +303,12 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://nocthoughts.com/2023/05/29/nocthoughts-dot-files-for-hyprland.html</loc>
+        <lastmod>2023-05-29</lastmod>
+        <changefreq>always<changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
         <loc>https://nocthoughts.com/posts</loc>
         <lastmod>2023-04-30</lastmod>
         <changefreq>always</changefreq>
