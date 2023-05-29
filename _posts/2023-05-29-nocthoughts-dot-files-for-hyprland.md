@@ -1,5 +1,5 @@
 ---
-title: "[Hyprland] NOCThoughts Dotfiles"
+title: "Hyprland - NOCThoughts Dotfiles"
 layout: single
 classes: wide
 date: 2023-05-29T08:00:00-05:00
