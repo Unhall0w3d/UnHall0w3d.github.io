@@ -67,7 +67,7 @@ As a Unix user, creating, managing, and sharing dotfiles has been a rewarding ex
 
 # Take Me To The Dotfiles
 
-The Dotfiles can be found on my [nocthought-dotfiles](https://github.com/Unhall0w3d/nocthoughts-dotfiles) repo on [Github]https://github.com/Unhall0w3d.
+The Dotfiles can be found on my [nocthought-dotfiles](https://github.com/Unhall0w3d/nocthoughts-dotfiles) repo on [Github](https://github.com/Unhall0w3d).
 
 ## README
 
@@ -128,4 +128,4 @@ python setup.py
 
 # Screenshots
 
-https://imgur.com/a/mM3YFSA
+[My RIP (Rice-In-Progress)](https://imgur.com/a/mM3YFSA)
