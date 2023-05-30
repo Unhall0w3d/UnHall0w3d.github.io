@@ -71,7 +71,6 @@ The Dotfiles can be found on my [nocthought-dotfiles](https://github.com/Unhall0
 
 ## README
 
-```md
 # nocthoughts-dotfiles
 Dotfiles for the NOCThoughts Admin. Arch _ Hyprland
 
@@ -130,4 +129,3 @@ python setup.py
 # Screenshots
 
 https://imgur.com/a/mM3YFSA
-```
