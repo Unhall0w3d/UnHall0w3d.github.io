@@ -77,28 +77,13 @@ Dotfiles for the NOCThoughts Admin. Arch _ Hyprland
 # Requirements
 
 **Arch Linux**
+```
 This script has only been tested on a base install of Arch Linux, and was built for Arch Linux.
 Usage on any other distro is considered unsupported.
-
-**python**
-```zsh
-pacman -Syu python
-```
-
-**git**
-```zsh
-pacman -Syu git
-```
-
-**paru**
-```zsh
-sudo pacman -S --needed base-devel
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
 ```
 
 # Recommendations
+
 ```text
 1. I recommend updating the ~/.config/hypr/hyprland.conf monitor configs to match your layout.
     a. As-is the monitor layout is two stacked "landscape" 1920x1080@144 monitors, with a 1920x1080@60 "portrait" monitor to the left.
@@ -115,15 +100,22 @@ makepkg -si
 5. Install "ruby" >= 2.60
     a. gem install colorls
     b. edit ~/.zshrc to add "source $(dirname $(gem which colorls))/tab_complete.sh" if desired.
+6. Re-install Paru
+    a. Because you won't have the paru completions, you can solve it or you can do a dance of compiling yay, using yay to remove paru, reinstall paru using yay, then uninstall yay.
+    b. Whatever works for you.
 ```
 
 # Installation
+
+The script starts out by fulfilling dependency requirements (git|paru).
+Once confirmed installed (either because it is already or because the script installs it) the script progresses to proper setup and installation.
 
 ```zsh
 cd ~/Downloads/
 git clone https://github.com/Unhall0w3d/nocthoughts-dotfiles.git
 cd nocthoughts-dotfiles
-python setup.py
+chmod +x setup.sh
+./setup.sh
 ```
 
 # Screenshots
