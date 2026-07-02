@@ -1,8 +1,8 @@
 ---
-layout: post
 title: "RUCKUS SmartZone Backup Retriever"
-date: 2026-07-01T08:00:00-05:00
+layout: single
 classes: wide
+date: 2026-07-01T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 categories:
   - PowerShell
