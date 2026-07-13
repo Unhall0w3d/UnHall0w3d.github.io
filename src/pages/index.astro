@@ -1,30 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PostList from "../components/PostList.astro";
 import { site } from "../config/site";
+import { getCollection } from "astro:content";
+import { sortPosts, type Post } from "../lib/posts";
 
-const signals = [
-  {
-    type: "AUTOMATION",
-    title: "RUCKUS SmartZone Backup Retriever",
-    summary: "Pulling controller backups across the wire when the clean diagram and the real network are not on speaking terms.",
-    date: "2026.07.01",
-    read: "7 MIN"
-  },
-  {
-    type: "SYSTEMS",
-    title: "NixOS & My Configs",
-    summary: "Declarative machinery, reproducible systems, and the configuration files holding it all together.",
-    date: "2023.08.13",
-    read: "8 MIN"
-  },
-  {
-    type: "LINUX",
-    title: "Hyprland — NOC Thoughts Dotfiles",
-    summary: "A closer look at the moving parts behind a personalized Unix environment.",
-    date: "2023.05.29",
-    read: "3 MIN"
-  }
-];
+const allPosts = sortPosts((await getCollection("posts", ({ data }) => !data.draft)) as Post[]);
+const latestPosts = allPosts.slice(0, 3);
 ---
 
 <BaseLayout>
@@ -37,8 +19,8 @@ const signals = [
         knowledge that usually appears only after something catches fire.
       </p>
       <div class="hero-actions">
-        <a class="button button-primary" href="/posts/">Enter the archive</a>
-        <a class="button button-ghost" href="/about/">Identify operator</a>
+        <a class="button button-primary" href="/posts.html">Enter the archive</a>
+        <a class="button button-ghost" href="/about.html">Identify operator</a>
       </div>
     </div>
 
@@ -56,7 +38,7 @@ const signals = [
       </svg>
       <dl class="signal-stats">
         <div><dt>FOCUS</dt><dd>UC / AUTOMATION</dd></div>
-        <div><dt>ARCHIVE</dt><dd>52 ENTRIES</dd></div>
+        <div><dt>ARCHIVE</dt><dd>{allPosts.length} ENTRIES</dd></div>
         <div><dt>STATE</dt><dd class="online">ONLINE</dd></div>
       </dl>
     </aside>
@@ -68,24 +50,9 @@ const signals = [
         <p class="eyebrow">LATEST SIGNALS</p>
         <h2 id="transmissions-title">Recent transmissions</h2>
       </div>
-      <a class="text-link" href="/posts/">View complete archive <span>→</span></a>
+      <a class="text-link" href="/posts.html">View complete archive <span>→</span></a>
     </header>
 
-    <div class="signal-list">
-      {signals.map((signal, index) => (
-        <article class="transmission-card">
-          <div class="card-index">{String(index + 1).padStart(2, "0")}</div>
-          <div class="card-body">
-            <p class="card-type">{signal.type}</p>
-            <h3><a href="/">{signal.title}</a></h3>
-            <p>{signal.summary}</p>
-          </div>
-          <div class="card-meta">
-            <span>{signal.date}</span>
-            <span>{signal.read}</span>
-          </div>
-        </article>
-      ))}
-    </div>
+    <PostList posts={latestPosts} numbered />
   </section>
 </BaseLayout>

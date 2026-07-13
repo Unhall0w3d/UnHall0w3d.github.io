@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getTerms, termSlug, type Post } from "../../lib/posts";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
+const categories = getTerms(posts, "categories");
+---
+
+<PageLayout title="Categories" description="The archive grouped by operational domain." eyebrow="SIGNAL CLASSIFICATION">
+  <div class="term-grid">
+    {categories.map(([category, entries]) => (
+      <a href={`/categories/${termSlug(category)}.html`}>
+        <span>{String(entries.length).padStart(2, "0")} signals</span>
+        <strong>{category}</strong>
+      </a>
+    ))}
+  </div>
+</PageLayout>

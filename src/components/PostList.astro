@@ -1,0 +1,28 @@
+---
+import type { Post } from "../lib/posts";
+import { formatPostDate, postExcerpt, postUrl, readingTime } from "../lib/posts";
+
+interface Props {
+  posts: Post[];
+  numbered?: boolean;
+}
+
+const { posts, numbered = false } = Astro.props;
+---
+
+<div class="signal-list post-list">
+  {posts.map((post, index) => (
+    <article class="transmission-card" data-search-item={`${post.data.title} ${post.data.categories.join(" ")} ${post.data.tags.join(" ")}`.toLowerCase()}>
+      <div class="card-index">{numbered ? String(index + 1).padStart(2, "0") : "//"}</div>
+      <div class="card-body">
+        <p class="card-type">{post.data.categories[0] ?? "Field Note"}</p>
+        <h3><a href={postUrl(post)}>{post.data.title}</a></h3>
+        <p>{postExcerpt(post)}</p>
+      </div>
+      <div class="card-meta">
+        <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
+        <span>{readingTime(post)} min read</span>
+      </div>
+    </article>
+  ))}
+</div>

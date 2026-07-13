@@ -1,5 +1,7 @@
 # Legacy migration inventory
 
+> Migration status: completed on `codex/site-rebuild`. This remains the preservation checklist for review before merge.
+
 Source of record during migration: `/home/bhones/Projects/blog/blogbackup`
 
 The backup is a clean Git repository at commit `4738fe4fdc37427bc826c7b5061df6ba8f0b709d`.
