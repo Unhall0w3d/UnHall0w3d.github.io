@@ -57,6 +57,40 @@ const latestPosts = allPosts.slice(0, 5);
     </aside>
   </section>
 
+  <section class="ambient-signal" aria-labelledby="ambient-signal-title" data-ambient-player>
+    <div class="ambient-signal-header">
+      <span>AMBIENT SIGNAL // PROFILE TRACK</span>
+      <span>YT-01</span>
+    </div>
+    <div class="ambient-signal-grid">
+      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for View From The Top"></div>
+      <div class="ambient-console">
+        <p class="ambient-kicker"><span>NOW CUED</span> TENNOCON 2026</p>
+        <h2 id="ambient-signal-title">View From The Top</h2>
+        <p class="ambient-artist">TRANSMISSION BY PLAYWARFRAME</p>
+
+        <div class="ambient-wave" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+
+        <div class="ambient-controls" aria-label="Audio controls">
+          <button class="ambient-control" type="button" data-ambient-restart aria-label="Restart song from the beginning">↶</button>
+          <button class="ambient-control ambient-play" type="button" data-ambient-play aria-label="Play song">▶</button>
+          <button class="ambient-control is-active" type="button" data-ambient-loop aria-label="Disable song loop" aria-pressed="true">↻</button>
+          <label class="ambient-volume">
+            <span>VOL <output data-ambient-volume-output>50</output></span>
+            <input data-ambient-volume type="range" min="0" max="50" value="50" aria-label="Song volume" />
+          </label>
+        </div>
+
+        <div class="ambient-footer">
+          <span data-ambient-status>STANDBY // PRESS PLAY</span>
+          <a href="https://youtu.be/ygOo9VediOg">SOURCE // YOUTUBE ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="transmissions" aria-labelledby="transmissions-title">
     <header class="section-header">
       <div>
@@ -81,4 +115,111 @@ const latestPosts = allPosts.slice(0, 5);
       );
     });
   });
+</script>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-ambient-player]");
+    if (!root) return;
+
+    const videoId = "ygOo9VediOg";
+    const playControl = root.querySelector("[data-ambient-play]");
+    const restartControl = root.querySelector("[data-ambient-restart]");
+    const loopControl = root.querySelector("[data-ambient-loop]");
+    const volumeControl = root.querySelector("[data-ambient-volume]");
+    const volumeOutput = root.querySelector("[data-ambient-volume-output]");
+    const status = root.querySelector("[data-ambient-status]");
+    let player;
+    let ready = false;
+    let looping = true;
+
+    const savedVolume = localStorage.getItem("noc-ambient-volume");
+    const storedVolume = savedVolume === null ? Number.NaN : Number(savedVolume);
+    const initialVolume = Number.isFinite(storedVolume) && storedVolume >= 0 && storedVolume <= 50
+      ? storedVolume
+      : 50;
+    volumeControl.value = String(initialVolume);
+    volumeOutput.value = String(initialVolume);
+
+    const updatePlayback = (playing) => {
+      root.dataset.state = playing ? "playing" : "paused";
+      playControl.textContent = playing ? "Ⅱ" : "▶";
+      playControl.setAttribute("aria-label", playing ? "Pause song" : "Play song");
+      status.textContent = playing ? "TRANSMITTING // SIGNAL ACTIVE" : "PAUSED // SIGNAL HELD";
+    };
+
+    const initializePlayer = () => {
+      if (player || !window.YT?.Player) return;
+      player = new window.YT.Player("ambient-youtube-player", {
+        width: "100%",
+        height: "200",
+        videoId,
+        playerVars: {
+          controls: 0,
+          playsinline: 1,
+          rel: 0,
+          origin: window.location.origin
+        },
+        events: {
+          onReady: (event) => {
+            ready = true;
+            event.target.setVolume(initialVolume);
+            status.textContent = "STANDBY // PRESS PLAY";
+          },
+          onStateChange: (event) => {
+            if (event.data === window.YT.PlayerState.PLAYING) updatePlayback(true);
+            if (event.data === window.YT.PlayerState.PAUSED) updatePlayback(false);
+            if (event.data === window.YT.PlayerState.ENDED) {
+              if (looping) {
+                player.seekTo(0, true);
+                player.playVideo();
+              } else {
+                updatePlayback(false);
+                status.textContent = "COMPLETE // SIGNAL ENDED";
+              }
+            }
+          },
+          onError: () => {
+            status.textContent = "ERROR // OPEN SOURCE LINK";
+          }
+        }
+      });
+    };
+
+    window.onYouTubeIframeAPIReady = initializePlayer;
+    if (window.YT?.Player) {
+      initializePlayer();
+    } else if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const api = document.createElement("script");
+      api.src = "https://www.youtube.com/iframe_api";
+      document.head.append(api);
+    }
+
+    playControl.addEventListener("click", () => {
+      if (!ready) return;
+      const playing = player.getPlayerState() === window.YT.PlayerState.PLAYING;
+      playing ? player.pauseVideo() : player.playVideo();
+    });
+
+    restartControl.addEventListener("click", () => {
+      if (!ready) return;
+      player.seekTo(0, true);
+      status.textContent = "REWOUND // T+00:00";
+    });
+
+    loopControl.addEventListener("click", () => {
+      looping = !looping;
+      loopControl.classList.toggle("is-active", looping);
+      loopControl.setAttribute("aria-pressed", String(looping));
+      loopControl.setAttribute("aria-label", looping ? "Disable song loop" : "Enable song loop");
+      status.textContent = looping ? "LOOP // ENGAGED" : "LOOP // DISENGAGED";
+    });
+
+    volumeControl.addEventListener("input", () => {
+      const volume = Number(volumeControl.value);
+      volumeOutput.value = String(volume);
+      localStorage.setItem("noc-ambient-volume", String(volume));
+      if (ready) player.setVolume(volume);
+    });
+  })();
 </script>
