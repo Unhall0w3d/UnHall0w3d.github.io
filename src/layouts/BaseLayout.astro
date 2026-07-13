@@ -32,10 +32,12 @@ const documentTitle = title === site.title ? title : `${title} | ${site.name}`;
     <meta name="msvalidate.01" content={site.verification.bing} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title={`${site.name} RSS feed`} href="/feed.xml" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png?v=2" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png?v=2" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest?v=2" />
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:title" content={documentTitle} />
