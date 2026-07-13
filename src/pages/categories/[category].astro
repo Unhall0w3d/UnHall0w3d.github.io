@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "../../components/PostList.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getTerms, sortPosts, termSlug, type Post } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
+  return getTerms(posts, "categories").map(([category, entries]) => ({
+    params: { category: termSlug(category) },
+    props: { category, posts: sortPosts(entries) }
+  }));
+}
+
+interface Props { category: string; posts: Post[]; }
+const { category, posts } = Astro.props;
+---
+
+<PageLayout title={category} description={`${posts.length} signals classified under ${category}.`} eyebrow="CATEGORY NODE">
+  <PostList posts={posts} numbered />
+</PageLayout>

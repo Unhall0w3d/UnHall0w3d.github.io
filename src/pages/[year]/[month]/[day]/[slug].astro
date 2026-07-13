@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import PostLayout from "../../../../layouts/PostLayout.astro";
+import { postDateParts, postSlug, sortPosts, type Post } from "../../../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = sortPosts((await getCollection("posts", ({ data }) => !data.draft)) as Post[]);
+
+  return posts.map((post) => {
+    const date = postDateParts(post);
+    const related = posts
+      .filter((candidate) => candidate.id !== post.id)
+      .map((candidate) => ({
+        post: candidate,
+        score: candidate.data.categories.filter((category) => post.data.categories.includes(category)).length
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score || b.post.data.date.valueOf() - a.post.data.date.valueOf())
+      .slice(0, 3)
+      .map(({ post: candidate }) => candidate);
+
+    return {
+      params: { ...date, slug: postSlug(post) },
+      props: { post, related }
+    };
+  });
+}
+
+interface Props {
+  post: Post;
+  related: Post[];
+}
+
+const { post, related } = Astro.props;
+const { Content, headings } = await render(post);
+---
+
+<PostLayout {post} {headings} {related}>
+  <Content />
+</PostLayout>

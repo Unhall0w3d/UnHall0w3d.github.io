@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "../../components/PostList.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { sortPosts, type Post } from "../../lib/posts";
+
+const posts = sortPosts((await getCollection("posts", ({ data }) => !data.draft)) as Post[]);
+---
+
+<PageLayout
+  title="Signal archive"
+  description={`${posts.length} field notes spanning unified communications, automation, infrastructure, Linux, and the incidents between.`}
+  eyebrow="COMPLETE TRANSMISSION INDEX"
+>
+  <label class="archive-search">
+    <span>Filter archive</span>
+    <input id="archive-filter" type="search" placeholder="Try CUCM, Python, ESXi…" autocomplete="off" />
+  </label>
+  <p class="filter-status" id="filter-status" aria-live="polite"></p>
+  <PostList posts={posts} numbered />
+</PageLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("#archive-filter");
+  const status = document.querySelector<HTMLElement>("#filter-status");
+  const items = [...document.querySelectorAll<HTMLElement>("[data-search-item]")];
+
+  input?.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    let visible = 0;
+    for (const item of items) {
+      const matches = !query || item.dataset.searchItem?.includes(query);
+      item.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    if (status) status.textContent = query ? `${visible} matching signals` : "";
+  });
+</script>

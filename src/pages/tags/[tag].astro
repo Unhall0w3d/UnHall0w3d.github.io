@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "../../components/PostList.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getTerms, sortPosts, termSlug, type Post } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
+  return getTerms(posts, "tags").map(([tag, entries]) => ({
+    params: { tag: termSlug(tag) },
+    props: { tag, posts: sortPosts(entries) }
+  }));
+}
+
+interface Props { tag: string; posts: Post[]; }
+const { tag, posts } = Astro.props;
+---
+
+<PageLayout title={tag} description={`${posts.length} signals tagged ${tag}.`} eyebrow="TAGGED TRANSMISSIONS">
+  <PostList posts={posts} numbered />
+</PageLayout>

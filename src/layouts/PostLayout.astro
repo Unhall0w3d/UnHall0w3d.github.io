@@ -1,0 +1,99 @@
+---
+import type { MarkdownHeading } from "astro";
+import type { Post } from "../lib/posts";
+import { site } from "../config/site";
+import { formatPostDate, postExcerpt, postUrl, readingTime, termSlug } from "../lib/posts";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  post: Post;
+  headings: MarkdownHeading[];
+  related: Post[];
+}
+
+const { post, headings, related } = Astro.props;
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const url = new URL(postUrl(post), site.url);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: postExcerpt(post),
+  datePublished: post.data.date.toISOString(),
+  mainEntityOfPage: url,
+  author: { "@type": "Person", name: site.author.name, url: site.social.github },
+  publisher: { "@type": "Organization", name: site.name, url: site.url }
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={postExcerpt(post)}
+  type="article"
+  publishedTime={post.data.date.toISOString()}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <article class="post-shell">
+    <header class="post-header">
+      <p class="eyebrow"><span>ARCHIVE SIGNAL</span> {post.data.categories[0] ?? "FIELD NOTE"}</p>
+      <h1>{post.data.title}</h1>
+      <p class="post-deck">{postExcerpt(post)}</p>
+      <div class="post-byline">
+        <span>By {site.author.name}</span>
+        <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
+        <span>{readingTime(post)} min read</span>
+      </div>
+    </header>
+
+    <div class="post-grid">
+      <aside class="post-rail">
+        <div class="operator-card">
+          <img src={site.author.avatar} width="72" height="72" alt="" />
+          <div><strong>{site.author.name}</strong><span>{site.author.role}</span></div>
+        </div>
+        {toc.length > 0 && (
+          <nav class="toc" aria-label="On this page">
+            <p>On this signal</p>
+            <ol>
+              {toc.map((heading) => (
+                <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>
+              ))}
+            </ol>
+          </nav>
+        )}
+      </aside>
+
+      <div class="post-main">
+        <div class="prose">
+          <slot />
+        </div>
+
+        <footer class="post-footer">
+          <div class="taxonomy">
+            <span>Filed under</span>
+            {post.data.categories.map((category) => <a href={`/categories/${termSlug(category)}.html`}>{category}</a>)}
+          </div>
+          <div class="taxonomy">
+            <span>Signal tags</span>
+            {post.data.tags.map((tag) => <a href={`/tags/${termSlug(tag)}.html`}>{tag}</a>)}
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    {related.length > 0 && (
+      <section class="related-posts" aria-labelledby="related-title">
+        <p class="eyebrow">ADJACENT SIGNALS</p>
+        <h2 id="related-title">Continue through the archive</h2>
+        <div class="related-grid">
+          {related.map((item) => (
+            <a href={postUrl(item)}>
+              <span>{item.data.categories[0] ?? "Field Note"}</span>
+              <strong>{item.data.title}</strong>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getTerms, termSlug, type Post } from "../../lib/posts";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
+const tags = getTerms(posts, "tags").sort(([, a], [, b]) => b.length - a.length);
+---
+
+<PageLayout title="Signal tags" description="Technologies, platforms, and recurring fault lines across the archive." eyebrow="ARCHIVE LEXICON">
+  <div class="tag-cloud">
+    {tags.map(([tag, entries]) => <a href={`/tags/${termSlug(tag)}.html`}>{tag}<sup>{entries.length}</sup></a>)}
+  </div>
+</PageLayout>
