@@ -1,0 +1,69 @@
+---
+import { site } from "../config/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description
+} = Astro.props;
+
+const canonicalPath = Astro.url.pathname.replace(/index\.html$/, "") || "/";
+const canonical = new URL(canonicalPath, site.url);
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070913" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="NOC Thoughts home">
+        <svg class="brand-sigil" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M24 3 42 14v20L24 45 6 34V14L24 3Z" />
+          <path d="m16 30 8-14 8 14M17 25h14" />
+        </svg>
+        <span class="brand-copy">
+          <strong>{site.name}</strong>
+          <small>FIELD NOTES // SIGNAL 01</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/posts/">Archive</a>
+        <a href="/categories/">Categories</a>
+        <a href="/tags/">Tags</a>
+        <a href="/about/">Operator</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        <span class="status-light" aria-hidden="true"></span>
+        Signal maintained by {site.author.name}
+      </p>
+      <p class="footer-code">NOCTHOUGHTS // SYRACUSE, NY // {new Date().getFullYear()}</p>
+    </footer>
+  </body>
+</html>

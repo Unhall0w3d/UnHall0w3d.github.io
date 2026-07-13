@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../config/site";
+
+const signals = [
+  {
+    type: "AUTOMATION",
+    title: "RUCKUS SmartZone Backup Retriever",
+    summary: "Pulling controller backups across the wire when the clean diagram and the real network are not on speaking terms.",
+    date: "2026.07.01",
+    read: "7 MIN"
+  },
+  {
+    type: "SYSTEMS",
+    title: "NixOS & My Configs",
+    summary: "Declarative machinery, reproducible systems, and the configuration files holding it all together.",
+    date: "2023.08.13",
+    read: "8 MIN"
+  },
+  {
+    type: "LINUX",
+    title: "Hyprland — NOC Thoughts Dotfiles",
+    summary: "A closer look at the moving parts behind a personalized Unix environment.",
+    date: "2023.05.29",
+    read: "3 MIN"
+  }
+];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span>TRANSMISSION ACTIVE</span> INFRASTRUCTURE FIELD LOG</p>
+      <h1>Where network operations meet <em>techno-sorcery.</em></h1>
+      <p class="hero-deck">
+        {site.tagline}. Hard-won fixes, useful scripts, and the operational
+        knowledge that usually appears only after something catches fire.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="/posts/">Enter the archive</a>
+        <a class="button button-ghost" href="/about/">Identify operator</a>
+      </div>
+    </div>
+
+    <aside class="signal-card" aria-label="Site signal status">
+      <div class="signal-card-header">
+        <span>SYSTEM SIGIL</span>
+        <span>01-A</span>
+      </div>
+      <svg class="hero-sigil" viewBox="0 0 320 320" aria-hidden="true">
+        <circle cx="160" cy="160" r="122" />
+        <circle cx="160" cy="160" r="86" />
+        <path d="M160 22v276M22 160h276M62 62l196 196M258 62 62 258" />
+        <path d="m160 72 76 44v88l-76 44-76-44v-88l76-44Z" />
+        <path class="sigil-core" d="m124 194 36-68 36 68M132 176h56" />
+      </svg>
+      <dl class="signal-stats">
+        <div><dt>FOCUS</dt><dd>UC / AUTOMATION</dd></div>
+        <div><dt>ARCHIVE</dt><dd>52 ENTRIES</dd></div>
+        <div><dt>STATE</dt><dd class="online">ONLINE</dd></div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="transmissions" aria-labelledby="transmissions-title">
+    <header class="section-header">
+      <div>
+        <p class="eyebrow">LATEST SIGNALS</p>
+        <h2 id="transmissions-title">Recent transmissions</h2>
+      </div>
+      <a class="text-link" href="/posts/">View complete archive <span>→</span></a>
+    </header>
+
+    <div class="signal-list">
+      {signals.map((signal, index) => (
+        <article class="transmission-card">
+          <div class="card-index">{String(index + 1).padStart(2, "0")}</div>
+          <div class="card-body">
+            <p class="card-type">{signal.type}</p>
+            <h3><a href="/">{signal.title}</a></h3>
+            <p>{signal.summary}</p>
+          </div>
+          <div class="card-meta">
+            <span>{signal.date}</span>
+            <span>{signal.read}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
