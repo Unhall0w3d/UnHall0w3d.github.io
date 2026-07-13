@@ -71,8 +71,19 @@ for (const legacyUrl of legacyUrls) {
   if (!(await resolvesToOutput(legacyUrl))) failures.add(`legacy sitemap -> ${legacyUrl}`);
 }
 
+const postSources = (await walk(path.join(root, "src/content/posts")))
+  .filter((file) => /\.mdx?$/.test(file));
+const publishedPostSources = [];
+for (const file of postSources) {
+  const source = await readFile(file, "utf8");
+  const frontmatter = source.match(/^---\s*\n([\s\S]*?)\n---/)?.[1] ?? "";
+  if (!/^draft:\s*true\s*$/m.test(frontmatter)) publishedPostSources.push(file);
+}
+
 const postPages = files.filter((file) => /\/\d{4}\/\d{2}\/\d{2}\/[^/]+\.html$/.test(file));
-if (postPages.length !== 52) failures.add(`expected 52 post pages; found ${postPages.length}`);
+if (postPages.length !== publishedPostSources.length) {
+  failures.add(`expected ${publishedPostSources.length} published post pages; found ${postPages.length}`);
+}
 
 if (failures.size > 0) {
   console.error("Site validation failed:\n" + [...failures].sort().map((failure) => `- ${failure}`).join("\n"));
