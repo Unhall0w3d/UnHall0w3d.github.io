@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostList from "../components/PostList.astro";
+import RepositoryRelay from "../components/RepositoryRelay.astro";
 import { site } from "../config/site";
 import { getCollection } from "astro:content";
 import { sortPosts, type Post } from "../lib/posts";
@@ -65,9 +66,22 @@ const latestPosts = allPosts.slice(0, 5);
     <div class="ambient-signal-grid">
       <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for View From The Top"></div>
       <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> TENNOCON 2026</p>
-        <h2 id="ambient-signal-title">View From The Top</h2>
-        <p class="ambient-artist">TRANSMISSION BY PLAYWARFRAME</p>
+        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>TENNOCON 2026</span></p>
+        <h2 id="ambient-signal-title" data-ambient-title>View From The Top</h2>
+        <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>PLAYWARFRAME</span></p>
+
+        <label class="ambient-selector">
+          <span>SIGNAL SELECT</span>
+          <select data-ambient-track aria-label="Select ambient signal">
+            <option value="0">01 // VIEW FROM THE TOP</option>
+            <option value="1">02 // DOMINO (REMIX)</option>
+            <option value="2">03 // WE ARE FUTURE (V2)</option>
+            <option value="3">04 // SHIFT (VIP MIX)</option>
+            <option value="4">05 // GRAVITY</option>
+            <option value="5">06 // TIDES</option>
+            <option value="6">07 // TRANSCENDENCE</option>
+          </select>
+        </label>
 
         <div class="ambient-wave" aria-hidden="true">
           <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -76,6 +90,7 @@ const latestPosts = allPosts.slice(0, 5);
         <div class="ambient-controls" aria-label="Audio controls">
           <button class="ambient-control" type="button" data-ambient-restart aria-label="Restart song from the beginning">↶</button>
           <button class="ambient-control ambient-play" type="button" data-ambient-play aria-label="Play song">▶</button>
+          <button class="ambient-control" type="button" data-ambient-next aria-label="Play next song">↠</button>
           <button class="ambient-control is-active" type="button" data-ambient-loop aria-label="Disable song loop" aria-pressed="true">↻</button>
           <label class="ambient-volume">
             <span>VOL <output data-ambient-volume-output>50</output></span>
@@ -85,11 +100,13 @@ const latestPosts = allPosts.slice(0, 5);
 
         <div class="ambient-footer">
           <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://youtu.be/ygOo9VediOg">SOURCE // YOUTUBE ↗</a>
+          <a href="https://youtu.be/ygOo9VediOg" data-ambient-source>SOURCE // YOUTUBE ↗</a>
         </div>
       </div>
     </div>
   </section>
+
+  <RepositoryRelay />
 
   <section class="transmissions" aria-labelledby="transmissions-title">
     <header class="section-header">
@@ -122,16 +139,90 @@ const latestPosts = allPosts.slice(0, 5);
     const root = document.querySelector("[data-ambient-player]");
     if (!root) return;
 
-    const videoId = "ygOo9VediOg";
+    const tracks = [
+      {
+        videoId: "ygOo9VediOg",
+        title: "View From The Top",
+        artist: "PLAYWARFRAME",
+        cue: "TENNOCON 2026",
+        source: "https://youtu.be/ygOo9VediOg",
+        startSeconds: 0
+      },
+      {
+        videoId: "PajvC-6bNWA",
+        title: "Domino (Remix)",
+        artist: "NEO.",
+        cue: "JUNE MIX // 00:00",
+        source: "https://youtu.be/PajvC-6bNWA?t=0",
+        startSeconds: 0,
+        endSeconds: 253
+      },
+      {
+        videoId: "PajvC-6bNWA",
+        title: "We are Future (V2)",
+        artist: "NEO.",
+        cue: "JUNE MIX // 04:13",
+        source: "https://youtu.be/PajvC-6bNWA?t=253",
+        startSeconds: 253,
+        endSeconds: 703
+      },
+      {
+        videoId: "PajvC-6bNWA",
+        title: "Shift (VIP MIX)",
+        artist: "NEO.",
+        cue: "JUNE MIX // 11:43",
+        source: "https://youtu.be/PajvC-6bNWA?t=703",
+        startSeconds: 703,
+        endSeconds: 1074
+      },
+      {
+        videoId: "PajvC-6bNWA",
+        title: "Gravity",
+        artist: "NEO.",
+        cue: "JUNE MIX // 17:54",
+        source: "https://youtu.be/PajvC-6bNWA?t=1074",
+        startSeconds: 1074,
+        endSeconds: 1380
+      },
+      {
+        videoId: "PajvC-6bNWA",
+        title: "Tides",
+        artist: "NEO.",
+        cue: "JUNE MIX // 23:00",
+        source: "https://youtu.be/PajvC-6bNWA?t=1380",
+        startSeconds: 1380,
+        endSeconds: 1651
+      },
+      {
+        videoId: "PajvC-6bNWA",
+        title: "Transcendence",
+        artist: "NEO.",
+        cue: "JUNE MIX // 27:31",
+        source: "https://youtu.be/PajvC-6bNWA?t=1651",
+        startSeconds: 1651
+      }
+    ];
     const playControl = root.querySelector("[data-ambient-play]");
     const restartControl = root.querySelector("[data-ambient-restart]");
+    const nextControl = root.querySelector("[data-ambient-next]");
     const loopControl = root.querySelector("[data-ambient-loop]");
     const volumeControl = root.querySelector("[data-ambient-volume]");
     const volumeOutput = root.querySelector("[data-ambient-volume-output]");
+    const trackControl = root.querySelector("[data-ambient-track]");
+    const title = root.querySelector("[data-ambient-title]");
+    const artist = root.querySelector("[data-ambient-artist]");
+    const cue = root.querySelector("[data-ambient-cue]");
+    const source = root.querySelector("[data-ambient-source]");
+    const video = root.querySelector(".ambient-video");
     const status = root.querySelector("[data-ambient-status]");
     let player;
     let ready = false;
     let looping = true;
+
+    const savedTrack = Number(localStorage.getItem("noc-ambient-track"));
+    let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
+      ? savedTrack
+      : 0;
 
     const savedVolume = localStorage.getItem("noc-ambient-volume");
     const storedVolume = savedVolume === null ? Number.NaN : Number(savedVolume);
@@ -140,6 +231,38 @@ const latestPosts = allPosts.slice(0, 5);
       : 50;
     volumeControl.value = String(initialVolume);
     volumeOutput.value = String(initialVolume);
+
+    const displayTrack = (index) => {
+      const track = tracks[index];
+      title.textContent = track.title;
+      artist.textContent = track.artist;
+      cue.textContent = track.cue;
+      source.href = track.source;
+      trackControl.value = String(index);
+      video.setAttribute("aria-label", `YouTube player for ${track.title}`);
+      localStorage.setItem("noc-ambient-track", String(index));
+    };
+
+    const selectTrack = (index, autoplay = true) => {
+      currentTrackIndex = (index + tracks.length) % tracks.length;
+      const track = tracks[currentTrackIndex];
+      displayTrack(currentTrackIndex);
+      if (!ready) return;
+      const playback = {
+        videoId: track.videoId,
+        startSeconds: track.startSeconds,
+        ...(track.endSeconds ? { endSeconds: track.endSeconds } : {})
+      };
+      if (autoplay) {
+        player.loadVideoById(playback);
+        status.textContent = `TUNING // ${track.title.toUpperCase()}`;
+      } else {
+        player.cueVideoById(playback);
+        status.textContent = "STANDBY // PRESS PLAY";
+      }
+    };
+
+    displayTrack(currentTrackIndex);
 
     const updatePlayback = (playing) => {
       root.dataset.state = playing ? "playing" : "paused";
@@ -153,11 +276,15 @@ const latestPosts = allPosts.slice(0, 5);
       player = new window.YT.Player("ambient-youtube-player", {
         width: "100%",
         height: "200",
-        videoId,
+        videoId: tracks[currentTrackIndex].videoId,
         playerVars: {
           controls: 0,
           playsinline: 1,
           rel: 0,
+          start: tracks[currentTrackIndex].startSeconds,
+          ...(tracks[currentTrackIndex].endSeconds
+            ? { end: tracks[currentTrackIndex].endSeconds }
+            : {}),
           origin: window.location.origin
         },
         events: {
@@ -171,16 +298,17 @@ const latestPosts = allPosts.slice(0, 5);
             if (event.data === window.YT.PlayerState.PAUSED) updatePlayback(false);
             if (event.data === window.YT.PlayerState.ENDED) {
               if (looping) {
-                player.seekTo(0, true);
+                player.seekTo(tracks[currentTrackIndex].startSeconds, true);
                 player.playVideo();
               } else {
-                updatePlayback(false);
-                status.textContent = "COMPLETE // SIGNAL ENDED";
+                selectTrack(currentTrackIndex + 1, true);
               }
             }
           },
-          onError: () => {
-            status.textContent = "ERROR // OPEN SOURCE LINK";
+          onError: (event) => {
+            status.textContent = event.data === 101 || event.data === 150
+              ? "ERROR 150 // EMBED BLOCKED"
+              : `ERROR ${event.data} // OPEN SOURCE LINK`;
           }
         }
       });
@@ -203,8 +331,17 @@ const latestPosts = allPosts.slice(0, 5);
 
     restartControl.addEventListener("click", () => {
       if (!ready) return;
-      player.seekTo(0, true);
-      status.textContent = "REWOUND // T+00:00";
+      const track = tracks[currentTrackIndex];
+      player.seekTo(track.startSeconds, true);
+      status.textContent = `REWOUND // ${track.cue}`;
+    });
+
+    nextControl.addEventListener("click", () => {
+      selectTrack(currentTrackIndex + 1, true);
+    });
+
+    trackControl.addEventListener("change", () => {
+      selectTrack(Number(trackControl.value), true);
     });
 
     loopControl.addEventListener("click", () => {
