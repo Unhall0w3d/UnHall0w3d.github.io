@@ -91,7 +91,7 @@ const latestPosts = allPosts.slice(0, 5);
           <button class="ambient-control" type="button" data-ambient-restart aria-label="Restart song from the beginning">↶</button>
           <button class="ambient-control ambient-play" type="button" data-ambient-play aria-label="Play song">▶</button>
           <button class="ambient-control" type="button" data-ambient-next aria-label="Play next song">↠</button>
-          <button class="ambient-control is-active" type="button" data-ambient-loop aria-label="Disable song loop" aria-pressed="true">↻</button>
+          <button class="ambient-control" type="button" data-ambient-loop aria-label="Enable song loop" aria-pressed="false">↻</button>
           <label class="ambient-volume">
             <span>VOL <output data-ambient-volume-output>50</output></span>
             <input data-ambient-volume type="range" min="0" max="50" value="50" aria-label="Song volume" />
@@ -217,7 +217,7 @@ const latestPosts = allPosts.slice(0, 5);
     const status = root.querySelector("[data-ambient-status]");
     let player;
     let ready = false;
-    let looping = true;
+    let looping = false;
 
     const savedTrack = Number(localStorage.getItem("noc-ambient-track"));
     let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
