@@ -1,0 +1,162 @@
+---
+type RepositorySpec = {
+  name: string;
+  displayName: string;
+  classification: string;
+  description: string;
+  language: string;
+  branch: string;
+  head: string;
+  pushedAt: string;
+};
+
+type GitHubRepository = {
+  description?: string | null;
+  default_branch?: string;
+  language?: string | null;
+  pushed_at?: string;
+};
+
+type GitHubCommit = {
+  sha?: string;
+  commit?: {
+    author?: {
+      date?: string;
+    };
+  };
+};
+
+const owner = "Unhall0w3d";
+const repositorySpecs: RepositorySpec[] = [
+  {
+    name: "aletheiauc",
+    displayName: "AletheiaUC",
+    classification: "ASSESSMENT ENGINE",
+    description: "Cisco Collaboration health assessment, diagnostics, and reporting.",
+    language: "Python",
+    branch: "main",
+    head: "617af2fd",
+    pushedAt: "2026-07-14T17:45:52Z",
+  },
+  {
+    name: "soul-slash",
+    displayName: "Soul/",
+    classification: "LOCAL INTELLIGENCE",
+    description: "Local-first assistant with deterministic skills, safety gates, and human-approved memory.",
+    language: "Ruby",
+    branch: "main",
+    head: "ed78b67c",
+    pushedAt: "2026-07-12T18:02:33Z",
+  },
+  {
+    name: "mind-enigma",
+    displayName: "Mind Enigma",
+    classification: "CISCO AUTOMATION",
+    description: "Cisco Collaboration scripts and operational automation.",
+    language: "Python",
+    branch: "master",
+    head: "f37fcfe2",
+    pushedAt: "2026-06-25T00:08:39Z",
+  },
+  {
+    name: "ruckus-backup-retriever",
+    displayName: "Ruckus Backup Retriever",
+    classification: "NETWORK UTILITY",
+    description: "PowerShell backup downloader for RUCKUS SmartZone environments.",
+    language: "PowerShell",
+    branch: "main",
+    head: "dee4dcdf",
+    pushedAt: "2026-07-05T23:51:38Z",
+  },
+];
+
+async function refreshRepository(spec: RepositorySpec): Promise<RepositorySpec> {
+  try {
+    const repositoryResponse = await fetch(`https://api.github.com/repos/${owner}/${spec.name}`, {
+      headers: { Accept: "application/vnd.github+json" },
+    });
+    if (!repositoryResponse.ok) return spec;
+
+    const repository = (await repositoryResponse.json()) as GitHubRepository;
+    const branch = repository.default_branch || spec.branch;
+    const commitResponse = await fetch(
+      `https://api.github.com/repos/${owner}/${spec.name}/commits/${encodeURIComponent(branch)}`,
+      { headers: { Accept: "application/vnd.github+json" } },
+    );
+    if (!commitResponse.ok) {
+      return {
+        ...spec,
+        branch,
+        description: repository.description || spec.description,
+        language: repository.language || spec.language,
+        pushedAt: repository.pushed_at || spec.pushedAt,
+      };
+    }
+
+    const commit = (await commitResponse.json()) as GitHubCommit;
+    return {
+      ...spec,
+      branch,
+      description: repository.description || spec.description,
+      language: repository.language || spec.language,
+      head: commit.sha?.slice(0, 8) || spec.head,
+      pushedAt: commit.commit?.author?.date || repository.pushed_at || spec.pushedAt,
+    };
+  } catch {
+    return spec;
+  }
+}
+
+const repositories = await Promise.all(repositorySpecs.map(refreshRepository));
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+---
+
+<section class="repository-relay" aria-labelledby="repository-relay-title">
+  <header class="repository-relay-header">
+    <div>
+      <p class="eyebrow">PUBLIC CODEX // SELECTED WORKS</p>
+      <h2 id="repository-relay-title">Repository relay</h2>
+    </div>
+    <div class="repository-relay-state" aria-label={`${repositories.length} repositories online`}>
+      <span class="repository-relay-pulse" aria-hidden="true"></span>
+      GH-{String(repositories.length).padStart(2, "0")} // LINKED
+    </div>
+  </header>
+
+  <div class="repository-grid">
+    {repositories.map((repository, index) => (
+      <article class="repository-node">
+        <a href={`https://github.com/${owner}/${repository.name}`} aria-label={`Open ${repository.displayName} on GitHub`}>
+          <div class="repository-node-header">
+            <span>NODE {String(index + 1).padStart(2, "0")}</span>
+            <span>{repository.classification}</span>
+          </div>
+          <div class="repository-node-copy">
+            <h3>{repository.displayName}</h3>
+            <p>{repository.description}</p>
+          </div>
+          <dl class="repository-node-stats">
+            <div><dt>BRANCH</dt><dd>{repository.branch}</dd></div>
+            <div><dt>HEAD</dt><dd><code>{repository.head}</code></dd></div>
+            <div><dt>STACK</dt><dd>{repository.language}</dd></div>
+            <div><dt>SYNC</dt><dd>{dateFormatter.format(new Date(repository.pushedAt)).toUpperCase()}</dd></div>
+          </dl>
+          <div class="repository-node-footer">
+            <span>STATUS // PUBLIC</span>
+            <strong>OPEN REPOSITORY ↗</strong>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+
+  <footer class="repository-relay-footer">
+    <span>HEAD IDENTIFIERS // 8-CHAR SHORT SHA</span>
+    <a href={`https://github.com/${owner}`}>ALL PUBLIC NODES ↗</a>
+  </footer>
+</section>

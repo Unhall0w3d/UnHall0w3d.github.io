@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostList from "../components/PostList.astro";
+import RepositoryRelay from "../components/RepositoryRelay.astro";
 import { site } from "../config/site";
 import { getCollection } from "astro:content";
 import { sortPosts, type Post } from "../lib/posts";
@@ -90,6 +91,8 @@ const latestPosts = allPosts.slice(0, 5);
       </div>
     </div>
   </section>
+
+  <RepositoryRelay />
 
   <section class="transmissions" aria-labelledby="transmissions-title">
     <header class="section-header">
