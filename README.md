@@ -1,17 +1,25 @@
 # NOC Thoughts
 
-NOC Thoughts is a static Astro site deployed to GitHub Pages at [nocthoughts.com](https://nocthoughts.com). The visual system, layouts, archive, taxonomy, SEO, and deployment pipeline are owned by this repository and do not depend on Jekyll or Minimal Mistakes.
+NOC Thoughts is Kenneth Perry's technical field journal: hard-won fixes, useful scripts, and notes from the stranger corners of network operations, unified communications, automation, and Linux.
+
+The site is built with [Astro](https://astro.build/) and published through GitHub Pages at [nocthoughts.com](https://nocthoughts.com).
 
 ## Local development
 
-Requirements: Node.js 24 and npm.
+The project requires Node.js 24 and npm.
 
 ```sh
 npm install
 npm run dev
 ```
 
-Astro will print the local preview address. Use `npm run validate` before committing; it builds the complete site and verifies all local links, assets, legacy URLs, and the expected post count.
+Astro will print the local preview address. Before committing a change, run:
+
+```sh
+npm run validate
+```
+
+This builds the complete site and checks its links, assets, established URLs, and post archive.
 
 ## Add a post
 
@@ -34,19 +42,25 @@ tags:
 ---
 ```
 
-Place screenshots and other static media in `public/assets/images`, then reference them from Markdown as `/assets/images/filename.png`. The generated post URL retains the historical NOC Thoughts format: `/YYYY/MM/DD/short-descriptive-slug.html`.
+Place screenshots and other static media in `public/assets/images`, then reference them from Markdown as `/assets/images/filename.png`.
 
-## Important locations
+Posts use the established NOC Thoughts URL format:
+
+```text
+/YYYY/MM/DD/short-descriptive-slug.html
+```
+
+## Repository map
 
 - `src/config/site.ts` — site identity, verification, social, analytics, and advertising identifiers
-- `src/content/posts` — the complete post archive
-- `src/content/pages` — About, privacy, and retained page copy
-- `src/layouts` — the owned page and post templates
-- `src/styles/global.css` — the owned design system
-- `public` — screenshots, icons, domain, robots, AdSense, and verification files
-- `scripts/validate-site.mjs` — migration and link-integrity validation
+- `src/content/posts` — published articles
+- `src/content/pages` — About, privacy, and other standalone page copy
+- `src/layouts` — shared page and post templates
+- `src/styles/global.css` — the site's visual system
+- `public` — screenshots, icons, robots, AdSense, domain, and verification files
+- `scripts/validate-site.mjs` — archive and link-integrity checks
 - `.github/workflows/deploy.yml` — GitHub Pages build and deployment
 
-## Deployment safety
+## Deployment
 
-Pull requests run the complete build. The deployment job runs only after changes reach `master`; work pushed to feature branches cannot replace the live site.
+Pull requests run the complete validation and build process. The live site is deployed only after changes are merged into `master`.
