@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import OperatorLinks from "../components/OperatorLinks.astro";
 import PostList from "../components/PostList.astro";
 import RepositoryRelay from "../components/RepositoryRelay.astro";
 import { site } from "../config/site";
@@ -58,7 +59,10 @@ const latestPosts = allPosts.slice(0, 5);
     </aside>
   </section>
 
-  <section class="ambient-signal" aria-labelledby="ambient-signal-title" data-ambient-player>
+  <div class="signal-utility-row">
+    <OperatorLinks />
+
+    <section class="ambient-signal" aria-labelledby="ambient-signal-title" data-ambient-player>
     <div class="ambient-signal-header">
       <span>AMBIENT SIGNAL // PROFILE TRACK</span>
       <span>YT-01</span>
@@ -104,7 +108,8 @@ const latestPosts = allPosts.slice(0, 5);
         </div>
       </div>
     </div>
-  </section>
+    </section>
+  </div>
 
   <RepositoryRelay />
 
