@@ -21,6 +21,7 @@ const jsonLd = {
   description: postExcerpt(post),
   datePublished: post.data.date.toISOString(),
   mainEntityOfPage: url,
+  ...(post.data.image ? { image: new URL(post.data.image, site.url) } : {}),
   author: { "@type": "Person", name: site.author.name, url: site.social.github },
   publisher: { "@type": "Organization", name: site.name, url: site.url }
 };
@@ -31,6 +32,10 @@ const jsonLd = {
   description={postExcerpt(post)}
   type="article"
   publishedTime={post.data.date.toISOString()}
+  image={post.data.image}
+  imageAlt={post.data.imageAlt}
+  imageWidth={post.data.imageWidth}
+  imageHeight={post.data.imageHeight}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article class="post-shell">

@@ -12,6 +12,10 @@ tags:
   - Automation
   - Linux
 description: "Why I started building Soul/, a local-first assistant designed around conversation, useful action, explicit approval, and human control."
+image: "/assets/images/soul-slash-conversation-social.png"
+imageAlt: "Soul Slash interface illustrating a fictional, approval-gated Downloads cleanup conversation."
+imageWidth: 1200
+imageHeight: 630
 draft: false
 ---
 
