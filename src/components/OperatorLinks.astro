@@ -1,0 +1,52 @@
+---
+import { site } from "../config/site";
+
+const channels = [
+  {
+    label: "GitHub",
+    identity: `@${site.author.handle}`,
+    detail: "CODE // PROJECTS // FIELD TOOLS",
+    href: site.social.github,
+    glyph: "GH",
+  },
+  {
+    label: "LinkedIn",
+    identity: site.author.name,
+    detail: "UC ENGINEERING // PROFESSIONAL NETWORK",
+    href: site.social.linkedin,
+    glyph: "IN",
+  },
+];
+---
+
+<aside class="operator-links" aria-labelledby="operator-links-title">
+  <div class="operator-links-header">
+    <span>OPERATOR UPLINK // EXTERNAL CHANNELS</span>
+    <span>EXT-02</span>
+  </div>
+
+  <div class="operator-links-copy">
+    <p class="eyebrow">PUBLIC SIGNAL PATHS</p>
+    <h2 id="operator-links-title">Find the operator</h2>
+    <p>Code, current projects, and the professional identity behind the signal.</p>
+  </div>
+
+  <nav class="operator-channel-list" aria-label="Kenneth Perry social profiles">
+    {channels.map((channel) => (
+      <a class="operator-channel" href={channel.href} aria-label={`Open ${channel.label} profile for ${channel.identity}`}>
+        <span class="operator-channel-glyph" aria-hidden="true">{channel.glyph}</span>
+        <span class="operator-channel-copy">
+          <span>{channel.label}</span>
+          <strong>{channel.identity}</strong>
+          <small>{channel.detail}</small>
+        </span>
+        <span class="operator-channel-arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="operator-links-footer">
+    <span><i aria-hidden="true"></i> IDENTITY VERIFIED</span>
+    <span>2 CHANNELS // PUBLIC</span>
+  </div>
+</aside>

@@ -391,10 +391,195 @@ h1 em {
 .signal-stats dd { margin: 0; color: var(--paper); }
 .signal-stats .online { color: var(--signal); }
 
+.signal-utility-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(36rem, 42rem);
+  gap: clamp(1.1rem, 2.5vw, 2rem);
+  align-items: stretch;
+  margin: -2rem 0 5rem;
+}
+
+.operator-links {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 0.9rem;
+  border: 1px solid var(--line-strong);
+  background:
+    linear-gradient(145deg, rgba(86, 242, 208, 0.065), transparent 42%),
+    rgba(7, 9, 19, 0.9);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.3);
+  clip-path: polygon(0 0, calc(100% - 1rem) 0, 100% 1rem, 100% 100%, 1rem 100%, 0 calc(100% - 1rem));
+}
+
+.operator-links::before,
+.operator-links::after {
+  position: absolute;
+  background: var(--signal);
+  content: "";
+}
+
+.operator-links::before {
+  top: 0;
+  left: 1rem;
+  width: 4rem;
+  height: 1px;
+}
+
+.operator-links::after {
+  bottom: 1rem;
+  left: 0;
+  width: 1px;
+  height: 4rem;
+}
+
+.operator-links-header,
+.operator-channel,
+.operator-links-footer {
+  font-family: var(--font-code);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.operator-links-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-size: 0.6rem;
+}
+
+.operator-links-copy {
+  padding: 0.15rem 0.1rem 0.85rem;
+}
+
+.operator-links-copy .eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--signal);
+  font-size: 0.56rem;
+}
+
+.operator-links-copy h2 {
+  font-size: clamp(1.65rem, 3vw, 2.4rem);
+  text-transform: uppercase;
+}
+
+.operator-links-copy > p:last-child {
+  max-width: 30rem;
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.operator-channel-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.operator-channel {
+  display: grid;
+  grid-template-columns: 2.65rem minmax(0, 1fr) auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  background: rgba(16, 23, 39, 0.72);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.operator-channel:hover,
+.operator-channel:focus-visible {
+  border-color: rgba(86, 242, 208, 0.58);
+  outline: none;
+  background: rgba(16, 31, 42, 0.88);
+  transform: translateX(0.18rem);
+}
+
+.operator-channel-glyph {
+  display: grid;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  color: var(--signal);
+  font-size: 0.75rem;
+  box-shadow: inset 0 0 1rem rgba(86, 242, 208, 0.05);
+}
+
+.operator-channel-copy {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.operator-channel-copy > span {
+  color: var(--muted);
+  font-size: 0.48rem;
+}
+
+.operator-channel-copy strong {
+  overflow: hidden;
+  margin-top: 0.16rem;
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.operator-channel-copy small {
+  overflow: hidden;
+  margin-top: 0.23rem;
+  color: var(--signal);
+  font-size: 0.45rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.operator-channel-arrow {
+  color: var(--arcane);
+  font-size: 1rem;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.operator-channel:hover .operator-channel-arrow,
+.operator-channel:focus-visible .operator-channel-arrow {
+  color: var(--signal-soft);
+  transform: translate(0.12rem, -0.12rem);
+}
+
+.operator-links-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.5rem;
+}
+
+.operator-links-footer i {
+  display: inline-block;
+  width: 0.36rem;
+  height: 0.36rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 9px rgba(86, 242, 208, 0.7);
+}
+
 .ambient-signal {
   position: relative;
-  width: min(100%, 42rem);
-  margin: -2rem 0 5rem auto;
+  width: 100%;
+  margin: 0;
   padding: 0.9rem;
   border: 1px solid rgba(167, 139, 250, 0.48);
   background:
@@ -1499,9 +1684,15 @@ h1 em {
     max-width: 30rem;
   }
 
+  .signal-utility-row {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+  }
+
+  .operator-links,
   .ambient-signal {
     width: min(100%, 36rem);
-    margin-top: 0;
+    margin-inline: auto;
   }
 
   .repository-node-stats {
@@ -1609,6 +1800,7 @@ h1 em {
   .site-nav,
   .hero-actions,
   .signal-card,
+  .operator-links,
   .ambient-signal,
   .repository-relay {
     display: none;
