@@ -16,6 +16,7 @@ export const site = {
   social: {
     github: "https://github.com/UnHall0w3d",
     linkedin: "https://www.linkedin.com/in/kperryuc",
+    discordUser: "https://discord.com/users/209522975467241472",
     twitter: "https://twitter.com/thoughtsnoc",
     discord: "https://discord.gg/HZYSfpySv6"
   },
