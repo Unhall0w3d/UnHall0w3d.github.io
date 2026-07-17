@@ -21,7 +21,7 @@ draft: false
 
 ## That Escalated Quickly
 
-Not long ago, I wrote about [why I am building Soul/](/2026/07/15/why-i-am-building-soul-slash/): a local-first assistant that can hold a real conversation, understand the environment around it, use deterministic tools, and become more capable without quietly appointing itself administrator of everything I own.
+Not long ago, I wrote about [why I am building Soul/](/2026/07/15/why-i-am-building-soul-slash.html): a local-first assistant that can hold a real conversation, understand the environment around it, use deterministic tools, and become more capable without quietly appointing itself administrator of everything I own.
 
 At the time, Soul/ had already moved beyond being a folder full of ideas and optimistic documentation. The core pieces were there. It could hold persistent conversations, route work toward skills, manage artifacts, and put approval gates in front of actions where an incorrect assumption might become an exciting afternoon.
 
