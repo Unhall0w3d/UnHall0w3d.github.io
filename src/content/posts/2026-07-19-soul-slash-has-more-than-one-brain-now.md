@@ -12,8 +12,8 @@ tags:
   - Automation
   - Linux
 description: "Soul/ can now move between local models, GPU architectures, and purpose-built Cores without leaving its identity, memory, or boundaries behind."
-image: "/assets/images/soul-slash-conversation-social.png"
-imageAlt: "Soul Slash interface illustrating a fictional, approval-gated conversation."
+image: "/assets/images/soul-slash-more-than-one-brain-social.png"
+imageAlt: "Soul Slash beside three interconnected local computational Cores, an audio waveform, and a visual frame."
 imageWidth: 1200
 imageHeight: 630
 draft: false
