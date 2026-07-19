@@ -1426,6 +1426,29 @@ h1 em {
   margin-top: 0;
 }
 
+.prose .post-image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.prose .post-image-grid img {
+  width: 100%;
+  margin: 0;
+}
+
+.prose .post-clear {
+  clear: both;
+}
+
+@media (max-width: 700px) {
+  .prose .post-image-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .prose table {
   display: block;
   max-width: 100%;

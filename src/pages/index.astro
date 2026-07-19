@@ -68,22 +68,23 @@ const latestPosts = allPosts.slice(0, 5);
       <span>YT-01</span>
     </div>
     <div class="ambient-signal-grid">
-      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for View From The Top"></div>
+      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Afterimage Current"></div>
       <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>TENNOCON 2026</span></p>
-        <h2 id="ambient-signal-title" data-ambient-title>View From The Top</h2>
-        <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>PLAYWARFRAME</span></p>
+        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 01</span></p>
+        <h2 id="ambient-signal-title" data-ambient-title>Afterimage Current</h2>
+        <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>SOUL SLASH SYNTHESIS</span></p>
 
         <label class="ambient-selector">
           <span>SIGNAL SELECT</span>
           <select data-ambient-track aria-label="Select ambient signal">
-            <option value="0">01 // VIEW FROM THE TOP</option>
-            <option value="1">02 // DOMINO (REMIX)</option>
-            <option value="2">03 // WE ARE FUTURE (V2)</option>
-            <option value="3">04 // SHIFT (VIP MIX)</option>
-            <option value="4">05 // GRAVITY</option>
-            <option value="5">06 // TIDES</option>
-            <option value="6">07 // TRANSCENDENCE</option>
+            <option value="0">01 // AFTERIMAGE CURRENT</option>
+            <option value="1">02 // VIEW FROM THE TOP</option>
+            <option value="2">03 // DOMINO (REMIX)</option>
+            <option value="3">04 // WE ARE FUTURE (V2)</option>
+            <option value="4">05 // SHIFT (VIP MIX)</option>
+            <option value="5">06 // GRAVITY</option>
+            <option value="6">07 // TIDES</option>
+            <option value="7">08 // TRANSCENDENCE</option>
           </select>
         </label>
 
@@ -104,7 +105,7 @@ const latestPosts = allPosts.slice(0, 5);
 
         <div class="ambient-footer">
           <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://youtu.be/ygOo9VediOg" data-ambient-source>SOURCE // YOUTUBE ↗</a>
+          <a href="https://www.youtube.com/watch?v=863-KXJRfyA" data-ambient-source>SOURCE // YOUTUBE ↗</a>
         </div>
       </div>
     </div>
@@ -145,6 +146,14 @@ const latestPosts = allPosts.slice(0, 5);
     if (!root) return;
 
     const tracks = [
+      {
+        videoId: "863-KXJRfyA",
+        title: "Afterimage Current",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 01",
+        source: "https://www.youtube.com/watch?v=863-KXJRfyA",
+        startSeconds: 0
+      },
       {
         videoId: "ygOo9VediOg",
         title: "View From The Top",
@@ -224,7 +233,8 @@ const latestPosts = allPosts.slice(0, 5);
     let ready = false;
     let looping = false;
 
-    const savedTrack = Number(localStorage.getItem("noc-ambient-track"));
+    const trackStorageKey = "noc-ambient-track-v2";
+    const savedTrack = Number(localStorage.getItem(trackStorageKey));
     let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
       ? savedTrack
       : 0;
@@ -245,7 +255,7 @@ const latestPosts = allPosts.slice(0, 5);
       source.href = track.source;
       trackControl.value = String(index);
       video.setAttribute("aria-label", `YouTube player for ${track.title}`);
-      localStorage.setItem("noc-ambient-track", String(index));
+      localStorage.setItem(trackStorageKey, String(index));
     };
 
     const selectTrack = (index, autoplay = true) => {

@@ -23,6 +23,13 @@ const channels = [
     href: site.social.discordUser,
     glyph: "DC",
   },
+  {
+    label: "YouTube",
+    identity: "Soul Slash Synthesis",
+    detail: "MUSIC // VISUAL SYNTHESIS",
+    href: site.social.soulYoutube,
+    glyph: "YT",
+  },
 ];
 ---
 
@@ -35,10 +42,10 @@ const channels = [
   <div class="operator-links-copy">
     <p class="eyebrow">PUBLIC SIGNAL PATHS</p>
     <h2 id="operator-links-title">Find the operator</h2>
-    <p>Code, current projects, and the professional identity behind the signal.</p>
+    <p>Code, current projects, professional identity, and Soul/'s creative transmissions.</p>
   </div>
 
-  <nav class="operator-channel-list" aria-label="Kenneth Perry social profiles">
+  <nav class="operator-channel-list" aria-label="Operator and Soul Slash public channels">
     {channels.map((channel) => (
       <a class="operator-channel" href={channel.href} aria-label={`Open ${channel.label} profile for ${channel.identity}`}>
         <span class="operator-channel-glyph" aria-hidden="true">{channel.glyph}</span>

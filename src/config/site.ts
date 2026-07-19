@@ -17,6 +17,7 @@ export const site = {
     github: "https://github.com/UnHall0w3d",
     linkedin: "https://www.linkedin.com/in/kperryuc",
     discordUser: "https://discord.com/users/209522975467241472",
+    soulYoutube: "https://www.youtube.com/channel/UCIY6AROma4bbum3jk2kfu-w",
     twitter: "https://twitter.com/thoughtsnoc",
     discord: "https://discord.gg/HZYSfpySv6"
   },
