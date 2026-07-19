@@ -31,22 +31,16 @@ const latestPosts = allPosts.slice(0, 5);
         <span>SYSTEM SIGNAL</span>
         <span>01-A</span>
       </div>
-      <button class="signal-flip" type="button" aria-pressed="false" aria-label="Kenneth Perry. Show system sigil">
+      <button class="signal-flip" type="button" aria-pressed="false" aria-label="Kenneth Perry. Show Soul portrait">
         <span class="signal-flip-inner">
           <span class="signal-face signal-face-portrait" aria-hidden="true">
             <img src={site.author.avatar} width="2048" height="2048" alt="" />
             <span class="signal-face-label">OPERATOR // 01</span>
             <span class="signal-flip-prompt">TAP TO DECRYPT ↻</span>
           </span>
-          <span class="signal-face signal-face-sigil" aria-hidden="true">
-            <svg class="hero-sigil" viewBox="0 0 320 320">
-              <circle cx="160" cy="160" r="122" />
-              <circle cx="160" cy="160" r="86" />
-              <path d="M160 22v276M22 160h276M62 62l196 196M258 62 62 258" />
-              <path d="m160 72 76 44v88l-76 44-76-44v-88l76-44Z" />
-              <path class="sigil-core" d="m124 194 36-68 36 68M132 176h56" />
-            </svg>
-            <span class="signal-face-label">SYSTEM SIGIL // A</span>
+          <span class="signal-face signal-face-soul" aria-hidden="true">
+            <img src="/assets/images/soul-slash-synthesis-avatar.jpg" width="900" height="900" alt="" />
+            <span class="signal-face-label">SOUL // SYNTHESIS</span>
             <span class="signal-flip-prompt">RETURN TO OPERATOR ↻</span>
           </span>
         </span>
@@ -134,7 +128,7 @@ const latestPosts = allPosts.slice(0, 5);
       control.setAttribute("aria-pressed", String(flipped));
       control.setAttribute(
         "aria-label",
-        flipped ? "System sigil. Show Kenneth Perry" : "Kenneth Perry. Show system sigil"
+        flipped ? "Soul portrait. Show Kenneth Perry" : "Kenneth Perry. Show Soul portrait"
       );
     });
   });
