@@ -62,24 +62,18 @@ const latestPosts = allPosts.slice(0, 5);
       <span>YT-01</span>
     </div>
     <div class="ambient-signal-grid">
-      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Afterimage Current"></div>
+      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Compiler Bloom"></div>
       <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 01</span></p>
-        <h2 id="ambient-signal-title" data-ambient-title>Afterimage Current</h2>
+        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 03</span></p>
+        <h2 id="ambient-signal-title" data-ambient-title>Compiler Bloom</h2>
         <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>SOUL SLASH SYNTHESIS</span></p>
 
         <label class="ambient-selector">
           <span>SIGNAL SELECT</span>
           <select data-ambient-track aria-label="Select ambient signal">
-            <option value="0">01 // AFTERIMAGE CURRENT</option>
+            <option value="0">01 // COMPILER BLOOM</option>
             <option value="1">02 // WHEN HOPE FORGOT OUR NAMES</option>
-            <option value="2">03 // VIEW FROM THE TOP</option>
-            <option value="3">04 // DOMINO (REMIX)</option>
-            <option value="4">05 // WE ARE FUTURE (V2)</option>
-            <option value="5">06 // SHIFT (VIP MIX)</option>
-            <option value="6">07 // GRAVITY</option>
-            <option value="7">08 // TIDES</option>
-            <option value="8">09 // TRANSCENDENCE</option>
+            <option value="2">03 // AFTERIMAGE CURRENT</option>
           </select>
         </label>
 
@@ -100,7 +94,7 @@ const latestPosts = allPosts.slice(0, 5);
 
         <div class="ambient-footer">
           <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://www.youtube.com/watch?v=863-KXJRfyA" data-ambient-source>SOURCE // YOUTUBE ↗</a>
+          <a href="https://www.youtube.com/watch?v=-ilV0X9-PR8" data-ambient-source>SOURCE // YOUTUBE ↗</a>
         </div>
       </div>
     </div>
@@ -142,11 +136,11 @@ const latestPosts = allPosts.slice(0, 5);
 
     const tracks = [
       {
-        videoId: "863-KXJRfyA",
-        title: "Afterimage Current",
+        videoId: "-ilV0X9-PR8",
+        title: "Compiler Bloom",
         artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 01",
-        source: "https://www.youtube.com/watch?v=863-KXJRfyA",
+        cue: "SOUL SYNTHESIS // GEN 03",
+        source: "https://www.youtube.com/watch?v=-ilV0X9-PR8",
         startSeconds: 0
       },
       {
@@ -158,65 +152,12 @@ const latestPosts = allPosts.slice(0, 5);
         startSeconds: 0
       },
       {
-        videoId: "ygOo9VediOg",
-        title: "View From The Top",
-        artist: "PLAYWARFRAME",
-        cue: "TENNOCON 2026",
-        source: "https://youtu.be/ygOo9VediOg",
+        videoId: "863-KXJRfyA",
+        title: "Afterimage Current",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 01",
+        source: "https://www.youtube.com/watch?v=863-KXJRfyA",
         startSeconds: 0
-      },
-      {
-        videoId: "PajvC-6bNWA",
-        title: "Domino (Remix)",
-        artist: "NEO.",
-        cue: "JUNE MIX // 00:00",
-        source: "https://youtu.be/PajvC-6bNWA?t=0",
-        startSeconds: 0,
-        endSeconds: 253
-      },
-      {
-        videoId: "PajvC-6bNWA",
-        title: "We are Future (V2)",
-        artist: "NEO.",
-        cue: "JUNE MIX // 04:13",
-        source: "https://youtu.be/PajvC-6bNWA?t=253",
-        startSeconds: 253,
-        endSeconds: 703
-      },
-      {
-        videoId: "PajvC-6bNWA",
-        title: "Shift (VIP MIX)",
-        artist: "NEO.",
-        cue: "JUNE MIX // 11:43",
-        source: "https://youtu.be/PajvC-6bNWA?t=703",
-        startSeconds: 703,
-        endSeconds: 1074
-      },
-      {
-        videoId: "PajvC-6bNWA",
-        title: "Gravity",
-        artist: "NEO.",
-        cue: "JUNE MIX // 17:54",
-        source: "https://youtu.be/PajvC-6bNWA?t=1074",
-        startSeconds: 1074,
-        endSeconds: 1380
-      },
-      {
-        videoId: "PajvC-6bNWA",
-        title: "Tides",
-        artist: "NEO.",
-        cue: "JUNE MIX // 23:00",
-        source: "https://youtu.be/PajvC-6bNWA?t=1380",
-        startSeconds: 1380,
-        endSeconds: 1651
-      },
-      {
-        videoId: "PajvC-6bNWA",
-        title: "Transcendence",
-        artist: "NEO.",
-        cue: "JUNE MIX // 27:31",
-        source: "https://youtu.be/PajvC-6bNWA?t=1651",
-        startSeconds: 1651
       }
     ];
     const playControl = root.querySelector("[data-ambient-play]");
@@ -236,7 +177,7 @@ const latestPosts = allPosts.slice(0, 5);
     let ready = false;
     let looping = false;
 
-    const trackStorageKey = "noc-ambient-track-v3";
+    const trackStorageKey = "noc-ambient-track-v4";
     const savedTrack = Number(localStorage.getItem(trackStorageKey));
     let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
       ? savedTrack
