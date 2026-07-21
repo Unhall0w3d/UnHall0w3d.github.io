@@ -72,13 +72,14 @@ const latestPosts = allPosts.slice(0, 5);
           <span>SIGNAL SELECT</span>
           <select data-ambient-track aria-label="Select ambient signal">
             <option value="0">01 // AFTERIMAGE CURRENT</option>
-            <option value="1">02 // VIEW FROM THE TOP</option>
-            <option value="2">03 // DOMINO (REMIX)</option>
-            <option value="3">04 // WE ARE FUTURE (V2)</option>
-            <option value="4">05 // SHIFT (VIP MIX)</option>
-            <option value="5">06 // GRAVITY</option>
-            <option value="6">07 // TIDES</option>
-            <option value="7">08 // TRANSCENDENCE</option>
+            <option value="1">02 // WHEN HOPE FORGOT OUR NAMES</option>
+            <option value="2">03 // VIEW FROM THE TOP</option>
+            <option value="3">04 // DOMINO (REMIX)</option>
+            <option value="4">05 // WE ARE FUTURE (V2)</option>
+            <option value="5">06 // SHIFT (VIP MIX)</option>
+            <option value="6">07 // GRAVITY</option>
+            <option value="7">08 // TIDES</option>
+            <option value="8">09 // TRANSCENDENCE</option>
           </select>
         </label>
 
@@ -146,6 +147,14 @@ const latestPosts = allPosts.slice(0, 5);
         artist: "SOUL SLASH SYNTHESIS",
         cue: "SOUL SYNTHESIS // GEN 01",
         source: "https://www.youtube.com/watch?v=863-KXJRfyA",
+        startSeconds: 0
+      },
+      {
+        videoId: "xV-XJT78tn0",
+        title: "When Hope Forgot Our Names",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 02",
+        source: "https://www.youtube.com/watch?v=xV-XJT78tn0",
         startSeconds: 0
       },
       {
@@ -227,7 +236,7 @@ const latestPosts = allPosts.slice(0, 5);
     let ready = false;
     let looping = false;
 
-    const trackStorageKey = "noc-ambient-track-v2";
+    const trackStorageKey = "noc-ambient-track-v3";
     const savedTrack = Number(localStorage.getItem(trackStorageKey));
     let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
       ? savedTrack
