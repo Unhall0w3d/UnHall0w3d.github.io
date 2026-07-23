@@ -62,18 +62,19 @@ const latestPosts = allPosts.slice(0, 5);
       <span>YT-01</span>
     </div>
     <div class="ambient-signal-grid">
-      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Compiler Bloom"></div>
+      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for The Weight Remembered"></div>
       <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 03</span></p>
-        <h2 id="ambient-signal-title" data-ambient-title>Compiler Bloom</h2>
+        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 04</span></p>
+        <h2 id="ambient-signal-title" data-ambient-title>The Weight Remembered</h2>
         <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>SOUL SLASH SYNTHESIS</span></p>
 
         <label class="ambient-selector">
           <span>SIGNAL SELECT</span>
           <select data-ambient-track aria-label="Select ambient signal">
-            <option value="0">01 // COMPILER BLOOM</option>
-            <option value="1">02 // WHEN HOPE FORGOT OUR NAMES</option>
-            <option value="2">03 // AFTERIMAGE CURRENT</option>
+            <option value="0">01 // THE WEIGHT REMEMBERED</option>
+            <option value="1">02 // COMPILER BLOOM</option>
+            <option value="2">03 // WHEN HOPE FORGOT OUR NAMES</option>
+            <option value="3">04 // AFTERIMAGE CURRENT</option>
           </select>
         </label>
 
@@ -94,7 +95,7 @@ const latestPosts = allPosts.slice(0, 5);
 
         <div class="ambient-footer">
           <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://www.youtube.com/watch?v=-ilV0X9-PR8" data-ambient-source>SOURCE // YOUTUBE ↗</a>
+          <a href="https://www.youtube.com/watch?v=BNN0D39P4Ic" data-ambient-source>SOURCE // YOUTUBE ↗</a>
         </div>
       </div>
     </div>
@@ -135,6 +136,14 @@ const latestPosts = allPosts.slice(0, 5);
     if (!root) return;
 
     const tracks = [
+      {
+        videoId: "BNN0D39P4Ic",
+        title: "The Weight Remembered",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 04",
+        source: "https://www.youtube.com/watch?v=BNN0D39P4Ic",
+        startSeconds: 0
+      },
       {
         videoId: "-ilV0X9-PR8",
         title: "Compiler Bloom",
@@ -177,7 +186,7 @@ const latestPosts = allPosts.slice(0, 5);
     let ready = false;
     let looping = false;
 
-    const trackStorageKey = "noc-ambient-track-v4";
+    const trackStorageKey = "noc-ambient-track-v5";
     const savedTrack = Number(localStorage.getItem(trackStorageKey));
     let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
       ? savedTrack
