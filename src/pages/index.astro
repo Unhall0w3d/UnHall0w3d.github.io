@@ -121,14 +121,28 @@ const latestPosts = allPosts.slice(0, 5);
 
 <script>
   document.querySelectorAll<HTMLButtonElement>(".signal-flip").forEach((control) => {
-    control.addEventListener("click", () => {
-      const flipped = control.getAttribute("aria-pressed") !== "true";
-      control.setAttribute("aria-pressed", String(flipped));
+    const showFace = (showSoul: boolean, musicActive = false) => {
+      control.setAttribute("aria-pressed", String(showSoul));
+      control.toggleAttribute("aria-disabled", musicActive);
       control.setAttribute(
         "aria-label",
-        flipped ? "Soul portrait. Show Kenneth Perry" : "Kenneth Perry. Show Soul portrait"
+        musicActive
+          ? "Soul Slash Synthesis portrait. Music is playing."
+          : showSoul
+            ? "Soul portrait. Show Kenneth Perry"
+            : "Kenneth Perry. Show Soul portrait"
       );
+    };
+
+    control.addEventListener("click", () => {
+      if (control.hasAttribute("aria-disabled")) return;
+      const flipped = control.getAttribute("aria-pressed") !== "true";
+      showFace(flipped);
     });
+
+    window.addEventListener("noc:ambient-playback", ((event: CustomEvent<{ playing: boolean }>) => {
+      showFace(event.detail.playing, event.detail.playing);
+    }) as EventListener);
   });
 </script>
 
@@ -255,6 +269,9 @@ const latestPosts = allPosts.slice(0, 5);
       playControl.textContent = playing ? "Ⅱ" : "▶";
       playControl.setAttribute("aria-label", playing ? "Pause song" : "Play song");
       status.textContent = playing ? "TRANSMITTING // SIGNAL ACTIVE" : "PAUSED // SIGNAL HELD";
+      window.dispatchEvent(new CustomEvent("noc:ambient-playback", {
+        detail: { playing }
+      }));
     };
 
     const initializePlayer = () => {
@@ -278,6 +295,8 @@ const latestPosts = allPosts.slice(0, 5);
             ready = true;
             event.target.setVolume(initialVolume);
             status.textContent = "STANDBY // PRESS PLAY";
+            updatePlayback(false);
+            status.textContent = "STANDBY // PRESS PLAY";
           },
           onStateChange: (event) => {
             if (event.data === window.YT.PlayerState.PLAYING) updatePlayback(true);
@@ -292,6 +311,7 @@ const latestPosts = allPosts.slice(0, 5);
             }
           },
           onError: (event) => {
+            updatePlayback(false);
             status.textContent = event.data === 101 || event.data === 150
               ? "ERROR 150 // EMBED BLOCKED"
               : `ERROR ${event.data} // OPEN SOURCE LINK`;
