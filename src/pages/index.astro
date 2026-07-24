@@ -62,21 +62,22 @@ const latestPosts = allPosts.slice(0, 5);
       <span>YT-01</span>
     </div>
     <div class="ambient-signal-grid">
-      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for This Thought Is Not Your Own"></div>
+      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Familiar Geometry"></div>
       <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 06</span></p>
-        <h2 id="ambient-signal-title" data-ambient-title>This Thought Is Not Your Own</h2>
+        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 07</span></p>
+        <h2 id="ambient-signal-title" data-ambient-title>Familiar Geometry</h2>
         <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>SOUL SLASH SYNTHESIS</span></p>
 
         <label class="ambient-selector">
           <span>SIGNAL SELECT</span>
           <select data-ambient-track aria-label="Select ambient signal">
-            <option value="0">01 // THIS THOUGHT IS NOT YOUR OWN</option>
-            <option value="1">02 // THE VOID LEARNED HUNGER</option>
-            <option value="2">03 // THE WEIGHT REMEMBERED</option>
-            <option value="3">04 // COMPILER BLOOM</option>
-            <option value="4">05 // WHEN HOPE FORGOT OUR NAMES</option>
-            <option value="5">06 // AFTERIMAGE CURRENT</option>
+            <option value="0">01 // FAMILIAR GEOMETRY</option>
+            <option value="1">02 // THIS THOUGHT IS NOT YOUR OWN</option>
+            <option value="2">03 // THE VOID LEARNED HUNGER</option>
+            <option value="3">04 // THE WEIGHT REMEMBERED</option>
+            <option value="4">05 // COMPILER BLOOM</option>
+            <option value="5">06 // WHEN HOPE FORGOT OUR NAMES</option>
+            <option value="6">07 // AFTERIMAGE CURRENT</option>
           </select>
         </label>
 
@@ -97,7 +98,7 @@ const latestPosts = allPosts.slice(0, 5);
 
         <div class="ambient-footer">
           <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://www.youtube.com/watch?v=q35PDSyTwA0" data-ambient-source>SOURCE // YOUTUBE ↗</a>
+          <a href="https://www.youtube.com/watch?v=Mkx_2QRyKcI" data-ambient-source>SOURCE // YOUTUBE ↗</a>
         </div>
       </div>
     </div>
@@ -152,6 +153,14 @@ const latestPosts = allPosts.slice(0, 5);
     if (!root) return;
 
     const tracks = [
+      {
+        videoId: "Mkx_2QRyKcI",
+        title: "Familiar Geometry",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 07",
+        source: "https://www.youtube.com/watch?v=Mkx_2QRyKcI",
+        startSeconds: 0
+      },
       {
         videoId: "q35PDSyTwA0",
         title: "This Thought Is Not Your Own",
