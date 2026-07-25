@@ -184,9 +184,9 @@ AletheiaUC has moved beyond the early API-collector skeleton and is now being ha
 
 That is not the same as claiming universal production readiness.
 
-Every collector and finding still needs to be validated against the customer-approved UC release, deployment model, credentials, topology, and maintenance constraints in which it will be used. Some paths have been exercised against live CUCM 15 systems. Others are implemented and covered by fixtures but still need broader field validation, particularly certificate and trust normalization, cross-version response aliases, bounded relationship enrichment, and several Unity Connection variations.
+Every collector and finding still needs to be validated against the customer-approved UC release, deployment model, credentials, topology, and maintenance constraints in which it will be used. CUCM 14 and 15 have now been validated. Other paths are implemented and covered by fixtures but still need broader field validation, particularly certificate and trust normalization, bounded relationship enrichment, and several Unity Connection variations.
 
-CUCM 14, 12, and 11.5 remain important validation targets. So do additional Unity Connection releases and deployment shapes. Cisco APIs have a long and distinguished tradition of returning approximately the same information in creatively different forms.
+CUCM 12 and 11.5 remain pending validation. So do additional Unity Connection releases and deployment shapes. Cisco APIs have a long and distinguished tradition of returning approximately the same information in creatively different forms.
 
 The project can also build a portable bootstrap ZIP for Windows or Linux operators who cannot use Git. It creates its own local Python environment and installs the report dependencies, including a local Chromium runtime when PDF export is available. HTML-only reporting remains an option where browser installation is blocked.
 
@@ -200,7 +200,7 @@ The next phase is less about adding every available Cisco interface and more abo
 
 Current priorities include:
 
-- **Cross-version and multi-cluster validation.** Exercise CUCM 14, 12, and 11.5, additional Unity Connection releases, and mixed assessments containing multiple clusters of the same technology.
+- **Cross-version and multi-cluster validation.** With CUCM 14 and 15 validated, continue with CUCM 12 and 11.5, additional Unity Connection releases, and mixed assessments containing multiple clusters of the same technology.
 - **Certificate and trust validation.** Complete fresh CUCM 15 testing for parsed chains, trust-store coverage, deduplication, and optional phone trust stores.
 - **Deeper Unity Connection validation.** Confirm CUPI field variants, message-aging child resources, SMTP availability differences, platform output, and experimental fixed-query behavior across versions.
 - **Shared UCOS collection.** Continue refining the common bounded Publisher baseline already used by IM&P and CER, while preserving the richer role-aware discovery, parsing, and health policy required by CUCM and CUC.
