@@ -57,7 +57,7 @@ The language model changes, the inference provider changes, the GPU manufacturer
 
 That works because the model is not where Soul/'s identity lives. Conversation history, memory, personality rules, tool contracts, project state, approval boundaries, and evidence remain outside the model. Gemma and Qwen provide different brains for the current exchange; neither one owns the assistant.
 
-<span class="image left"><a href="/assets/images/soul-slash-core-runtime-selector.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-core-runtime-selector.png" alt="Soul Slash runtime selector showing an active NVIDIA chat model and an available AMD model profile" loading="lazy" /></a></span>
+<span class="image left"><a href="/assets/images/soul-slash-core-runtime-selector.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-core-runtime-selector.png" alt="Soul Slash runtime selector showing an active NVIDIA chat model and an available AMD model profile" loading="lazy" width="417" height="928" /></a></span>
 
 *The runtime selector shows the separation directly. Conversation can remain active on NVIDIA while the AMD card is reserved for creative work.*
 
@@ -101,7 +101,7 @@ That way lies prompt soup.
 
 Soul/ can ask only for the missing required decisions, draft the optional material, and show the complete brief before anything reaches the music runtime. Every field remains visible and editable. Model-generated input is still input, not approval.
 
-<span class="image fit"><a href="/assets/images/soul-slash-music-studio-afterimage-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-studio-afterimage-current.png" alt="Soul Slash Music Studio showing a creative brief, project archive, generation controls, and reference tools" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-music-studio-afterimage-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-studio-afterimage-current.png" alt="Soul Slash Music Studio showing a creative brief, project archive, generation controls, and reference tools" loading="lazy" width="3374" height="1168" /></a></span>
 
 *Music Studio keeps the creative brief, exact generation inputs, candidates, references, and reviews inside one private project rather than scattering them across a prompt history and an output folder.*
 
@@ -184,7 +184,7 @@ When Visual Studio is invoked through Chat, the only required creative input is 
 
 Again, it may draft. It may not decide.
 
-<span class="image fit"><a href="/assets/images/soul-slash-visual-studio-first-light.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-visual-studio-first-light.png" alt="Soul Slash Visual Studio showing a visual brief, local generation preview, archive, and motion lane" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-visual-studio-first-light.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-visual-studio-first-light.png" alt="Soul Slash Visual Studio showing a visual brief, local generation preview, archive, and motion lane" loading="lazy" width="3368" height="1283" /></a></span>
 
 *Visual Studio uses the same basic contract as Music Studio: visible input, exact resource inspection, one bounded generation, immutable output, and human review.*
 
@@ -219,7 +219,7 @@ Once both candidates have recorded `keep` reviews, Visual Studio can bind one ex
 
 The binding is another previewed operation. It copies the reviewed visual into the music candidate's lineage and records where it came from. It does not search for the most recent image, guess which project title I meant, or silently promote an unreviewed candidate because it has an attractive thumbnail.
 
-<span class="image fit"><a href="/assets/images/soul-slash-music-candidate-visual-companion.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-candidate-visual-companion.png" alt="Soul Slash Music Studio candidate with audio evidence and a reviewed visual companion bound to the exact song" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-music-candidate-visual-companion.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-candidate-visual-companion.png" alt="Soul Slash Music Studio candidate with audio evidence and a reviewed visual companion bound to the exact song" loading="lazy" width="2595" height="1185" /></a></span>
 
 *The companion lives with the music candidate's evidence. Audio, visual, review, and lineage remain connected all the way to the export path.*
 

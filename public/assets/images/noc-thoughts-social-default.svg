@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">NOC Thoughts</title>
+  <desc id="description">Infrastructure field notes from the signal edge</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07131d"/>
+      <stop offset=".55" stop-color="#0a111c"/>
+      <stop offset="1" stop-color="#15121b"/>
+    </linearGradient>
+    <radialGradient id="signal" cx=".26" cy=".46" r=".65">
+      <stop offset="0" stop-color="#24d9e9" stop-opacity=".22"/>
+      <stop offset=".56" stop-color="#24d9e9" stop-opacity=".035"/>
+      <stop offset="1" stop-color="#24d9e9" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#7ddfe4" stroke-opacity=".08"/>
+    </pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#signal)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <path d="M0 48h710l24 24h466M0 582h438l22-22h740" fill="none" stroke="#d8a92f" stroke-opacity=".62" stroke-width="2"/>
+  <path d="M0 52h510M790 578h410" fill="none" stroke="#24d9e9" stroke-opacity=".78" stroke-width="3"/>
+  <g transform="translate(98 151)" fill="none" stroke-linejoin="round">
+    <path d="M138 0 258 70v140l-120 70L18 210V70Z" stroke="#d8a92f" stroke-width="5"/>
+    <path d="m79 188 59-105 59 105M88 151h100" stroke="#70f3ef" stroke-width="9" filter="url(#glow)"/>
+    <circle cx="138" cy="140" r="113" stroke="#24d9e9" stroke-opacity=".28" stroke-width="2"/>
+    <circle cx="138" cy="140" r="88" stroke="#d8a92f" stroke-opacity=".28" stroke-width="2" stroke-dasharray="7 12"/>
+  </g>
+  <g transform="translate(440 178)">
+    <text x="0" y="0" fill="#51e7ee" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" letter-spacing="5">TRANSMISSION ACTIVE // SIGNAL 01</text>
+    <text x="0" y="105" fill="#edf8f5" font-family="Georgia, 'Times New Roman', serif" font-size="84" letter-spacing="2">NOC THOUGHTS</text>
+    <line x1="0" y1="142" x2="630" y2="142" stroke="#d8a92f" stroke-opacity=".62" stroke-width="2"/>
+    <text x="0" y="197" fill="#a9c3c7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25" letter-spacing="3">INFRASTRUCTURE · AUTOMATION · LOCAL AI</text>
+    <text x="0" y="252" fill="#70939a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" letter-spacing="2">FIELD NOTES FROM THE SIGNAL EDGE</text>
+  </g>
+  <text x="1125" y="535" fill="#d8a92f" fill-opacity=".7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" text-anchor="end">NOCTHOUGHTS.COM</text>
+</svg>

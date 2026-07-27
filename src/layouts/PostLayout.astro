@@ -2,7 +2,7 @@
 import type { MarkdownHeading } from "astro";
 import type { Post } from "../lib/posts";
 import { site } from "../config/site";
-import { formatPostDate, postExcerpt, postUrl, readingTime, termSlug } from "../lib/posts";
+import { formatPostDate, postExcerpt, postMetaDescription, postUrl, readingTime, termSlug } from "../lib/posts";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -14,24 +14,42 @@ interface Props {
 const { post, headings, related } = Astro.props;
 const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const url = new URL(postUrl(post), site.url);
+const metaDescription = postMetaDescription(post);
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: post.data.title,
-  description: postExcerpt(post),
+  description: metaDescription,
   datePublished: post.data.date.toISOString(),
+  ...(post.data.updated ? { dateModified: post.data.updated.toISOString() } : {}),
   mainEntityOfPage: url,
   ...(post.data.image ? { image: new URL(post.data.image, site.url) } : {}),
-  author: { "@type": "Person", name: site.author.name, url: site.social.github },
-  publisher: { "@type": "Organization", name: site.name, url: site.url }
+  author: {
+    "@type": "Person",
+    name: site.author.name,
+    url: new URL("/about.html", site.url),
+    sameAs: [site.social.github, site.social.linkedin]
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+    url: site.url,
+    logo: {
+      "@type": "ImageObject",
+      url: new URL("/android-chrome-512x512.png", site.url),
+      width: 512,
+      height: 512
+    }
+  }
 };
 ---
 
 <BaseLayout
   title={post.data.title}
-  description={postExcerpt(post)}
+  description={metaDescription}
   type="article"
   publishedTime={post.data.date.toISOString()}
+  modifiedTime={post.data.updated?.toISOString()}
   image={post.data.image}
   imageAlt={post.data.imageAlt}
   imageWidth={post.data.imageWidth}
@@ -46,6 +64,7 @@ const jsonLd = {
       <div class="post-byline">
         <span>By {site.author.name}</span>
         <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
+        {post.data.updated && <time datetime={post.data.updated.toISOString()}>Updated {formatPostDate(post.data.updated)}</time>}
         <span>{readingTime(post)} min read</span>
       </div>
     </header>
@@ -53,7 +72,7 @@ const jsonLd = {
     <div class="post-grid">
       <aside class="post-rail">
         <div class="operator-card">
-          <img src={site.author.avatar} width="72" height="72" alt="" />
+          <img src={site.author.thumbnail} width="144" height="144" alt="" />
           <div><strong>{site.author.name}</strong><span>{site.author.role}</span></div>
         </div>
         {toc.length > 0 && (

@@ -1,5 +1,6 @@
 ---
 title: "Privacy Policy"
+description: "How NOC Thoughts handles analytics, advertising, cookies, personal information, and visitor privacy."
 sitemap: false
 permalink: /privacypolicy.html
 ---

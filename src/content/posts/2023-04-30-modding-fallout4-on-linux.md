@@ -99,7 +99,7 @@ A few things to make sure you have installed before starting... namely protontri
     c. Type "getf4seversion" and confirm there's valid output showing the version, as shown below.
 ```
     
-<a href="#" class="image main"><img src="/assets/images/f4se.png" alt="f4se is active" /></a>
+<a href="#" class="image main"><img src="/assets/images/f4se.png" alt="f4se is active" width="565" height="50" /></a>
 
 ```
 12. Installing Mods
@@ -123,7 +123,7 @@ sResourceDataDirsFinal=
     h. At this point things should work. Download a mod using the nxm link and confirm that Mod Organizer 2 downloads the files.
 ```
 
-<a href="#" class="image main"><img src="/assets/images/f4mo2.png" alt="Mod Organizer 2" /></a>
+<a href="#" class="image main"><img src="/assets/images/f4mo2.png" alt="Mod Organizer 2" width="1307" height="605" /></a>
     
 ## Time To Play
 

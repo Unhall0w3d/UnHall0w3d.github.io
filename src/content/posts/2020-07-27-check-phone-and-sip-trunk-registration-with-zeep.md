@@ -145,13 +145,13 @@ input.txt file containing device/trunk names. One per line. File is expected to 
 
 ## Script Behavior - Phones
 
-<span class="image fit"><img src="/assets/images/scriptbehavior_phones.png" alt="Example of script run against Phones." /></span>
+<span class="image fit"><img src="/assets/images/scriptbehavior_phones.png" alt="Example of script run against Phones." width="877" height="161" /></span>
 
 Example of script behavior, requested input, output formatting when checking phone registration.
 
 ## Script Behavior - Trunks
 
-<span class="image fit"><img src="/assets/images/scriptbehavior_trunks.png" alt="Example of script run against Trunks." /></span>
+<span class="image fit"><img src="/assets/images/scriptbehavior_trunks.png" alt="Example of script run against Trunks." width="860" height="413" /></span>
 
 Example of script behavior, requested input, output formatting when checking trunk registration.
 

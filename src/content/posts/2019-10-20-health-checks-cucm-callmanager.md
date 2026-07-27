@@ -19,7 +19,7 @@ tags:
 
 And here it is, my list of commands and checks that I run against CUCM nodes (7.x-12.x)  for most changes that take place. It's useful output to collect prior to changing configurations like domains, DNS servers, IP/Hostname changes, Upgrades, Restarts -- anything that makes a change system wide.<!--more-->
 
-<span class="image fit"><img src="/assets/images/rtmt1.png" alt="RTMT Overview Page" /></span>
+<span class="image fit"><img src="/assets/images/rtmt1.png" alt="RTMT Overview Page" width="672" height="414" /></span>
 
 I pull this data to refer back to in the event that the change has disrupted dbrepliction, endpoint registration status, inter-cluster communication, intra-cluster communication, service status, anything. Consider this output a "CYA" for later. Something to refer back to to confirm all is as it was prior to the change, with whatever exceptions should exist (e.g. IP address changed should reflect in post-change "show network eth0 detail" output.
 
@@ -88,21 +88,21 @@ Pulls the RIS Database data for the related entries. Assists in confirming all e
 
 ### Alert Central - RTMT
 
-<span class="image fit"><img src="/assets/images/cuchealthcheck2.png" alt="Alert Central view in RTMT for all critical events on the cluster." /></span>
+<span class="image fit"><img src="/assets/images/cuchealthcheck2.png" alt="Alert Central view in RTMT for all critical events on the cluster." width="1000" height="539" /></span>
 
 ### System Summary - RTMT
 
-<span class="image fit"><img src="/assets/images/cuchealthcheck3.png" alt="System Summary page for VMEM, CPU and Common Partition usage." /></span>
+<span class="image fit"><img src="/assets/images/cuchealthcheck3.png" alt="System Summary page for VMEM, CPU and Common Partition usage." width="1000" height="534" /></span>
 
 ## Registered Phones/Devices (Cluster) -  RTMT
 
-<span class="image fit"><img src="/assets/images/cucmhealthcheck4.png" alt="Registered Phones/Devices View in RTMT." /></span>
+<span class="image fit"><img src="/assets/images/cucmhealthcheck4.png" alt="Registered Phones/Devices View in RTMT." width="1000" height="517" /></span>
 
-<span class="image fit"><img src="/assets/images/cucmhealthcheck5.png" alt="Registered Phones/Devices View in RTMT." /></span>
+<span class="image fit"><img src="/assets/images/cucmhealthcheck5.png" alt="Registered Phones/Devices View in RTMT." width="1000" height="517" /></span>
 
 ## Database Summary - RTMT
 
-<span class="image fit"><img src="/assets/images/cucmhealthcheck6.png" alt="Database Summary for overview of database state in UC environment." /></span>
+<span class="image fit"><img src="/assets/images/cucmhealthcheck6.png" alt="Database Summary for overview of database state in UC environment." width="1000" height="516" /></span>
 
 For health checks, I don't download Reports from the Cisco Unified Reporting feature, as it does not contain data that I'd want to refer to for verification. They are however helpful, at times, in troubleshooting issues on the system and getting deeper insights into database replication/setup, for example.
 

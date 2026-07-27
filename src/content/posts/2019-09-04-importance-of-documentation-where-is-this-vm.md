@@ -99,7 +99,7 @@ Example: FCH1999333SS
 
 With this data collected, we fill in our Excel sheet. The way I've found this easiest to understand and explain to fellow engineers is to name the worksheet the ESXi hostname, and include the CIMC/VM details within the worksheet. See the screenshot below.
 
-<span class="image fit"><img src="/assets/images/importantdocumentation1.png" alt="Excel Sheet display of the collected data." /></span>
+<span class="image fit"><img src="/assets/images/importantdocumentation1.png" alt="Excel Sheet display of the collected data." width="703" height="577" /></span>
 
 Bam. I've now got a document I can refer to quickly to determine what's where, that you can provide to any service desk or auxilliary support teams to reference (ideally at a centrally located Sharepoint or similar location. Treat it as a live doc and update as you go!)
 

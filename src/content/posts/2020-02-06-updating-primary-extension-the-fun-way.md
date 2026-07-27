@@ -22,7 +22,7 @@ Today's post covers a workaround-turned-update-method for the 'Primary Extension
 
 <!--more-->
 
-<span class="image fit"><img src="/assets/images/primaryextensionerror1.png" alt="The error that pops up on a single user in CCM End User page." /></span>
+<span class="image fit"><img src="/assets/images/primaryextensionerror1.png" alt="The error that pops up on a single user in CCM End User page." width="860" height="132" /></span>
 
 This error generated for any kind of change on just this one user account. Whether you modified their primary extension, self service user id, home cluster -- even if you just clicked save -- it would produce this error. Ultimately while troubleshooting THAT issue, we found that the Name Dialing entry on the end user page did not match the user's LastFirst, so there was a mismatch. CUCM didn't like that. We blanked out the Name Dialing entry, saved (SUCCESSFULLY!), and it autopopulated a new, updated, proper LastFirst entry, which fixed our issue trying to edit this end user.
 

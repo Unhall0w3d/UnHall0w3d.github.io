@@ -9,9 +9,17 @@ import { sortPosts, type Post } from "../lib/posts";
 
 const allPosts = sortPosts((await getCollection("posts", ({ data }) => !data.draft)) as Post[]);
 const latestPosts = allPosts.slice(0, 5);
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  alternateName: ["The NOC Thoughts Blog", "nocthoughts.com"],
+  url: `${site.url}/`
+};
 ---
 
 <BaseLayout>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow"><span>TRANSMISSION ACTIVE</span> INFRASTRUCTURE FIELD LOG</p>
@@ -226,6 +234,7 @@ const latestPosts = allPosts.slice(0, 5);
     let player;
     let ready = false;
     let looping = false;
+    let playWhenReady = false;
 
     const trackStorageKey = "noc-ambient-track-v6";
     const savedTrack = Number(localStorage.getItem(trackStorageKey));
@@ -256,7 +265,10 @@ const latestPosts = allPosts.slice(0, 5);
       currentTrackIndex = (index + tracks.length) % tracks.length;
       const track = tracks[currentTrackIndex];
       displayTrack(currentTrackIndex);
-      if (!ready) return;
+      if (!ready) {
+        if (autoplay) requestPlayer(true);
+        return;
+      }
       const playback = {
         videoId: track.videoId,
         startSeconds: track.startSeconds,
@@ -303,9 +315,13 @@ const latestPosts = allPosts.slice(0, 5);
           onReady: (event) => {
             ready = true;
             event.target.setVolume(initialVolume);
-            status.textContent = "STANDBY // PRESS PLAY";
-            updatePlayback(false);
-            status.textContent = "STANDBY // PRESS PLAY";
+            if (playWhenReady) {
+              playWhenReady = false;
+              event.target.playVideo();
+            } else {
+              updatePlayback(false);
+              status.textContent = "STANDBY // PRESS PLAY";
+            }
           },
           onStateChange: (event) => {
             if (event.data === window.YT.PlayerState.PLAYING) updatePlayback(true);
@@ -329,23 +345,42 @@ const latestPosts = allPosts.slice(0, 5);
       });
     };
 
-    window.onYouTubeIframeAPIReady = initializePlayer;
-    if (window.YT?.Player) {
-      initializePlayer();
-    } else if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
-      const api = document.createElement("script");
-      api.src = "https://www.youtube.com/iframe_api";
-      document.head.append(api);
-    }
+    const requestPlayer = (autoplay = false) => {
+      playWhenReady ||= autoplay;
+      if (ready) {
+        if (autoplay) player.playVideo();
+        return;
+      }
+
+      status.textContent = "TUNING // OPENING SIGNAL";
+      if (window.YT?.Player) {
+        initializePlayer();
+        return;
+      }
+
+      window.onYouTubeIframeAPIReady = initializePlayer;
+      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+        const api = document.createElement("script");
+        api.src = "https://www.youtube.com/iframe_api";
+        api.async = true;
+        document.head.append(api);
+      }
+    };
 
     playControl.addEventListener("click", () => {
-      if (!ready) return;
+      if (!ready) {
+        requestPlayer(true);
+        return;
+      }
       const playing = player.getPlayerState() === window.YT.PlayerState.PLAYING;
       playing ? player.pauseVideo() : player.playVideo();
     });
 
     restartControl.addEventListener("click", () => {
-      if (!ready) return;
+      if (!ready) {
+        requestPlayer(true);
+        return;
+      }
       const track = tracks[currentTrackIndex];
       player.seekTo(track.startSeconds, true);
       status.textContent = `REWOUND // ${track.cue}`;

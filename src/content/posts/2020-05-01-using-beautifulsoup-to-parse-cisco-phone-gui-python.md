@@ -26,7 +26,7 @@ I want to start this blog post off by prefacing the below script I'm providing b
 
 <!--more-->
 
-<span class="image fit"><img src="/assets/images/beautifulsoup.png" alt="It's just a sample image." /></span>
+<span class="image fit"><img src="/assets/images/beautifulsoup.png" alt="It's just a sample image." width="873" height="584" /></span>
 
 About 3-4 years ago I had a small hand in producing a sample script (in bash) that would log into a Cisco Unified Communications Manager (or IM&P, or CUC, or CER... you get the deal. Any VOS appliance) and run a list of commands against the server CLI and pipe all output to a text file. Not only was it shoddy, but it ran commands against a server even if we knew there would be no output. For example, "show cuc cluster status" against a CUCM is going to error out as a command... but that was my first attempt at automating pulling health check data. Later on this project was picked up by my colleagues and converted first to PHP, then Python -- and then expanded to include a whole host of UC related technologies.
 

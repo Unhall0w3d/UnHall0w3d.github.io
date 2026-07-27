@@ -44,6 +44,13 @@ for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
   const attributes = html.matchAll(/\b(?:href|src)=(?:"([^"]+)"|'([^']+)')/g);
 
+  for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
+    const image = match[0];
+    if (!/\bwidth=/.test(image) || !/\bheight=/.test(image)) {
+      failures.add(`${path.relative(root, file)} -> image missing intrinsic dimensions: ${image.slice(0, 120)}`);
+    }
+  }
+
   for (const match of attributes) {
     let target = match[1] ?? match[2];
     if (!target || target.startsWith("#") || /^(?:mailto:|tel:|data:|javascript:)/.test(target)) continue;
@@ -83,6 +90,32 @@ for (const file of postSources) {
 const postPages = files.filter((file) => /\/\d{4}\/\d{2}\/\d{2}\/[^/]+\.html$/.test(file));
 if (postPages.length !== publishedPostSources.length) {
   failures.add(`expected ${publishedPostSources.length} published post pages; found ${postPages.length}`);
+}
+
+const expectedSitemapUrls = new Set();
+for (const file of htmlFiles) {
+  const html = await readFile(file, "utf8");
+  if (/<meta\s+name="robots"\s+content="[^"]*\bnoindex\b/i.test(html)) continue;
+  if (/<meta\s+http-equiv="refresh"/i.test(html)) continue;
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
+  if (canonical?.startsWith(siteOrigin)) expectedSitemapUrls.add(canonical);
+}
+
+const generatedSitemap = await readFile(path.join(dist, "sitemap-0.xml"), "utf8");
+const sitemapUrls = new Set(
+  [...generatedSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+);
+
+for (const url of sitemapUrls) {
+  const pathname = new URL(url).pathname;
+  if (pathname !== "/" && !pathname.endsWith(".html")) {
+    failures.add(`sitemap URL does not use the canonical .html form: ${url}`);
+  }
+  if (!expectedSitemapUrls.has(url)) failures.add(`unexpected or non-indexable sitemap URL: ${url}`);
+}
+
+for (const url of expectedSitemapUrls) {
+  if (!sitemapUrls.has(url)) failures.add(`canonical indexable URL missing from sitemap: ${url}`);
 }
 
 if (failures.size > 0) {

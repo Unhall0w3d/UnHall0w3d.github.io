@@ -14,8 +14,14 @@ export async function getStaticPaths() {
 
 interface Props { tag: string; posts: Post[]; }
 const { tag, posts } = Astro.props;
+const signalLabel = posts.length === 1 ? "signal" : "signals";
 ---
 
-<PageLayout title={tag} description={`${posts.length} signals tagged ${tag}.`} eyebrow="TAGGED TRANSMISSIONS">
+<PageLayout
+  title={`Posts tagged ${tag}`}
+  description={`${posts.length} ${signalLabel} tagged ${tag}.`}
+  eyebrow="TAGGED TRANSMISSIONS"
+  robots={posts.length === 1 ? "noindex,follow" : undefined}
+>
   <PostList posts={posts} numbered />
 </PageLayout>

@@ -12,7 +12,7 @@ tags:
   - Unified Communications
   - General
 ---
-<span class="image fit"><img src="/assets/images/ccnpcollab.png" alt="CCNP Collaboration" /></span>
+<span class="image fit"><img src="/assets/images/ccnpcollab.png" alt="CCNP Collaboration" width="346" height="346" /></span>
 
 ## Recertified, Again!
 

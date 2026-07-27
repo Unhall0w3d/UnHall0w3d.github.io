@@ -67,7 +67,7 @@ For example, “clean up my Downloads folder” sounds simple until an assistant
 
 Soul/ should inspect first, present a bounded plan, ask for approval, move the exact approved files to Trash, verify the result, and leave a record. The conversational part makes the interaction natural. The deterministic part keeps “natural” from becoming “surprising.”
 
-<span class="image fit"><img src="/assets/images/soul-slash-conversation-demo.svg" alt="Illustrative Soul Slash conversation showing a Downloads cleanup plan awaiting explicit approval" /></span>
+<span class="image fit"><img src="/assets/images/soul-slash-conversation-demo.svg" alt="Illustrative Soul Slash conversation showing a Downloads cleanup plan awaiting explicit approval" width="1600" height="900" /></span>
 
 *Illustrative demo using fictional data. The important part is not the cleanup itself—it is that Soul/ has inspected and planned the work without quietly deciding it has permission to act.*
 
@@ -117,7 +117,7 @@ That remains a human decision.
 
 In a way, Soul/ is both an assistant and a framework for teaching an assistant new things without handing the lesson plan to the assistant.
 
-<span class="image fit"><img src="/assets/images/soul-slash-skill-studio-demo.svg" alt="Illustrative Soul Slash Skill Studio showing proposal, isolated beta, and production promotion stages" /></span>
+<span class="image fit"><img src="/assets/images/soul-slash-skill-studio-demo.svg" alt="Illustrative Soul Slash Skill Studio showing proposal, isolated beta, and production promotion stages" width="1600" height="900" /></span>
 
 *The Skill Studio lifecycle, shown with a fictional skill. A proposal can become a tested candidate, but tests and model output do not get to promote it into production.*
 
@@ -127,7 +127,7 @@ Soul/ is still experimental, but it is no longer a README describing something I
 
 It has persistent multi-turn conversations through the terminal and a local dashboard. It can route requests toward deterministic skills, maintain conversation artifacts and workspace context, record execution history, and handle explicit approval flows. It has human-reviewed memory promotion, a Skill Studio with proposal, beta, and production stages, and a self-assessment surface for looking at its environment, models, and missing capabilities.
 
-<span class="image fit"><img src="/assets/images/soul-slash-self-improvement-demo.svg" alt="Illustrative Soul Slash Self Improvement assessment identifying a capability gap without making system changes" /></span>
+<span class="image fit"><img src="/assets/images/soul-slash-self-improvement-demo.svg" alt="Illustrative Soul Slash Self Improvement assessment identifying a capability gap without making system changes" width="1600" height="900" /></span>
 
 *Self Improvement is meant to identify and explain useful gaps, not silently rewrite the assistant. This fictional assessment ends with a recommendation and zero mutations.*
 

@@ -14,13 +14,13 @@ tags:
   - Git
 ---
 
-<span class="image fit"><img src="/assets/images/nixos_1.png" alt="NixOS. It just.. keeps.. booting..." /></span>
+<span class="image fit"><img src="/assets/images/nixos_1.png" alt="NixOS. It just.. keeps.. booting..." width="992" height="532" /></span>
 
-# Well Hello There!
+## Well Hello There!
 
 Howdy! Been a while, hasn't it? While you've been off, I don't know, working, living life, struggling to keep up with the verbiage anyone "younger than you" uses, binging Baldur's Gate 3... where was I? Oh, yes. While you've been off *having fun* I've been mixing things up on my desktop and laptop daily drivers and I'm now running [NixOS](https://nixos.org/)! <!--more--> Until now I've been running Arch variants with little issue and much success. So if it ain't broke, why fix it?
 
-# NixOS
+## NixOS
 
 First, a brief overview of NixOS. NixOS is a Linux distribution built on top of the Nix package manager. Its declarative configuration allows reliable system upgrades via several official channels of significant size and stability. NixOS has tools dedicated to DevOps and deployment tasks.[8][9]
 
@@ -32,7 +32,7 @@ In short, some of the benefits of NixOS over other Linux distributions are:
     4. Immutability: The software making up a given system configuration cannot be changed once it has been built, preventing accidental or malicious modifications.
     5. Nix package manager: Packages can be installed without affecting the rest of the system, and can be tested without installing.
 
-# A Little Background
+## A Little Background
 
 Now, the 'reproducible build' portion is what I was striving for with my [Arch Configs](https://github.com/Unhall0w3d/nocthoughts-dotfiles), however, it was becoming a bit to maintain and due to spending less of my time messing with CSS, Yuck, and Window Managers/Compositing, I wanted to shift to something usable, a bit familiar, and something I could repeatably deploy (if I broke something, or just felt like reformatting for one reason or another). This is where I landed on NixOS.
 
@@ -48,7 +48,7 @@ I'd like to test more with Home Manager as a way to differentiate user based con
 
 As part of my exploration through NixOS there will likely be upcoming posts that go into more depth on the trials and tribulations I face. Look forward to it.
 
-# My Configs
+## My Configs
 
 This brings us to my configs. If you try using the configurations you'll need to make changes to the user, hard drive mounting, packages to install, etc... I don't recommend using the configs 1:1. You can, however, take snippets that are relevant for you, such as the steam specific configurations, getting Lutris installed and working, enabling AMDGPU kernel module, etc. My configs can be found on [GitHub - nixos-configs](https://github.com/Unhall0w3d/nixos-configs).
 
@@ -399,6 +399,6 @@ This brings us to my configs. If you try using the configurations you'll need to
 }
 ```
 
-# And That's It
+## And That's It
 
 And that's mostly it! More tinkering, more learning... primarily by throwing myself into the fire with a "sink or swim" mentality, but hey... whatever works. I'd like to thank you for reading this update, feel free to join the NOC Thoughts Discord, and check back for updates!

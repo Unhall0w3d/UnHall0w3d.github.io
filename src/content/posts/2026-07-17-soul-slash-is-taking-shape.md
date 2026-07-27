@@ -43,7 +43,7 @@ An assistant that can perform real work needs to be honest about its state. It s
 
 The model can speak naturally. The system still has to show its work.
 
-<span class="image fit"><a href="/assets/images/soul-slash-dashboard-overview.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-dashboard-overview.png" alt="Current Soul Slash Chat dashboard with conversation archive, host telemetry, model runtime controls, workspace, and the Soul familiar" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-dashboard-overview.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-dashboard-overview.png" alt="Current Soul Slash Chat dashboard with conversation archive, host telemetry, model runtime controls, workspace, and the Soul familiar" loading="lazy" width="3378" height="1281" /></a></span>
 
 *The current Chat interface. Conversation remains at the center, while host status, the selected model, runtime controls, workspace context, and Soul's current state stay visible around it. Select any screenshot to open the full-resolution image.*
 
@@ -90,7 +90,7 @@ When Soul/ encounters a real capability gap, it no longer has to choose between 
 
 The stages are deliberately visible because “the code exists” and “the assistant is trusted to use this” are not the same statement.
 
-<span class="image fit"><a href="/assets/images/soul-slash-skill-studio-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-skill-studio-current.png" alt="Current Soul Slash Skill Studio showing Proposal, Beta, trial evidence, and Production approval stages" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-skill-studio-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-skill-studio-current.png" alt="Current Soul Slash Skill Studio showing Proposal, Beta, trial evidence, and Production approval stages" loading="lazy" width="3376" height="1281" /></a></span>
 
 *Skill Studio makes the lifecycle visible. A proposed capability has to cross two operator-controlled gates before it can become a production skill.*
 
@@ -118,13 +118,13 @@ Self Assessment is Soul/ looking inward and gathering evidence. It can examine t
 
 Assessment is intentionally read-only. It can produce an advisory plan, but it cannot install updates, change services, or modify the host. Its purpose is awareness and maintenance—not autonomous administration wearing a helpful label.
 
-<span class="image fit"><a href="/assets/images/soul-slash-self-assessment-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-self-assessment-current.png" alt="Soul Slash Self Assessment dashboard showing environment inventory, capability health, model runtime, recommendations, proposal review, and terminal-only host improvement controls" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-self-assessment-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-self-assessment-current.png" alt="Soul Slash Self Assessment dashboard showing environment inventory, capability health, model runtime, recommendations, proposal review, and terminal-only host improvement controls" loading="lazy" width="1156" height="1268" /></a></span>
 
 *Self Assessment brings environment, runtime, capability, and update evidence together without turning any finding into an automatic change.*
 
 The useful part is not simply that Soul/ can inventory a few language runtimes or count available updates. It can turn those observations into understandable opportunities. In one assessment it identified that model-suitability routing was only partial and that vision and screen understanding were still missing. It did not claim to have fixed either one, download another model, or promote a new capability. It named the gaps and stopped where its authority stopped.
 
-<span class="image fit"><a href="/assets/images/soul-slash-assessed-opportunities.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-assessed-opportunities.png" alt="Soul Slash assessed opportunities identifying partial model routing and missing vision and screen understanding" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-assessed-opportunities.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-assessed-opportunities.png" alt="Soul Slash assessed opportunities identifying partial model routing and missing vision and screen understanding" loading="lazy" width="729" height="475" /></a></span>
 
 *Two real assessed opportunities: better model-to-task routing and the ability to understand screen or screenshot context. Findings become visible work, not silent self-modification.*
 
@@ -136,7 +136,7 @@ This is where Soul/ can examine its tracked architecture and prepare a bounded p
 
 The process records what was proposed, which paths may change, what was tested, and what evidence came back. Review gates stand between the proposal, the experiment, and any external integration work. Soul/ does not merge, push, deploy, or promote its own changes.
 
-<span class="image fit"><a href="/assets/images/soul-slash-self-augmentation-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-self-augmentation-current.png" alt="Soul Slash Self Augmentation dashboard showing Observe, Propose, Experiment, and Review stages with isolated worktree gates" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-self-augmentation-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-self-augmentation-current.png" alt="Soul Slash Self Augmentation dashboard showing Observe, Propose, Experiment, and Review stages with isolated worktree gates" loading="lazy" width="1125" height="1261" /></a></span>
 
 *Self Augmentation follows an explicit Observe, Propose, Experiment, and Review path. Implementation and integration remain external, human-reviewed work.*
 
@@ -159,7 +159,7 @@ Soul/ now has guarded runtime profiles, a primary AMD-backed model path using th
 
 The AMD configuration was built and benchmarked before becoming the primary path rather than being promoted on the strength of “the process started once.” Qwen3-14B provided the measured baseline, while Ministral was tested against Soul/'s actual conversation, continuity, tool-selection, structured-output, and execution-honesty requirements. The two were nearly tied for generation speed on the same hardware, but Ministral produced a more recognizable machine-soul voice while still respecting the distinction between inference and action. It earned the primary profile through observed behavior, not a model-card promise.
 
-<span class="image fit"><a href="/assets/images/soul-slash-capability-model-runtime.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-capability-model-runtime.png" alt="Soul Slash capability health and local inference assessment showing available, partial, and missing capabilities alongside reachable model endpoints" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-capability-model-runtime.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-capability-model-runtime.png" alt="Soul Slash capability health and local inference assessment showing available, partial, and missing capabilities alongside reachable model endpoints" loading="lazy" width="824" height="544" /></a></span>
 
 *Runtime assessment reports what is actually reachable and how complete Soul/'s surrounding capabilities are. An unavailable endpoint is evidence to work from, not something the interface quietly rounds up to healthy.*
 

@@ -33,7 +33,7 @@ Around that architecture, Music Studio has grown from an experiment into a bound
 
 The dashboard reflects some of this. The more interesting part is what had to happen underneath it.<!--more-->
 
-<span class="image fit"><a href="/assets/images/soul-slash-core-dashboard-avatar.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-core-dashboard-avatar.png" alt="Soul Slash Chat dashboard in Music Core showing the new Soul avatar, Qwen conversation runtime, and AMD music engine status" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-core-dashboard-avatar.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-core-dashboard-avatar.png" alt="Soul Slash Chat dashboard in Music Core showing the new Soul avatar, Qwen conversation runtime, and AMD music engine status" loading="lazy" width="3370" height="1256" /></a></span>
 
 *Soul/ in Music Core. Qwen keeps the conversation present on NVIDIA while the dashboard reports the AMD music lane separately. The new avatar has also replaced the original glyph as Soul/'s presence inside the Chat pane. Select any screenshot to open the full-resolution image.*
 
@@ -82,7 +82,7 @@ There is also no need to restart a model merely to change the label on the door.
 
 That may sound like a small optimization. It is also the difference between designing around what the system is actually doing and writing a sequence of service restarts until the interface appears correct.
 
-<span class="image left"><a href="/assets/images/soul-slash-core-runtime-selector.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-core-runtime-selector.png" alt="Soul Slash model runtime panel showing the active NVIDIA Qwen fallback and available AMD Gemma profile" loading="lazy" /></a></span>
+<span class="image left"><a href="/assets/images/soul-slash-core-runtime-selector.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-core-runtime-selector.png" alt="Soul Slash model runtime panel showing the active NVIDIA Qwen fallback and available AMD Gemma profile" loading="lazy" width="417" height="928" /></a></span>
 
 *The runtime panel makes the split explicit: Qwen is active as reserve chat on NVIDIA while Gemma remains available as the AMD Daily Core. Loading and switching remain manual operations.*
 
@@ -126,7 +126,7 @@ Generation also survives moving around the dashboard now. Leaving Music Studio n
 
 This is deliberately not a general background worker system. The operation still has a beginning, a specific scope, an accountable owner, and an end.
 
-<span class="image fit"><a href="/assets/images/soul-slash-music-studio-afterimage-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-studio-afterimage-current.png" alt="Soul Slash Music Studio showing the Afterimage Current creative brief, project archive, and reference controls" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-music-studio-afterimage-current.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-studio-afterimage-current.png" alt="Soul Slash Music Studio showing the Afterimage Current creative brief, project archive, and reference controls" loading="lazy" width="3374" height="1168" /></a></span>
 
 *Music Studio's creative brief for Afterimage Current. The project binds intent, duration, musical structure, seed, rights status, references, and eventual candidates into one private record.*
 
@@ -144,7 +144,7 @@ It rejects instructions framed around cloning, imitation, or producing a soundal
 
 Reviewed candidates can also be trimmed at their source edges without overwriting the original. More involved editing, arrangement, internal splicing, fades, and amplification remain outside the current editor. Calling a precise trim “full audio production” would be the software equivalent of calling scissors a recording studio.
 
-<span class="image fit"><a href="/assets/images/soul-slash-music-candidate-visual-companion.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-candidate-visual-companion.png" alt="Soul Slash Music Studio candidate showing audio playback, vocal evidence, and a reviewed static visual companion" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-music-candidate-visual-companion.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-music-candidate-visual-companion.png" alt="Soul Slash Music Studio candidate showing audio playback, vocal evidence, and a reviewed static visual companion" loading="lazy" width="2595" height="1185" /></a></span>
 
 *A generated music candidate remains surrounded by evidence and review controls. Its visual companion is bound to the exact audio candidate rather than becoming a vaguely related file elsewhere on disk.*
 
@@ -156,7 +156,7 @@ It uses a pinned local FLUX.2 Klein 4B Q4 model through `stable-diffusion.cpp` a
 
 The initial text-to-image qualification produced a 1024×576 image in roughly ten seconds on the RX 6900 XT. Image-guided editing took considerably longer—about eight and a half minutes—but demonstrated that a source composition could be retained while making a directed change.
 
-<span class="image fit"><a href="/assets/images/soul-slash-visual-studio-first-light.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-visual-studio-first-light.png" alt="Soul Slash Visual Studio showing the First Light Calibration brief and bounded local generation controls" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-visual-studio-first-light.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-visual-studio-first-light.png" alt="Soul Slash Visual Studio showing the First Light Calibration brief and bounded local generation controls" loading="lazy" width="3368" height="1283" /></a></span>
 
 *Visual Studio begins with a versioned brief and an exact local-generation preview. The motion lane is visible, but correctly marked as unavailable while qualification remains incomplete.*
 
@@ -172,7 +172,7 @@ There is already a concrete example of that path: [Afterimage Current](https://w
 
 That last detail is worth preserving. It is not being presented as a painstakingly edited final production or the best result the system could eventually produce. It is a useful record of what came out of one bounded request, one accepted candidate, and one reviewed still before anyone began sanding down the machine marks.
 
-<span class="image fit"><a href="/assets/images/soul-slash-visual-studio-candidates.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-visual-studio-candidates.png" alt="Soul Slash Visual Studio comparing an original text draft with an image-guided revision and human review controls" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/soul-slash-visual-studio-candidates.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-visual-studio-candidates.png" alt="Soul Slash Visual Studio comparing an original text draft with an image-guided revision and human review controls" loading="lazy" width="2609" height="1184" /></a></span>
 
 *The original image and guided revision remain separate candidates. Each keeps its timing, origin, rating, disposition, and next available actions instead of allowing an edit to quietly replace its source.*
 
@@ -211,8 +211,8 @@ Those distinctions prevent several convenient lies. A running service does not n
 The navigation has also been reorganized around intent. Skill Studio, Self Assessment, and Self Augmentation now live under Self Improvement. Music Studio and Visual Studio live under Creative Studios. Review Center holds the decisions that still belong to me.
 
 <div class="post-image-grid">
-  <a href="/assets/images/soul-slash-self-improvement-navigation.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-self-improvement-navigation.png" alt="Soul Slash Self Improvement navigation containing Skill Studio, Self Assessment, and Self Augmentation" loading="lazy" /></a>
-  <a href="/assets/images/soul-slash-creative-studios-navigation.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-creative-studios-navigation.png" alt="Soul Slash Creative Studios navigation containing Music Studio and Visual Studio" loading="lazy" /></a>
+  <a href="/assets/images/soul-slash-self-improvement-navigation.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-self-improvement-navigation.png" alt="Soul Slash Self Improvement navigation containing Skill Studio, Self Assessment, and Self Augmentation" loading="lazy" width="577" height="355" /></a>
+  <a href="/assets/images/soul-slash-creative-studios-navigation.png" target="_blank" rel="noopener"><img src="/assets/images/soul-slash-creative-studios-navigation.png" alt="Soul Slash Creative Studios navigation containing Music Studio and Visual Studio" loading="lazy" width="758" height="335" /></a>
 </div>
 
 *The revised navigation groups related work without flattening their boundaries. Assessment, augmentation, capability development, music, and visual creation still retain separate contracts underneath.*

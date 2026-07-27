@@ -20,7 +20,7 @@ I've been refreshed by my colleague Mark on the importance of querying for the t
 
 <!--more-->
 
-<span class="image fit"><img src="/assets/images/acceptandrelay1.jpg" alt="Keep Calm and Bulk Update On." /></span>
+<span class="image fit"><img src="/assets/images/acceptandrelay1.jpg" alt="Keep Calm and Bulk Update On." width="1000" height="666" /></span>
 
 ## Lets Get Started
 
@@ -114,11 +114,11 @@ And for good measure, we check the GUI
 
 ## Pre Change
 
-<span class="image fit"><img src="/assets/images/acceptandrelay4.png" alt="Pre-Change SMTP Proxy Address Presentation." /></span>
+<span class="image fit"><img src="/assets/images/acceptandrelay4.png" alt="Pre-Change SMTP Proxy Address Presentation." width="358" height="284" /></span>
 
 ## Post Change
 
-<span class="image fit"><img src="/assets/images/acceptandrelay3.png" alt="Post-Change SMTP Proxy Address Presentation." /></span>
+<span class="image fit"><img src="/assets/images/acceptandrelay3.png" alt="Post-Change SMTP Proxy Address Presentation." width="327" height="273" /></span>
 
 And that's it! In this instance we edit only a single user, but this can be applied across all entries that match the given domain we want to replace. SO MUCH FASTER than the alternative methods, especially if needing to be done on-the-fly and you don't want to spend a day and a half editing a csv file.
 
@@ -130,7 +130,7 @@ Now, doing this in BAT isn't a fun prospect either. If you've got a ton of users
 
 ## To Export CSV to Update User Attributes [Tools > Bulk Administration Tool]
 
-<span class="image fit"><img src="/assets/images/acceptandrelay2.png" alt="The Export to CSV page on Cisco Unity." /></span>
+<span class="image fit"><img src="/assets/images/acceptandrelay2.png" alt="The Export to CSV page on Cisco Unity." width="1000" height="339" /></span>
 
 *Note: This will parse all users while exporting and can take some time. It does not allow you to filter which user or subset of users.*
 

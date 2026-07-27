@@ -58,6 +58,12 @@ export function postExcerpt(post: Post, maxLength = 220) {
   return `${excerpt.slice(0, maxLength).replace(/\s+\S*$/, "")}…`;
 }
 
+export function postMetaDescription(post: Post) {
+  const description = postExcerpt(post);
+  if (description.length <= 158) return description;
+  return `${description.slice(0, 158).replace(/\s+\S*$/, "")}…`;
+}
+
 export function readingTime(post: Post) {
   const words = (post.body ?? "")
     .replace(/<[^>]+>/g, " ")

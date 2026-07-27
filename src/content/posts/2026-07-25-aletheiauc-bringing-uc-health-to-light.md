@@ -99,7 +99,7 @@ A collector is not considered finished merely because it obtained a response. Th
 
 Otherwise the feature exists mainly for the person reading the source code.
 
-<span class="image fit"><a href="/assets/images/aletheiauc-generic-report-overview.jpg" target="_blank" rel="noopener"><img src="/assets/images/aletheiauc-generic-report-overview.jpg" alt="Synthetic generic AletheiaUC report showing its title and executive overview metric cards" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/aletheiauc-generic-report-overview.jpg" target="_blank" rel="noopener"><img src="/assets/images/aletheiauc-generic-report-overview.jpg" alt="Synthetic generic AletheiaUC report showing its title and executive overview metric cards" loading="lazy" width="1265" height="712" /></a></span>
 
 *The generic report is intentionally unbranded and self-contained. Every environment name, address, device, count, and finding shown in these screenshots comes from AletheiaUC's built-in synthetic SampleCollector—not a customer assessment.*
 
@@ -124,7 +124,7 @@ A finding should answer three questions:
 2. Why does it matter?
 3. What should someone do next?
 
-<span class="image fit"><a href="/assets/images/aletheiauc-generic-report-findings.jpg" target="_blank" rel="noopener"><img src="/assets/images/aletheiauc-generic-report-findings.jpg" alt="Synthetic AletheiaUC priority finding showing lifecycle evidence, operational impact, and a recommended next step" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/aletheiauc-generic-report-findings.jpg" target="_blank" rel="noopener"><img src="/assets/images/aletheiauc-generic-report-findings.jpg" alt="Synthetic AletheiaUC priority finding showing lifecycle evidence, operational impact, and a recommended next step" loading="lazy" width="1265" height="712" /></a></span>
 
 *A synthetic lifecycle finding demonstrates the current finding structure: severity, observed facts, impact, supporting detail, and an actionable recommendation.*
 
@@ -152,7 +152,7 @@ Configured inventory and runtime registration are different views of the environ
 
 AXL can describe what should exist. RISPort can describe what registered during the captured runtime snapshot. A useful assessment has to reconcile the two without forcing unrelated objects into the same category.
 
-<span class="image fit"><a href="/assets/images/aletheiauc-generic-report-device-health.jpg" target="_blank" rel="noopener"><img src="/assets/images/aletheiauc-generic-report-device-health.jpg" alt="Synthetic AletheiaUC device inventory and registration summaries grouped by model and runtime category" loading="lazy" /></a></span>
+<span class="image fit"><a href="/assets/images/aletheiauc-generic-report-device-health.jpg" target="_blank" rel="noopener"><img src="/assets/images/aletheiauc-generic-report-device-health.jpg" alt="Synthetic AletheiaUC device inventory and registration summaries grouped by model and runtime category" loading="lazy" width="1265" height="712" /></a></span>
 
 *The synthetic device section separates configured inventory from registration state, then groups runtime objects into phones, gateways or endpoints, and SIP trunks.*
 

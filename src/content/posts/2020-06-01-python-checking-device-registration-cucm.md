@@ -52,25 +52,25 @@ Reporting output is stored as two .txt files with one device's status per line. 
 
 ## Invoking the Script and Selecting an Option
 
-<span class="image fit"><img src="/assets/images/phoneregcheck1.png" alt="The view of the menu when spawning the script." /></span>
+<span class="image fit"><img src="/assets/images/phoneregcheck1.png" alt="The view of the menu when spawning the script." width="875" height="200" /></span>
 
 ## User Input Collection
 
-<span class="image fit"><img src="/assets/images/phoneregcheck2.png" alt="Required information is collected by user from INPUT." /></span>
+<span class="image fit"><img src="/assets/images/phoneregcheck2.png" alt="Required information is collected by user from INPUT." width="870" height="113" /></span>
 
 ## Option 1 Only - Device Pool Selection
 
 This only appears if you filter by Device Pool.
 
-<span class="image fit"><img src="/assets/images/phoneregcheck3.png" alt="This only appears if you filter by Device Pool." /></span>
+<span class="image fit"><img src="/assets/images/phoneregcheck3.png" alt="This only appears if you filter by Device Pool." width="313" height="164" /></span>
 
 ## Informational...
 
-<span class="image fit"><img src="/assets/images/phoneregcheck4.png" alt="It's informational." /></span>
+<span class="image fit"><img src="/assets/images/phoneregcheck4.png" alt="It's informational." width="699" height="107" /></span>
 
 ## Status Report
 
-<span class="image fit"><img src="/assets/images/phoneregcheck5.png" alt="A status report when the script is completed." /></span>
+<span class="image fit"><img src="/assets/images/phoneregcheck5.png" alt="A status report when the script is completed." width="873" height="77" /></span>
 
 And there we go. Looking at the contents of the file we can see some of the data related to the phones if registered. For unregistered devices we simply state that the device isn't registered.
 

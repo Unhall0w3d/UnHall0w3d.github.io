@@ -37,7 +37,7 @@ Now that that's out of the way, let's move on to the quite simple steps in getti
 
 ### Step 2
 
-<span class="image fit"><img src="/assets/images/bootable1.png" alt="Extract the cdrtools-latest.zip file to a folder, e.g. C:\ISO" /></span>
+<span class="image fit"><img src="/assets/images/bootable1.png" alt="Extract the cdrtools-latest.zip file to a folder, e.g. C:\ISO" width="805" height="566" /></span>
 
 ### Step 3
 
@@ -45,11 +45,11 @@ Download your *.ISO Image, e.g. "UCSInstall_UCOS_12.5.1.11900-146.sgn.iso"
 
 ### Step 4
 
-<span class="image fit"><img src="/assets/images/bootable2.png" alt="Decompress the *.ISO using 7-zip or similar." /></span>
+<span class="image fit"><img src="/assets/images/bootable2.png" alt="Decompress the *.ISO using 7-zip or similar." width="815" height="588" /></span>
 
 ### Step 5
 
-<span class="image fit"><img src="/assets/images/bootable3.png" alt="Open an administrative CMD or PWSH prompt within the specified decompressed ISO folder." /></span>
+<span class="image fit"><img src="/assets/images/bootable3.png" alt="Open an administrative CMD or PWSH prompt within the specified decompressed ISO folder." width="669" height="181" /></span>
 
 ### Step 6
 
@@ -59,13 +59,13 @@ Issue the following command, invoking the mkisofs.exe executable from the cdrtoo
 C:\ISO\mkisofs.exe -A "CDROM" -V "CDROM" -p "Cisco" -J -R -r -v -T -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o C:\UCBootable_12.5.sgn.iso . <--- the . is required at the end.
 ```
 
-<span class="image fit"><img src="/assets/images/bootable4.png" alt="Issuing the command to make the ISO bootable." /></span>
+<span class="image fit"><img src="/assets/images/bootable4.png" alt="Issuing the command to make the ISO bootable." width="1000" height="79" /></span>
 
-<span class="image fit"><img src="/assets/images/bootable5.png" alt="The command providing updates and completing its work." /></span>
+<span class="image fit"><img src="/assets/images/bootable5.png" alt="The command providing updates and completing its work." width="566" height="447" /></span>
 
 Output file:
 
-<span class="image fit"><img src="/assets/images/bootable6.png" alt="File exported by the command in Step 6." /></span>
+<span class="image fit"><img src="/assets/images/bootable6.png" alt="File exported by the command in Step 6." width="632" height="36" /></span>
 
 ### Step 7
 
@@ -75,11 +75,11 @@ Mount the ISO and ensure it's bootable. Clean up the unwanted loose files. (Opti
 
 ## Voila - IT LIVES!
 
-<span class="image fit"><img src="/assets/images/bootable7.png" alt="Proof that the ISO is now bootable." /></span>
+<span class="image fit"><img src="/assets/images/bootable7.png" alt="Proof that the ISO is now bootable." width="722" height="445" /></span>
 
-<span class="image fit"><img src="/assets/images/bootable8.png" alt="Installer Prompts are working as expected." /></span>
+<span class="image fit"><img src="/assets/images/bootable8.png" alt="Installer Prompts are working as expected." width="720" height="438" /></span>
 
-<span class="image fit"><img src="/assets/images/bootable9.png" alt="CUCM is visible as a valid product to install." /></span>
+<span class="image fit"><img src="/assets/images/bootable9.png" alt="CUCM is visible as a valid product to install." width="729" height="452" /></span>
 
 Now there is another step we could take, which is to modify the contents of the ISO image before re-containerizing it in order to remove the checks it performs to say "Does the presented hardware combination meet our requirements"  to allow us to trim down even further what resources must be allocated for install, for ultra-thin LAB deployments. I'll explore that in another post, as it's not really a requirement and more a nice-to-have for those seeking the maximum bang for their buck when it comes to resource availability.
 

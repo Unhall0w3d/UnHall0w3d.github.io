@@ -11,7 +11,7 @@ categories:
 tags:
   - Cisco Unified Communications Manager
   - Cisco
-  - Cisco Uniied Contact Center
+  - Cisco Unified Contact Center
   - Unified Communications
 ---
 

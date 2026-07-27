@@ -44,7 +44,7 @@ For this command the following returns are possible:
 1. False - IR is not disabled
 2. True - IR is disabled
 
-<span class="image fit"><img src="/assets/images/irlro1.png" alt="Command output for current status of Interrupt Remapping." /></span>
+<span class="image fit"><img src="/assets/images/irlro1.png" alt="Command output for current status of Interrupt Remapping." width="971" height="115" /></span>
 
 ### Second Thing... Second? Software And Hardware LRO Settings
 
@@ -63,7 +63,7 @@ For these commands the possible returns are:
 1. 1 - Enabled
 2. 0 - Disabled
 
-<span class="image fit"><img src="/assets/images/irlro2.png" alt="Command output for current status of Large Receive Offload." /></span>
+<span class="image fit"><img src="/assets/images/irlro2.png" alt="Command output for current status of Large Receive Offload." width="428" height="162" /></span>
 
 ## Remediation Steps - Interrupt Remapping & LRO
 
@@ -81,19 +81,19 @@ Gracefully shut down Guest OS's, e.g. "utils system shutdown".
 
 Place the ESXi host into Maintenance Mode, e.g. "esxcli system maintenanceMode set --enable true"
 
-<span class="image fit"><img src="/assets/images/irlro3.png" alt="Putting ESXi in Maintenance Mode." /></span>
+<span class="image fit"><img src="/assets/images/irlro3.png" alt="Putting ESXi in Maintenance Mode." width="550" height="42" /></span>
 
 ### Step 4 - Change IR
 
 Modify the IR Value using ESXCFG, e.g. "esxcfg-advcfg -k TRUE iovDisableIR
 
-<span class="image fit"><img src="/assets/images/irlro4.png" alt="Setting "Disable IR" to True." /></span>
+<span class="image fit"><img src="/assets/images/irlro4.png" alt="Setting "Disable IR" to True." width="434" height="20" /></span>
 
 ### Step 5 - Change LRO
 
 Modify the LRO Settings to "0" using ESXCFG, e.g. "esxcfg-advcfg -s 0 /Net/VmxnetSwLROSL"
 
-<span class="image fit"><img src="/assets/images/irlro5.png" alt="Setting LRO to Disabled." /></span>
+<span class="image fit"><img src="/assets/images/irlro5.png" alt="Setting LRO to Disabled." width="457" height="173" /></span>
 
 Just to note the console look is different, I did these steps separately and used Powershell for most of it, and ConEmu w/ Ubuntu Theme for this session. Oops!
 
@@ -101,13 +101,13 @@ Just to note the console look is different, I did these steps separately and use
 
 Save the config, e.g. "auto-backup.sh"
 
-<span class="image fit"><img src="/assets/images/irlro6.png" alt="Let's perform a backup." /></span>
+<span class="image fit"><img src="/assets/images/irlro6.png" alt="Let's perform a backup." width="709" height="80" /></span>
 
 ### Step 7 - Reboot
 
 Perform a reboot on the ESXi host.
 
-<span class="image fit"><img src="/assets/images/irlro7.png" alt="Give it a reboot!" /></span>
+<span class="image fit"><img src="/assets/images/irlro7.png" alt="Give it a reboot!" width="288" height="47" /></span>
 
 ## Verification & Post Change
 
@@ -117,19 +117,19 @@ Now that the setting has been modified, config saved and the ESXi host restarted
 
 Verify iovDisableIR is set to TRUE
 
-<span class="image fit"><img src="/assets/images/irlro8.png" alt="Command output verifying IR is Disabled." /></span>
+<span class="image fit"><img src="/assets/images/irlro8.png" alt="Command output verifying IR is Disabled." width="742" height="90" /></span>
 
 ## Step 2 - Verify LRO
 
 Verify LRO settings are set to "0".
 
-<span class="image fit"><img src="/assets/images/irlro9.png" alt="Command output verifying LRO is Disabled." /></span>
+<span class="image fit"><img src="/assets/images/irlro9.png" alt="Command output verifying LRO is Disabled." width="451" height="172" /></span>
 
 ## Step 3 - Maintenance Mode Off
 
 Turn Maintenance Mode Off
 
-<span class="image fit"><img src="/assets/images/irlro10.png" alt="Taking ESXi back out of maintenance mode." /></span>
+<span class="image fit"><img src="/assets/images/irlro10.png" alt="Taking ESXi back out of maintenance mode." width="544" height="48" /></span>
 
 There we go. We're ready to power on the VMs in the desired order (if such an order exists) and proceed to VM health checks and testing.
 

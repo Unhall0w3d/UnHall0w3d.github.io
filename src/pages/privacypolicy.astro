@@ -7,6 +7,6 @@ if (!page) throw new Error("Privacy policy content is missing");
 const { Content } = await render(page);
 ---
 
-<PageLayout title={page.data.title} eyebrow="SITE POLICY">
+<PageLayout title={page.data.title} description={page.data.description} eyebrow="SITE POLICY">
   <Content />
 </PageLayout>

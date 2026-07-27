@@ -25,7 +25,7 @@ Another day, another query. This time the request was not up for interpretation 
 
 This time we get a screenshot of the Product Specific Configuration Layout element of "Video Calling" (see below). We're able to do this but it's not as straight forward as a typical query against the 'device' table for an attribute like the 'description' of a phone.
 
-<span class="image fit"><img src="/assets/images/videocalling1.png" alt="Product Specific Configuration Layout element depicting whether Video Calling is Enabled or Disabled - CUCM Device > Phone" /></span>
+<span class="image fit"><img src="/assets/images/videocalling1.png" alt="Product Specific Configuration Layout element depicting whether Video Calling is Enabled or Disabled - CUCM Device width="820" height="333" > Phone" /></span>
 Product Specific Configuration Layout element depicting whether Video Calling is Enabled or Disabled - CUCM Device > Phone
 
 The request comes in as "Would you please check if a report can be created for all Asia region users (CSFxxxxxx) that have this Video Calling option "Enabled"? The attachment accompanied the request. Immediately I think of what attributes I need to pull based on the request, which I now, and which I don't know. So we'll have the name (device name) and description (device description) from the Device table. That's a given. The next is to think about where the Video Calling "Product Specific Configuration Layout" is held. For this I performed a "run sql select * from device" presuming the data to be stored there. It's not.
@@ -40,9 +40,9 @@ run sql select d.name, d.description, d4k.xml from device as d inner join device
 
 ## The Output
 
-<span class="image fit"><img src="/assets/images/videocalling2.png" alt="Relevant attribute within XML is <videoCapability></videoCapability>" /></span>
+<span class="image fit"><img src="/assets/images/videocalling2.png" alt="Relevant attribute within XML is <videoCapability width="1000" height="82"></videoCapability>" /></span>
 
-<span class="image fit"><img src="/assets/images/videocalling3.png" alt="Relevant attribute within XML is <videoCapability></videoCapability>" /></span>
+<span class="image fit"><img src="/assets/images/videocalling3.png" alt="Relevant attribute within XML is <videoCapability width="1000" height="21"></videoCapability>" /></span>
 
 This provides us the entire XML contents for the given device, whether they contain the exact attribute we want to find or not. Turns out that attribute is <videoCapability></videoCapability>. Valid entries are 0, or 1. You can see how we'd modify the query from here... but I'd like to cover a few caveats before we do this.
 
@@ -79,12 +79,12 @@ run sql select d.name, d.description, d4k.xml from device as d inner join device
 ## Altered Query -- Output
 
 The output provides all user devices (CSF/Jabber) where Video Calling is enabled via Product Specific Layout, indicating manual enablement.
-<span class="image fit"><img src="/assets/images/videocalling4.png" alt="The output provides all user devices (CSF/Jabber) where Video Calling is enabled via Product Specific Layout, indicating manual enablement." /></span>
+<span class="image fit"><img src="/assets/images/videocalling4.png" alt="The output provides all user devices (CSF/Jabber) where Video Calling is enabled via Product Specific Layout, indicating manual enablement." width="1000" height="89" /></span>
 
 Now that we know what devices have been enabled manually, we can parse for the devices that have it disabled manually. To do this we need to edit our '1' to a '0'. Remember our caveat, if the user has the Product Specific Layout option for Video Calling set to '0' (disabled) but they do not check the option to override the Common Phone Profile, it won't apply. This is akin to a 'best effort' or 'as best as we can get' query. This is my Worksheet 3 in Excel
 
 The output provides all user devices (CSF/Jabber) where Video Calling is disabled via Product Specific Layout, indicating manual disablement.
-<span class="image fit"><img src="/assets/images/videocalling5.png" alt="The output provides all user devices (CSF/Jabber) where Video Calling is disabled via Product Specific Layout, indicating manual disablement." /></span>
+<span class="image fit"><img src="/assets/images/videocalling5.png" alt="The output provides all user devices (CSF/Jabber) where Video Calling is disabled via Product Specific Layout, indicating manual disablement." width="1000" height="21" /></span>
 
 Where do we go from here? Well, what I chose to do as explained previously is to translate this data (copy + paste) to Excel, Worksheet 1 being the "All users" pull, Worksheet 2 being the "Manually Enabled Users" pull, and Worksheet 3 being the "Manually Disabled Users" pull. Once the data is posted into Excel we select Column A and use the "Data" Ribbon tab to find the "Text to Columns" option. We then set the Text to Columns to match our data type - Delimited or Fixed Width, and sort all three worksheets so the attributes are in cell columns matching their type - Name, Description, XML.
 
@@ -107,7 +107,7 @@ Column E (Manually Enabled) has the following formula along the entire column
 ```
 
 A view of what the report rows look like after the formula is applied. Headers left to right are “Device”, “Description”, “Device Pool”, “XML”
-<span class="image fit"><img src="/assets/images/videocalling6.png" alt="A view of what the report rows look like after the formula is applied. Headers left to right are “Device”, “Description”, “Device Pool”, “XML”" /></span>
+<span class="image fit"><img src="/assets/images/videocalling6.png" alt="A view of what the report rows look like after the formula is applied. Headers left to right are “Device”, “Description”, “Device Pool”, “XML”" width="750" height="47" /></span>
 
 Now, as is the case with almost any report that I've pulled there's always the request for additional information. Usually something they wanted from the get-go but didn't mention or didn't know they wanted when the initial request came through. In our case it was to attempt to identify the site these users are at. To do this I've utilized the Device Pool associated with the user's phone. If there is no more granular depiction within CUCM (Location field?) then this is what we'll end up going with. So the only query I end up modifying is my initial "all users" query as that page displays the colorized data (and is really what they want to be looking at). To this we add the dp.name (from devicepool table represented as dp) and we related the foreign key of the devicepool assigned to the device (fkdevicepool in device as d) to the pkid of the device pool (pkid in devicepool as dp). 
 
@@ -120,7 +120,7 @@ run sql select d.name, d.description, d4k.xml, dp.name as devicepool from device
 ## Expanded Query - Output
 
 Modified version of my initial query to include the device pool assigned to the given device.
-<span class="image fit"><img src="/assets/images/videocalling7.png" alt="Modified version of my initial query to include the device pool assigned to the given device." /></span>
+<span class="image fit"><img src="/assets/images/videocalling7.png" alt="Modified version of my initial query to include the device pool assigned to the given device." width="750" height="69" /></span>
 
 The caveats mentioned were sent to the client in the email containing the report, as well as a quick explainer on how to interpret the data (such as below). When I can't make it clean and easily understandable, you might say I've failed... and maybe I have. But I'm not particularly great at organizing data so that it's digestable by others, especially when it comes to Excel.
 
@@ -135,7 +135,7 @@ If the CSF name in “Column A” is RED, video calling is disabled *manually*.
 The caveats that I noted in my previous email are still relevant.
 
 Visual representation of the color scheme described above.
-<span class="image fit"><img src="/assets/images/videocalling8.png" alt="Visual representation of the color scheme described above." /></span>
+<span class="image fit"><img src="/assets/images/videocalling8.png" alt="Visual representation of the color scheme described above." width="466" height="200" /></span>
 
 
 So with all of this done I was able to button up the data into a single Excel Workbook with 3 sheets, some formulas to identify information that was of interest to the client and ultimately created another SQL query to throw into my tool belt to potentially be pulled out for other regions or clients that may request similar data.
