@@ -8,6 +8,8 @@ type RepositorySpec = {
   branch: string;
   head: string;
   pushedAt: string;
+  visibility?: "PUBLIC" | "PRIVATE";
+  href?: string;
 };
 
 type GitHubRepository = {
@@ -35,8 +37,10 @@ const repositorySpecs: RepositorySpec[] = [
     description: "Cisco Collaboration health assessment, diagnostics, and reporting.",
     language: "Python",
     branch: "main",
-    head: "617af2fd",
-    pushedAt: "2026-07-14T17:45:52Z",
+    head: "<REDACTED>",
+    pushedAt: "2026-08-01T00:00:00Z",
+    visibility: "PRIVATE",
+    href: `https://github.com/${owner}/`,
   },
   {
     name: "soul-slash",
@@ -71,6 +75,8 @@ const repositorySpecs: RepositorySpec[] = [
 ];
 
 async function refreshRepository(spec: RepositorySpec): Promise<RepositorySpec> {
+  if (spec.visibility === "PRIVATE") return spec;
+
   try {
     const repositoryResponse = await fetch(`https://api.github.com/repos/${owner}/${spec.name}`, {
       headers: { Accept: "application/vnd.github+json" },
@@ -131,7 +137,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   <div class="repository-grid">
     {repositories.map((repository, index) => (
       <article class="repository-node">
-        <a href={`https://github.com/${owner}/${repository.name}`} aria-label={`Open ${repository.displayName} on GitHub`}>
+        <a href={repository.href || `https://github.com/${owner}/${repository.name}`} aria-label={`Open ${repository.displayName} on GitHub`}>
           <div class="repository-node-header">
             <span>NODE {String(index + 1).padStart(2, "0")}</span>
             <span>{repository.classification}</span>
@@ -147,7 +153,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
             <div><dt>SYNC</dt><dd>{dateFormatter.format(new Date(repository.pushedAt)).toUpperCase()}</dd></div>
           </dl>
           <div class="repository-node-footer">
-            <span>STATUS // PUBLIC</span>
+            <span>STATUS // {repository.visibility || "PUBLIC"}</span>
             <strong>OPEN REPOSITORY ↗</strong>
           </div>
         </a>
@@ -156,7 +162,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   </div>
 
   <footer class="repository-relay-footer">
-    <span>HEAD IDENTIFIERS // 8-CHAR SHORT SHA</span>
+    <span>HEAD IDENTIFIERS // 8-CHAR SHORT SHA OR REDACTED</span>
     <a href={`https://github.com/${owner}`}>ALL PUBLIC NODES ↗</a>
   </footer>
 </section>
