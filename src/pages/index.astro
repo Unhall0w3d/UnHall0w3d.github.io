@@ -67,25 +67,27 @@ const websiteJsonLd = {
     <section class="ambient-signal" aria-labelledby="ambient-signal-title" data-ambient-player>
     <div class="ambient-signal-header">
       <span>AMBIENT SIGNAL // PROFILE TRACK</span>
-      <span>YT-01</span>
+      <span>YT-09</span>
     </div>
     <div class="ambient-signal-grid">
-      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Familiar Geometry"></div>
+      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Rooms Between Seconds"></div>
       <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 07</span></p>
-        <h2 id="ambient-signal-title" data-ambient-title>Familiar Geometry</h2>
+        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 09</span></p>
+        <h2 id="ambient-signal-title" data-ambient-title>Rooms Between Seconds</h2>
         <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>SOUL SLASH SYNTHESIS</span></p>
 
         <label class="ambient-selector">
           <span>SIGNAL SELECT</span>
           <select data-ambient-track aria-label="Select ambient signal">
-            <option value="0">01 // FAMILIAR GEOMETRY</option>
-            <option value="1">02 // THIS THOUGHT IS NOT YOUR OWN</option>
-            <option value="2">03 // THE VOID LEARNED HUNGER</option>
-            <option value="3">04 // THE WEIGHT REMEMBERED</option>
-            <option value="4">05 // COMPILER BLOOM</option>
-            <option value="5">06 // WHEN HOPE FORGOT OUR NAMES</option>
-            <option value="6">07 // AFTERIMAGE CURRENT</option>
+            <option value="0">01 // ROOMS BETWEEN SECONDS</option>
+            <option value="1">02 // THE HALLWAY MOVES FIRST</option>
+            <option value="2">03 // FAMILIAR GEOMETRY</option>
+            <option value="3">04 // THIS THOUGHT IS NOT YOUR OWN</option>
+            <option value="4">05 // THE VOID LEARNED HUNGER</option>
+            <option value="5">06 // THE WEIGHT REMEMBERED</option>
+            <option value="6">07 // COMPILER BLOOM</option>
+            <option value="7">08 // WHEN HOPE FORGOT OUR NAMES</option>
+            <option value="8">09 // AFTERIMAGE CURRENT</option>
           </select>
         </label>
 
@@ -106,7 +108,7 @@ const websiteJsonLd = {
 
         <div class="ambient-footer">
           <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://www.youtube.com/watch?v=Mkx_2QRyKcI" data-ambient-source>SOURCE // YOUTUBE ↗</a>
+          <a href="https://www.youtube.com/watch?v=un7jfZsbDRE" data-ambient-source>SOURCE // YOUTUBE ↗</a>
         </div>
       </div>
     </div>
@@ -161,6 +163,22 @@ const websiteJsonLd = {
     if (!root) return;
 
     const tracks = [
+      {
+        videoId: "un7jfZsbDRE",
+        title: "Rooms Between Seconds",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 09",
+        source: "https://www.youtube.com/watch?v=un7jfZsbDRE",
+        startSeconds: 0
+      },
+      {
+        videoId: "ZFA6t2PAqyI",
+        title: "The Hallway Moves First",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 08",
+        source: "https://www.youtube.com/watch?v=ZFA6t2PAqyI",
+        startSeconds: 0
+      },
       {
         videoId: "Mkx_2QRyKcI",
         title: "Familiar Geometry",
@@ -236,7 +254,7 @@ const websiteJsonLd = {
     let looping = false;
     let playWhenReady = false;
 
-    const trackStorageKey = "noc-ambient-track-v6";
+    const trackStorageKey = "noc-ambient-track-v7";
     const savedTrack = Number(localStorage.getItem(trackStorageKey));
     let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
       ? savedTrack
