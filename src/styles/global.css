@@ -1379,6 +1379,63 @@ h1 em {
   line-height: 1.6;
 }
 
+.prose .code-preview {
+  margin-block: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(7, 11, 20, 0.72);
+}
+
+.prose .code-preview summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  color: var(--paper);
+  font-family: var(--font-code);
+  list-style: none;
+}
+
+.prose .code-preview summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose .code-preview summary::before {
+  content: "+";
+  flex: 0 0 auto;
+  color: var(--signal);
+  font-size: 1.2rem;
+}
+
+.prose .code-preview[open] summary::before {
+  content: "−";
+}
+
+.prose .code-preview summary span {
+  flex: 1;
+}
+
+.prose .code-preview summary small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.prose .code-preview pre {
+  max-height: 34rem;
+  margin: 0;
+  border-width: 1px 0 0 2px;
+  border-radius: 0;
+  overflow: auto;
+}
+
+.prose .code-preview-error pre {
+  border-left-color: #ff8f70;
+}
+
 .prose blockquote {
   padding: 0.3rem 0 0.3rem 1.4rem;
   border-left: 2px solid var(--signal);

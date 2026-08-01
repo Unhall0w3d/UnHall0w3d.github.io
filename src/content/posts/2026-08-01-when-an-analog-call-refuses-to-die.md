@@ -221,6 +221,22 @@ Every additional port type or IOS variation should earn its way into the policy 
 
 ## Download The Sanitized Reference Files
 
+<details class="code-preview" data-code-preview="/assets/downloads/analog-stuck-call-guard-deployment-v1.0.6.md">
+  <summary>
+    <span>Preview the deployment and validation notes</span>
+    <small>MARKDOWN // V1.0.6</small>
+  </summary>
+  <pre aria-live="polite"><code>Open this panel to load the sanitized Markdown file.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/analog-stuck-call-guard-v1.0.6.tcl">
+  <summary>
+    <span>Preview the IOS XE EEM Tcl policy</span>
+    <small>TCL // V1.0.6</small>
+  </summary>
+  <pre aria-live="polite"><code>Open this panel to load the sanitized Tcl policy.</code></pre>
+</details>
+
 - <a href="/assets/downloads/analog-stuck-call-guard-v1.0.6.tcl" download>Download the IOS XE EEM Tcl policy</a>
 - <a href="/assets/downloads/analog-stuck-call-guard-deployment-v1.0.6.md" download>Download the sanitized deployment and validation notes</a>
 

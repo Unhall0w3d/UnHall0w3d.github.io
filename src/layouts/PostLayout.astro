@@ -121,3 +121,29 @@ const jsonLd = {
     )}
   </article>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>("[data-code-preview]").forEach((preview) => {
+    let loaded = false;
+
+    preview.addEventListener("toggle", async () => {
+      if (!preview.open || loaded) return;
+
+      const source = preview.dataset.codePreview;
+      const code = preview.querySelector<HTMLElement>("code");
+      if (!source || !code) return;
+
+      code.textContent = "Loading preview…";
+
+      try {
+        const response = await fetch(source);
+        if (!response.ok) throw new Error(`Preview request failed with ${response.status}`);
+        code.textContent = await response.text();
+        loaded = true;
+      } catch {
+        code.textContent = "Preview unavailable. Use the download link below to open the file directly.";
+        preview.classList.add("code-preview-error");
+      }
+    });
+  });
+</script>
