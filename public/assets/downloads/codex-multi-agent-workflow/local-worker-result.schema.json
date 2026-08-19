@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/local-worker-result.schema.json",
+  "title": "Local Worker Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "status",
+    "worker",
+    "summary",
+    "changed_paths",
+    "commands",
+    "evidence",
+    "uncertainties",
+    "scope_deviations"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["complete", "partial", "blocked", "failed"]
+    },
+    "worker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "runtime", "accelerator", "contract_version"],
+      "properties": {
+        "model": { "type": "string", "minLength": 1 },
+        "runtime": { "type": "string", "minLength": 1 },
+        "accelerator": { "type": "string", "minLength": 1 },
+        "contract_version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "changed_paths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["command", "result"],
+        "properties": {
+          "command": { "type": "string" },
+          "result": { "type": "string" }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "source"],
+        "properties": {
+          "claim": { "type": "string" },
+          "source": { "type": "string" },
+          "digest": { "type": "string" }
+        }
+      }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "scope_deviations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
