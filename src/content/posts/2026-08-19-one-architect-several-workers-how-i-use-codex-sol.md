@@ -156,6 +156,30 @@ Most of this workflow belongs in `AGENTS.md`. The primary model and reasoning se
 
 I prepared a generic version of that policy without my personal tone, private paths, project names, credentials, publication habits, or other individual preferences. I also included a small JSON Schema for an optional local worker's result envelope.
 
+<details class="code-preview" data-code-preview="/assets/downloads/codex-multi-agent-workflow/AGENTS.md">
+  <summary>
+    <span>Preview the generic AGENTS.md</span>
+    <small>MARKDOWN // WORKFLOW POLICY</small>
+  </summary>
+  <pre aria-live="polite"><code>Open this panel to load the generic multi-agent workflow policy.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-multi-agent-workflow/local-worker-result.schema.json">
+  <summary>
+    <span>Preview the local-worker result schema</span>
+    <small>JSON SCHEMA // RESULT ENVELOPE</small>
+  </summary>
+  <pre aria-live="polite"><code>Open this panel to load the local-worker result schema.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-multi-agent-workflow/README.md">
+  <summary>
+    <span>Preview the setup notes</span>
+    <small>MARKDOWN // IMPLEMENTATION NOTES</small>
+  </summary>
+  <pre aria-live="polite"><code>Open this panel to load the setup notes.</code></pre>
+</details>
+
 - <a href="/assets/downloads/codex-multi-agent-workflow/AGENTS.md" download>Download the generic AGENTS.md</a>
 - <a href="/assets/downloads/codex-multi-agent-workflow/local-worker-result.schema.json" download>Download the local-worker result schema</a>
 - <a href="/assets/downloads/codex-multi-agent-workflow/README.md" download>Download the setup notes</a>
