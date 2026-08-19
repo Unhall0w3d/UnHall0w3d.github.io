@@ -892,6 +892,10 @@ h1 em {
   transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
+.repository-node:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .repository-node:hover,
 .repository-node:focus-within {
   border-color: rgba(86, 242, 208, 0.55);
