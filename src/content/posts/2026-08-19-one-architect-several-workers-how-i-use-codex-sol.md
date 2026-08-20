@@ -14,6 +14,13 @@ description: "How I use Codex Sol at medium reasoning as the architect and integ
 draft: false
 ---
 
+> **Update — August 20, 2026:** I re-tested the routing assumptions in this
+> article against two real repositories and changed which workers receive most
+> implementation work. The original workflow and previews remain below for
+> context. The current policy, evidence, pricing analysis, and replacement
+> downloads are in
+> [The Cheapest Adequate Worker: Re-Evaluating My Codex Subagent Strategy](/2026/08/20/the-cheapest-adequate-worker-re-evaluating-my-codex-subagent-strategy.html).
+
 ## The Strongest Model Does Not Need To Do Every Job
 
 For a while, the safest way to use a coding agent seemed obvious: choose the strongest model available, give it the whole problem, and let it work from beginning to end.
@@ -179,10 +186,6 @@ I prepared a generic version of that policy without my personal tone, private pa
   </summary>
   <pre aria-live="polite"><code>Open this panel to load the setup notes.</code></pre>
 </details>
-
-- <a href="/assets/downloads/codex-multi-agent-workflow/AGENTS.md" download>Download the generic AGENTS.md</a>
-- <a href="/assets/downloads/codex-multi-agent-workflow/local-worker-result.schema.json" download>Download the local-worker result schema</a>
-- <a href="/assets/downloads/codex-multi-agent-workflow/README.md" download>Download the setup notes</a>
 
 The file is a starting policy, not a universal authority document. A real repository still needs its actual test commands, sensitive-data boundaries, ownership rules, deployment process, and human approval points.
 

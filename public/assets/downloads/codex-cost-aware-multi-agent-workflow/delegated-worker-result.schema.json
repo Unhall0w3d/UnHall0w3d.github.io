@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/delegated-worker-result.schema.json",
+  "title": "Delegated Worker Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_id", "status", "assignment", "worker", "summary", "changed_paths", "commands", "evidence", "validation", "uncertainties", "scope_deviations", "escalation"],
+  "properties": {
+    "task_id": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["complete", "partial", "blocked", "failed"] },
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "objective", "scope", "mutation_authority"],
+      "properties": {
+        "category": { "type": "string", "enum": ["mapping", "analysis", "deterministic_checks", "documentation", "mechanical_change", "implementation", "debugging", "review", "integration"] },
+        "objective": { "type": "string", "minLength": 1 },
+        "scope": { "type": "array", "items": { "type": "string" } },
+        "mutation_authority": { "type": "string", "enum": ["none", "owned_paths"] }
+      }
+    },
+    "worker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested_model", "observed_model", "reasoning_effort", "role", "runtime"],
+      "properties": {
+        "requested_model": { "type": "string", "minLength": 1 },
+        "observed_model": { "type": ["string", "null"] },
+        "reasoning_effort": { "type": ["string", "null"] },
+        "role": { "type": "string", "minLength": 1 },
+        "runtime": { "type": "string", "minLength": 1 }
+      }
+    },
+    "summary": { "type": "string" },
+    "changed_paths": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["command", "result"],
+        "properties": { "command": { "type": "string" }, "result": { "type": "string" } }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "source"],
+        "properties": { "claim": { "type": "string" }, "source": { "type": "string" }, "digest": { "type": "string" } }
+      }
+    },
+    "validation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status"],
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["passed", "failed", "not_run"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "uncertainties": { "type": "array", "items": { "type": "string" } },
+    "scope_deviations": { "type": "array", "items": { "type": "string" } },
+    "escalation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommended", "reason", "suggested_tier"],
+      "properties": {
+        "recommended": { "type": "boolean" },
+        "reason": { "type": "string" },
+        "suggested_tier": { "type": ["string", "null"], "enum": ["luna_high", "terra_medium", "primary_sol", null] }
+      }
+    }
+  }
+}
