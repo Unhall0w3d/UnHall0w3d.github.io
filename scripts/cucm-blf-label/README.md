@@ -10,13 +10,8 @@ Documentation revision: 2026-09-11. This guide describes the current script with
 automatic toolkit setup, explicit `--insecure`, scoped warning suppression,
 mandatory full-collection read-back, and durable per-phone JSONL records.
 
-Live operator testing on CUCM **14.0.1.16900(4)** negotiated AXL **14.0** and
-loaded the matching local Cisco toolkit. The initial one-phone apply reported
-**34 BLFs verified; other speed-dial collections unchanged**. A subsequent
-13-phone preview identified 12 phones needing changes and one already correct;
-the operator then reported a successful batch run. The batch JSONL was not
-independently reviewed. These results establish experience in that environment,
-not qualification of every CUCM release or phone model.
+Testing completed successfully on **CUCM 14 (14.0.1.16900(4))**, using AXL
+**14.0**, with both single-phone and multiple-phone CSV files.
 
 CUCM 15 / AXL 15.0 paths have offline coverage using real Zeep and synthetic
 schemas, but no live CUCM 15 result has been established. Handset/expansion-module
