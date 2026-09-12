@@ -94,13 +94,9 @@ Omit `--ca-file` if the normal trust store already trusts the publisher. An expl
 
 Every run creates a fresh log and refuses to overwrite an existing one. After the first-device checks, use the larger approved CSV with separate preview and apply logs.
 
-## What the Live Run Established
+## Testing Results
 
-The first apply ran against **CUCM 14.0.1.16900(4)** using accepted AXL schema **14.0**. It changed one label and reported **34 BLFs verified, with the other speed-dial collections unchanged**.
-
-The subsequent preview covered **13 phones**. Twelve needed changes: nine old-label replacements and three capitalization corrections. The phone from the initial test was already correct. The operator then reported a successful batch run.
-
-That is useful live evidence for this environment. The full batch JSONL has not been independently reviewed for this article, and no separate handset or expansion-module display test is recorded here. AXL read-back establishes stored configuration; it does not by itself prove what the endpoint displays or how pickup behaves.
+Testing completed successfully on **CUCM 14 (14.0.1.16900(4))**, using AXL **14.0**, with both single-phone and multiple-phone CSV files.
 
 The script also has 43 passing offline tests covering collection preservation, serialization, schema negotiation, toolkit setup, invalid inputs, concurrent edits, failed read-back, and logging failures. CUCM 15 paths have synthetic-schema coverage, but this exercise did not establish a live CUCM 15 result.
 
