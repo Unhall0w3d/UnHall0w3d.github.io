@@ -1,0 +1,4 @@
+device,destination,partition,new_label
+SEP020000000001,4001,EXAMPLE_PT,Alex McDonald
+SEP020000000002,4001,EXAMPLE_PT,Alex McDonald
+SEP020000000003,4001,EXAMPLE_PT,Alex McDonald
