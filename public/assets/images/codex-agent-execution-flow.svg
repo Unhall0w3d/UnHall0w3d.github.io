@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 870" role="img" aria-labelledby="title desc">
+  <title id="title">Codex agent execution flow</title>
+  <desc id="desc">Human authorization flows to Astra, then to scoped mapper, implementer, and reviewer roles. Their evidence passes through deterministic validation before Astra integrates it and a human reviews consequential promotion.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop stop-color="#111c34"/>
+      <stop offset="1" stop-color="#0b1222"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M1 1 9 5 1 9" fill="none" stroke="#73c6dc" stroke-width="2"/>
+    </marker>
+    <style>
+      text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;fill:#edf4fc}
+      .eyebrow{font-size:16px;letter-spacing:2px;fill:#87d1e4;font-weight:700}
+      .title{font-size:36px;font-weight:750}
+      .label{font-size:25px;font-weight:700}
+      .body{font-size:17px;fill:#b8c9dd}
+      .note{font-size:15px;fill:#b8c9dd}
+      .line{fill:none;stroke:#73c6dc;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="870" rx="28" fill="url(#bg)"/>
+  <text class="eyebrow" x="64" y="59">AUTHORITY → ASSIGNMENT → EVIDENCE → REVIEW</text>
+  <text class="title" x="64" y="108">A small agent execution system</text>
+
+  <rect x="65" y="141" width="1070" height="76" rx="15" fill="#283b55" stroke="#d9bd81" stroke-width="2"/>
+  <text class="label" x="95" y="176">Human authorization</text>
+  <text class="body" x="95" y="201">Defines the task, scope, and review gates</text>
+  <path class="line" d="M600 218 V248"/>
+
+  <rect x="65" y="253" width="1070" height="86" rx="15" fill="#173c53" stroke="#71c9e2" stroke-width="2"/>
+  <text class="label" x="95" y="289">Astra · primary owner</text>
+  <text class="body" x="95" y="315">Settles authority; sends schema-checked assignments</text>
+  <path d="M600 340 V364 H215 V385 M600 364 V385 M600 364 H985 V385" fill="none" stroke="#73c6dc" stroke-width="3"/>
+
+  <rect x="65" y="389" width="300" height="118" rx="15" fill="#202f48" stroke="#6989c2" stroke-width="2"/>
+  <text class="label" x="90" y="428">Mapper</text>
+  <text class="body" x="90" y="457">Read-only</text>
+  <text class="note" x="90" y="483">Paths, calls, exact evidence</text>
+
+  <rect x="450" y="389" width="300" height="118" rx="15" fill="#202f48" stroke="#6989c2" stroke-width="2"/>
+  <text class="label" x="475" y="428">Implementer</text>
+  <text class="body" x="475" y="457">Workspace-write</text>
+  <text class="note" x="475" y="483">Owned changes and checks</text>
+
+  <rect x="835" y="389" width="300" height="118" rx="15" fill="#202f48" stroke="#6989c2" stroke-width="2"/>
+  <text class="label" x="860" y="428">Reviewer</text>
+  <text class="body" x="860" y="457">Read-only</text>
+  <text class="note" x="860" y="483">Findings and uncertainty</text>
+  <path d="M215 508 V529 H600 V547 M600 508 V547 M985 508 V529 H600" fill="none" stroke="#73c6dc" stroke-width="3"/>
+
+  <rect x="65" y="551" width="1070" height="100" rx="15" fill="#213c40" stroke="#84c9ae" stroke-width="2"/>
+  <text class="label" x="95" y="590">Evidence + deterministic checks</text>
+  <text class="body" x="95" y="620">Lifecycle receipt · path checks · review artifact · persistence signals</text>
+  <path class="line" d="M600 652 V681"/>
+
+  <rect x="65" y="686" width="1070" height="70" rx="15" fill="#173c53" stroke="#71c9e2" stroke-width="2"/>
+  <text class="label" x="95" y="730">Astra integrates and verifies the result</text>
+  <path class="line" d="M600 757 V783"/>
+
+  <rect x="65" y="789" width="1070" height="55" rx="15" fill="#3a3434" stroke="#d9bd81" stroke-width="2"/>
+  <text class="label" x="95" y="825">Human review where promotion requires it</text>
+</svg>

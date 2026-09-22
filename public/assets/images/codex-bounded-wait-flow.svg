@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">Long job waiting pattern</title>
+  <desc id="desc">A repeated sleep and check loop creates many agent turns. A bounded wait uses one wait for a completion event or retained result, then one result inspection.</desc>
+  <defs>
+    <style>
+      text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;fill:#edf4fc}
+      .title{font-size:32px;font-weight:750}
+      .head{font-size:21px;font-weight:700}
+      .body{font-size:17px;fill:#bfd0e1}
+      .box{fill:#23344f;stroke:#758fb4;stroke-width:2}
+      .good{fill:#1d4045;stroke:#83c9ad;stroke-width:2}
+      .arrow{fill:none;stroke:#83c9ad;stroke-width:3}
+    </style>
+  </defs>
+  <rect width="1200" height="440" rx="28" fill="#101b30"/>
+  <text class="title" x="62" y="68">Waiting for a long-running job</text>
+  <rect x="60" y="104" width="515" height="263" rx="18" fill="#1a263b" stroke="#a99585" stroke-width="2"/>
+  <text class="head" x="88" y="147">Repeated wake/check loop</text>
+  <rect class="box" x="91" y="179" width="123" height="56" rx="10"/>
+  <text class="body" x="124" y="214">Sleep</text>
+  <text class="body" x="226" y="214">→</text>
+  <rect class="box" x="254" y="179" width="123" height="56" rx="10"/>
+  <text class="body" x="288" y="214">Check</text>
+  <text class="body" x="389" y="214">→</text>
+  <rect class="box" x="417" y="179" width="123" height="56" rx="10"/>
+  <text class="body" x="444" y="214">Resume</text>
+  <path d="M476 243 V266 H151 V243" fill="none" stroke="#a99585" stroke-width="2"/>
+  <text class="body" x="91" y="313">Every unchanged check adds another turn</text>
+  <text class="body" x="91" y="339">and another context-resumption opportunity.</text>
+
+  <rect x="625" y="104" width="515" height="263" rx="18" fill="#1b3038" stroke="#83c9ad" stroke-width="2"/>
+  <text class="head" x="653" y="147">Bounded, result-driven wait</text>
+  <rect class="good" x="651" y="179" width="143" height="56" rx="10"/>
+  <text class="body" x="673" y="214">Job receipt</text>
+  <text class="body" x="803" y="214">→</text>
+  <rect class="good" x="827" y="179" width="126" height="56" rx="10"/>
+  <text class="body" x="852" y="214">Wait</text>
+  <text class="body" x="964" y="214">→</text>
+  <rect class="good" x="987" y="179" width="128" height="56" rx="10"/>
+  <text class="body" x="1000" y="214">Result</text>
+  <text class="body" x="651" y="313">Identity, timeout, and result location</text>
+  <text class="body" x="651" y="339">allow one inspection when work completes.</text>
+  <text class="body" x="60" y="414">Policy goal · no token-savings benchmark has been measured here.</text>
+</svg>
