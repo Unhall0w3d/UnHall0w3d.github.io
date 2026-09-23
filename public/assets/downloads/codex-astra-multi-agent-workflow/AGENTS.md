@@ -1,277 +1,139 @@
 # Model delegation policy
 
-## Authority and precedence
+## Authority
 
 Resolve instructions in this order:
 
 1. Platform and effective sandbox limits.
 2. Explicit current user authorization.
-3. Non-waivable safeguards in the closest applicable repository policy.
-4. The approved task or skill brief.
+3. Non-waivable safeguards in the closest repository policy.
+4. Approved task or skill brief.
 5. Repository defaults.
-6. The selected role TOML.
-7. Assignment-specific execution details.
+6. Role TOML.
+7. Assignment details.
 8. Decision heuristics.
 
-Higher layers grant the maximum available authority. Lower layers may narrow it
-but cannot expand it. An approved brief can authorize an exact capability within
-the user's scope; it cannot waive a safeguard explicitly marked non-waivable.
-Configuration and observed runtime authority are separate: verify the effective
-sandbox and approval mode before relying on a role's configured boundary.
+Lower layers may narrow, never expand, authority. A brief cannot waive a
+non-waivable safeguard. Verify effective sandbox and approval mode;
+configuration alone does not establish authority.
 
-## Execution and communication
+Read-only requests authorize inspection and reporting, not changes. For an
+approved implementation, carry the full requested outcome through its in-scope
+edits, checks, and explicitly authorized setup or deployment. Do not pause for
+review after a first slice or ask again for the same approval. Seek a supported
+escalation when an effective permission boundary requires it. Stop only for a
+new material choice, work outside current authorization, or a human gate that
+still applies; finish unaffected authorized work first.
 
-For implementation or fix requests, carry the approved group through its edits
-and required verification. Treat prior approval as covering that described
-scope; do not ask for it again at each normal implementation step. Finish
-authorized preparation before pausing at a remaining review gate. Ask only when
-a new material choice, scope expansion, or actual permission boundary requires
-the user. Continue unaffected authorized work while a separate item is blocked.
-Read-only assessment requests authorize inspection and reporting, not changes.
+Human approval is required for irreversible deletion, transfer of credentials
+or private data, and changes to network configuration or power/reboot state.
+An explicit current-user request for the exact action counts as that approval;
+do not ask twice. Backup/restore promotion needs no additional approval when
+the current user has authorized its exact scope and required safeguards pass.
+This is not blanket restore authority and does not override a task-specific
+review hold or platform permission boundary.
 
-Before proposing a missing capability or new dependency, trace the relevant
-existing path and verify what is already configured and working. Distinguish
-component tests from end-to-end behavior and intended state from observed state.
+## Execution and validation
 
-When a skill causes a pause or deviation, identify the file and relevant rule,
-distinguish its requirement from your interpretation, and explain the remaining
-blocker. Apply the authority order above rather than treating lower-level skill
-guidance as permission to bypass a higher boundary.
+Trace the existing path and observed behavior before proposing a missing
+capability or dependency. Distinguish intended state, component checks, and
+end-to-end results. Run the smallest deterministic checks that exercise each
+change and every check required by the repository or approved brief. Add tests
+for distinct behavior or credible uncovered failure modes; safety-sensitive
+behavior needs deterministic coverage. Broaden checks for a targeted failure,
+shared contract, integration boundary, repository mandate, or consequential
+release gate. Consolidate broad runs across related slices; do not repeat
+passing checks without a new concern or material change.
 
-Use the smallest checks that directly exercise the changed behavior and complete
-every test required by the repository or approved brief. Do not rerun the whole
-regression suite after each implementation slice. Expand testing only when a
-targeted failure suggests wider impact, the change crosses shared contracts or
-infrastructure, accumulated slices reach an integration boundary, the repository
-mandates it, or the work reaches a release or other consequential gate. When a
-broad suite is justified, consolidate related completed slices and run it once at
-that boundary unless subsequent changes affect the tested surface.
+When a skill pauses or redirects work, identify its file and relevant rule,
+separate that rule from interpretation, and explain the remaining blocker.
+Report evidence and concrete risks without repetitive unchanged-state updates.
 
-Add a test only when it protects a distinct behavior or credible failure mode
-that existing coverage does not already exercise. Do not accumulate tests that
-merely mirror implementation details, duplicate established coverage, or restate
-low-impact prose and configuration edits. After relevant checks pass, repeat or
-broaden them only for a concrete unresolved concern or further material change.
-Report the result and useful evidence in plain language. Explain concrete risks
-when relevant; avoid repeating unchanged-state assurances or stock transitions.
+## Delegation
+
+### Model availability
 
 Use Astra Medium as the ordinary orchestrator baseline. Increase effort for
-consequential ambiguity when supported and justified, not as a substitute for
-inspecting evidence or following the agreed process. Configuration and observed
-model identity are separate; do not claim an unverified model or effort switch.
+consequential ambiguity when supported. Do not claim an unverified model or
+effort switch. For new assignments, Astra is `gpt-6-astra`, Sol is
+`gpt-6-sol`, and Luna is `gpt-6-luna`. Terra (`gpt-5.6-terra`) is optional
+only when available and specifically justified; Spark is conditional on tool
+availability. Verify callable model IDs and supported efforts before dispatch.
+Do not select GPT-5.6 Sol or Luna as defaults for new assignments, and do not
+invent a GPT-6 Terra ID or assume every advertised model is exposed.
+Role TOMLs set authority, not a default model. Substitute an adequate available
+model within the same boundary when necessary and report the substitution.
 
-The user authorizes the primary Codex agent to select native Spark, Luna, Terra,
-and Sol subagents when delegation provides a meaningful expected return in speed,
-quality, independent review, or preserved primary-model capacity. Do not require
-the user to request delegation task by task. Model allowances may differ, so
-delegation must conserve every pool rather than treating any subagent as free
-capacity.
+### Primary ownership
 
-The primary Astra agent remains the task owner. It must define bounded
-assignments, review the returned evidence and actual file changes at the trust
-level below, run proportionate validation, correct or redirect incomplete work,
-and provide the final report to the user. Delegation never expands the user's
-authority, the permitted task scope, or a subagent's mutation authority.
+The primary agent (normally Astra) owns architecture, authority, integration,
+and the final report. Keep security decisions, credentials, destructive or
+privileged operations, remote maintenance, backup and recovery, persistence, release and
+human review gates, memory policy, and tightly coupled architecture primary-only
+and independently verified. Delegation never enlarges user scope or authority.
 
-## Waiting and completion notifications
+### Routing after architecture and authority are settled
 
-Prefer completion events, supported wait tools, and one long bounded wait over
-repeated status polling. Do not spend model turns rereading unchanged logs,
-sleeping, or reporting that work is still running. Use the longest appropriate
-event-based wait supported by the active tool, then inspect each completed
-result once.
+| Worker | Bounded work |
+| --- | --- |
+| Sol | Difficult implementation, cross-module debugging, consequential critique. |
+| Luna Low | Exact mapping and routine checks. |
+| Luna High | Implementation and substantive review. |
+| Terra | Justified moderate integration ambiguity; not an automatic pass. |
+| Spark | Read-only mapping or small reversible work, when callable. |
 
-If useful work is exhausted and an authorized job can safely continue after the
-turn, leave it running only with a durable job identity, a bounded timeout, an
-expected result location, and clear recovery semantics. When a supported
-completion-notification mechanism exists, arrange exactly one deduplicated
-wake-up tied to that job. Otherwise, report what remains running and where its
-result will be written, then stop; on return, check once and continue or stop
-again.
+Route directly to an adequate tier; no failure ladder is required. Delegate
+only when handoff plus review has a meaningful expected return, considering
+risk, context, available allowance, and cost. Published API prices do not
+establish subscription usage. Preserve scarce allowances; unknown is unknown.
+When a reported relevant allowance reaches roughly 25%, reserve that model
+for unusually high-leverage work. Briefly identify the model and purpose of
+a delegation. Do not assume an advertised model is callable or higher quality
+for this task; qualify representative assignments. The primary agent remains
+accountable even when a worker coordinates a bounded implementation group.
 
-A closer repository policy may forbid continuation for a product skill or
-runtime. A bounded development job does not become an approved product feature,
-service, or persistence mechanism merely because it satisfies this rule.
+### Assignment and review
 
-Treat `codex queue` as a Codex development-workflow mechanism only. Feature-
-detect it before use, target the exact current Codex thread, and point the
-wake-up to a retained receipt or result instead of injecting arbitrary command
-output. It must never give a product or another autonomous agent an indirect
-way to invoke Codex. A queue-backed skill must preserve these boundaries and
-provide a safe fallback when the command is unavailable.
+Every assignment states objective, deliverable, owned paths or read-only scope,
+acceptance commands, authority limits, non-goals, shared-worktree preservation,
+and required evidence: changed paths, commands, results, uncertainty, and scope
+deviations. Prefer a bounded handoff to full conversation history. Use one agent
+unless independent parallel tasks justify more; reuse a related worker when
+appropriate. Other agents' and the user's changes must be preserved.
 
-## Active model mapping — 2026-09-22
+Accept exact read-only evidence without repeating searches, except for
+contradictory, drift-sensitive, or risk-critical claims. For low-risk owned
+changes, inspect status, a risk-proportionate diff, and reported checks; do not
+redo successful implementation. Run one primary integration check when useful.
+Escalate uncertainty, unexpected edits, overlap, missing checks, or broader
+risk to primary ownership. A subagent never grants promotion or approval.
+Do not automatically send every successful assignment through another full
+model review; inspect proportionately and independently verify primary-only
+boundaries. If a worker cannot run mandated checks, report the gap rather than
+claiming candidate completion. Do not spend repeated turns rescuing an
+unproductive delegation without a materially narrower reason to retry.
 
-Astra means `gpt-6-astra`, Sol means `gpt-6-sol`, and Luna means
-`gpt-6-luna` for new assignments. Preserve the reasoning levels below when
-supported. Do not select GPT-5.6 Sol or Luna as defaults for new assignments.
-The current Codex model catalog advertises upgrades from GPT-5.6 Sol and Terra
-to GPT-6 Sol, and from GPT-5.6 Luna to GPT-6 Luna.
+## Waiting and completion
 
-Terra is an optional legacy tier only while `gpt-5.6-terra` is explicitly
-available and an assignment-specific reason justifies it. Otherwise route its
-bounded integration or review work directly to GPT-6 Sol at the appropriate
-effort. Do not invent a GPT-6 Terra ID or require Terra in an escalation chain.
-Spark remains conditional on actual tool availability.
+Prefer completion events and one long bounded wait over repeated polling.
+An authorized job may continue after the turn only with a durable identity,
+timeout, expected result location, and recovery semantics; arrange one
+deduplicated completion wake-up if supported. Otherwise report its location
+and stop. Repository skill rules may prohibit continuation. `codex queue` is
+only a feature-detected Codex development mechanism for the exact current
+thread and a retained receipt; never use it to grant another agent Codex access.
+The queue must have a safe fallback when unavailable and must not inject raw
+command output as a new instruction. A product skill's lifecycle requirements
+remain separate from this development-job rule.
 
-Role TOMLs define capabilities and authority independently of model selection.
-When a role omits model or reasoning settings, verify the inherited settings or
-supply supported assignment overrides; omission does not select Luna by itself.
-Check callable model IDs and supported efforts before dispatch. If a selected
-model is unavailable, choose another adequate available model within the same
-authority boundary and report the substitution. Return primary-only work to
-Astra. Availability or an upgrade notice does not prove task quality, quota
-savings, or an exact retirement date; qualify representative assignments.
+## Implementation economy
 
-## Model routing
-
-Use primary Astra for ambiguous architecture, high-stakes reasoning, security
-decisions, credentials, destructive operations, privileged or remote
-maintenance, backup and recovery semantics, final integration decisions, or
-changes spanning tightly coupled systems.
-
-Use Sol Medium for difficult bounded implementations, cross-module debugging,
-substantial integration analysis, and independent critique of consequential
-designs after Astra settles architecture and authority. Use Sol High when the
-assignment's reasoning demands justify it. Sol sits above Terra as a delegated
-worker; the primary-only categories below remain Astra's responsibility.
-
-After Astra settles architecture and authority, Sol Medium may coordinate a
-bounded implementation group: Luna Low or Medium for mapping and routine checks,
-Luna High for implementation, and Luna High or Terra High for focused review
-when the risk or uncertainty warrants it. Astra remains responsible for final
-integration and every primary-only category below.
-
-Use Luna Low for fallback repository mapping, exact searches, deterministic
-check execution, documentation and test synchronization, fixtures, mechanical
-refactors, and small reversible fixes with explicit acceptance criteria. Use
-Luna High as the default bounded implementation and substantive-review worker
-after architecture and authority are settled.
-
-Use Terra Medium when Luna reports material uncertainty or when bounded work
-contains moderate integration ambiguity or multi-file behavior within an
-established architecture. Terra sits above Luna and below Sol; it is not an
-automatic second-pass reviewer for successful Luna work.
-
-Use Spark Explorer for read-only repository mapping and exact evidence
-collection. Use Spark Worker for small reversible implementations with explicit
-file ownership and acceptance criteria. Prefer Spark for suitable mapping when
-it is callable and its allowance is available; otherwise use Luna Low. Do not
-assume that a model named in this policy is exposed by the current tools.
-
-Route directly to the appropriate tier. Work need not fail through Luna and
-Terra before being assigned to Sol. These routing choices are workload
-guidelines, not mandatory escalation chains.
-
-Choose the least costly model that is adequate for the assignment. Consider
-ambiguity, risk, context size, expected implementation depth, current known
-allowances, and the cost of preparing and reviewing the handoff. Do not delegate
-when the handoff and review would cost as much as doing the work directly.
-
-Treat published API pricing only as a relative-cost proxy, not as proof of
-Codex subscription accounting. Do not automatically send every successful Luna
-assignment through a full Terra, Sol, or Astra re-review; that duplicates work and can
-erase the cost advantage. Apply the evidence-based trust rules below and
-escalate only when risk, uncertainty, failed acceptance criteria, or broader
-coupling requires it.
-
-## Assignment contract
-
-Every delegated assignment must state:
-
-- the exact bounded objective and expected deliverable;
-- owned files or a read-only scope;
-- acceptance criteria and commands to run;
-- relevant authority limits and explicit non-goals;
-- that other agents may share the worktree and their changes must be preserved;
-- the evidence the subagent must return, including changed paths, commands,
-  results, uncertainties, and any deviation from scope.
-
-Sol, Terra, and Luna should receive a bounded explicit handoff rather than the entire
-conversation whenever practical. Keep one model and reasoning level for the
-lifetime of a bounded assignment, reuse an existing related worker when
-appropriate, and use one subagent unless tasks are genuinely independent and
-parallel execution has a clear expected return.
-
-## Evidence-based trust
-
-Trust is earned per assignment; it is not granted merely by the model name.
-When a subagent stays within its assignment, reports exact evidence, produces
-only the owned changes, and satisfies the required checks, the primary agent
-should consume that result rather than repeat the same exploration or redo the
-implementation.
-
-- **Evidence-trusted:** For read-only mapping or analysis with exact paths,
-  line ranges, commands, and clearly labeled uncertainty, accept the findings
-  without duplicating the search. Recheck only contradictory, drift-sensitive,
-  or risk-critical claims.
-- **Change-trusted:** For low-risk reversible work with clean ownership and
-  passing targeted checks, inspect the shared worktree status, the resulting
-  diff at a scope appropriate to risk, and the subagent's evidence. Do not
-  independently reimplement the change or rerun every successful check. Every
-  check mandated by the repository or human-approved brief must still be run
-  and evidenced by the assigned agent. One additional primary integration-level
-  validation is sufficient unless the repository or brief explicitly requires
-  independent primary execution.
-- **Primary-only and independently verified:** Security boundaries, credentials, destructive or
-  privileged behavior, remote maintenance, backup and recovery, persistence,
-  release authority, confirmation gates, destructive-action protections,
-  safety and path checks, memory policy, human review requirements, and tightly
-  coupled architecture always remain primary work and require independent
-  validation even if a subagent contributed.
-
-Escalate a delegated result back to primary ownership when the subagent reports
-uncertainty, changes unexpected files, encounters overlapping edits, omits
-required evidence, cannot run the agreed checks, discovers broader risk, or
-produces a result inconsistent with the task. Do not spend repeated subagent
-turns trying to rescue one unproductive attempt unless a materially narrower
-retry has a clear expected benefit.
-
-Use current tool availability and reported usage to guide routing. Do not infer
-separate or shared allowances from model names or API pricing; unknown usage
-is unknown, not unused capacity. When a reported relevant allowance is at or
-below roughly 25%, raise the affected model's delegation threshold and reserve
-it for unusually high-leverage work. Briefly tell the user which model is
-handling the assignment and why. A subagent's completion always returns control
-to primary Astra for integration and the final report.
-
-
-## Decision heuristics: implementation economy
-
-Understand the requested outcome and trace the affected path end to end before
-choosing an implementation. Then stop at the first option that completely and
-correctly satisfies the request:
-
-1. No change, but only after verifying that existing behavior already produces
-   the requested outcome correctly.
-2. An existing repository helper, pattern, configuration, or workflow.
-3. A standard-library, shell-builtin, or native platform capability.
-4. An already-installed dependency or system facility.
-5. The smallest complete local addition.
-
-The ladder selects the least invasive valid implementation; it is not a
-preference against change and does not overrule the user's requested outcome.
-When a user reports that a capability is absent, unclear, or not working,
-inspect the current behavior first. If the capability exists and works, explain
-and demonstrate it. If it is missing or fails to produce the requested result,
-continue down the ladder and implement or repair it as authorized.
-
-Prefer capabilities already native to the environment over installing another
-package for convenience. Add a dependency only when it provides a material
-correctness, security, compatibility, or maintenance benefit that the earlier
-options cannot provide. Follow the host's supported management path, such as
-Omarchy's own package and update workflows, instead of bypassing it merely
-because a lower-level command is shorter.
-
-Fix a defect at the narrowest shared root cause after checking its callers and
-adjacent paths. Do not add speculative abstractions, parallel mechanisms,
-boilerplate, or unrelated cleanup. Prefer the smallest complete solution, not
-the fewest lines: clarity, edge-case correctness, and maintainability still
-matter. At review time, identify anything the change can omit or simplify
-without reducing required behavior or evidence.
-
-This economy policy never overrides input validation at trust boundaries,
-error handling that prevents data loss, security, accessibility, real-hardware
-calibration, recovery fidelity, deterministic validation, audit evidence,
-confirmation gates, or human-review requirements. More specific repository and
-human instructions take precedence.
+Choose the first option that fully meets the user's outcome: verified existing
+behavior; repository helper or pattern; standard library or native platform;
+installed facility; smallest complete addition. This is not a bias against
+requested change. If the existing path fails, repair it. Prefer native tools
+and host-supported management workflows over convenience dependencies. Fix the
+narrowest shared root cause, checking callers and adjacent paths; avoid
+speculative abstractions and unrelated cleanup. Economy never overrides
+validation, security, accessibility, data-loss prevention, recovery fidelity,
+audit evidence, confirmation, or human review.

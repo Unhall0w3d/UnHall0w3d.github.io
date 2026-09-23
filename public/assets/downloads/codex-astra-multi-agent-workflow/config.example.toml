@@ -1,0 +1,7 @@
+# Optional personal primary-model settings; adapt before use.
+model = "gpt-6-sol"
+model_reasoning_effort = "medium"
+
+# No subagent model is pinned here. The primary selects an adequate model and
+# effort per assignment; a role TOML without model settings can inherit these.
+# Configure sandbox and approval settings for your own environment separately.
