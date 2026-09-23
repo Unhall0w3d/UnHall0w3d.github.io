@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 870" role="img" aria-labelledby="title desc">
   <title id="title">Codex agent execution flow</title>
-  <desc id="desc">Human authorization flows to Astra, then to scoped mapper, implementer, and reviewer roles. Their evidence passes through deterministic validation before Astra integrates it and a human reviews consequential promotion.</desc>
+  <desc id="desc">Human authorization flows to the acting primary agent, then to scoped mapper, implementer, and reviewer roles. Their evidence passes through deterministic validation before the primary integrates it and a human reviews consequential promotion.</desc>
   <defs>
     <linearGradient id="bg" x2="1" y2="1">
       <stop stop-color="#111c34"/>
@@ -29,8 +29,8 @@
   <path class="line" d="M600 218 V248"/>
 
   <rect x="65" y="253" width="1070" height="86" rx="15" fill="#173c53" stroke="#71c9e2" stroke-width="2"/>
-  <text class="label" x="95" y="289">Astra · primary owner</text>
-  <text class="body" x="95" y="315">Settles authority; sends schema-checked assignments</text>
+  <text class="label" x="95" y="289">Primary agent · task owner</text>
+  <text class="body" x="95" y="315">Settles authority; sends bounded assignments</text>
   <path d="M600 340 V364 H215 V385 M600 364 V385 M600 364 H985 V385" fill="none" stroke="#73c6dc" stroke-width="3"/>
 
   <rect x="65" y="389" width="300" height="118" rx="15" fill="#202f48" stroke="#6989c2" stroke-width="2"/>
@@ -55,7 +55,7 @@
   <path class="line" d="M600 652 V681"/>
 
   <rect x="65" y="686" width="1070" height="70" rx="15" fill="#173c53" stroke="#71c9e2" stroke-width="2"/>
-  <text class="label" x="95" y="730">Astra integrates and verifies the result</text>
+  <text class="label" x="95" y="730">Primary integrates and verifies the result</text>
   <path class="line" d="M600 757 V783"/>
 
   <rect x="65" y="789" width="1070" height="55" rx="15" fill="#3a3434" stroke="#d9bd81" stroke-width="2"/>
