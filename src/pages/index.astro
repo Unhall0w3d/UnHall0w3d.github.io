@@ -39,7 +39,7 @@ const websiteJsonLd = {
         <span>SYSTEM SIGNAL</span>
         <span>01-A</span>
       </div>
-      <button class="signal-flip" type="button" aria-pressed="false" aria-label="Kenneth Perry. Show Soul portrait">
+      <button class="signal-flip" type="button" aria-pressed="false" aria-label="Kenneth Perry. Show Soul's Chippy avatar">
         <span class="signal-flip-inner">
           <span class="signal-face signal-face-portrait" aria-hidden="true">
             <img src={site.author.avatar} width="2048" height="2048" alt="" />
@@ -47,8 +47,8 @@ const websiteJsonLd = {
             <span class="signal-flip-prompt">TAP TO DECRYPT ↻</span>
           </span>
           <span class="signal-face signal-face-soul" aria-hidden="true">
-            <img src="/assets/images/soul-slash-synthesis-avatar.jpg" width="900" height="900" alt="" />
-            <span class="signal-face-label">SOUL // SYNTHESIS</span>
+            <chippy-pet state="idle" paused hide-label></chippy-pet>
+            <span class="signal-face-label">SOUL // CHIPPY</span>
             <span class="signal-flip-prompt">RETURN TO OPERATOR ↻</span>
           </span>
         </span>
@@ -130,18 +130,21 @@ const websiteJsonLd = {
   </section>
 </BaseLayout>
 
+<script is:inline type="module" src="/assets/chippy/chippy.mjs"></script>
+
 <script>
   document.querySelectorAll<HTMLButtonElement>(".signal-flip").forEach((control) => {
     const showFace = (showSoul: boolean, musicActive = false) => {
       control.setAttribute("aria-pressed", String(showSoul));
       control.toggleAttribute("aria-disabled", musicActive);
+      control.querySelector("chippy-pet")?.toggleAttribute("paused", !showSoul);
       control.setAttribute(
         "aria-label",
         musicActive
-          ? "Soul Slash Synthesis portrait. Music is playing."
+          ? "Soul's Chippy avatar. Music is playing."
           : showSoul
-            ? "Soul portrait. Show Kenneth Perry"
-            : "Kenneth Perry. Show Soul portrait"
+            ? "Soul's Chippy avatar. Show Kenneth Perry"
+            : "Kenneth Perry. Show Soul's Chippy avatar"
       );
     };
 
