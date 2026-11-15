@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OperatorLinks from "../components/OperatorLinks.astro";
 import PostList from "../components/PostList.astro";
+import MusicPlayer from "../components/MusicPlayer.astro";
 import RepositoryRelay from "../components/RepositoryRelay.astro";
 import { site } from "../config/site";
 import { getCollection } from "astro:content";
@@ -29,8 +30,8 @@ const websiteJsonLd = {
         knowledge that usually appears only after something catches fire.
       </p>
       <div class="hero-actions">
-        <a class="button button-primary" href="/posts.html">Enter the archive</a>
-        <a class="button button-ghost" href="/about.html">Identify operator</a>
+        <a class="button button-primary" href="/tools.html">Find a tool</a>
+        <a class="button button-ghost" href="/posts.html">Read the field notes</a>
       </div>
     </div>
 
@@ -61,61 +62,17 @@ const websiteJsonLd = {
     </aside>
   </section>
 
-  <div class="signal-utility-row">
-    <OperatorLinks />
-
-    <section class="ambient-signal" aria-labelledby="ambient-signal-title" data-ambient-player>
-    <div class="ambient-signal-header">
-      <span>AMBIENT SIGNAL // PROFILE TRACK</span>
-      <span>YT-09</span>
+  <section class="tool-start" aria-labelledby="tool-start-title">
+    <header class="section-header">
+      <div><p class="eyebrow">THE FIELD TOOLBOX</p><h2 id="tool-start-title">What are you working on?</h2></div>
+      <a class="text-link" href="/tools.html">All tools &amp; downloads →</a>
+    </header>
+    <div class="tool-start-grid">
+      <a href="/tools.html#phone-changes"><strong>Update CUCM phones</strong><span>CSV-driven BLF labels and primary-line auto answer.</span></a>
+      <a href="/tools.html#audits"><strong>Audit a UC deployment</strong><span>Read-only SQL for extensions, speed dials, and calling access.</span></a>
+      <a href="/tools.html#operations"><strong>Handle operational tasks</strong><span>SmartZone backup retrieval and an analog call guard.</span></a>
     </div>
-    <div class="ambient-signal-grid">
-      <div class="ambient-video" id="ambient-youtube-player" aria-label="YouTube player for Rooms Between Seconds"></div>
-      <div class="ambient-console">
-        <p class="ambient-kicker"><span>NOW CUED</span> <span data-ambient-cue>SOUL SYNTHESIS // GEN 09</span></p>
-        <h2 id="ambient-signal-title" data-ambient-title>Rooms Between Seconds</h2>
-        <p class="ambient-artist">TRANSMISSION BY <span data-ambient-artist>SOUL SLASH SYNTHESIS</span></p>
-
-        <label class="ambient-selector">
-          <span>SIGNAL SELECT</span>
-          <select data-ambient-track aria-label="Select ambient signal">
-            <option value="0">01 // ROOMS BETWEEN SECONDS</option>
-            <option value="1">02 // THE HALLWAY MOVES FIRST</option>
-            <option value="2">03 // FAMILIAR GEOMETRY</option>
-            <option value="3">04 // THIS THOUGHT IS NOT YOUR OWN</option>
-            <option value="4">05 // THE VOID LEARNED HUNGER</option>
-            <option value="5">06 // THE WEIGHT REMEMBERED</option>
-            <option value="6">07 // COMPILER BLOOM</option>
-            <option value="7">08 // WHEN HOPE FORGOT OUR NAMES</option>
-            <option value="8">09 // AFTERIMAGE CURRENT</option>
-          </select>
-        </label>
-
-        <div class="ambient-wave" aria-hidden="true">
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-        </div>
-
-        <div class="ambient-controls" aria-label="Audio controls">
-          <button class="ambient-control" type="button" data-ambient-restart aria-label="Restart song from the beginning">↶</button>
-          <button class="ambient-control ambient-play" type="button" data-ambient-play aria-label="Play song">▶</button>
-          <button class="ambient-control" type="button" data-ambient-next aria-label="Play next song">↠</button>
-          <button class="ambient-control" type="button" data-ambient-loop aria-label="Enable song loop" aria-pressed="false">↻</button>
-          <label class="ambient-volume">
-            <span>VOL <output data-ambient-volume-output>50</output></span>
-            <input data-ambient-volume type="range" min="0" max="50" value="50" aria-label="Song volume" />
-          </label>
-        </div>
-
-        <div class="ambient-footer">
-          <span data-ambient-status>STANDBY // PRESS PLAY</span>
-          <a href="https://www.youtube.com/watch?v=un7jfZsbDRE" data-ambient-source>SOURCE // YOUTUBE ↗</a>
-        </div>
-      </div>
-    </div>
-    </section>
-  </div>
-
-  <RepositoryRelay />
+  </section>
 
   <section class="transmissions" aria-labelledby="transmissions-title">
     <header class="section-header">
@@ -128,6 +85,14 @@ const websiteJsonLd = {
 
     <PostList posts={latestPosts} numbered />
   </section>
+
+  <div class="signal-utility-row">
+    <OperatorLinks />
+
+    <MusicPlayer />
+  </div>
+
+  <RepositoryRelay />
 </BaseLayout>
 
 <script is:inline type="module" src="/assets/chippy/chippy.mjs"></script>
@@ -158,276 +123,4 @@ const websiteJsonLd = {
       showFace(event.detail.playing, event.detail.playing);
     }) as EventListener);
   });
-</script>
-
-<script is:inline>
-  (() => {
-    const root = document.querySelector("[data-ambient-player]");
-    if (!root) return;
-
-    const tracks = [
-      {
-        videoId: "un7jfZsbDRE",
-        title: "Rooms Between Seconds",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 09",
-        source: "https://www.youtube.com/watch?v=un7jfZsbDRE",
-        startSeconds: 0
-      },
-      {
-        videoId: "ZFA6t2PAqyI",
-        title: "The Hallway Moves First",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 08",
-        source: "https://www.youtube.com/watch?v=ZFA6t2PAqyI",
-        startSeconds: 0
-      },
-      {
-        videoId: "Mkx_2QRyKcI",
-        title: "Familiar Geometry",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 07",
-        source: "https://www.youtube.com/watch?v=Mkx_2QRyKcI",
-        startSeconds: 0
-      },
-      {
-        videoId: "q35PDSyTwA0",
-        title: "This Thought Is Not Your Own",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 06",
-        source: "https://www.youtube.com/watch?v=q35PDSyTwA0",
-        startSeconds: 0
-      },
-      {
-        videoId: "9J2zrAoTfB4",
-        title: "The Void Learned Hunger",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 05",
-        source: "https://www.youtube.com/watch?v=9J2zrAoTfB4",
-        startSeconds: 0
-      },
-      {
-        videoId: "BNN0D39P4Ic",
-        title: "The Weight Remembered",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 04",
-        source: "https://www.youtube.com/watch?v=BNN0D39P4Ic",
-        startSeconds: 0
-      },
-      {
-        videoId: "-ilV0X9-PR8",
-        title: "Compiler Bloom",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 03",
-        source: "https://www.youtube.com/watch?v=-ilV0X9-PR8",
-        startSeconds: 0
-      },
-      {
-        videoId: "xV-XJT78tn0",
-        title: "When Hope Forgot Our Names",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 02",
-        source: "https://www.youtube.com/watch?v=xV-XJT78tn0",
-        startSeconds: 0
-      },
-      {
-        videoId: "863-KXJRfyA",
-        title: "Afterimage Current",
-        artist: "SOUL SLASH SYNTHESIS",
-        cue: "SOUL SYNTHESIS // GEN 01",
-        source: "https://www.youtube.com/watch?v=863-KXJRfyA",
-        startSeconds: 0
-      }
-    ];
-    const playControl = root.querySelector("[data-ambient-play]");
-    const restartControl = root.querySelector("[data-ambient-restart]");
-    const nextControl = root.querySelector("[data-ambient-next]");
-    const loopControl = root.querySelector("[data-ambient-loop]");
-    const volumeControl = root.querySelector("[data-ambient-volume]");
-    const volumeOutput = root.querySelector("[data-ambient-volume-output]");
-    const trackControl = root.querySelector("[data-ambient-track]");
-    const title = root.querySelector("[data-ambient-title]");
-    const artist = root.querySelector("[data-ambient-artist]");
-    const cue = root.querySelector("[data-ambient-cue]");
-    const source = root.querySelector("[data-ambient-source]");
-    const video = root.querySelector(".ambient-video");
-    const status = root.querySelector("[data-ambient-status]");
-    let player;
-    let ready = false;
-    let looping = false;
-    let playWhenReady = false;
-
-    const trackStorageKey = "noc-ambient-track-v7";
-    const savedTrack = Number(localStorage.getItem(trackStorageKey));
-    let currentTrackIndex = Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length
-      ? savedTrack
-      : 0;
-
-    const savedVolume = localStorage.getItem("noc-ambient-volume");
-    const storedVolume = savedVolume === null ? Number.NaN : Number(savedVolume);
-    const initialVolume = Number.isFinite(storedVolume) && storedVolume >= 0 && storedVolume <= 50
-      ? storedVolume
-      : 50;
-    volumeControl.value = String(initialVolume);
-    volumeOutput.value = String(initialVolume);
-
-    const displayTrack = (index) => {
-      const track = tracks[index];
-      title.textContent = track.title;
-      artist.textContent = track.artist;
-      cue.textContent = track.cue;
-      source.href = track.source;
-      trackControl.value = String(index);
-      video.setAttribute("aria-label", `YouTube player for ${track.title}`);
-      localStorage.setItem(trackStorageKey, String(index));
-    };
-
-    const selectTrack = (index, autoplay = true) => {
-      currentTrackIndex = (index + tracks.length) % tracks.length;
-      const track = tracks[currentTrackIndex];
-      displayTrack(currentTrackIndex);
-      if (!ready) {
-        if (autoplay) requestPlayer(true);
-        return;
-      }
-      const playback = {
-        videoId: track.videoId,
-        startSeconds: track.startSeconds,
-        ...(track.endSeconds ? { endSeconds: track.endSeconds } : {})
-      };
-      if (autoplay) {
-        player.loadVideoById(playback);
-        status.textContent = `TUNING // ${track.title.toUpperCase()}`;
-      } else {
-        player.cueVideoById(playback);
-        status.textContent = "STANDBY // PRESS PLAY";
-      }
-    };
-
-    displayTrack(currentTrackIndex);
-
-    const updatePlayback = (playing) => {
-      root.dataset.state = playing ? "playing" : "paused";
-      playControl.textContent = playing ? "Ⅱ" : "▶";
-      playControl.setAttribute("aria-label", playing ? "Pause song" : "Play song");
-      status.textContent = playing ? "TRANSMITTING // SIGNAL ACTIVE" : "PAUSED // SIGNAL HELD";
-      window.dispatchEvent(new CustomEvent("noc:ambient-playback", {
-        detail: { playing }
-      }));
-    };
-
-    const initializePlayer = () => {
-      if (player || !window.YT?.Player) return;
-      player = new window.YT.Player("ambient-youtube-player", {
-        width: "100%",
-        height: "200",
-        videoId: tracks[currentTrackIndex].videoId,
-        playerVars: {
-          controls: 0,
-          playsinline: 1,
-          rel: 0,
-          start: tracks[currentTrackIndex].startSeconds,
-          ...(tracks[currentTrackIndex].endSeconds
-            ? { end: tracks[currentTrackIndex].endSeconds }
-            : {}),
-          origin: window.location.origin
-        },
-        events: {
-          onReady: (event) => {
-            ready = true;
-            event.target.setVolume(initialVolume);
-            if (playWhenReady) {
-              playWhenReady = false;
-              event.target.playVideo();
-            } else {
-              updatePlayback(false);
-              status.textContent = "STANDBY // PRESS PLAY";
-            }
-          },
-          onStateChange: (event) => {
-            if (event.data === window.YT.PlayerState.PLAYING) updatePlayback(true);
-            if (event.data === window.YT.PlayerState.PAUSED) updatePlayback(false);
-            if (event.data === window.YT.PlayerState.ENDED) {
-              if (looping) {
-                player.seekTo(tracks[currentTrackIndex].startSeconds, true);
-                player.playVideo();
-              } else {
-                selectTrack(currentTrackIndex + 1, true);
-              }
-            }
-          },
-          onError: (event) => {
-            updatePlayback(false);
-            status.textContent = event.data === 101 || event.data === 150
-              ? "ERROR 150 // EMBED BLOCKED"
-              : `ERROR ${event.data} // OPEN SOURCE LINK`;
-          }
-        }
-      });
-    };
-
-    const requestPlayer = (autoplay = false) => {
-      playWhenReady ||= autoplay;
-      if (ready) {
-        if (autoplay) player.playVideo();
-        return;
-      }
-
-      status.textContent = "TUNING // OPENING SIGNAL";
-      if (window.YT?.Player) {
-        initializePlayer();
-        return;
-      }
-
-      window.onYouTubeIframeAPIReady = initializePlayer;
-      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
-        const api = document.createElement("script");
-        api.src = "https://www.youtube.com/iframe_api";
-        api.async = true;
-        document.head.append(api);
-      }
-    };
-
-    playControl.addEventListener("click", () => {
-      if (!ready) {
-        requestPlayer(true);
-        return;
-      }
-      const playing = player.getPlayerState() === window.YT.PlayerState.PLAYING;
-      playing ? player.pauseVideo() : player.playVideo();
-    });
-
-    restartControl.addEventListener("click", () => {
-      if (!ready) {
-        requestPlayer(true);
-        return;
-      }
-      const track = tracks[currentTrackIndex];
-      player.seekTo(track.startSeconds, true);
-      status.textContent = `REWOUND // ${track.cue}`;
-    });
-
-    nextControl.addEventListener("click", () => {
-      selectTrack(currentTrackIndex + 1, true);
-    });
-
-    trackControl.addEventListener("change", () => {
-      selectTrack(Number(trackControl.value), true);
-    });
-
-    loopControl.addEventListener("click", () => {
-      looping = !looping;
-      loopControl.classList.toggle("is-active", looping);
-      loopControl.setAttribute("aria-pressed", String(looping));
-      loopControl.setAttribute("aria-label", looping ? "Disable song loop" : "Enable song loop");
-      status.textContent = looping ? "LOOP // ENGAGED" : "LOOP // DISENGAGED";
-    });
-
-    volumeControl.addEventListener("input", () => {
-      const volume = Number(volumeControl.value);
-      volumeOutput.value = String(volume);
-      localStorage.setItem("noc-ambient-volume", String(volume));
-      if (ready) player.setVolume(volume);
-    });
-  })();
 </script>

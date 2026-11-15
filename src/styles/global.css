@@ -1885,3 +1885,34 @@ h1 em {
     color: black;
   }
 }
+
+/* The task directory remains usable without JavaScript. */
+.tool-start { margin: 0 0 4rem; }
+.tool-start-grid, .tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.tool-start-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tool-start-grid > a, .tool-card { border: 1px solid var(--line-strong); background: rgba(86, 242, 208, 0.035); padding: clamp(1rem, 2vw, 1.6rem); }
+.tool-start-grid > a { display: grid; gap: 0.6rem; text-decoration: none; }
+.tool-start-grid strong { color: var(--signal); }
+.tool-start-grid span, .tool-card p, .tool-card dd, .tool-group header p, .tools-archive-note { color: var(--muted); line-height: 1.65; }
+.tool-start-grid > a:hover, .tool-start-grid > a:focus-visible { border-color: var(--signal); }
+.tools-header { max-width: 65rem; padding-block: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
+.tools-header h1 { max-width: none; font-size: clamp(2.4rem, 5vw, 4rem); }
+.tool-jump-links, .tool-downloads { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; }
+.tool-jump-links { margin: 0 0 3rem; }
+.tool-jump-links a, .tool-downloads a { padding-block: 0.6rem; text-underline-offset: 0.25em; }
+.tool-group { margin-bottom: 4rem; scroll-margin-top: 2rem; }
+.tool-card h3 { margin-top: 0; font-size: 1.3rem; }
+.tool-card h3 a { color: var(--paper); }
+.tool-card dt { color: var(--signal); font: 0.7rem var(--font-code); text-transform: uppercase; margin-top: 1rem; }
+.tool-card dd { margin: 0.4rem 0 1rem; }
+.tool-downloads { margin-top: 1rem; border-top: 1px solid var(--line); font-size: 0.85rem; }
+.tools-archive-note { margin-bottom: 4rem; }
+.signal-utility-row { align-items: start; margin-top: 0; }
+.ambient-summary { cursor: pointer; color: var(--paper); padding: 0.5rem; line-height: 1.5; }
+.ambient-summary-title { color: var(--muted); font-size: 0.85rem; margin-left: 0.6rem; }
+.ambient-summary-state { display: block; color: var(--signal); font: 0.7rem var(--font-code); margin: 0.5rem 0 0 1rem; }
+.ambient-signal[open] .ambient-summary { margin-bottom: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+.ambient-summary:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+@media (max-width: 55rem) {
+  .tool-start-grid, .tool-grid { grid-template-columns: 1fr; }
+}
