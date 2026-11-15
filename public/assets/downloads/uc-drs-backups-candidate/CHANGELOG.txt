@@ -1,0 +1,11 @@
+UC DRS v1.6.1 testing candidate -- 2026-11-15
+
+- Preserve v1.6 source, test harnesses and original testing package.
+- Share technology/required-feature mapping across input, release and coverage.
+- Compare complete UCCX major/minor components; reject 12.50 and 12.51.
+- Require a declared product registration on an exact discovered node, so
+  IM&P-only evidence cannot qualify a CUCM environment.
+- Preserve existing inventory, IM&P component and publisher/subscriber checks.
+- Preserve SSH/credential behavior, local SFTP provisioning, audit and write gates.
+- Add 17 integrated regression assertions; core total 106. Local setup remains 53.
+- Update help, filenames and operator guidance; remain an unpublished candidate.

@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/build-sitemap.mjs",
+    "build": "npm run check:downloads && ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/build-sitemap.mjs && python3 -B scripts/check_downloads.py --check-built",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
-    "validate": "npm run build && node scripts/validate-site.mjs"
+    "validate": "npm run test:downloads && npm run test:site-validator && npm run build && node scripts/validate-site.mjs",
+    "test:downloads": "python3 -B -m unittest discover -s scripts -p test_check_downloads.py",
+    "check:downloads": "python3 -B scripts/check_downloads.py",
+    "test:site-validator": "node --test scripts/test-validate-site.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

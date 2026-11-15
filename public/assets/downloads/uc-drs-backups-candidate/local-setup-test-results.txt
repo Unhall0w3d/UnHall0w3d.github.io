@@ -1,0 +1,141 @@
+PASS safe profile-relative path normalized
+PASS reject unsafe path /SFTPBackups/x
+PASS reject unsafe path C:/Users/x
+PASS reject unsafe path SFTPBackups/../other
+PASS reject unsafe path SFTPBackups//x
+PASS reject unsafe path SFTPBackups/CON.txt
+PASS reject unsafe path SFTPBackups/x.
+PASS reject unsafe path SFTPBackups/x;command
+PASS source scopes canonicalized and deduplicated
+PASS reject invalid source Any
+PASS reject invalid source 0.0.0.0/0
+PASS reject invalid source 192.0.2.1/0
+PASS reject invalid source 192.0.2.1/33
+PASS reject invalid source 127.0.0.1
+PASS reject invalid source 224.1.1.1
+PASS reject invalid source ::1
+PASS reject invalid source 192.0.2.1;command
+PASS standard Windows SSH config accepted without rewrite
+PASS custom mapping rejected: Include other.conf
+PASS custom mapping rejected: ChrootDirectory C:/jail
+PASS custom mapping rejected: ForceCommand internal-sftp
+PASS custom mapping rejected: Port 2222
+PASS custom mapping rejected: Subsystem sftp sftp-server.exe -d C:/other
+PASS native profile API wrapper compiles without calling Windows
+PASS missing server/profile produces explicit provisioning plan
+PASS monthly disabled omits monthly folder
+PASS refuse setup when SFTP IP is not local
+PASS refuse mismatched local account
+PASS separate networks cannot share a setup run
+PASS exact scoped firewall rule accepted
+PASS broad rule is not accepted as scoped setup
+PASS uninitialized local profile identified without inventing path
+PASS disabled account rejected
+PASS domain account rejected
+PASS expired account rejected
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: Create through Windows profile API, then use its registered path
+Install OpenSSH Server: True; start sshd: True; Automatic startup: True
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+The broad default rule created by a fresh Windows installation will be disabled before sshd is started.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+Local setup preview only. Add -Apply to perform these local changes.
+PASS preview performs zero system mutations
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: Create through Windows profile API, then use its registered path
+Install OpenSSH Server: True; start sshd: True; Automatic startup: True
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+The broad default rule created by a fresh Windows installation will be disabled before sshd is started.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+PASS ShouldProcess refusal performs zero system mutations
+PASS non-elevated setup stops before mutations
+PASS elevation failure is nonmutating
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: Create through Windows profile API, then use its registered path
+Install OpenSSH Server: True; start sshd: True; Automatic startup: True
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+The broad default rule created by a fresh Windows installation will be disabled before sshd is started.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+Local configuration verified. Test SFTP login and file creation as the selected account, then test a backup from UC.
+PASS fresh install orders scoped firewall before service startup
+PASS completion only after service and listener verification
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: Create through Windows profile API, then use its registered path
+Install OpenSSH Server: True; start sshd: True; Automatic startup: True
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+The broad default rule created by a fresh Windows installation will be disabled before sshd is started.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+PASS Windows restart requirement stops setup without reboot
+PASS installer-created broad rule disabled even when restart is needed
+PASS partial install is not marked complete
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: /mock/user
+Install OpenSSH Server: False; start sshd: False; Automatic startup: False
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+WARNING: Existing OpenSSH firewall rules are preserved. They or other rules may allow broader access than the new scoped rule; review effective firewall policy.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+Local configuration verified. Test SFTP login and file creation as the selected account, then test a backup from UC.
+PASS existing server service and firewall retained; folder checks rerun
+PASS conflicting same-name firewall rule not overwritten
+PASS firewall conflict blocks all provisioning
+
+FINAL: 47 local-setup checks passed. Native Windows servicing, ACLs, firewall and SFTP login remain untested.
+PASS new root grant plan limits FullControl to SYSTEM and Administrators
+PASS backup user receives Modify rather than FullControl
+PASS existing folder plan adds only selected user grant
+PASS Everyone cannot become the backup account grant
+
+FINAL: 51 local-setup checks passed. Native Windows servicing, ACLs, firewall and SFTP login remain untested.
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: /mock/user
+Install OpenSSH Server: False; start sshd: False; Automatic startup: False
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+WARNING: Existing OpenSSH firewall rules are preserved. They or other rules may allow broader access than the new scoped rule; review effective firewall policy.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+Local configuration verified. Test SFTP login and file creation as the selected account, then test a backup from UC.
+PASS Windows-provided OpenSSH Users group gains selected account only
+
+Local SFTP setup on  (192.0.2.50); site Example
+Account: backup [S-1-5-21-1-2-3-1001]
+Profile: /mock/user
+Install OpenSSH Server: False; start sshd: False; Automatic startup: False
+Folders below the user profile: SFTPBackups/Example/Voice/Monthly, SFTPBackups/Example/Voice/Weekly
+OpenSSH Users: add this account if Windows provides the group and membership is absent.
+New root: private ACL. Existing folders: preserve entries and add user Modify where absent.
+Firewall: TCP/22 on 192.0.2.50, Domain/Private profiles, from 192.0.2.0/24
+WARNING: Existing OpenSSH firewall rules are preserved. They or other rules may allow broader access than the new scoped rule; review effective firewall policy.
+Existing sshd_config is preserved. This enables ordinary Windows SSH/SFTP, not an SFTP-only jail.
+Local configuration verified. Test SFTP login and file creation as the selected account, then test a backup from UC.
+PASS existing OpenSSH Users membership is not added repeatedly
+
+FINAL: 53 local-setup checks passed. Native Windows servicing, ACLs, firewall and SFTP login remain untested.

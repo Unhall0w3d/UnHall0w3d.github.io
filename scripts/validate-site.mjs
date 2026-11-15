@@ -42,7 +42,7 @@ const failures = new Set();
 
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
-  const attributes = html.matchAll(/\b(?:href|src)=(?:"([^"]+)"|'([^']+)')/g);
+  const attributes = html.matchAll(/\b(?:href|src|data-code-preview)=(?:"([^"]+)"|'([^']+)')/g);
 
   for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
     const image = match[0];

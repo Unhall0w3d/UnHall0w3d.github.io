@@ -1,0 +1,33 @@
+UC DRS v1.6.1 candidate validation -- 2026-11-15
+
+Baseline: scripts/uc-drs-backups/Set-UC-DRSBackupSchedules-v1.6.ps1, unchanged.
+Changes: complete major/minor release matching; required primary product
+registration on a discovered node; one shared product mapping. No SSH, credential,
+provisioning, audit or remote mutation path was changed.
+
+Executed in separate PowerShell 7.7.0 processes on Linux:
+- Core harness: 106 checks passed (89 existing plus 17 regression assertions).
+- Local SFTP setup harness: 53 checks passed.
+- Core harness includes script AST parsing, function loading, built-in help,
+  native wrapper compilation, simulated DRS writes/reruns/maintenance, read-only
+  guards, redaction, interrupted-write behavior and connection cleanup.
+- New regressions reject UCCX 12.50/12.51 and unknown technology; accept supported
+  release text including the known parenthesized CUCM form; block IM&P-only,
+  empty, wrong-node and wrong-case primary registration evidence; retain mixed
+  CUCM/IM&P, CUCM-only and the CUC/CER/UCCX feature mappings.
+- Same existing local setup fixtures verify simulated service/ACL/firewall actions.
+
+Commands from this package, each in a fresh process:
+  pwsh -NoLogo -NoProfile -NonInteractive -File ./Test-UC-DRSBackupSchedules.ps1
+  pwsh -NoLogo -NoProfile -NonInteractive -File ./Test-LocalSftpSetup.ps1
+
+No real Windows APIs, SSH connections, Cisco changes, SFTP login, backup run or
+restore operation occurred. Windows PowerShell 5.1, Posh-SSH/Cisco response shapes,
+native credential/provisioning/ACL/firewall behavior and effective SFTP access
+remain operator qualification items. Feature registration is evidence of the
+queried configuration, not proof of successful backup or recovery.
+
+Distribution is staged outside public; original v1.6 package is preserved there
+separately. Source/staged loose files/ZIP contents/checksum parity are checked by
+scripts/check_downloads.py --audit-staged-draft uc-drs-backups-candidate.
+Publication, remote rollout and Git push were not performed.

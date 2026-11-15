@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "packages": {
+    "cucm-auto-answer": {
+      "state": "released",
+      "mirrors": [
+        "auto-answer-update.py",
+        "README.md"
+      ],
+      "public_only": {
+        "devlist.example.csv": "cab85767cf5c631c867974e23256d0724a7fd2257b57acd4bdce5fd0dc761fa3"
+      }
+    },
+    "cucm-blf-label": {
+      "state": "released",
+      "mirrors": [
+        "blf-label-update.py",
+        "README.md"
+      ],
+      "public_only": {
+        "phones.example.csv": "9ba3168878c9fc0ec3cd0367a6236e55fe9278efca4c6c7a39690be2de17c7ff"
+      }
+    },
+    "uc-drs-backups": {
+      "state": "draft",
+      "mirrors": [
+        "Set-UC-DRSBackupSchedules-v1.6.ps1",
+        "README.txt",
+        "targets-example.csv",
+        "profile-example.json",
+        "Test-UC-DRSBackupSchedules.ps1",
+        "Test-LocalSftpSetup.ps1",
+        "core-test-results.txt",
+        "local-setup-test-results.txt",
+        "VALIDATION.txt"
+      ],
+      "archive": {
+        "stem": "UC-DRS",
+        "version": "1.6"
+      }
+    },
+    "uc-drs-backups-candidate": {
+      "state": "released",
+      "mirrors": [
+        "Set-UC-DRSBackupSchedules-v1.6.1.ps1",
+        "README.txt",
+        "CHANGELOG.txt",
+        "targets-example.csv",
+        "profile-example.json",
+        "Test-UC-DRSBackupSchedules.ps1",
+        "Test-LocalSftpSetup.ps1",
+        "core-test-results.txt",
+        "local-setup-test-results.txt",
+        "VALIDATION.txt"
+      ],
+      "archive": {
+        "stem": "UC-DRS",
+        "version": "1.6.1"
+      }
+    }
+  }
+}

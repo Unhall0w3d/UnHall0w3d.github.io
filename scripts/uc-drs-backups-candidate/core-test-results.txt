@@ -1,0 +1,323 @@
+PASS target normalization supplies SSH port
+PASS reject shorthand IP
+PASS reject IP command injection
+PASS reject unsafe CLI token
+PASS reject credential field in inventory
+PASS reject duplicate targets
+PASS credential key includes site purpose endpoint and user
+PASS SSH and SFTP namespaces differ
+PASS native wrapper compiles without calling Windows APIs
+PASS topology retains IM&P database role
+PASS subscriber cannot become configuration endpoint
+PASS unauthenticated member blocks topology
+PASS unknown topology row blocks partial success
+PASS registration table retains components
+PASS registration label format retains components
+PASS truncated registration blocks
+PASS partly parsed registration blocks
+PASS CUCM-only coverage
+PASS IM&P pair included in schedule features
+PASS missing publisher DB component blocks
+PASS missing IM&P subscriber blocks
+PASS IM&P publisher-only coverage
+PASS unexpected IM&P blocks None profile
+PASS CUC single-node feature mapping
+PASS CUC rejects mismatched technology registrations
+PASS CER single-node feature mapping
+PASS CER rejects mismatched technology registrations
+PASS UCCX single-node feature mapping
+PASS UCCX rejects mismatched technology registrations
+PASS parse release
+PASS UCCX release uses separate policy
+PASS reject nonexistent UCCX 14 adapter
+PASS UCCX 12.50 cannot pass the 12.5 minor-version gate
+PASS UCCX 12.51 cannot pass the 12.5 minor-version gate
+PASS UCCX 15 accepted with Active Version form
+PASS parenthesized CUCM release preserved
+PASS unknown technology cannot bypass release policy
+PASS IM&P-only declared CUCM is blocked despite complete IM&P components
+PASS CCM on an undiscovered node cannot satisfy CUCM coverage
+PASS CUCM with IM&P remains accepted
+PASS CUCM-only remains accepted
+PASS primary feature retains exact node-name matching
+PASS CUC expected primary feature accepted
+PASS CUC wrong primary feature blocked
+PASS CER expected primary feature accepted
+PASS CER wrong primary feature blocked
+PASS UCCX expected primary feature accepted
+PASS UCCX wrong primary feature blocked
+PASS empty discovered inventory cannot pass coverage
+PASS list parser preserves schedule enabled state
+PASS unknown list is not empty configuration
+PASS partial device list blocks
+PASS explicit empty list accepted
+PASS new configuration plan has two create pairs
+PASS weekly start respects minimum elapsed two days
+PASS monthly scheduling is next calendar day not weekday
+PASS declining monthly creates no monthly device
+PASS disabled existing schedule is not already_ok
+PASS shared destinations rejected
+PASS expected new pair preserves empty baseline
+PASS lost existing configuration detected
+PASS stale admin prompt cannot finish output
+PASS colon status is not CLI prompt
+PASS unexpected password prompt not treated as CLI
+PASS expected password prompt recognized
+PASS weekly prompt recognized
+PASS final admin prompt accepts trailing newline
+PASS unverified command cannot continue anyway
+PASS failure overrides success token
+PASS redaction preserves valid JSON and handles escaped secrets
+PASS nested log data redacted
+PASS transport rejects writes when mode disables them
+PASS mode guard sends no bytes
+PASS write response does not resolve pending intent
+PASS verified write resolves matching intent
+PASS stale buffered output stops next command
+PASS disconnect detected without timeout loop
+PASS secret-exchange timeout stops
+PASS secret exchange omitted from timeout audit
+PASS normal cleanup disposes stream and removes own session
+WARNING: SSH Stream cleanup failed; inspect this run's audit log.
+PASS stream cleanup failure still removes session
+PASS state drift blocks execution before credential prompt
+PASS WhatIf/ShouldProcess refusal skips writes and credential requests
+PASS nonsecret profile roundtrip
+PASS profile cannot silently overwrite existing file
+
+85 checks passed. Windows vault and live Cisco behavior were not exercised.
+Weekly: created and enabled; full settings require DRS review.
+Monthly: created and enabled; full settings require DRS review.
+PASS full simulated create workflow completes weekly and monthly
+PASS simulated schedules enabled and read back
+PASS all six simulated writes have matching verification receipts
+PASS echoed SFTP password absent from full-run audit
+PASS full before and after configuration captured per operation
+PASS repeat run reports existing settings as unverified
+PASS repeat run sends no configuration writes
+PASS contradictory read-only/apply flags rejected before setup
+PASS maintenance requires explicit apply
+PASS WhatIf forbids module installation
+
+FINAL: 95 offline checks passed. Live Windows/Cisco tests remain operator work.
+Maintenance mode: no new devices or schedules will be created.
+WARNING: List output is not a restorable export. Record full settings in DRS before deleting anything.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "enabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+WARNING: Device is referenced by a schedule. Resolve that dependency first.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "enabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+PASS referenced device cannot be deleted
+Maintenance mode: no new devices or schedules will be created.
+WARNING: List output is not a restorable export. Record full settings in DRS before deleting anything.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "enabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+Weekly: DisableSchedule verified.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "disabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+PASS maintenance disables only selected schedule with readback
+Maintenance mode: no new devices or schedules will be created.
+WARNING: List output is not a restorable export. Record full settings in DRS before deleting anything.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "disabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+Weekly: DeleteSchedule verified.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+Weekly: DeleteDevice verified.
+{
+  "Devices": [
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+PASS explicit maintenance deletion preserves unrelated pair
+PASS maintenance has matching intent verification receipts
+WARNING: Authentication rejected. One fresh credential attempt is available.
+SSH connected; waiting up to 120 seconds for the Cisco admin prompt.
+PASS authentication rejection gets exactly one fresh attempt
+PASS credential save offered only after authentication success
+WARNING: Authentication rejected. One fresh credential attempt is available.
+PASS second authentication rejection stops target
+PASS failed credentials never saved and retry is bounded
+PASS nested settings validated during profile import
+
+FINAL: 104 offline checks passed. Windows vault and live Cisco behavior remain untested.
+PASS documented device server/path retained for verification
+PASS Get-Help synopsis is discoverable
+
+FINAL: 106 offline checks passed. Windows vault and live Cisco behavior remain untested.

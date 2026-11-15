@@ -64,6 +64,20 @@ export const tools: Tool[] = [
     post: "2026-08-25-auditing-local-and-long-distance-calling-access-with-cucm-sql",
   },
   {
+    id: "uc-drs", group: "operations", title: "Cisco UC DRS backup configuration",
+    description: "Prepare a local Windows SFTP destination and configure UC backup schedules using a reusable profile for each managed network.",
+    requires: "Windows PowerShell 5.1 or PowerShell 7 on Windows; Posh-SSH for UC operations; appliance SSH/OS credentials.",
+    status: "v1.6.1 testing candidate. 106 core and 53 local-setup checks passed offline. Native Windows and live appliance qualification remain pending; configuration checks do not establish backup or restore success.",
+    post: "2026-11-14-standardizing-cisco-uc-backup-configuration-with-powershell",
+    downloads: [
+      { label: "v1.6.1 testing package", href: "/assets/downloads/uc-drs-backups-candidate/UC-DRS-v1.6.1-testing.zip" },
+      { label: "PowerShell script", href: "/assets/downloads/uc-drs-backups-candidate/Set-UC-DRSBackupSchedules-v1.6.1.ps1" },
+      { label: "README", href: "/assets/downloads/uc-drs-backups-candidate/README.txt" },
+      { label: "Changelog", href: "/assets/downloads/uc-drs-backups-candidate/CHANGELOG.txt" },
+      { label: "Checksums", href: "/assets/downloads/uc-drs-backups-candidate/SHA256SUMS.txt" },
+    ],
+  },
+  {
     id: "ruckus-backups", group: "operations", title: "RUCKUS SmartZone backup retriever",
     description: "Retrieve SmartZone backup files through a repeatable PowerShell workflow.",
     requires: "Windows PowerShell and HTTPS access to SmartZone; see the repository for setup.",
