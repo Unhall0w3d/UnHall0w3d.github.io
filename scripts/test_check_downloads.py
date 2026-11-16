@@ -142,6 +142,58 @@ class DownloadCheckTest(unittest.TestCase):
         path.symlink_to(self.root / "scripts/published/main.py")
         self.assertIn("symlink refused", self.check()["published"][0])
 
+    def stage_nested_package(self):
+        self.manifest["packages"]["candidate"] = {
+            "state": "released", "mirrors": ["agents/worker.toml"],
+            "archive": {"folder": "Roles", "filename": "roles.zip"},
+        }
+        self.script = "agents/worker.toml"
+        self.archive = "roles.zip"
+        self.sums = f"{digest(self.payload)}  {self.script}\n".encode()
+        self.members = [("Roles/" + self.script, self.payload), ("Roles/SHA256SUMS.txt", self.sums)]
+        self.stage_candidate()
+
+    def test_nested_generic_archive_and_built_parity(self):
+        self.stage_nested_package()
+        self.assertEqual(self.check()["candidate"], [])
+        for path in (self.root / "public").rglob("*"):
+            if path.is_file():
+                self.write("dist/" + str(path.relative_to(self.root / "public")), path.read_bytes())
+        self.assertEqual(self.check(built=True), {"published": [], "candidate": []})
+        self.write("dist/assets/downloads/candidate/agents/worker.toml", b"drift")
+        self.assertIn("built bytes differ", self.check(built=True)["candidate"][0])
+
+    def test_nested_extra_files_and_empty_directories(self):
+        self.stage_nested_package()
+        self.write("public/assets/downloads/candidate/agents/private.txt", b"not for release")
+        (self.root / "public/assets/downloads/candidate/unused").mkdir()
+        errors = "\n".join(self.check()["candidate"])
+        self.assertIn("agents/private.txt", errors)
+        self.assertIn("unused", errors)
+
+    def test_nested_paths_refuse_traversal_aliases_and_collisions(self):
+        for paths in [["agents/../secret"], ["/absolute"], ["agents//x"],
+                      ["agents/./x"], ["agents\\x"], ["agents/x", "Agents/y"],
+                      ["agents", "agents/x"], ["agents/x", "agents/X"]]:
+            with self.subTest(paths=paths):
+                self.manifest["packages"]["published"]["mirrors"] = paths
+                self.assertTrue(self.check()["published"])
+
+    def test_nested_symlink_directory_refused(self):
+        self.stage_nested_package()
+        path = self.root / "public/assets/downloads/candidate/agents"
+        (path / "worker.toml").unlink()
+        path.rmdir()
+        path.symlink_to(self.root / "scripts/candidate/agents", target_is_directory=True)
+        self.assertIn("symlink refused", self.check()["candidate"][0])
+
+    def test_generic_archive_name_and_contents_validated(self):
+        self.stage_nested_package()
+        self.fixture_archive(self.members + [("Roles/agents/extra.toml", b"extra")])
+        self.assertIn("ZIP membership mismatch", self.check()["candidate"][0])
+        self.manifest["packages"]["candidate"]["archive"]["filename"] = "roles.txt"
+        self.assertIn("must end in .zip", self.check()["candidate"][0])
+
 
 if __name__ == "__main__":
     unittest.main()

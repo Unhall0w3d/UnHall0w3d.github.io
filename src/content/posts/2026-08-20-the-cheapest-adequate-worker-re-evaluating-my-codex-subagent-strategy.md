@@ -14,6 +14,10 @@ description: "Why I re-tested a Codex multi-agent strategy one day after publish
 draft: false
 ---
 
+> **November 15, 2026 update.** The [current Codex configuration](/2026/09/22/from-a-codex-prompt-to-an-agent-execution-system.html#current-configuration-november-15-2026)
+> covers the GPT-6.1 Sol primary, the five worker roles, and the downloadable
+> setup files.
+
 ## A Confident Article Is Still A Snapshot
 
 Yesterday I published

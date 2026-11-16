@@ -1,0 +1,3 @@
+# Merge this model key into your existing config; preserve integrations and permissions.
+# Reasoning effort remains the client default for the primary.
+model = "gpt-6.1-sol"

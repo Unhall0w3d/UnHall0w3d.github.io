@@ -1,0 +1,16 @@
+Codex routing package — 2026.11.15.1
+Reviewed November 15, 2026
+
+- Use the installed policy and roles as the sanitized baseline.
+- Add Luna High for bounded, low-complexity coding and focused tests.
+- Add Terra 6.1 Low for visual reasoning, computer use and bounded UI fixes.
+- Keep Sol 6.1 as primary with client-default effort; Sol workers use Medium.
+- Preserve Luna Low for exact mapping and routine checks.
+- Explain pinned model/effort precedence and inherited parent permissions.
+- Retain authority, Downloads quarantine, primary-only decisions, evidence,
+  completion-event and bounded-wait rules.
+- Package the policy, minimal config, five roles, usage notes and checksums.
+- Preserve older downloads at their original URLs; link the dated current package.
+
+This is a task-specific configuration, not a universal routing recommendation.
+No comparative model-quality, elapsed-time or subscription-cost claim is made.

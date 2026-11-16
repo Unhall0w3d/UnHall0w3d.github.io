@@ -25,6 +25,39 @@ def checked_names(names):
         raise ValueError("duplicate or case-colliding manifest names")
 
 
+def checked_paths(names):
+    """Allow package subdirectories without accepting traversal or aliases."""
+    for name in names:
+        if not isinstance(name, str):
+            raise ValueError("unsafe manifest name")
+        for part in name.split("/"):
+            checked_names([part])
+    folded = [name.casefold() for name in names]
+    if len(set(folded)) != len(folded):
+        raise ValueError("duplicate or case-colliding manifest names")
+    prefixes = {}
+    for name in names:
+        parts = name.split("/")
+        for end in range(1, len(parts) + 1):
+            prefix = "/".join(parts[:end])
+            if prefixes.setdefault(prefix.casefold(), prefix) != prefix:
+                raise ValueError("case-colliding package directories")
+            if end < len(parts) and prefix.casefold() in folded:
+                raise ValueError("package file/directory collision")
+
+
+def package_entries(directory):
+    """Include unexpected directories and symlinks without following them."""
+    if not directory.is_dir():
+        return set()
+    return {child.relative_to(directory).as_posix() for child in directory.rglob("*")}
+
+
+def expected_entries(names):
+    return {str(parent) for name in names for parent in [Path(name), *Path(name).parents]
+            if str(parent) != "."}
+
+
 def digest(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -50,6 +83,11 @@ def contents(path):
 
 
 def archive_spec(spec, mirrors):
+    if set(spec) == {"folder", "filename"}:
+        checked_names([spec["folder"], spec["filename"]])
+        if not spec["filename"].endswith(".zip"):
+            raise ValueError("archive filename must end in .zip")
+        return spec["folder"], spec["filename"]
     if set(spec) != {"stem", "version"}:
         raise ValueError("invalid archive keys")
     checked_names([spec["stem"]])
@@ -92,10 +130,10 @@ def check_package(root, package, spec, *, draft_location=None, built=False):
         raise ValueError("invalid mirrors or public_only")
     if any(not isinstance(pin, str) or not DIGEST.fullmatch(pin) for pin in public_only.values()):
         raise ValueError("invalid public-only digest")
-    checked_names(mirrors)
+    checked_paths(mirrors)
     folder, zip_name = archive_spec(spec["archive"], mirrors) if "archive" in spec else (None, None)
     expected = mirrors + list(public_only) + ([CHECKSUMS, zip_name] if folder else [])
-    checked_names(expected)
+    checked_paths(expected)
     public_rel = Path("public") / DOWNLOADS / package
     built_rel = Path("dist") / DOWNLOADS / package
     errors = []
@@ -123,11 +161,11 @@ def check_package(root, package, spec, *, draft_location=None, built=False):
 
     directory = path_at(root, public_rel)
     if directory.is_dir():
-        extras = sorted({child.name for child in directory.iterdir()} - set(expected))
+        extras = sorted(package_entries(directory) - expected_entries(expected))
         if extras:
             errors.append(f"unexpected public entries: {', '.join(extras)}")
     if built and path_at(root, built_rel).is_dir():
-        extras = sorted({child.name for child in path_at(root, built_rel).iterdir()} - set(expected))
+        extras = sorted(package_entries(path_at(root, built_rel)) - expected_entries(expected))
         if extras:
             errors.append(f"unexpected built entries: {', '.join(extras)}")
 

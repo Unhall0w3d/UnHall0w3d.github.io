@@ -14,6 +14,10 @@ description: "How I use Codex Sol at medium reasoning as the architect and integ
 draft: false
 ---
 
+> **November 15, 2026 update.** The [current Codex configuration](/2026/09/22/from-a-codex-prompt-to-an-agent-execution-system.html#current-configuration-november-15-2026)
+> covers the GPT-6.1 Sol primary, the five worker roles, and the downloadable
+> setup files.
+
 > **Update — August 20, 2026:** I re-tested the routing assumptions in this
 > article against two real repositories and changed which workers receive most
 > implementation work. The original workflow and previews remain below for

@@ -15,7 +15,87 @@ draft: false
 
 Our first multi-agent configuration was mostly an `AGENTS.md` that told a strong primary model when to delegate, which worker to choose, and how to review the result. It was useful. It was also asking the model to remember a growing list of authority rules, handoff details, test expectations, and exceptions.
 
-The latest revision is bigger than replacing GPT-5.6 Sol and Luna with GPT-6 Sol and Luna. We audited the instructions, introduced three scoped worker roles, and moved several checks into schemas and a verifier. Since publication, we have also compacted the global and Soul policies and clarified exactly which rules belong in each. The configuration now chooses GPT-6 Sol Medium as the personal default, while the policy continues to describe Astra Medium as its ordinary orchestration baseline. Those are different kinds of settings.<!--more-->
+The September revision was bigger than replacing GPT-5.6 Sol and Luna with GPT-6 Sol and Luna. We audited the instructions, introduced three scoped worker roles, and moved several checks into schemas and a verifier. Since publication, we have also compacted the global and Soul policies and clarified exactly which rules belong in each. At the time, I had configured GPT-6 Sol Medium as my personal default, while the written policy still described Astra Medium as the ordinary orchestration baseline.<!--more-->
+
+## Current Configuration (November 15, 2026)
+
+The September setup used three model-neutral roles. That made the roles easy to reuse, but the primary had to pick the model and effort whenever the inherited defaults were a poor fit. I now use GPT-6.1 Sol as the primary, with reasoning effort left at the client's default. The five worker roles below pin a model and effort for jobs I can describe up front.
+
+| Role | Model and effort | Work I assign |
+| --- | --- | --- |
+| `luna_focused` | GPT-6 Luna Low | Exact mapping, routine checks, and small reversible edits. |
+| `luna_coding` | GPT-6 Luna High | Low-complexity coding, small fixes, and focused tests when the design and checks are already clear. |
+| `sol_implementation` | GPT-6.1 Sol Medium | Complex implementation and debugging. |
+| `sol_review` | GPT-6.1 Sol Medium | Read-only review for correctness, regressions, and gaps in validation. |
+| `terra_visual` | GPT-6.1 Terra Low | Visual reasoning, computer use, and bounded UI coding where rendered behavior matters. |
+
+I kept Luna Low for quick mapping and added a separate High role for small changes with clear acceptance checks. That gives the coding worker more reasoning effort while keeping the handoff narrow. Any comparison of the two still needs to count the primary's corrections and review through accepted completion. [OpenAI's model guidance](https://learn.chatgpt.com/docs/models)
+
+OpenAI describes Terra as a model for visual reasoning and precise computer use. I apply that to bounded UI changes when I can give it a specific rendered state to inspect and verify. That's my routing choice. I still send complex code and cross-module debugging to Sol. [GPT-6.1 Terra model documentation](https://developers.openai.com/api/docs/models/gpt-6.1-terra)
+
+A role's pinned model and reasoning effort take precedence over spawn-time overrides. Choose a role whose pins fit the job, and check which model and effort actually ran where the client exposes them. Current Codex inherits the effective sandbox and approval mode from the parent session, including when an older role file contains its own sandbox key. A role can instruct a reviewer to avoid edits. For enforced read-only access, use a verified read-only parent. [Codex subagent documentation](https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents)
+
+The primary still decides whether the handoff is worth doing. I give a worker a concrete objective, owned paths or read-only scope, acceptance checks, and the evidence to return. During long work I prefer a completion event or a bounded wait and inspect the result once it arrives. The aim is to spend fewer turns asking whether anything changed. I have no measured token savings or accepted-change cost for this setup.
+
+The November qualification used Codex CLI 0.166.0. Fresh-session execution records confirmed all five saved roles used the configured model and effort and inherited the parent permissions. Luna High completed a small Python fix that passed six tests. Terra inspected a clipped mobile screenshot and changed the CSS; independent browser checks at mobile and desktop widths confirmed the layout fit and the button still worked. That establishes these fixtures. It does not establish a general performance ranking or lower subscription usage.
+
+### Inspect the November Package
+
+Review the policy and the roles before merging them into your setup. The config example sets the primary model. Start a fresh session after making changes and verify role discovery, model availability, and effective permissions in your client.
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/AGENTS.md">
+  <summary><span>Review AGENTS.md</span><small>MARKDOWN // AUTHORITY AND ROUTING</small></summary>
+  <pre aria-live="polite"><code>Open to load AGENTS.md.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/config.example.toml">
+  <summary><span>Review the primary model config</span><small>TOML // PRIMARY MODEL</small></summary>
+  <pre aria-live="polite"><code>Open to load config.example.toml.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/agents/luna_focused.toml">
+  <summary><span>Review luna_focused.toml</span><small>TOML // LUNA LOW</small></summary>
+  <pre aria-live="polite"><code>Open to load luna_focused.toml.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/agents/luna_coding.toml">
+  <summary><span>Review luna_coding.toml</span><small>TOML // LUNA HIGH</small></summary>
+  <pre aria-live="polite"><code>Open to load luna_coding.toml.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/agents/sol_implementation.toml">
+  <summary><span>Review sol_implementation.toml</span><small>TOML // SOL MEDIUM</small></summary>
+  <pre aria-live="polite"><code>Open to load sol_implementation.toml.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/agents/sol_review.toml">
+  <summary><span>Review sol_review.toml</span><small>TOML // SOL MEDIUM</small></summary>
+  <pre aria-live="polite"><code>Open to load sol_review.toml.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/agents/terra_visual.toml">
+  <summary><span>Review terra_visual.toml</span><small>TOML // TERRA LOW</small></summary>
+  <pre aria-live="polite"><code>Open to load terra_visual.toml.</code></pre>
+</details>
+
+<details class="code-preview" data-code-preview="/assets/downloads/codex-routing-2026-11-15/README.txt">
+  <summary><span>Review the setup notes</span><small>TEXT // INSTALLATION AND CHECKS</small></summary>
+  <pre aria-live="polite"><code>Open to load README.txt.</code></pre>
+</details>
+
+- [Download the November configuration ZIP](/assets/downloads/codex-routing-2026-11-15/codex-routing-2026-11-15.zip)
+- [Download AGENTS.md](/assets/downloads/codex-routing-2026-11-15/AGENTS.md)
+- [Download config.example.toml](/assets/downloads/codex-routing-2026-11-15/config.example.toml)
+- [Download luna_focused.toml](/assets/downloads/codex-routing-2026-11-15/agents/luna_focused.toml)
+- [Download luna_coding.toml](/assets/downloads/codex-routing-2026-11-15/agents/luna_coding.toml)
+- [Download sol_implementation.toml](/assets/downloads/codex-routing-2026-11-15/agents/sol_implementation.toml)
+- [Download sol_review.toml](/assets/downloads/codex-routing-2026-11-15/agents/sol_review.toml)
+- [Download terra_visual.toml](/assets/downloads/codex-routing-2026-11-15/agents/terra_visual.toml)
+- [Download README.txt](/assets/downloads/codex-routing-2026-11-15/README.txt)
+- [Changelog](/assets/downloads/codex-routing-2026-11-15/CHANGELOG.txt)
+- [SHA-256 checksums](/assets/downloads/codex-routing-2026-11-15/SHA256SUMS.txt)
+
+## The September Configuration
 
 <figure>
   <img src="/assets/images/codex-agent-execution-flow.svg" alt="Human authorization flows to the primary agent, which assigns work to read-only mapper and reviewer roles and a workspace-write implementer. Evidence goes through deterministic checks before the primary integrates it and a human reviews promotion." width="1200" height="870" loading="lazy" />
@@ -102,9 +182,9 @@ The hoped-for operational gains are fewer incomplete handoffs, fewer skipped che
 
 The system is still a candidate at several boundaries. The Soul default sandbox has not been changed by this work; effective role isolation needs runtime qualification; and the review validator proves completeness of an artifact, not correctness of its claims. The compacted instructions improve clarity but do not establish that Codex has loaded every role or reduced token use. Keeping those boundaries visible is part of making the system trustworthy.
 
-## Review the Reusable Configuration
+## Review the September Configuration Files
 
-The downloadable package now contains the compacted generic `AGENTS.md`, the three unchanged model-neutral role examples, a minimal `config.example.toml` showing the current Sol Medium primary selection, and a README. It illustrates the policy, role, and model-selection layers. The Soul-specific schemas, check registry, and verifier described above are not included in this generic package; they depend on that repository's risk and review rules. The example config deliberately omits the Soul project's broader sandbox setting.
+The September package contains the compacted generic `AGENTS.md`, the three unchanged model-neutral role examples, a minimal `config.example.toml` showing the then-current Sol Medium primary selection, and a README. It illustrates the policy, role, and model-selection layers. The Soul-specific schemas, check registry, and verifier described above are not included in this generic package; they depend on that repository's risk and review rules. The example config deliberately omits the Soul project's broader sandbox setting.
 
 <details class="code-preview" data-code-preview="/assets/downloads/codex-astra-multi-agent-workflow/AGENTS.md">
   <summary><span>Review the generic AGENTS.md</span><small>MARKDOWN // AUTHORITY AND ROUTING</small></summary>

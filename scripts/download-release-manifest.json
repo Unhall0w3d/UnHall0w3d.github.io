@@ -57,6 +57,24 @@
         "stem": "UC-DRS",
         "version": "1.6.1"
       }
+    },
+    "codex-routing-2026-11-15": {
+      "state": "released",
+      "mirrors": [
+        "AGENTS.md",
+        "config.example.toml",
+        "README.txt",
+        "CHANGELOG.txt",
+        "agents/luna_focused.toml",
+        "agents/luna_coding.toml",
+        "agents/sol_implementation.toml",
+        "agents/sol_review.toml",
+        "agents/terra_visual.toml"
+      ],
+      "archive": {
+        "folder": "codex-routing-2026-11-15",
+        "filename": "codex-routing-2026-11-15.zip"
+      }
     }
   }
 }

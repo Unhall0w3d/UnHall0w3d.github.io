@@ -99,7 +99,12 @@ export const tools: Tool[] = [
     id: "codex-workflows", group: "agent-workflows", title: "Codex roles and execution workflow",
     description: "Explore scoped delegation, policy boundaries, and evidence checks, with links to the configuration's evolution.",
     requires: "A Codex setup and a review of the models and capabilities available to you.",
-    status: "Historical configuration examples. Model names and routing recommendations require a fresh review.",
+    status: "November 2026 configuration. Five role/model pairs verified on CLI 0.166.0; bounded coding and UI fixtures passed. Confirm support and permissions in your client.",
     post: "2026-09-22-from-a-codex-prompt-to-an-agent-execution-system",
+    downloads: [
+      { label: "November configuration ZIP", href: "/assets/downloads/codex-routing-2026-11-15/codex-routing-2026-11-15.zip" },
+      { label: "Setup notes", href: "/assets/downloads/codex-routing-2026-11-15/README.txt" },
+      { label: "SHA-256 checksums", href: "/assets/downloads/codex-routing-2026-11-15/SHA256SUMS.txt" },
+    ],
   },
 ];
