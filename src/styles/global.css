@@ -262,8 +262,30 @@ h1 em {
 
 .signal-card-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   color: var(--muted);
+}
+
+.signal-frequency {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding-inline: 0.25rem;
+  text-decoration: underline dotted;
+  text-underline-offset: 0.3em;
+  text-transform: none;
+}
+
+.signal-frequency:hover,
+.signal-frequency:focus-visible {
+  color: var(--signal);
+  text-decoration-style: solid;
+}
+
+.signal-frequency:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 .signal-flip {

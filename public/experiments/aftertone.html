@@ -1,0 +1,1495 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f3efe4" />
+    <meta
+      name="description"
+      content="An illustrated field receiver for five calls that slipped out of the dial plan."
+    />
+    <title>Aftertone — NOC Thoughts</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f3efe4;
+        --ink: #282923;
+        --quiet: #605f53;
+        --rule: #bcb9a9;
+        --red: #a63a23;
+        --mono: "IBM Plex Mono", "Courier New", monospace;
+        --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+        --serif: "Spectral", Georgia, serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background-color: var(--paper);
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAUGElEQVR42n2cyY7kuJJFOUryAGpVtekPaKD//+PCNZK9EbNPHfB1Ao6I9NDAwYZrZtcY/+e//2sLIbT3E0MI/f19CSGkEMIZQnje7/P7Ce815f1bfb+7388SQtjf+8czl/eaFEI43p/5/f0TQvi+/08hhCuEsOKd/b1ue5+f3vde73P7O5bvO5Zxf8P3y3tPe/92veOpeNaYT8aYe/i/f+f77uX9PY4bxk33O8jwPjC+3wUMjC9J70KNxQ/vC8dLV3w3ri3vZyxCfBcnY+Ou9/Ng0TK+T+8z4ntPeH9f3p8RY88hhJ/3HWNMY5MPbPr6Pjfh3iFM4/sqgeoJkjB2K2AnyzuBMan6Xt8w8Q9e2rAwyzuIce0Xzxn/f96B1/e6invHuwIWPEGKmxbpeid14yf/DUE5cP2Q8jGXMf6xoPt771jo4/1+bEZNWM0EafnghTtW/34nTlW6NdiKQQ1J3DHoADUYknJhES88b313/H5/9ve7gmd8cH/GXOp77ZhHkRkZZqFrPA82ktL/QHqHlj4J4nxjAXeosW1klBgHDGzYiTGQISnbO4EVUnPhvihprZp4gN3tkPLn3dCGTWvvhCOktkPTMkxRwM8HG3xBQArGMTbozyInSNsCHedONKx+wU4XLGCHLapSqwhp/GLBOjai4Tljg4a9axp4gyR2bE6E1Aw7/Pvee8I5FcyTgrHITNR3vOd7T9OG9hBCHl52eMUvRL1jNxao1wkbs8pmjMVaYR/bOxGaCNqfMekI1ctYiDHGBZ6xvWON2JAHYxva8YNJRzgtfmxKLi1mgYacGH8IIeQCsY6QrBMTrHLhQ30+8IgDjhC+bJjIqolkwJZh2B9AjgKtoBcf5uSAlDTYtYq5PNiUDHN0YpOHVN3vT5qKCHg0NjHA5PWxgAGq0rHK33eRCGXKxOsFSOGBQQwpHSqZsYD06LQvpwz/8NoZBr9icgck+8Tkw0TdLrzvRza8AN92aCOf+xF+fQJWNupm2rIA8DnUpWABbuzuigkGSO8Hz7oxSeKwC06gCsA2QZkN5uOBqgWoY4EN65DMn/f7joVI2OxHnpwqniFw13AiXIwNNuDBTWNHhvj+wqA32b8uuxQgmRek7xas+ABkn+9YEsaQ5VUPmZAmNRzX0tY+gGEZqksEEjD+DNxIuLYME1VglCMiAWKwDHW4J1K6wJtGeMCuyVQ4mwNSSq9ZXxvaoeoZz7rhEQcmq++GRmxSwobu7zs+kOYHz/6Bebjx94pNyFi8h6Yi//P3XxUwpEO0T4RvEQaZyL5BrFcNnFgwQnIKFqsrsrhlA29oQ4bT6BMcmrGJ1IwHuC5jk1dEHx1YOMMXcH4FQtANpB/hrFuL+ch2LVKZC649YoE+WPRh5whp6PVPhXojItrlFU/YuOFJHY9zbIRJEeMMMAsLnpEgfR3P2bXYIYSQ8j9//5W0MBEGO0M6ViH+LoMd4e3GxCsGsQJj3ri2wlTckHpKf4AKZX2/QP1+MNYMCebmMFmxSasyTESSZmQ5rUYJjFCtDix3vhLTFPaMAS1S54HaLzmIBjt5wzsHZGgqJGTBBnJyN+4fnnl/79uAVYPi4qgU3Vh4hoFFSYgb41+RhqMv+CmIFiLQfVUsWLDrWWpS8ZMg9oL6M1X1YDFXSBRj1gIbHCARHyAAOpEHqp0w9gyQHoVjKZUJdvFS/rNJGx9AuiPB4D7AbA1AeWRk7K0fRAxRMXGU5+wIv5iUDIg8OGkuHjflgbTdSi4kSMmFyVdcv0MINmhMls2swsgdZqZibWqSPamCAR0B+xcqvMnLLopDm9QgIr3ETUvwlFlZGHrCG9K04tkJ712AZdMrqR0SGRSZDFB9CuxvEoQGCf3VRv5xFg0iHoTOCXQb7EBXqOMd2+CN6SQy7O6F35Mk98A1q6TK0colu7sJGNMT3zBJI+GwS8UvONSgjHlkjpNexnHxgoEExIYbFr3Dc60I5Vj3OBFlMDH5YHcXLcIC4LthAxjhNGTMi0LNgI1pk3g5yFlsMEen0lqXUmgRqb9C43hgpZngTDLWzFB3GfEGSVqhchfw5gobxxpIlw3rypCPXN4hwJ5kf5sy4UnR0rjuB6p8a+wPNKAplDywET1BNSgJQYi+KxO7K0+2KdAOkJqsat0ltUqAHB1OYkj3rjFWJTL6ZCFPqP6vcn9jbK4CPjBFRQ5qzPNX89wLRDcIlQeks9IklPsCShwC4pSASrcP/DVUbUzwg0Vn+itjMsSBEZW+FeMPCC2/gB4sZxZlm7qgSprE9rdyoSGE8C1y2zvUL0OMEypXBVJwIrKIWKCOa3+x0JSIKmzYIB0fVdxu4bIdBp+wqr33dtjTsRkLNqIhYroElJukeYPkPYqVQ/7n7786VvsREC5Q3Sj7QjvE7MozSYmfko6msKy+z6hY2BvqzlT+AliRgReLbDUTtawKNoVrJAY8WLQMiDSesyrnuCQB06SyZIbnYQGHLz9UKkwCrMP2MFRMYiDcYjZEpew3SMcJh3SqTrFMMuV0GJzfD0xXFF5lYuECfNsxvs5JO9KIEOkvFvdXYHN44R/VLBoGz2TqA9t2Q9WdxIzYqIJrOmBOV3CfFLkEMQwIjvM7lwWL/wh3dm3mB88c49mTxD9CegLi2wBjvSkbzPT8zPMWXMOEZAd2jChCRcCEAtBcIa1dtIsGNUuKd0nzWGB6PpDSSxmo8dwfVe6S6tNLQgqIXJYmtagIe05JK9WYXr1BOh5506FWVJtLdmqHhnQUuliU2mCvuqKoBo9Ju8e5sYJ4/gdPnCGhBQvbBrnokrv+AfCtgDRFGKhgMTa8cBfXJcOor0jZ/4q005Rk2DGGpMmd4r00ZW7CJJRLUMsKW0hCQFSIykwUs1FjsXuCBFSoTxXAXeWNGoz3B2p5wjivKEYXgdIFXr2o9tLx3DCJMh68s+CZnOSKRb2VFV+UQWJZ9hQaYaptVRxeQwgxCSQmJQp2UTAGdPjAcz8y9JdqFa41l0n2J8huETQ3hG/0vqNseUDFEjbzB1IZkRDpgEgVOLaKJEVnkVVQH9/HoozypkxEFqFohceO2M1HHrAoMclS56XI41GmJ0gLLsEZprIWxbD0/A3Q6xAf5gONuOCV6X0ztIj2eWHarkBdDlxwiFbBUC+L1Nj1tzBhSRVIE1mjq/J8UZIQlSVesDlpkhskwCcgp9pWsC66BKYLvN+Kt4sSxgtDlqqKWhdjMwO1dyUz46SAzjzfF4vXlKQ84AX7JIVFr51QGO/CbQVqx7GTWdBER/4i1bbCdm9Y9KTQjqblX5OI4pDcqsAtYnr2CVkyILwa9myHAd6gUgmF7V9wVjo8+QF1PlT4p/NpCtOC7HGccJ8v1UwM7MkXLypS/VlMxpSXqlOriuc7pCeLD30BHx2wbQ4FWdNlAvNHhSrWLbKqhocWswjnVWHHrkz5o7JFg41kHfyS92a5d2zgw5IdKbZMrp6iiZE1n1VYOkWnTaCyLfKoHRtxY4EWTSyJIFlVfTvAW2yIpCxBCzYuIK7PipWLorCO9N2lWtCTYK8IMT7yRpSgACgTFZEs8KhdXONZ2fHAYILaKoJYVaRfFGVfONkoAigX/4QN/RUhnXS6E0mLTaSAfzmTggFWJB27JOSSKu4AumWSaKUNIvPrQI7uRAxMeMBkwweS/ohKckvtTgUDBd58F5f7C9uZoSUVCeU6YbUGjTUleaxTHJhTNLQOaMHUz0h3j0H+KElx474uXgrDrRPa0DHRrsphV4kyyJQkLFoShfiSltyK7y9JIonnh9BGY/V+l35vwm+XIoEOxH8iVd+lhkxlHXIWD5zTA4lPuj8DM2bAFzo4l1sXUVE6pOyAan6wgbuadugXKtDEwoRqUCDfAECj4s5HRRY25SSVPDcQeH4gNY8iGHq3S3XoqnR/nhSdDtjeHXb6ko1MyvbQDmcljC84qA82htXDxlAuTzLNcUL76CqkR9EyTrUlZGWnmRigvbqVGSdpaFFTDNlbxHQkCaQJ2F5ESWnAqJeqcG0Sx2fR5/5wY77qJooqWTInt6q22sReqgqRRsJ0kQTdosRFkcODCvRBixEVNpqJkAHFTmyumyVNBM1yQOQgus3sTyi3YfLcnQuxJgsuRTt1g3vclcH4IhphqqzA+QRxU5LSZQscVhecyMgYNfWtLJPwlAXzqL+tYjxUUfkOFbFCCOFMyqc9kzatJM/7ILORFCM3ZV6K7GeDCdgmVbagClicEMEjiu2n2l0J4pu4PXSOTH7sqgEvkFDSVzbxq+9B7aDK1AlJnB2LDwb3UdroVmIhIFUVJx62C2A/Ym6Rt8fi/KkEcMai0psWscgyKG4d0mjW/wNnlCbEywf50Jr/+fsvI/5dcKGIlM0CMwswRRmQfWLf+gS35f/AeyEB6Jw0w1wK7Nk/vKEHZVHUkpRUYLaJNt2APKrb6g8765EIf8QPPgCYV4VWlygdbNpZAUXIebGHe5S+etQPkpF8vVTjqCpnsl0sKSBwuZXEoirC03cCdzLePRa8J+S/OkByUP3hhHd1ovTBC21X3Gi4Q7JOYMxLPJwvVNf04IDY9ASI7pDiVUXzrvaJAEBNGMTO1CTHFkUgCCGEziTkpsblhslkhGpBiJ+M+BNiz1i4ouHl+A+prEfp/TCBF1XUk6DuARKIrJa76sZl0lvCsPYWTWVXQjiPWNgdPSO62GVbft7JLeqwTIAkrN4VHRHQREUbu/2rNqqvEpcPzAhrGFm8HKbUmgrzQbTjG1LbJnXfNmkY2lTCeEYkQg/4K89T5NkImE0wb5O6cdRhD6c6xbMaYJLGk1SDIMxYgA64OBXjZzBAnLfoYI2golFU10FTte7P6SNlkuLu6g875VDcmOKucnZ4+iyDFdUvFqwyJvkL2/MoVk/CdCwUOZ31qGc5K2TNk/bdJpLUrQzPIuSwJLh79koEUdyqUvFjwb9KjUeFZxvULr6Lw4McXNv4nUQ+rk/8yhaR3XWIEXFJajNs8Bc2m1DuV962iIezkNFAoLpIIjrUIcLzsQ5SBCPYjrWj1WD5fxIAXR42KRVf1XOyTqp6WZ1RuwpdF+z8gjRcR5iWELfvckTua/mTgE5w57eouETgu4zxF9LjMwga7MwHBpqx6I3MNilvFe8nyfEz6Zjq6tx06Hgh2lkx/gvU4ib8d4onecKOkqE75nSzlavrxKBfSUwB1TUqkZkFpJuKSe4dzpDqVTBmRbjoxm1u8hfh2q2KWxdz4pikoipCsqzDLrIO32C+kA4yJdiMpDxeUCj2FS+arj2rpLghqonChwwXb9DMOiTh0FECXep3Tyi5rGlkFcHTpCT7yDbv8uYOOzukdSz4XWBEfVaMmQfsMMryosy4rAiBmo4zCarvlklLBaFThiYU1WuqWK9RVT1ztBflNpcJReWZlENPNYn/61CeoniywSOuEw9148V1csZUUEvWB5M5JhSRpng6KWJhLdkZnaAFWpVVOiYts1XtF02ZmqI5dh2OdihfGtOkqS6oXEjQW9XBY9Va4dUCnMQXIDyrSXoR7/CjUmLWsVFJLRDUkq8qawWbzKJYVX8IbekyAeYkkjasxZ/Dx3j0SJLdeqS+iw5nIE3tUA05oszZ1b6QJ6Rw8lmyjifZsWhFbRY8GuWWnXtEYDogBHXSznYBMdxKXiS9o5Gg3UVdy2g4pNTd2IUNlTsmIdi5tCvwj0gxrRPQ2uQFx6b8KB52rSKq5nEp9LogyVVOI6gc+iAdx/Yucnv24UTMPPcJPdfkNLSkAxy62AxF52IRgEYVsbsqfqvONHBO74RE+rC0WwdJ8lyFXzEdFsXmFWaliHt9TA6j/Bm9cgn1z6AM84zeYW8Z5UmTwO4OaLGgUtbEkz6UxsqaDEPEHdK4KEl667CxS1mlDolOANWsrbRJRJQnbRELOxPZUHPpKBQWeS4dikNstU0WnnXZryQ4qGbxUSLU7Cjas0Md8qxVPOAckqFwQDh2kaVOdSVdYmDs0rA0IpGgNtJdLIEH6ufDHpihvsViZya56WCKDhZohZF2zTeoVJoUv3c1K56AGkkZbsbzDV41qmXiVvIkKpnw4JOTTuY4JgF8klpd4BlfsF3L5CUEsQFx9QPnYuIlncEzKTRlPfueHIjD8wcNxClFvyINZJ1rE1Vwaz7NOKknLE7osEm4jeFTVHHnUuN0V+tVU7FpUeJz1uRtp3CJgRDFaamK6T8A6I8kmad0RGFR8nhOEez/hIhuRa1q2+rYbaaOsgiPO+xPUwx5Cqo8Cr8WMbOc/a2qwTwqa1YZ/6ATlCjdWWfM8GSmqs71rNNIgggCeaT0SevIqGtYctgcc4pV0FRJW3VQBNn4JJD/sG0KfysTws89OcmSBaFTC0m7/FFsXuBISN5sOhiXB5iNpEOhHS2yU01S4iNIVmEm93Kw+LzpvJaiQyZWYLdVtLWvNuyRpJCtlRVm8Wipa3JKxwZ13uA0s06FowN0F+qfvhKm9H2OVFWGuYISdshzER6sqi9XwYio/GCdFIfq5CSiQ0fAbzoZ89H7Hh2Lt6lOXfCcoDMieBB4lOlgENCSmlt8FPqPjv9MMMqnMrgNO5tUj+WRxDc6Qpt2+5w4Epcwq85mZa/eyC1SqqwtUT16lGJSii+dxUqMOcZZizDXrdZ4hj+rQryE0MttqY8KTYQfH6jcLs/mnrci1QuTDc2qrwRsBrXokgRHhHhRJQGzw/okNP3TaNPUIvWIcHlPGgazSo6LDln0+QRsoTpVmnSHExMRh8DyV6WHWzZvndjER4ywDJvMk4qjCOXsoyNi2MnqSgqcx4vrpPuccemvmmS+OhbuxnUrBtMmnyBK24KNIKXtUkfTjYyNIVKbAPxViKDp6L5F8XUTk9VHKx8hhPa/XgpQt5E4J4oAAAAASUVORK5CYII=");
+        color: var(--ink);
+        font-family: var(--sans);
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        color: inherit;
+        cursor: pointer;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #a63a23;
+        outline-offset: 4px;
+      }
+      button:disabled {
+        cursor: default;
+      }
+      .page {
+        width: min(1320px, 92%);
+        margin: auto;
+      }
+      .eyebrow,
+      .micro,
+      .control,
+      .status,
+      .station-id,
+      .log-number,
+      .foot,
+      .brand,
+      .sound,
+      .log-count {
+        font: 700 11px/1.35 var(--mono);
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      .mast {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid var(--ink);
+      }
+      .mark {
+        display: block;
+        width: 29px;
+        height: 29px;
+        color: var(--red);
+      }
+      .brand {
+        font-size: 13px;
+        letter-spacing: 0.1em;
+      }
+      .mast-label {
+        border-left: 1px solid var(--rule);
+        padding-left: 13px;
+        color: var(--quiet);
+        font: 11px var(--mono);
+      }
+      .sound {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        background: transparent;
+        border: 1px solid var(--rule);
+        padding: 8px 12px;
+      }
+      .sound:hover,
+      .secondary:hover:enabled,
+      .log-card:hover:enabled {
+        background: #e5e0d2;
+      }
+      .bars {
+        height: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .bars i {
+        width: 2px;
+        background: currentColor;
+        height: 45%;
+      }
+      .bars i:nth-child(2) {
+        height: 80%;
+      }
+      .bars i:nth-child(3) {
+        height: 100%;
+      }
+      .sound[aria-pressed="true"] {
+        color: var(--red);
+      }
+      .hero {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 25px;
+        padding: 34px 0 25px;
+      }
+      .eyebrow {
+        color: var(--red);
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 24px;
+        height: 2px;
+        background: currentColor;
+      }
+      h1 {
+        font-family: var(--sans);
+        font-size: clamp(76px, 7.8vw, 115px);
+        font-weight: 750;
+        line-height: 0.94;
+        letter-spacing: -0.084em;
+        margin: 9px 0 0 -0.052em;
+      }
+      .hero p {
+        margin: 0 0 1px;
+        max-width: 365px;
+        font: italic clamp(18px, 1.6vw, 24px)/1.24 var(--serif);
+      }
+      .instrument {
+        display: grid;
+        grid-template-columns: minmax(0, 2.24fr) minmax(256px, 1fr);
+        border: 1px solid var(--ink);
+      }
+      figure {
+        margin: 0;
+        min-width: 0;
+        border-right: 1px solid var(--ink);
+        display: flex;
+        flex-direction: column;
+      }
+      .view {
+        position: relative;
+        background: #202928;
+        flex: 1;
+        min-height: 238px;
+        isolation: isolate;
+      }
+      .view canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        inset: 0;
+        object-fit: cover;
+      }
+      .view .plate,
+      .view .stamp {
+        position: absolute;
+        font: 10px/1.1 var(--mono);
+        color: #eee8cf;
+        letter-spacing: 0.13em;
+        text-shadow: 0 1px 3px #151f20;
+        background: #202928bb;
+        padding: 5px 7px;
+      }
+      .plate {
+        top: 14px;
+        left: 15px;
+      }
+      .stamp {
+        bottom: 12px;
+        right: 14px;
+      }
+      figcaption {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        min-height: 66px;
+        padding: 10px 20px;
+        border-top: 1px solid var(--ink);
+      }
+      .station-id {
+        border: 1px solid var(--ink);
+        padding: 5px 8px;
+        white-space: nowrap;
+      }
+      .scene-title {
+        font: italic clamp(20px, 2vw, 31px)/1 var(--serif);
+        margin: 0;
+      }
+      .print-type {
+        margin-left: auto;
+        color: var(--quiet);
+        font: 10px var(--mono);
+        white-space: nowrap;
+      }
+      .console {
+        padding: 21px clamp(19px, 2vw, 32px) 18px;
+        background: #dfdccd44;
+        display: flex;
+        flex-direction: column;
+      }
+      .panel-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .status {
+        color: var(--red);
+        font-size: 10px;
+        letter-spacing: 0.035em;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .status:before {
+        content: "";
+        background: currentColor;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+      .status[data-locked="false"] {
+        color: var(--quiet);
+      }
+      .freq {
+        display: flex;
+        gap: 7px;
+        align-items: baseline;
+        margin: 14px 0 4px;
+      }
+      .freq output {
+        font: 500 clamp(49px, 4.4vw, 68px)/1 var(--sans);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.075em;
+      }
+      .freq small {
+        font: 13px var(--mono);
+        color: var(--quiet);
+      }
+      .dial {
+        position: relative;
+        height: 42px;
+        margin: 1px 0 0;
+      }
+      .ruler {
+        width: 100%;
+        height: 35px;
+        display: block;
+      }
+      .dial input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        cursor: ew-resize;
+      }
+      .dial:focus-within {
+        outline: 2px solid var(--red);
+        outline-offset: 3px;
+      }
+      .scale-ends {
+        display: flex;
+        justify-content: space-between;
+        color: var(--quiet);
+        font: 10px var(--mono);
+        margin-top: -4px;
+      }
+      .message {
+        margin: 15px 0 16px;
+        padding-top: 13px;
+        border-top: 1px solid var(--rule);
+        flex: 1;
+      }
+      .micro {
+        display: block;
+        color: var(--quiet);
+        font-size: 10px;
+      }
+      .message p {
+        margin: 6px 0 0;
+        font: italic 18px/1.28 var(--serif);
+        min-height: 2.55em;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+      }
+      .control {
+        font-size: 10px;
+        letter-spacing: 0.025em;
+        border: 1px solid var(--ink);
+        padding: 12px 7px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+      .primary {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .primary:hover {
+        background: #41443a;
+      }
+      .secondary {
+        background: transparent;
+      }
+      .secondary:disabled {
+        border-color: var(--rule);
+        color: var(--quiet);
+      }
+      .glyph {
+        font-size: 14px;
+        line-height: 10px;
+      }
+      .log-head {
+        margin: 24px 0 12px;
+        display: flex;
+        align-items: baseline;
+        gap: 13px;
+      }
+      .log-head h2 {
+        font: 600 25px/1 var(--sans);
+        letter-spacing: -0.055em;
+        margin: 0;
+      }
+      .log-head:after {
+        content: "";
+        flex: 1;
+        border-top: 1px solid var(--rule);
+        align-self: center;
+      }
+      .log-count {
+        order: 1;
+        color: var(--quiet);
+        font-size: 10px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .log-card {
+        position: relative;
+        text-align: left;
+        background: transparent;
+        min-height: 76px;
+        overflow: hidden;
+        border: 1px solid var(--rule);
+        padding: 11px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .log-card.current {
+        border-color: var(--red);
+      }
+      .log-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+      }
+      .log-number {
+        font-size: 10px;
+        color: var(--quiet);
+      }
+      .wave {
+        display: block;
+        width: 47%;
+        height: 14px;
+      }
+      .log-name {
+        font: italic 17px/1.1 var(--serif);
+      }
+      .log-card:disabled .log-name {
+        color: var(--quiet);
+      }
+      .reply {
+        margin-top: 14px;
+        border: 1px solid var(--red);
+        background: transparent;
+        color: var(--red);
+        padding: 10px 15px;
+      }
+      .reply[hidden] {
+        display: none;
+      }
+      .foot {
+        font-size: 9px;
+        letter-spacing: 0.055em;
+        color: var(--quiet);
+        border-top: 1px solid var(--rule);
+        margin: 23px 0 16px;
+        padding-top: 11px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+      }
+      [hidden] {
+        display: none;
+      }
+      @media (min-width: 820px) {
+        .view {
+          aspect-ratio: 2.14;
+        }
+      }
+      @media (max-width: 820px) {
+        .page {
+          width: 94%;
+        }
+        .hero {
+          padding: 24px 0 19px;
+        }
+        .hero p {
+          max-width: 246px;
+        }
+        .console {
+          padding: 15px;
+        }
+        .instrument {
+          grid-template-columns: minmax(0, 1.55fr) minmax(248px, 1fr);
+        }
+        .view {
+          min-height: 225px;
+        }
+        .print-type {
+          display: none;
+        }
+        .cards {
+          gap: 6px;
+        }
+        .log-card {
+          padding: 9px;
+        }
+        .wave {
+          width: 35%;
+        }
+      }
+      @media (max-width: 660px) {
+        .page {
+          width: 92%;
+        }
+        .mast {
+          height: 54px;
+        }
+        .mast-label {
+          display: none;
+        }
+        .hero {
+          display: block;
+          padding: 25px 0 18px;
+        }
+        .hero p {
+          margin-top: 12px;
+          max-width: 100%;
+          font-size: 18px;
+        }
+        .instrument {
+          grid-template-columns: 1fr;
+        }
+        .view {
+          aspect-ratio: 1.85;
+          min-height: 0;
+        }
+        figure {
+          border-right: 0;
+          border-bottom: 1px solid var(--ink);
+        }
+        figcaption {
+          min-height: 47px;
+          padding: 8px 12px;
+        }
+        .scene-title {
+          font-size: 22px;
+        }
+        .console {
+          padding: 15px;
+        }
+        .message p {
+          min-height: 0;
+        }
+        .cards {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .log-card {
+          min-height: 68px;
+        }
+        .log-head {
+          margin-top: 22px;
+        }
+        .freq {
+          margin: 10px 0 2px;
+        }
+        .plate {
+          top: 8px;
+          left: 8px;
+        }
+        .stamp {
+          bottom: 7px;
+          right: 7px;
+        }
+        .foot {
+          flex-wrap: wrap;
+        }
+        .brand {
+          font-size: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="mast">
+        <canvas
+          class="mark"
+          id="mark"
+          width="64"
+          height="64"
+          aria-hidden="true"
+        ></canvas>
+        <strong class="brand">NOC Thoughts</strong
+        ><span class="mast-label">Experimental Systems</span>
+        <button class="sound" id="sound" aria-pressed="false">
+          <span class="bars" aria-hidden="true"
+            ><i></i><i></i><i></i><i></i></span
+          ><span id="soundText">Sound off</span>
+        </button>
+      </header>
+      <section class="hero">
+        <div>
+          <span class="eyebrow">Shortwave field receiver</span>
+          <h1>Aftertone</h1>
+        </div>
+        <p>
+          Five calls slipped out of the dial plan.<br />Tune the band. Keep what
+          comes through.
+        </p>
+      </section>
+      <section class="instrument" aria-label="Shortwave receiver">
+        <figure>
+          <div class="view">
+            <canvas
+              id="land"
+              width="1200"
+              height="560"
+              role="img"
+              aria-label="Illustrated landscape at the tuned frequency"
+            ></canvas
+            ><span id="plate" class="plate"></span
+            ><span class="stamp">AT–5 / RX</span>
+          </div>
+          <figcaption>
+            <span id="stationId" class="station-id"></span>
+            <h2 id="title" class="scene-title"></h2>
+            <span class="print-type">RECEIVER PLATE</span>
+          </figcaption>
+        </figure>
+        <div class="console">
+          <div class="panel-title">
+            <strong class="eyebrow" style="color: var(--ink)">Tuner</strong
+            ><span class="status" id="lock"></span>
+          </div>
+          <div class="freq">
+            <output for="tuning" id="freq">6.830</output><small>MHz</small>
+          </div>
+          <div class="dial">
+            <canvas class="ruler" id="ruler" aria-hidden="true"></canvas
+            ><input
+              id="tuning"
+              aria-label="Tune frequency in megahertz"
+              type="range"
+              min="5800"
+              max="15800"
+              step="5"
+              value="6830"
+            />
+          </div>
+          <div class="scale-ends">
+            <span>5.8</span><span>10.8</span><span>15.8</span>
+          </div>
+          <div class="message">
+            <span class="micro">Intercepted transmission</span>
+            <p id="transcript"></p>
+          </div>
+          <div class="actions">
+            <button class="control primary" id="seek">
+              <span class="glyph" aria-hidden="true">↠</span> Seek next</button
+            ><button class="control secondary" id="save">
+              <span class="glyph" aria-hidden="true">＋</span
+              ><span id="saveText">Log signal</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section aria-labelledby="logTitle">
+        <div class="log-head">
+          <h2 id="logTitle">Field log</h2>
+          <span class="log-count" id="count"></span>
+        </div>
+        <div class="cards" id="cards"></div>
+        <button class="reply control" id="reply" hidden>
+          Connect the five lines ↗
+        </button>
+      </section>
+      <div class="foot">
+        <span>Aftertone &nbsp;/&nbsp; Signal Studies</span
+        ><span>Tune by dragging the scale or using ← →</span>
+      </div>
+      <p class="sr" role="status" id="notice"></p>
+    </main>
+    <script>
+      "use strict";
+      const get = (id) => document.getElementById(id);
+      const tau = 2 * Math.PI;
+      const stations = [
+        {
+          freq: 6830,
+          name: "The Last Repeater",
+          site: "Highland exchange",
+          msg: "“If the line goes quiet, leave the ridge light on. I can find my way from there.”",
+          seed: 23,
+          sun: [705, 151, 99],
+          root: 196,
+          notes: [0, 7, 12, 9],
+        },
+        {
+          freq: 8275,
+          name: "The Glass Reservoir",
+          site: "Submerged exchange",
+          msg: "“The water came up to the switchboard in June. Tonight the bells are ringing under the ice.”",
+          seed: 62,
+          sun: [307, 128, 72],
+          root: 220,
+          notes: [0, 3, 10, 7],
+        },
+        {
+          freq: 10440,
+          name: "The Listening Orchard",
+          site: "Rural party line",
+          msg: "“We buried the copper after the storm. Come spring, the branches knew all our numbers.”",
+          seed: 114,
+          sun: [655, 121, 78],
+          root: 164.81,
+          notes: [0, 7, 10, 12],
+        },
+        {
+          freq: 12215,
+          name: "The Night Ferry",
+          site: "Coastal dispatch",
+          msg: "“One passenger, no luggage. Asked if the return ticket was good for yesterday.”",
+          seed: 37,
+          sun: [796, 121, 61],
+          root: 146.83,
+          notes: [0, 5, 12, 7],
+        },
+        {
+          freq: 14660,
+          name: "The Room Upstairs",
+          site: "Unlisted extension",
+          msg: "“I heard you go past the house four times. This time, let it ring.”",
+          seed: 95,
+          sun: [393, 116, 64],
+          root: 246.94,
+          notes: [0, 5, 7, 3],
+        },
+      ];
+      const paper = "#e4d9b9",
+        dark = "#202a29",
+        red = "#e07950";
+      const range = get("tuning"),
+        screen = get("land"),
+        ctx = screen.getContext("2d");
+      const art = document.createElement("canvas");
+      art.width = 1200;
+      art.height = 560;
+      const g = art.getContext("2d");
+      const W = 1000,
+        H = 467;
+      function seeded(seed) {
+        return () => {
+          seed = (Math.imul(1664525, seed) + 1013904223) >>> 0;
+          return seed / 4294967296;
+        };
+      }
+      function line(c, x1, y1, x2, y2, color, w = 1) {
+        c.strokeStyle = color;
+        c.lineWidth = w;
+        c.beginPath();
+        c.moveTo(x1, y1);
+        c.lineTo(x2, y2);
+        c.stroke();
+      }
+      function disc(c, x, y, r, color) {
+        c.fillStyle = color;
+        c.beginPath();
+        c.arc(x, y, r, 0, tau);
+        c.fill();
+      }
+      function path(points, fill) {
+        g.fillStyle = fill;
+        g.beginPath();
+        points.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y)));
+        g.closePath();
+        g.fill();
+      }
+      function ridge(x, layer, s) {
+        const k = s.seed + layer * 16;
+        return (
+          164 +
+          layer * 45 +
+          26 * Math.sin(x * 0.008 + k) +
+          15 * Math.sin(x * 0.016 + k * 0.7) +
+          6 * Math.sin(x * 0.045 + k) +
+          2 * Math.sin(0.099 * x + k)
+        );
+      }
+      function hills(layer, s, r, water) {
+        const base =
+          layer === 0
+            ? "#84918a"
+            : layer === 1
+              ? "#627169"
+              : layer === 2
+                ? "#48584e"
+                : "#33463f";
+        const edges = Array.from({ length: 501 }, (_, i) => [
+          i * 2,
+          ridge(i * 2, layer, s),
+        ]);
+        path([...edges, [W, H], [0, H]], base);
+        g.save();
+        g.clip();
+        // Broken, slanted cuts follow folds running down each face.
+        for (let i = 0; i < 3600; i++) {
+          const x = r() * W,
+            top = ridge(x, layer, s),
+            dy = r() * 108,
+            y = top + dy;
+          const lean =
+            (ridge(x + 3, layer, s) - ridge(x - 3, layer, s)) * 0.75 +
+            Math.sin(x * 0.028 + layer) * 1.8;
+          const len = 1 + r() * (layer + 2) * 2.2;
+          line(
+            g,
+            x,
+            y,
+            x + lean * len * 0.58 + 1,
+            y + len,
+            r() > 0.48 ? "rgba(226,221,192,.34)" : "rgba(18,37,34,.33)",
+            0.45 + r() * 0.7,
+          );
+        }
+        for (let row = 0; row < 11; row++) {
+          let x = r() * 22;
+          while (x < W) {
+            const len = 3 + r() * 30,
+              offset = row * 4.8 + 2 + r() * 2;
+            line(
+              g,
+              x,
+              ridge(x, layer, s) + offset,
+              x + len,
+              ridge(x + len, layer, s) + offset,
+              "rgba(226,223,198,.29)",
+              0.65,
+            );
+            x += len + 2 + r() * 17;
+          }
+        }
+        g.restore();
+        if (water && layer === 2) {
+          g.fillStyle = "#87978d";
+          g.fillRect(0, 302, W, H - 302);
+          for (let i = 0; i < 2200; i++) {
+            const x = r() * W,
+              y = 302 + r() * 165;
+            line(
+              g,
+              x,
+              y,
+              x + r() * (y - 284) * 0.42,
+              y,
+              r() > 0.35 ? "#4e6760" : "#bdc1a6",
+              0.4 + r() * 0.8,
+            );
+          }
+        }
+      }
+      function fir(x, y, h, r, col) {
+        line(g, x, y - h, x, y, col, Math.max(0.5, h * 0.023));
+        for (let j = 2; j < 24; j++) {
+          const t = j / 25,
+            w = h * t * 0.16;
+          const yy = y - h + t * h;
+          path(
+            [
+              [x, yy - h * 0.09],
+              [x + w * (0.6 + r() * 0.55), yy + h * 0.08],
+              [x, yy + h * 0.036],
+              [x - w * (0.6 + r() * 0.55), yy + h * 0.1],
+            ],
+            col,
+          );
+        }
+      }
+      function tower(x, y, h) {
+        const foot = h * 0.13,
+          top = y - h,
+          ink = "#182323";
+        for (const sign of [-1, 1]) {
+          line(g, x + sign * foot, y, x + sign * 2, top, ink, h * 0.018);
+          line(g, x + sign * 2, top, x, top - h * 0.16, ink, h * 0.011);
+        }
+        for (let i = 0; i < 8; i++) {
+          const a = i / 8,
+            b = (i + 1) / 8,
+            w1 = 2 + a * (foot - 2),
+            w2 = 2 + b * (foot - 2),
+            ya = top + h * a,
+            yb = top + h * b;
+          line(g, x - w1, ya, x + w2, yb, ink, 1.7);
+          line(g, x + w1, ya, x - w2, yb, ink, 1.7);
+          line(g, x - w1, ya, x + w1, ya, ink, 1.4);
+        }
+        for (let i = 0; i < 4; i++) {
+          const yy = top - h * 0.12 + i * h * 0.055;
+          line(g, x - h * 0.08, yy, x + h * 0.08, yy, ink, 2);
+        }
+        line(g, x, top + h * 0.19, x - h * 0.52, y, ink, 0.85);
+        line(g, x, top + h * 0.19, x + h * 0.57, y, ink, 0.85);
+        disc(g, x, top - h * 0.16, 2.4, red);
+      }
+      function building(x, y, w, h) {
+        g.fillStyle = "#202b28";
+        g.fillRect(x, y - h, w, h);
+        path(
+          [
+            [x - 3, y - h],
+            [x + w * 0.48, y - h - w * 0.28],
+            [x + w + 3, y - h],
+          ],
+          "#202b28",
+        );
+        for (let i = 0; i < 3; i++) {
+          g.fillStyle = i === 1 ? red : "#adae91";
+          g.fillRect(x + 5 + i * w * 0.29, y - h * 0.66, 3, 5);
+        }
+      }
+      function orchard(x, y, h, r) {
+        function limb(bx, by, len, angle, d) {
+          const ex = bx + Math.cos(angle) * len,
+            ey = by + Math.sin(angle) * len;
+          line(g, bx, by, ex, ey, "#24312c", Math.max(0.8, d * d * 0.55));
+          if (d > 1) {
+            limb(
+              ex,
+              ey,
+              len * (0.62 + r() * 0.16),
+              angle - 0.22 - r() * 0.57,
+              d - 1,
+            );
+            limb(
+              ex,
+              ey,
+              len * (0.62 + r() * 0.16),
+              angle + 0.2 + r() * 0.58,
+              d - 1,
+            );
+          }
+        }
+        limb(x, y, h * 0.35, -1.58, 5);
+      }
+      function poles() {
+        let last;
+        for (const [x, y, h] of [
+          [534, 354, 33],
+          [577, 374, 49],
+          [647, 400, 75],
+          [755, 441, 115],
+          [957, 495, 186],
+        ]) {
+          const top = y - h;
+          line(g, x, y, x - 3, top, "#202b28", h * 0.034);
+          for (const a of [0.06, 0.145]) {
+            const yy = top + h * a;
+            line(g, x - h * 0.11, yy, x + h * 0.09, yy, "#202b28", h * 0.029);
+            for (const f of [-0.085, 0.07]) {
+              const xx = x + h * f;
+              line(g, xx, yy - 4, xx, yy, "#202b28", 2);
+              if (last) {
+                g.strokeStyle = "#26312c";
+                g.lineWidth = 0.9;
+                g.beginPath();
+                g.moveTo(last.x + last.h * f, last.y - last.h + last.h * a - 4);
+                g.quadraticCurveTo(
+                  (last.x + xx) / 2,
+                  (last.y - last.h + yy) / 2 + 12,
+                  xx,
+                  yy - 4,
+                );
+                g.stroke();
+              }
+            }
+          }
+          last = { x, y, h };
+        }
+      }
+      function drawPlate(index) {
+        const s = stations[index],
+          r = seeded(s.seed);
+        g.setTransform(1.2, 0, 0, 1.2, 0, 0);
+        g.fillStyle = "#283331";
+        g.fillRect(0, 0, W, H);
+        // Fine horizontal cuts and a misregistered vermilion disc evoke a relief print.
+        for (let i = 0; i < 5800; i++) {
+          const x = r() * W,
+            y = r() * 260;
+          line(
+            g,
+            x,
+            y,
+            x + 1 + r() * 12,
+            y,
+            r() > 0.5 ? "#36423d" : "#23302d",
+            0.5 + r() * 0.7,
+          );
+        }
+        for (let i = 0; i < 140; i++) {
+          let x = r() * W,
+            y = r() * 240;
+          disc(g, x, y, 0.3 + r() * 0.9, "#bebca3");
+        }
+        const [sx, sy, sr] = s.sun;
+        disc(g, sx, sy, sr, "#e08056");
+        g.save();
+        g.clip();
+        for (let i = 0; i < 1900; i++) {
+          const x = sx - sr + r() * 2 * sr,
+            y = sy - sr + r() * 2 * sr;
+          line(g, x, y, x + r() * 6, y, r() > 0.5 ? "#ef9b69" : "#c76b48", 0.6);
+        }
+        for (let i = 0; i < 16; i++) {
+          const y = sy + i * 5;
+          line(g, sx - sr, y, sx + sr, y, "#344039", 0.45 + i * 0.075);
+        }
+        g.restore();
+        for (let i = 0; i < 18; i++) {
+          const x = r() * W,
+            y = 40 + r() * 122,
+            len = 13 + r() * 98;
+          line(g, x, y, x + len, y, "#889084", 0.7);
+          line(g, x + len * 0.28, y + 2, x + len * 0.83, y + 2, "#788077", 0.6);
+        }
+        const water = index === 1 || index === 3;
+        for (let k = 0; k < (water ? 3 : 4); k++) hills(k, s, r, water);
+        if (index === 0) {
+          const x = 265,
+            y = ridge(x, 3, s) + 3;
+          tower(x, y, 156);
+          building(x + 12, y + 2, 36, 13);
+        }
+        if (index === 1) {
+          const x = 613,
+            y = 321;
+          building(x - 16, y, 33, 48);
+          path(
+            [
+              [x - 14, y - 48],
+              [x, y - 109],
+              [x + 14, y - 48],
+            ],
+            "#26362f",
+          );
+          line(g, x, y - 108, x, y - 120, "#26362f", 2);
+          for (let i = 0; i < 33; i++) {
+            const yy = y + r() * 42;
+            line(
+              g,
+              x - 20 + r() * 12,
+              yy,
+              x + 15 + r() * 10,
+              yy,
+              "#506b5f",
+              1.1,
+            );
+          }
+        }
+        if (index === 2) {
+          for (let i = 0; i < 13; i++) {
+            const x = 120 + i * 62 + r() * 30;
+            orchard(x, ridge(x, 3, s) + 25, 44 + r() * 46, r);
+          }
+        }
+        if (index === 3) {
+          const x = 530,
+            y = 348;
+          path(
+            [
+              [x - 84, y - 13],
+              [x + 85, y - 13],
+              [x + 65, y + 2],
+              [x - 61, y + 2],
+            ],
+            "#24322f",
+          );
+          g.fillStyle = "#27352f";
+          g.fillRect(x - 43, y - 32, 85, 20);
+          g.fillRect(x - 25, y - 40, 49, 10);
+          g.fillRect(x + 8, y - 56, 8, 23);
+          for (let i = 0; i < 9; i++) {
+            g.fillStyle = i % 3 ? paper : red;
+            g.fillRect(x - 36 + i * 9, y - 28, 4, 4);
+          }
+          line(g, x - 48, y - 15, x - 48, y - 52, "#25322e", 1.6);
+        }
+        if (index === 4) {
+          const x = 574,
+            y = ridge(x, 3, s) + 8;
+          building(x, y, 67, 53);
+          g.fillStyle = "#202b28";
+          g.fillRect(x + 48, y - 74, 6, 20);
+          g.fillStyle = red;
+          g.fillRect(x + 30, y - 57, 6, 7);
+        }
+        // Foreground cuts turn into long grasses and stands of spruce.
+        function ground(x) {
+          return (
+            (water ? 419 : 375) +
+            24 * Math.sin(x * 0.007 + s.seed) +
+            12 * Math.sin(x * 0.018 + 1)
+          );
+        }
+        const edge = Array.from({ length: 251 }, (_, i) => [
+          i * 4,
+          ground(i * 4),
+        ]);
+        path([...edge, [W, H + 1], [0, H + 1]], "#25342d");
+        for (let i = 0; i < 6800; i++) {
+          const x = r() * W,
+            y = ground(x) - 1 + r() * 101;
+          const len = 2 + r() * 9;
+          line(
+            g,
+            x,
+            y,
+            x + len,
+            y - len * (0.1 + r() * 0.5),
+            r() > 0.22 ? "#4b5846" : "#a1a487",
+            0.55 + r() * 0.55,
+          );
+        }
+        for (let i = 0; i < 148; i++) {
+          const x = r() * W,
+            clump = (1 + Math.sin(x * 0.018 + s.seed)) / 2;
+          if (clump > 0.48 && (x < W * 0.35 || x > W * 0.78))
+            fir(
+              x,
+              ground(x) + 4 + r() * 8,
+              6 + r() * clump * (water ? 25 : 44),
+              r,
+              "#26342c",
+            );
+        }
+        if (index === 0) poles();
+        // Small flecks of ink and stock run through every plate.
+        for (let i = 0; i < 13500; i++) {
+          const x = r() * W,
+            y = r() * H;
+          g.fillStyle =
+            r() > 0.48 ? "rgba(233,224,192,.15)" : "rgba(12,24,20,.19)";
+          g.fillRect(x, y, 0.5 + r(), 0.55 + r());
+        }
+      }
+      const key = "aftertone.fieldlog.v1";
+      let logged = new Set(),
+        durable = true;
+      try {
+        const ids = JSON.parse(localStorage.getItem(key) || "[]");
+        if (Array.isArray(ids))
+          logged = new Set(
+            ids.filter(
+              (i) => Number.isInteger(i) && i >= 0 && i < stations.length,
+            ),
+          );
+      } catch {
+        durable = false;
+      }
+      let nearest = 0,
+        locked = true,
+        signal = 1,
+        returning = false,
+        lastPlate = -1,
+        sounding = false,
+        context,
+        bus,
+        soundTimer,
+        beat = 0,
+        frame = 0;
+      const lessMotion = matchMedia("(prefers-reduced-motion: reduce)");
+      const nameOf = (n) => String(n + 1).padStart(2, "0");
+      function wave(c, width, height, i, active) {
+        const mid = height / 2;
+        line(c, 0, mid, width, mid, "#aaa897", 1);
+        const r = seeded(stations[i].seed);
+        for (let x = 0; x < width; x += 2.7) {
+          const envelope = Math.sin((Math.PI * x) / width) ** 1.4;
+          const a =
+            (0.2 + r() * 0.8) * envelope * height * 0.45 * (active ? 1 : 0.35);
+          line(c, x, mid - a, x, mid + a, active ? "#a63a23" : "#8a8979", 1);
+        }
+      }
+      function canvasSize(canvas) {
+        const box = canvas.getBoundingClientRect(),
+          d = Math.min(devicePixelRatio || 1, 2);
+        canvas.width = Math.max(1, Math.round(box.width * d));
+        canvas.height = Math.max(1, Math.round(box.height * d));
+        const c = canvas.getContext("2d");
+        c.setTransform(d, 0, 0, d, 0, 0);
+        return { c, w: box.width, h: box.height };
+      }
+      function dial() {
+        const { c, w, h } = canvasSize(get("ruler")),
+          p = (range.value - range.min) / (range.max - range.min);
+        for (let i = 0; i <= 80; i++) {
+          const x = 1 + ((w - 2) * i) / 80;
+          line(
+            c,
+            x,
+            i % 8 === 0 ? 4 : i % 2 === 0 ? 12 : 18,
+            x,
+            h - 4,
+            i % 8 === 0 ? "#44483d" : "#989887",
+            1,
+          );
+        }
+        const needle = 3 + (w - 6) * p;
+        line(c, needle, 0, needle, h, "#a63a23", 2);
+        c.fillStyle = "#a63a23";
+        c.beginPath();
+        c.moveTo(needle - 4.5, 0);
+        c.lineTo(needle + 4.5, 0);
+        c.lineTo(needle, 7);
+        c.fill();
+      }
+      function cards() {
+        const box = get("cards");
+        if (!box.childElementCount) {
+          stations.forEach((s, i) => {
+            const b = document.createElement("button");
+            b.className = "log-card";
+            b.innerHTML =
+              '<span class="log-top"><span class="log-number"></span><canvas class="wave" aria-hidden="true"></canvas></span><span class="log-name"></span>';
+            b.onclick = () => tune(s.freq);
+            box.append(b);
+          });
+        }
+        [...box.children].forEach((b, i) => {
+          const known = logged.has(i),
+            selected = locked && nearest === i && !returning;
+          b.disabled = !known;
+          b.classList.toggle("current", selected);
+          b.querySelector(".log-number").textContent = "RX / " + nameOf(i);
+          b.querySelector(".log-name").textContent = known
+            ? stations[i].name
+            : "Unlogged";
+          b.setAttribute(
+            "aria-label",
+            known
+              ? "Recall " + stations[i].name
+              : "Signal " + nameOf(i) + " unlogged",
+          );
+          const { c, w, h } = canvasSize(b.querySelector("canvas"));
+          wave(c, w, h, i, known);
+        });
+        get("count").textContent =
+          String(logged.size).padStart(2, "0") + " / 05 logged";
+        get("reply").hidden = logged.size !== 5;
+        get("reply").textContent = returning
+          ? "Disconnect return line"
+          : "Connect the five lines ↗";
+      }
+      function paint(time) {
+        const t = lessMotion.matches ? 0 : time * 0.001,
+          s = stations[nearest];
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.drawImage(art, 0, 0);
+        const r = seeded(
+          lessMotion.matches ? 177 : (Math.floor(time / 85) + 1) * 313,
+        );
+        if (!locked) {
+          ctx.fillStyle = "rgba(29,38,34," + (0.18 + (1 - signal) * 0.65) + ")";
+          ctx.fillRect(0, 0, screen.width, screen.height);
+          for (let j = 0; j < Math.ceil((1 - signal) * 78); j++) {
+            const y = r() * 560;
+            ctx.fillStyle = "rgba(213,216,188," + (0.04 + r() * 0.17) + ")";
+            ctx.fillRect(r() * 1150, y, 5 + r() * 150, 1 + r() * 1.6);
+          }
+        }
+        ctx.setTransform(1.2, 0, 0, 1.2, 0, 0);
+        if (locked) {
+          const sites = [
+            [265, ridge(265, 3, stations[0]) + 3 - 156 * 1.16],
+            [613, 201],
+            [374, ridge(374, 3, s) - 19],
+            [538, 292],
+            [604, ridge(574, 3, s) - 47],
+          ];
+          const [x, y] = sites[nearest];
+          const strength = lessMotion.matches
+            ? 0.55
+            : 0.38 + 0.28 * Math.sin(t * 1.7);
+          disc(ctx, x, y, 3.4, "rgba(247,139,83," + strength + ")");
+          if (returning) {
+            const pts = [
+              [56, 125],
+              [265, 100],
+              [496, 144],
+              [690, 83],
+              [904, 149],
+            ];
+            for (let i = 0; i < pts.length; i++) {
+              const [px, py] = pts[i];
+              if (i)
+                line(ctx, ...pts[i - 1], px, py, "rgba(250,174,115,.76)", 1);
+              disc(ctx, px, py, 2.4, "#fac195");
+            }
+          }
+        }
+      }
+      function animate(time) {
+        frame = 0;
+        paint(time);
+        if (!lessMotion.matches && !document.hidden)
+          frame = requestAnimationFrame(throttle);
+      }
+      let lastTime = -100;
+      function throttle(time) {
+        frame = 0;
+        if (time - lastTime >= 90) {
+          lastTime = time;
+          animate(time);
+        } else frame = requestAnimationFrame(throttle);
+      }
+      function refreshAnimation() {
+        cancelAnimationFrame(frame);
+        animate(performance.now());
+      }
+      function update() {
+        const khz = Number(range.value);
+        nearest = stations.reduce(
+          (best, s, i) =>
+            Math.abs(s.freq - khz) < Math.abs(stations[best].freq - khz)
+              ? i
+              : best,
+          0,
+        );
+        const s = stations[nearest],
+          distance = Math.abs(s.freq - khz);
+        locked = distance <= 15;
+        signal = Math.max(0, 1 - distance / 275);
+        if (lastPlate !== nearest) {
+          drawPlate(nearest);
+          lastPlate = nearest;
+        }
+        const frequency = (khz / 1000).toFixed(3);
+        get("freq").textContent = frequency;
+        range.setAttribute(
+          "aria-valuetext",
+          frequency + " megahertz, " + (locked ? s.name : "between stations"),
+        );
+        get("plate").textContent = returning
+          ? "RETURN CIRCUIT"
+          : locked
+            ? s.site.toUpperCase()
+            : "BAND NOISE";
+        get("stationId").textContent = returning
+          ? "TX / 00"
+          : locked
+            ? "RX / " + nameOf(nearest)
+            : "RX / ––";
+        get("title").textContent = returning
+          ? "The Line Home"
+          : locked
+            ? s.name
+            : "Between stations";
+        get("lock").textContent = returning
+          ? "Connected"
+          : locked
+            ? "Signal locked"
+            : "Searching";
+        get("lock").dataset.locked = String(locked);
+        get("transcript").textContent = returning
+          ? "“There you are. We kept the light on.”"
+          : locked
+            ? s.msg
+            : "A wash of carrier noise. Move along the scale until a voice comes into focus.";
+        screen.setAttribute(
+          "aria-label",
+          returning
+            ? "Five points of light join above the repeater"
+            : locked
+              ? [
+                  "A radio mast and a line of wooden poles cross an engraved mountain valley under an orange sun.",
+                  "A steeple rises out of the reservoir under a low orange moon.",
+                  "Bare orchard branches catch the last light on a mountain ridge.",
+                  "A ferry with one lit window crosses the dark inlet.",
+                  "A single upstairs window glows in a hillside house.",
+                ][nearest]
+              : "Static obscures the landscape",
+        );
+        get("save").disabled = !locked || logged.has(nearest);
+        get("saveText").textContent =
+          locked && logged.has(nearest) ? "Logged" : "Log signal";
+        dial();
+        cards();
+        paint(performance.now());
+      }
+      function tune(khz) {
+        returning = false;
+        range.value = khz;
+        beat = 0;
+        update();
+        get("notice").textContent = locked
+          ? "Receiving " + stations[nearest].name
+          : "Between stations";
+      }
+      range.addEventListener("input", () => tune(range.value));
+      get("seek").onclick = () => {
+        const next =
+          stations.find((s) => s.freq > Number(range.value) + 15) ||
+          stations[0];
+        tune(next.freq);
+      };
+      get("save").onclick = () => {
+        if (!locked) return;
+        logged.add(nearest);
+        try {
+          localStorage.setItem(key, JSON.stringify([...logged]));
+        } catch {
+          durable = false;
+        }
+        update();
+        get("notice").textContent =
+          stations[nearest].name +
+          " logged." +
+          (durable ? "" : " Saved for this session.") +
+          (logged.size === 5 ? " The five lines can now be connected." : "");
+      };
+      get("reply").onclick = () => {
+        if (returning) tune(stations[0].freq);
+        else {
+          range.value = stations[0].freq;
+          returning = true;
+          beat = 0;
+          update();
+          get("notice").textContent =
+            "Return line connected. " + get("transcript").textContent;
+        }
+      };
+      function note(hz, when, duration, volume, type = "sine") {
+        const o = context.createOscillator(),
+          gain = context.createGain();
+        o.type = type;
+        o.frequency.value = hz;
+        gain.gain.setValueAtTime(0.0001, when);
+        gain.gain.exponentialRampToValueAtTime(volume, when + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.0001, when + duration);
+        o.connect(gain);
+        gain.connect(bus);
+        o.start(when);
+        o.stop(when + duration + 0.02);
+        o.onended = () => {
+          o.disconnect();
+          gain.disconnect();
+        };
+      }
+      function playBeat() {
+        if (!sounding || document.hidden || context.state !== "running") return;
+        const when = context.currentTime + 0.02;
+        if (locked) {
+          const s = stations[returning ? beat % 5 : nearest],
+            pitch = s.root * 2 ** (s.notes[beat % 4] / 12);
+          note(pitch, when, 0.85, 0.13);
+          note(pitch * 2.005, when + 0.12, 0.66, 0.025, "triangle");
+          if (beat % 4 === 0) note(s.root / 2, when, 1.85, 0.09);
+          if (returning)
+            note(stations[(beat + 2) % 5].root, when + 0.24, 0.92, 0.055);
+        } else {
+          note(52 + signal * 17, when, 0.48, 0.035, "triangle");
+        }
+        beat++;
+      }
+      get("sound").onclick = async () => {
+        const button = get("sound");
+        button.disabled = true;
+        try {
+          if (sounding) {
+            sounding = false;
+            clearInterval(soundTimer);
+            await context.suspend();
+          } else {
+            if (!context) {
+              context = new (
+                window.AudioContext || window.webkitAudioContext
+              )();
+              bus = context.createGain();
+              bus.gain.value = 0.48;
+              bus.connect(context.destination);
+            }
+            await context.resume();
+            sounding = true;
+            playBeat();
+            soundTimer = setInterval(playBeat, 620);
+          }
+          button.setAttribute("aria-pressed", String(sounding));
+          get("soundText").textContent = sounding ? "Sound on" : "Sound off";
+        } catch {
+          get("soundText").textContent = "Audio unavailable";
+        } finally {
+          button.disabled = false;
+        }
+      };
+      const logo = get("mark").getContext("2d");
+      logo.translate(32, 32);
+      for (let i = 0; i < 4; i++) {
+        logo.rotate(Math.PI / 2);
+        line(logo, 3, -3, 19, -20, "#a63a23", 4);
+        line(logo, 15, -4, 25, -14, "#a63a23", 4);
+        line(logo, 3, -15, 13, -25, "#a63a23", 4);
+      }
+      disc(logo, 0, 0, 4, "#a63a23");
+      new ResizeObserver(() => {
+        dial();
+        cards();
+      }).observe(get("cards"));
+      document.addEventListener("visibilitychange", refreshAnimation);
+      lessMotion.addEventListener("change", refreshAnimation);
+      update();
+      refreshAnimation();
+    </script>
+  </body>
+</html>
