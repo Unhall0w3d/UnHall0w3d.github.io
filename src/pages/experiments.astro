@@ -3,6 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const experiments = [
   {
+    slug: "observatory",
+    name: "Local LLM Observatory",
+    description: "Replay a simulated handoff from a 9B language model to the Rapid renderer. Follow the worker, GPU memory, and timeline as the run unfolds."
+  },
+  {
     slug: "kestrel-sound",
     name: "Kestrel Sound",
     description: "Send a sonar pulse across the inlet. Follow the echoes and chart three submerged bronze bells."
@@ -14,7 +19,7 @@ const experiments = [
   }
 ];
 ---
-<BaseLayout title="Experiments" description="Play Kestrel Sound and Aftertone, two interactive Canvas experiments.">
+<BaseLayout title="Experiments" description="Explore interactive experiments from NOC Thoughts, including Local LLM Observatory, Kestrel Sound, and Aftertone.">
   <header class="post-header"><h1>Experiments</h1></header>
   <div class="tool-grid">
     {experiments.map(({slug, name, description}) => (
