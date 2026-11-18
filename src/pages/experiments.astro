@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const experiments = [
+  {
+    slug: "kestrel-sound",
+    name: "Kestrel Sound",
+    description: "Send a sonar pulse across the inlet. Follow the echoes and chart three submerged bronze bells."
+  },
+  {
+    slug: "aftertone",
+    name: "Aftertone",
+    description: "Tune a shortwave receiver across five lost calls. Each frequency brings a different landscape and a transmission for your field log."
+  }
+];
+---
+<BaseLayout title="Experiments" description="Play Kestrel Sound and Aftertone, two interactive Canvas experiments.">
+  <header class="post-header"><h1>Experiments</h1></header>
+  <div class="tool-grid">
+    {experiments.map(({slug, name, description}) => (
+      <article class="tool-card">
+        <a href={`/experiments/${slug}.html`}>
+          <img src={`/assets/images/experiments/${slug}.webp`} alt="" width="850" height="356" />
+          <h2>{name}</h2>
+        </a>
+        <p>{description}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
+<style>
+  article a { display: block; color: var(--paper); text-decoration: none; }
+  article img { display: block; width: 100%; height: auto; aspect-ratio: 2.39; object-fit: cover; }
+  article h2 { margin: 1rem 0 .45rem; }
+  article a:hover h2, article a:focus-visible h2 { text-decoration: underline; text-underline-offset: .18em; }
+  article p { margin: 0; }
+</style>

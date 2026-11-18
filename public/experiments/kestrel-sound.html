@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101d20"><title>Kestrel Sound — Echo Sounder</title>
+<style>
+:root{--ink:#101d20;--line:#395153;--foam:#f0e9d6;--muted:#aac0b7;--signal:#ff9e66;--paper:#e4ddc7;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--foam);font:16px/1.45 "Work Sans",system-ui,sans-serif}main{max-width:1510px;margin:auto;padding:clamp(14px,3vw,46px)}
+header,.bar,.meta,.row,.keys,.bottom{display:flex;align-items:center;justify-content:space-between;gap:1em}header{border-bottom:1px solid var(--line);padding-bottom:15px}.brand,.label,.meta,.bar,.keys,.bottom,button,.state,.units{font: .74rem/1.45 var(--mono);letter-spacing:.055em}.brand,.label,.meta,.bar,.state,.units{text-transform:uppercase}.brand{display:flex;align-items:center;gap:10px}.glyph{width:32px;height:22px;background:repeating-radial-gradient(ellipse at 50% 100%,transparent 0 3px,var(--signal) 4px 5px,transparent 6px 8px);clip-path:polygon(0 100%,0 49%,50% 0,100% 49%,100% 100%)}a{color:var(--muted);text-underline-offset:4px}.hero{display:flex;align-items:end;justify-content:space-between;gap:28px;padding:clamp(19px,3.5vw,46px) 0 22px}h1,h2,p{margin:0}h1{font:normal clamp(3.1rem,6vw,6.6rem)/.97 "Baskervville",Georgia,serif;letter-spacing:-.065em}.hero p{max-width:43ch;color:#cad6cc;line-height:1.55}.console{display:grid;grid-template-columns:minmax(0,1fr) clamp(230px,22vw,310px);border:1px solid var(--line)}
+.scope{min-width:0;background:#11272b}.bar{padding:10px 14px;color:var(--muted);background:#16292b;border-bottom:1px solid var(--line)}.bar b{color:var(--foam);font-weight:500}.map{display:block;width:100%;height:clamp(370px,49vh,620px);cursor:crosshair;touch-action:manipulation}.map:focus-visible{outline:2px solid var(--signal);outline-offset:-3px}.keys{background:#16292b;color:var(--muted);padding:10px 14px;border-block:1px solid var(--line);flex-wrap:wrap;gap:4px 14px;letter-spacing:0}.receiver{padding:13px 16px 10px}.receiver .row{align-items:baseline}.receiver .units{color:var(--signal);font-size:.72rem}#trace{width:100%;height:53px;display:block}
+aside{color:#273735;background:repeating-linear-gradient(0deg,#fff1 0 1px,transparent 1px 4px),var(--paper);padding:clamp(16px,2vw,28px);display:flex;flex-direction:column;border-left:5px double #586a5d}
+aside .label{color:#49594e}.total{font:normal 3.8rem/1 Georgia,serif;letter-spacing:-.08em;margin:.13em 0 .25em}.total small{font:normal 1.5rem Georgia;color:#58675b;letter-spacing:0}.slips{padding:0;margin:0;list-style:none;border-top:1px solid #909781}.slips li{padding:12px 0;border-bottom:1px dashed #929883;display:flex;justify-content:space-between;align-items:center;gap:8px}.slips b{font:normal 1.13rem Georgia}.state{font-size:.64rem;color:#526254}.slips li[data-found] .state{color:#7c351c;font-weight:bold}.log{padding:20px 0}.log p{font-size:.91rem;margin-top:4px}.tail{margin-top:auto}.meta{padding-top:12px;border-top:1px solid #989b87}.meta strong{font-size:1.05rem}.bottom{padding-top:13px;color:var(--muted);align-items:baseline}.bottom p{max-width:75ch}button{cursor:pointer;border:1px solid #718270;background:transparent;color:inherit;padding:9px 12px;margin-top:12px}button:hover,button:focus-visible{background:#283a34;color:var(--foam)}:focus-visible{outline:2px solid #ec8745;outline-offset:2px}
+@media(max-width:780px){.console{grid-template-columns:1fr}.hero{display:block}.hero p{margin-top:12px}aside{border-left:0;border-top:4px double #586a5d;display:grid;grid-template-columns:1fr 1.3fr;gap:8px 20px}.log{padding:2px 0}.tail{margin:0}.map{height:clamp(320px,43svh,490px)}.keys{font-size:.68rem}.bottom{flex-wrap:wrap}.slips li{padding:6px 0}.total{font-size:3.2rem}}
+@media(max-width:480px){main{padding:12px}.hero{padding:19px 0 16px}.hero p{font-size:.88rem}.bar,.label,.brand{font-size:.67rem}.bottom{font-size:.65rem}.units{letter-spacing:0}.receiver{padding:10px}.slips b{font-size:1rem}}
+</style></head>
+<body><main>
+<header><div class="brand"><span class="glyph" aria-hidden="true"></span>Echo Sounder</div><a href="/experiments.html">Experiments</a></header>
+<div class="hero"><h1>Kestrel Sound</h1><p>Three bronze bells lie beneath the inlet. Sound a patch of water, watch for a diamond, then sound its center to chart the bell.</p></div>
+<div class="console"><section class="scope" aria-label="Acoustic chart">
+<div class="bar"><b>Bathymetric plate</b><span>Sounding radius · 245 m</span></div>
+<canvas class="map" tabindex="0" aria-label="Kestrel Sound interactive chart" aria-describedby="controls message">This chart requires Canvas.</canvas>
+<div class="keys" id="controls"><span>Click or tap to sound</span><span>Keyboard · arrows to aim / Space to sound</span></div>
+<div class="receiver"><div class="row"><span class="label">Return trace</span><span class="units" id="reading">Receiver ready</span></div><canvas id="trace" aria-label="Range trace of the latest sounding"></canvas></div>
+</section><aside aria-label="Survey register"><div><div class="label">Recovery register</div><div class="total"><span id="count">0</span><small> / 3 charted</small></div></div><ol class="slips">
+<li><b>Low bell</b><span class="state">Uncharted</span></li><li><b>Tenor bell</b><span class="state">Uncharted</span></li><li><b>Treble bell</b><span class="state">Uncharted</span></li></ol>
+<div class="log"><div class="label">Last transmission</div><p id="message" role="status">Ready. Choose your first sounding site.</p></div><div class="tail"><div class="meta"><span>Soundings</span><strong id="casts">00</strong></div><button id="reset">Reset survey</button></div></aside></div>
+<div class="bottom"><p>Dotted rings show swept water. On the trace, line up the ivory aim marker with an orange peak to recover a faded range.</p></div>
+</main><script>
+'use strict';
+const chart=document.querySelector('.map'), trace=document.querySelector('#trace');
+const g=chart.getContext('2d'), t=trace.getContext('2d'), plate=document.createElement('canvas');
+const paper='#efe9d4', signal='#ffa068', motion=matchMedia('(prefers-reduced-motion: reduce)');
+const reach=245, travel=170, hold=3900, span=960, depth=600;
+const sites=[{x:203,y:163,hz:97},{x:753,y:178,hz:147},{x:564,y:470,hz:220}];
+const rows=[...document.querySelectorAll('.slips li')];
+const el=id=>document.getElementById(id), clamp=(n,lo,hi)=>Math.max(lo,Math.min(hi,n));
+let w,h,tw,th,dpr,aim,active,history,found,casts,returns,frame;
+function relief(x,y){
+ const u=x/span,v=y/depth;
+ const ridge=v-.52-.21*Math.sin(u*5.9+.4)-.055*Math.sin(u*15);
+ return 410-180*Math.exp(-ridge*ridge/.018)+93*Math.cos(5.7*u-3.8*v)+47*Math.sin(u*12+v*9)+16*Math.sin(u*24-v*19)+8*Math.cos(v*33+u*12);
+}
+function makePlate(){
+ plate.width=chart.width;plate.height=chart.height;
+ const p=plate.getContext('2d');p.setTransform(dpr,0,0,dpr,0,0);
+ p.fillStyle='#10272c';p.fillRect(0,0,w,h);
+ const nx=Math.ceil(w/7),ny=Math.ceil(h/7),dx=w/nx,dy=h/ny;
+ const field=Array.from({length:ny+1},(_,j)=>Array.from({length:nx+1},(_,i)=>relief(i*span/nx,j*depth/ny)));
+ // March the isobaths once per layout. Major contours carry depth labels.
+ for(let level=48;level<660;level+=8){
+  const major=level%48===0;p.beginPath();let label;
+  const tx=(.12+((level/48*.343)% .75))*w,ty=(.2+((level/48*.17)%.58))*h;
+  let best=Infinity;
+  for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){
+   const v=[field[j][i],field[j][i+1],field[j+1][i+1],field[j+1][i]];
+   if(Math.min(...v)>level||Math.max(...v)<level)continue;
+   const pts=[],x=i*dx,y=j*dy,xx=[x,x+dx,x+dx,x],yy=[y,y,y+dy,y+dy];
+   for(let k=0;k<4;k++){const l=(k+1)%4;if((v[k]<level)===(v[l]<level))continue;
+    const f=(level-v[k])/(v[l]-v[k]);pts.push([xx[k]+(xx[l]-xx[k])*f,yy[k]+(yy[l]-yy[k])*f]);}
+   for(let k=0;k+1<pts.length;k+=2){p.moveTo(...pts[k]);p.lineTo(...pts[k+1]);
+    const [a,b]=pts[k],dist=Math.hypot(a-tx,b-ty);if(major&&a>34&&a<w-34&&b>34&&b<h-35&&dist<best){best=dist;label=[a,b]}}
+  }
+  p.lineWidth=major?1.05:.62;p.strokeStyle=major?'#73a098':'#396567';p.stroke();
+  if(major&&label&&best<w*.31){p.font='10px monospace';p.textAlign='center';p.lineWidth=4;p.strokeStyle='#10272c';p.strokeText(level,...label);p.fillStyle='#9cb6a6';p.fillText(level,...label)}
+ }
+ p.strokeStyle='#82a79c35';p.lineWidth=.7;p.setLineDash([2,5]);p.beginPath();
+ for(let x=0;x<=span;x+=120){p.moveTo(x*w/span,0);p.lineTo(x*w/span,h)}
+ for(let y=0;y<=depth;y+=120){p.moveTo(0,y*h/depth);p.lineTo(w,y*h/depth)}
+ p.stroke();p.setLineDash([]);
+ p.font='10px monospace';p.fillStyle=paper;p.textAlign='left';p.fillText('N ↑',14,23);
+ const length=100*w/span;p.strokeStyle=paper;p.beginPath();p.moveTo(14,h-18);p.lineTo(14,h-14);p.lineTo(14+length,h-14);p.lineTo(14+length,h-18);p.stroke();p.fillText('100 m',15,h-22);
+}
+function layout(){
+ w=chart.clientWidth;h=chart.clientHeight;tw=trace.clientWidth;th=trace.clientHeight;dpr=Math.min(devicePixelRatio||1,3);
+ for(const [c,a,b] of [[chart,w,h],[trace,tw,th]]){c.width=Math.round(a*dpr);c.height=Math.round(b*dpr)}
+ makePlate();requestDraw();
+}
+function reset(){
+ aim={x:span/2,y:depth/2};active=null;history=[];returns=[];found=new Set();casts=0;
+ for(const row of rows){delete row.dataset.found;row.lastElementChild.textContent='Uncharted'}
+ el('count').textContent='0';el('casts').textContent='00';el('reading').textContent='Receiver ready';
+ el('message').textContent='Ready. Choose your first sounding site.';requestDraw();
+}
+function requestDraw(){if(!frame)frame=requestAnimationFrame(draw)}
+function nearSite(s){
+ const dx=s.x-aim.x,dy=s.y-aim.y;
+ return Math.hypot(dx,dy)<=25||Math.hypot(dx*w/span,dy*h/depth)<=16;
+}
+function sound(){
+ if(found.size===sites.length)return;
+ const now=performance.now();
+ if(active)active.swept=Math.min(reach,Math.max(0,(now-active.start)*travel/1000));
+ const hits=sites.map((s,i)=>({i,range:Math.hypot(s.x-aim.x,s.y-aim.y),close:nearSite(s),heard:false})).filter(hit=>hit.range<=reach&&!found.has(hit.i)).sort((a,b)=>a.range-b.range);
+ const known=sites.findIndex((s,i)=>found.has(i)&&nearSite(s));
+ active={...aim,start:now,hits,known,done:false,charted:false,swept:0};history.push(active);if(history.length>12)history.shift();returns=[];casts++;
+ el('casts').textContent=String(casts).padStart(2,'0');el('message').textContent='Listening for bronze returns…';el('reading').textContent='Sweeping';requestDraw();
+}
+function receive(hit,arrival){
+ const s=sites[hit.i];hit.heard=true;returns.push({...s,range:hit.range,arrival});
+ if(hit.close){
+  found.add(hit.i);active.charted=true;rows[hit.i].dataset.found='yes';rows[hit.i].lastElementChild.textContent=s.hz+' Hz';el('count').textContent=found.size;
+  el('message').textContent=found.size===3?'Survey complete. All three bells are on the chart.':rows[hit.i].firstElementChild.textContent+' charted. Search the unswept water.';
+ }else if(!active.charted)el('message').textContent='Return at '+Math.round(hit.range)+' m. Sound the diamond to chart it.';
+ el('reading').textContent=returns.map(r=>Math.round(r.range)+' m').join(' · ');
+}
+function ring(x,y,r,color,dash=[]){
+ if(r<=0)return;g.strokeStyle=color;g.setLineDash(dash);g.beginPath();g.ellipse(x*w/span,y*h/depth,r*w/span,r*h/depth,0,0,Math.PI*2);g.stroke();g.setLineDash([]);
+}
+function marker(s,charted){
+ const x=s.x*w/span,y=s.y*h/depth;
+ g.save();g.translate(x,y);g.lineWidth=1.6;g.strokeStyle=signal;g.fillStyle=charted?signal:'#11282d';
+ g.beginPath();if(charted){g.moveTo(-7,4);g.quadraticCurveTo(-4,1,-4,-4);g.quadraticCurveTo(0,-10,4,-4);g.quadraticCurveTo(4,1,7,4);g.closePath()}else{g.moveTo(0,-9);g.lineTo(9,0);g.lineTo(0,9);g.lineTo(-9,0);g.closePath()}
+ g.fill();g.stroke();if(charted)g.fillRect(-1,7,2,2);else g.fillRect(-1,-1,2,2);
+ const txt=charted?s.hz+' Hz':Math.round(s.range)+' m';
+ g.font='bold 12px monospace';g.textAlign=x>w-64?'right':'left';const off=x>w-64?-13:13;
+ g.lineWidth=4;g.strokeStyle='#102427';g.strokeText(txt,off,4);g.fillStyle=paper;g.fillText(txt,off,4);g.restore();
+}
+function drawTrace(distance){
+ t.setTransform(dpr,0,0,dpr,0,0);t.clearRect(0,0,tw,th);
+ const x0=14,x1=tw-24,base=th-18,at=m=>x0+(x1-x0)*m/reach;
+ t.font='10px monospace';t.textAlign='center';t.fillStyle='#a6b8a9';t.strokeStyle='#597269';t.lineWidth=1;t.beginPath();t.moveTo(x0,base);t.lineTo(x1,base);
+ for(const m of [0,50,100,150,200,245]){const x=at(m);t.moveTo(x,base);t.lineTo(x,base+4);t.fillText(m,x,th-1)}t.stroke();
+ t.strokeStyle=signal;t.lineWidth=1.6;t.beginPath();
+ for(let x=x0;x<=x1;x++){const metres=(x-x0)*reach/(x1-x0);let y=0;
+  for(const r of returns){const d=metres-r.range;y+=23*Math.exp(-d*d/25)*Math.cos(d*r.hz/180)}
+  if(x===x0)t.moveTo(x,base-y);else t.lineTo(x,base-y);
+ }t.stroke();
+ if(active&&!active.done){t.fillStyle='#ff9e6670';t.fillRect(at(distance),4,1,base-3)}
+ if(active){const range=Math.hypot(aim.x-active.x,aim.y-active.y);if(range<=reach){const x=at(range);t.fillStyle=paper;t.beginPath();t.moveTo(x-4,2);t.lineTo(x+4,2);t.lineTo(x,8);t.fill();t.fillRect(x,8,1,base-9)}}
+}
+function draw(now){
+ frame=0;if(!w)return;g.setTransform(dpr,0,0,dpr,0,0);g.drawImage(plate,0,0,w,h);g.lineWidth=1;
+ for(const p of history)ring(p.x,p.y,p.swept,'#adcdbe55',[3,5]);
+ let distance=0;
+ if(active){
+  distance=clamp((now-active.start)*travel/1000,0,reach);
+  active.swept=distance;
+  for(const hit of active.hits)if(!hit.heard&&hit.range<=distance)receive(hit,active.start+hit.range/travel*1000);
+  if(!active.done&&distance===reach){active.done=true;
+   if(!returns.length){el('reading').textContent='No return';el('message').textContent=active.known>=0?'This bell is already charted. Try unswept water.':'Quiet water. Aim beyond the dotted sweep.'}
+   else if(!active.charted)el('message').textContent='Sweep clear. Sound the center of a return.'}
+  if(!active.done){const r=motion.matches?Math.floor(distance/30)*30:distance;g.lineWidth=1.8;ring(active.x,active.y,r,signal);g.lineWidth=1;ring(active.x,active.y,r-7,'#ffd7a560')}
+ }
+ if(active){
+  const ax=active.x*w/span,ay=active.y*h/depth;
+  g.fillStyle=paper;g.fillRect(ax-1.5,ay-1.5,3,3);
+  const aimRange=Math.hypot(aim.x-active.x,aim.y-active.y);
+  const match=returns.find(r=>Math.abs(r.range-aimRange)<6);
+  if(match)ring(active.x,active.y,match.range,'#e6dfbd99',[2,5]);
+ }
+ const fresh=returns.filter(r=>now<r.arrival+hold&&!sites.some((s,i)=>s.x===r.x&&found.has(i)));
+ if(active&&active.done&&!active.charted&&returns.length&&!fresh.length&&!active.faded){
+  active.faded=true;el('message').textContent='Echo faded. Match the trace peak with your aim, or sound again.';
+ }
+ for(const r of fresh)marker(r,false);
+ for(const i of found)marker(sites[i],true);
+ const x=aim.x*w/span,y=aim.y*h/depth;g.strokeStyle=paper;g.lineWidth=1.2;g.beginPath();g.arc(x,y,5,0,Math.PI*2);g.moveTo(x-13,y);g.lineTo(x-7,y);g.moveTo(x+7,y);g.lineTo(x+13,y);g.moveTo(x,y-13);g.lineTo(x,y-7);g.moveTo(x,y+7);g.lineTo(x,y+13);g.stroke();
+ if(found.size===3){
+  const label='SURVEY CLOSED  /  03 FIXES';g.font='bold 11px monospace';const width=g.measureText(label).width+22;
+  g.fillStyle='#11272b';g.fillRect(w-width-14,h-38,width,24);g.strokeStyle=signal;g.strokeRect(w-width-14,h-38,width,24);
+  g.fillStyle=paper;g.textAlign='left';g.fillText(label,w-width-3,h-22);
+ }
+ drawTrace(distance);if(active&&!active.done||fresh.length)requestDraw();
+}
+function point(e){const r=chart.getBoundingClientRect();aim={x:clamp((e.clientX-r.left)/r.width*span,0,span),y:clamp((e.clientY-r.top)/r.height*depth,0,depth)};requestDraw()}
+chart.addEventListener('pointermove',e=>{if(e.pointerType==='mouse')point(e)});
+chart.addEventListener('click',e=>{if(e.detail)point(e);chart.focus({preventScroll:true});sound()});
+chart.addEventListener('keydown',e=>{
+ const dirs={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};
+ if(e.code==='Space'||e.key===' '){e.preventDefault();if(!e.repeat)sound();return}
+ if(dirs[e.key]){e.preventDefault();const [x,y]=dirs[e.key],step=e.shiftKey?40:12;aim.x=clamp(aim.x+x*step,0,span);aim.y=clamp(aim.y+y*step,0,depth);requestDraw()}
+});
+el('reset').onclick=reset;reset();new ResizeObserver(layout).observe(chart);window.addEventListener('resize',layout);layout();
+</script></body></html>
