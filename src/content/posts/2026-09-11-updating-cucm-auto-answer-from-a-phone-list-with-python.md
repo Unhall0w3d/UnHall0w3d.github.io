@@ -46,28 +46,21 @@ The file needs exactly three columns:
 
 | Column | Required value |
 | --- | --- |
-| `Device` | The phone's `SEP` device name or a supported MAC address format. |
+| `Device` | The configured CUCM device name, or a supported MAC address for a SEP device. |
 | `Extension` | The expected directory number on configured Line 1, including any leading zeros. |
 | `Partition` | The expected route partition name. An empty field explicitly means no partition. |
 
-Here is a fictional example, limited to ten lines including the header. These values illustrate the required format; they are not customer device identifiers or an extract from the original inventory.
+The download includes this fictional CSV. The second extension has a leading zero and an empty partition field.
 
 ```csv
 Device,Extension,Partition
-SEP020000000001,2101,EXAMPLE_PT
-SEP020000000002,3472,EXAMPLE_PT
-SEP020000000003,5083,EXAMPLE_PT
-SEP020000000004,6214,EXAMPLE_PT
-SEP020000000005,7355,EXAMPLE_PT
-SEP020000000006,8466,EXAMPLE_PT
-SEP020000000007,9027,EXAMPLE_PT
-SEP020000000008,1188,EXAMPLE_PT
-SEP020000000009,4639,EXAMPLE_PT
+SEP020000000001,001234,LAB_PT
+SEP020000000002,001235,
 ```
 
-<a href="/assets/downloads/cucm-auto-answer/devlist.example.csv" download>Download the example CSV</a>, replace the example values with the approved devices, and save your working list as `devlist.csv`.
+Copy the example from [Tools & Downloads](/tools.html#auto-answer), substitute your devices, and save it as `devlist.csv`. Headers are case-insensitive and may be reordered.
 
-Headers are case-insensitive and may be reordered. Device values may use a bare 12-digit hex MAC, consistently colon-separated or hyphen-separated MAC notation, or dotted notation such as `0200.0000.0001`. The script normalizes those accepted formats to `SEP` names. It rejects malformed values, duplicate devices, and duplicate DN/partition identities.
+Use the configured name for Cisco IP Communicator (`CIPC`) or Jabber (`CSF`, `BOT`, `TCT`, or `TAB`). For a Cisco phone, enter its `SEP` name or its MAC in bare, colon-separated, hyphen-separated, or dotted form. The script normalizes a MAC to a SEP name. It also accepts an explicit `ATA` name followed by 12 hex digits for preview. If a batch includes an ATA, the whole batch is preview-only.
 
 If you prepare the list in a spreadsheet, preserve extensions as text so leading zeros survive the export. For an unpartitioned DN, leave the last field empty: `SEP020000000001,2101,`. Do not enter a display label such as `<None>` as the partition name.
 
@@ -84,7 +77,7 @@ python3 -m venv .venv
 
 On Windows, the equivalents are `py -3 -m venv .venv` and `.venv\Scripts\python.exe -m pip install requests`. Use the virtual environment's interpreter for the commands below, or activate it first.
 
-You also need connectivity to the CUCM publisher's AXL endpoint on HTTPS port 8443, an account permitted to perform the required AXL operations, and trusted TLS certificates. The script targets AXL `15.0`; it does not automatically negotiate another schema version.
+You also need connectivity to the CUCM publisher's AXL endpoint on HTTPS port 8443, an account permitted to perform the required AXL operations, and trusted TLS certificates. The script starts with a read-only AXL 15.0 probe. If the publisher explicitly rejects that version and advertises 14.x, the script can probe AXL 14.0. An accepted 14.0 schema permits preview only. Apply requires AXL 15.0.
 
 Start with a dry run:
 
@@ -92,7 +85,7 @@ Start with a dry run:
 python auto-answer-update.py devlist.csv --publisher cucm-pub.example.com --report preview.jsonl
 ```
 
-The script prompts for the username and password. If the server's issuer is not in your trust store, add `--ca-file /path/to/ca.pem` with the appropriate PEM CA bundle. Certificate verification stays enabled; there is no `--insecure` option.
+The script prompts for the username and password. If the server's issuer is not in your trust store, add `--ca-file /path/to/ca.pem` with the appropriate PEM CA bundle. For a lab with an untrusted certificate, `--insecure` disables certificate and hostname verification for that run and prints one startup warning. Choose one TLS option.
 
 Review the results. `READY` means the validated DN needs a change. `ALREADY_OK` means it already has the requested setting. `REJECTED` means validation failed; if any row is rejected, the batch performs no writes.
 
@@ -114,26 +107,33 @@ Before attempting a write, the script flushes a `WRITE_INTENT` record containing
 
 This makes a rerun useful for checking existing configuration as well as making a new change. It also gives the operator a record of what was intended and what was verified.
 
-## What the Live Run Confirmed
+## What the Lab Phone Did
 
-I ran the revised script against the same set of devices, and every device came back `ALREADY_OK`.
+The original run checked an existing list and found every line already configured. For the rc4 write test, I started with Auto Answer Off on Line 1 of a Cisco IP Communicator. CUCM reported release `15.0.1.15900(150)` and accepted AXL `15.0`.
 
-That was useful evidence: the revised script worked through the live read and validation path for that device set and recognized that the requested configuration was already present. Checking the list did not require going back through each phone's configuration page.
+The apply recorded one verified change to Auto Answer with Speakerphone. I ran the preview again against the same CSV and got `ALREADY_OK`. Then I dialed the extension from Baresip. CIPC rang and answered on speakerphone without anyone clicking Answer. The reverse call connected too. The call test covered ringing and pickup. We didn’t test two-way speech.
 
-That run did not exercise a new write from another auto-answer value. The revision also has 20 passing offline tests, including mocked SOAP update/read-back, shared-line rejection, state drift, malformed input, and uncertain write outcomes. Those tests cover the script's behavior under controlled inputs; they do not replace a live write test or a call to the endpoint.
+## Read the Journal
 
-I am not attaching a time-saved figure or claiming support for every phone model. The practical gain was a repeatable list-driven check, explicit results for each target, and a process ready to use again when the next approved list arrives.
+I use the offline reader when I want to know how an apply ended or whether a write still needs investigation. Download the [CUCM journal summary script](/tools.html#journal-summary) and run it against the file you saved. It needs Python 3.10+ and works without CUCM credentials.
+
+```sh
+python journal_summary.py --tool auto-answer --format text apply-001.jsonl
+python journal_summary.py --tool auto-answer --format json preview.jsonl
+```
+
+In the lab, both formats matched the raw records for all three runs. The initial preview reported zero verified updates, the apply reported one, and the repeat preview reported zero. An `ALREADY_OK` row counts as zero because the updater skipped the write. If the reader reports `RECONCILE_REQUIRED`, check the affected DN in CUCM against the original journal before another apply.
 
 ## Where It Fits—and Where It Stops
 
 | Condition | Behavior or limitation |
 | --- | --- |
-| Explicit list of SEP-named phones with matching configured Line 1 DNs | This is the intended input, regardless of whether model, prefix, or device-pool filters group them conveniently. |
-| DN has exactly one appearance, on that phone at Line 1 | Eligible for validation and, if needed, an update. |
+| Explicit list of supported device names with matching configured Line 1 DNs | This is the intended input, regardless of whether model, prefix, or device-pool filters group them conveniently. |
+| DN has exactly one appearance, on that phone at Line 1 | Eligible for an update when the batch and schema permit writes. |
 | Setting is already speakerphone auto-answer | Reports `ALREADY_OK`; no update is needed. |
 | DN is shared, including another appearance on the same device | Rejected. Listing all devices in the CSV does not bypass the restriction. |
 | Expected DN or partition differs from CUCM | Rejected; the script does not repair assignments. |
-| Target is Line 2 or later, an Extension Mobility profile, or a non-SEP device | Outside this utility's supported scope. |
+| Target is Line 2 or later or a logged-in Extension Mobility profile | Outside this utility's supported scope. |
 | Empty partition | Supported explicitly in the input and covered by mocked tests; not separately established by the reported live run. |
 | Another CUCM schema version or a different endpoint model | Requires environment-specific qualification; model-independent selection does not prove model-independent behavior. |
 | Missing permissions, failed TLS validation, or unexpected API data | Stops rather than treating missing information as permission to change something. |
@@ -155,7 +155,7 @@ Keep input lists and reports private. They contain device identifiers, directory
 
 The previews below load the same files offered for download. The README includes setup, command examples, status meanings, exit codes, and recovery limitations.
 
-<details class="code-preview" data-code-preview="/assets/downloads/cucm-auto-answer/auto-answer-update.py">
+<details class="code-preview" data-code-preview="/assets/downloads/cucm-auto-answer-candidate/auto-answer-update.py">
   <summary>
     <span>Review the Python script</span>
     <small>PYTHON // CUCM AUTO ANSWER</small>
@@ -163,16 +163,22 @@ The previews below load the same files offered for download. The README includes
   <pre aria-live="polite"><code>Open this panel to load the Python script.</code></pre>
 </details>
 
-<details class="code-preview" data-code-preview="/assets/downloads/cucm-auto-answer/README.md">
+<details class="code-preview" data-code-preview="/assets/downloads/cucm-auto-answer-candidate/README.txt">
   <summary>
     <span>Review the README and usage examples</span>
-    <small>MARKDOWN // SETUP AND OPERATION</small>
+    <small>TEXT // SETUP AND OPERATION</small>
   </summary>
   <pre aria-live="polite"><code>Open this panel to load the usage guide.</code></pre>
 </details>
 
-- <a href="/assets/downloads/cucm-auto-answer/auto-answer-update.py" download>Download auto-answer-update.py</a>
-- <a href="/assets/downloads/cucm-auto-answer/README.md" download>Download the README</a>
-- <a href="/assets/downloads/cucm-auto-answer/devlist.example.csv" download>Download the fictional input CSV</a>
+<details class="code-preview" data-code-preview="/assets/downloads/cucm-journal-summary-candidate/journal_summary.py">
+  <summary>Review the offline journal reader</summary>
+  <pre aria-live="polite"><code>Open to read journal_summary.py.</code></pre>
+</details>
 
-The next request can start with an approved device list, a dry run, and a review of the results. That is the kind of repeatability I wanted from a task that was otherwise going to be a lot of the same clicks.
+<details class="code-preview" data-code-preview="/assets/downloads/cucm-journal-summary-candidate/README.txt">
+  <summary>Review the journal reader README</summary>
+  <pre aria-live="polite"><code>Open to read the journal formats and exit codes.</code></pre>
+</details>
+
+The [auto-answer entry on Tools](/tools.html#auto-answer) has the updater, README, and example CSV. The [journal reader entry](/tools.html#journal-summary) has the standalone reader and its README.

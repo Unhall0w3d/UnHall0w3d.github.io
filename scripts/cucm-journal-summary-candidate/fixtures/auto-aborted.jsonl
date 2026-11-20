@@ -1,0 +1,6 @@
+{"event":"START","mode":"APPLY","publisher":"synthetic.invalid"}
+{"event":"READY","target":{"device":"TEST-A","extension":"101","partition":""}}
+{"event":"READY","target":{"device":"TEST-B","extension":"102","partition":"TEST"}}
+{"event":"WRITE_INTENT","target":{"device":"TEST-A","extension":"101","partition":""}}
+{"event":"UPDATED","target":{"device":"TEST-A","extension":"101","partition":""}}
+{"event":"WRITE_INTENT","target":{"device":"TEST-B","extension":"102","partition":"TEST"}}

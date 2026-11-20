@@ -1,0 +1,29 @@
+0.2.0-rc4 — Keep the startup --insecure warning and suppress repeated InsecureRequestWarning messages during those requests.
+
+0.2.0-rc3 — Accept configured CSF, BOT, TCT, TAB and CIPC names; recognize explicit ATA names for preview. Bare MACs still select SEP.
+
+0.2.0-rc2 — 2026-11-20 — separate review candidate
+
+- Add explicit --insecure with a warning; retain verified TLS by default.
+- Reject --insecure combined with --ca-file before credentials/network access.
+- Pass explicit False to Requests so CA environment defaults cannot override it.
+- Preserve AXL 14.0 preview-only, authentication and all DN/write safeguards.
+- Journal schema unchanged; existing offline summary remains compatible.
+
+0.2.0-rc1 — 2026-11-15 — separate review candidate
+
+Based on the preserved 03-cucm-auto-answer discovery sample and original updater.
+- Enable the runnable CLI in this candidate only; add --version.
+- Integrate bounded getCCMVersion discovery and schema-pinned operations.
+- Retain AXL 14.0 preview-only in both CLI apply gate and update method.
+- Explicit CA bundle takes precedence; verified TLS and no redirects retained.
+- Every journal row declares journal_schema and schema_version 1; START includes
+  tool_version; DISCOVERY records software release and accepted schema.
+- Preserve exact DN UUID/sole appearance, complete preflight, immediate recheck,
+  durable write intent, verified read-back, no rollback and no write retries.
+- Retain 20 baseline and 11 discovery tests; add 8 producer/consumer tests for
+  preview, schema refusal, success, no-op, startup failure, interruption, later
+  drift and report/fsync failure (some tests cover multiple scenarios).
+- Add README.txt, fictional CSV and private review packaging.
+
+No original or public download replacement. No live appliance validation.

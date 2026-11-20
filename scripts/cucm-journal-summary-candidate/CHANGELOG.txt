@@ -1,0 +1,14 @@
+0.2.0-rc1 — 2026-11-15 — separate review candidate
+
+Based on the preserved 04-cucm-conventions journal-summary sample.
+- Add explicit auto-answer version-1 format support and per-record consistency.
+- Validate discovery ordering and disallow AXL 14.0 apply activity/success.
+- Preserve original unversioned auto-answer and BLF event dialects/pairing.
+- Keep JSON as the default; add --format text and --version.
+- Add source_schema_version and accepted_axl_version summary fields.
+- Keep earlier verified update counts visible when later rows are uncertain.
+- Stop at the first invalid record; never echo private identifiers or input text.
+- Retain 11 legacy tests and add 13 version/CLI/privacy tests.
+- Add README.txt describing commands, format contract and evidence limitations.
+
+Offline reader only: no network, source journal writes or recovery actions.

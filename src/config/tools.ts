@@ -14,6 +14,7 @@ type Tool = {
   requires: string;
   status: string;
   post: string;
+  guideSection?: string;
   downloads?: { label: string; href: string }[];
 };
 
@@ -31,15 +32,27 @@ export const tools: Tool[] = [
     ],
   },
   {
-    id: "auto-answer", group: "phone-changes", title: "CUCM primary-line auto answer",
+    id: "auto-answer", group: "phone-changes", title: "CUCM primary-line auto answer (0.2.0-rc4)",
     description: "Check selected phones and set their primary directory numbers to speakerphone auto answer. Shared-line checks are part of preflight.",
-    requires: "Python 3.10+, requests, AXL 15.0, and a phone / extension / partition CSV.",
-    status: "Live already-correct checks reported; writes with this revision are covered offline, not yet live-verified.",
+    requires: "Python 3.10+, requests, CUCM AXL access, and a phone CSV. AXL 15.0 supports apply. AXL 14.0 is preview-only.",
+    status: "CUCM 15 lab: one CIPC Line 1 update verified. A repeat preview returned ALREADY_OK and an inbound call auto-answered on speakerphone.",
     post: "2026-09-11-updating-cucm-auto-answer-from-a-phone-list-with-python",
     downloads: [
-      { label: "Python script", href: "/assets/downloads/cucm-auto-answer/auto-answer-update.py" },
-      { label: "README", href: "/assets/downloads/cucm-auto-answer/README.md" },
-      { label: "Example CSV", href: "/assets/downloads/cucm-auto-answer/devlist.example.csv" },
+      { label: "Python script", href: "/assets/downloads/cucm-auto-answer-candidate/auto-answer-update.py" },
+      { label: "README", href: "/assets/downloads/cucm-auto-answer-candidate/README.txt" },
+      { label: "Example CSV", href: "/assets/downloads/cucm-auto-answer-candidate/devlist.example.csv" },
+    ],
+  },
+  {
+    id: "journal-summary", group: "phone-changes", title: "CUCM journal summary (0.2.0-rc1)",
+    description: "Read a saved auto-answer or BLF label journal offline. Check verified updates and unresolved writes in text or JSON.",
+    requires: "Python 3.10+ and a saved updater JSONL file.",
+    status: "Both formats matched three CUCM 15 auto-answer journals. Legacy auto-answer and BLF coverage uses synthetic fixtures.",
+    post: "2026-09-11-updating-cucm-auto-answer-from-a-phone-list-with-python",
+    guideSection: "read-the-journal",
+    downloads: [
+      { label: "Python script", href: "/assets/downloads/cucm-journal-summary-candidate/journal_summary.py" },
+      { label: "README", href: "/assets/downloads/cucm-journal-summary-candidate/README.txt" },
     ],
   },
   {

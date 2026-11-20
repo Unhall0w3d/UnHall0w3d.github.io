@@ -8,7 +8,7 @@ const publishedPosts = await getCollection("posts", ({ data }) => !data.draft);
 const entries = tools.map((tool) => {
   const post = publishedPosts.find((post) => post.id.replace(/\.mdx?$/, "") === tool.post);
   if (!post) throw new Error(`Tool ${tool.id} requires a published guide: ${tool.post}`);
-  return { ...tool, guide: postUrl(post) };
+  return { ...tool, guide: postUrl(post) + (tool.guideSection ? `#${tool.guideSection}` : "") };
 });
 ---
 <BaseLayout title="Tools & Downloads" description="Practical Cisco UC scripts, read-only audit queries, backup tools, and agent workflow references, with guides and validation limits.">
@@ -26,7 +26,7 @@ const entries = tools.map((tool) => {
       <header class="section-header"><div><h2 id={`${group.id}-title`}>{group.title}</h2><p>{group.description}</p></div></header>
       <div class="tool-grid">
         {entries.filter((tool) => tool.group === group.id).map((tool) => (
-          <article class="tool-card" aria-labelledby={`${tool.id}-title`}>
+          <article id={tool.id} class="tool-card" aria-labelledby={`${tool.id}-title`}>
             <h3 id={`${tool.id}-title`}><a href={tool.guide}>{tool.title}</a></h3>
             <p>{tool.description}</p>
             <dl><dt>Requirements</dt><dd>{tool.requires}</dd><dt>Scope &amp; validation</dt><dd>{tool.status}</dd></dl>

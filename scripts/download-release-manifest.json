@@ -95,6 +95,21 @@
         "stem": "UC-DRS",
         "version": "1.6.2"
       }
+    },
+    "cucm-auto-answer-candidate": {
+      "state": "released",
+      "mirrors": [
+        "auto-answer-update.py",
+        "README.txt",
+        "devlist.example.csv"
+      ]
+    },
+    "cucm-journal-summary-candidate": {
+      "state": "released",
+      "mirrors": [
+        "journal_summary.py",
+        "README.txt"
+      ]
     }
   }
 }

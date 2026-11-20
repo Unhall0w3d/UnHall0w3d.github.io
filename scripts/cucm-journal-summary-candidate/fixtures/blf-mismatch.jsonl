@@ -1,0 +1,8 @@
+{"event":"start","mode":"apply","publisher":"synthetic.invalid"}
+{"event":"discovery","accepted_schema":"15.0"}
+{"event":"precheck","device":"TEST-A"}
+{"event":"update_needed","device":"TEST-A"}
+{"event":"prewrite_check","device":"TEST-A"}
+{"event":"write_intent","device":"TEST-A"}
+{"event":"postcheck","device":"TEST-A","snapshot":{"label":"SYNTHETIC_PII_MARKER"}}
+{"event":"verification_failed","device":"TEST-A"}

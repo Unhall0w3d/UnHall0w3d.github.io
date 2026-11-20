@@ -94,6 +94,14 @@ Omit `--ca-file` if the normal trust store already trusts the publisher. An expl
 
 Every run creates a fresh log and refuses to overwrite an existing one. After the first-device checks, use the larger approved CSV with separate preview and apply logs.
 
+To check how the run ended, download the [offline CUCM journal reader](/tools.html#journal-summary) and give it the same log you used for apply:
+
+```sh
+python journal_summary.py --tool blf-label --format text phone-apply.jsonl
+```
+
+The reader counts a BLF update when the journal pairs the write with its postcheck and verified outcome. If an intent remains open, use the original per-phone snapshots to reconcile the phone in CUCM before retrying. The reader’s legacy BLF checks used synthetic journals.
+
 ## Testing Results
 
 Testing completed successfully on **CUCM 14 (14.0.1.16900(4))**, using AXL **14.0**, with both single-phone and multiple-phone CSV files.
