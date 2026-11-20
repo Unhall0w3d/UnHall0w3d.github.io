@@ -75,6 +75,26 @@
         "folder": "codex-routing-2026-11-15",
         "filename": "codex-routing-2026-11-15.zip"
       }
+    },
+    "uc-drs-backups-v1.6.2-candidate": {
+      "state": "released",
+      "mirrors": [
+        "Set-UC-DRSBackupSchedules-v1.6.2.ps1",
+        "README.txt",
+        "CHANGELOG.txt",
+        "targets-example.csv",
+        "profile-example.json",
+        "Test-UC-DRSBackupSchedules.ps1",
+        "Test-LocalSftpSetup.ps1",
+        "core-test-results.txt",
+        "local-setup-test-results.txt",
+        "VALIDATION.txt",
+        "registration-fixtures.json"
+      ],
+      "archive": {
+        "stem": "UC-DRS",
+        "version": "1.6.2"
+      }
     }
   }
 }

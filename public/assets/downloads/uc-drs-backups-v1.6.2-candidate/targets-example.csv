@@ -1,0 +1,5 @@
+Site,Id,Technology,Address,Port,Username,ExpectedNodes,ImpTopology,ImpPublisher,ImpSubscriber
+Example,Voice,CUCM,192.0.2.10,22,admin,cucm-pub;imp-pub;imp-sub,Pair,imp-pub,imp-sub
+Example,Voicemail,CUC,192.0.2.20,22,admin,cuc-pub;cuc-sub,None,,
+Example,Emergency,CER,192.0.2.30,22,admin,cer-pub;cer-sub,None,,
+Example,ContactCenter,UCCX,192.0.2.40,22,admin,ccx-pub;ccx-sub,None,,

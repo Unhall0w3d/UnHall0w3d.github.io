@@ -1,0 +1,87 @@
+{
+  "status": "validated_before_publication",
+  "article": "https://nocthoughts.com/2026/11/14/standardizing-cisco-uc-backup-configuration-with-powershell.html",
+  "package": "uc-drs-backups-v1.6.2-candidate",
+  "revision": 5,
+  "script_unchanged_from_lab": true,
+  "validation": {
+    "command": "npm run validate",
+    "result": "passed",
+    "html_files": 224,
+    "posts": 77,
+    "legacy_urls": 57,
+    "lab": "PowerShell 7.7.0 / Posh-SSH 3.2.7 / single CUCM 15.0.1.15900-150 publisher",
+    "preview_writes": 0,
+    "apply_writes_with_matched_readbacks": 12,
+    "offline_core_checks": 253,
+    "offline_local_setup_checks": 53
+  },
+  "preservation": "Existing v1.6.1 downloads retained; other maintenance candidates excluded.",
+  "files": [
+    {
+      "name": "CHANGELOG.txt",
+      "bytes": 6243,
+      "sha256": "403729b1a2ce8906932bd1f6682b9429b466ae655b73a0939d887a03aedf8165"
+    },
+    {
+      "name": "README.txt",
+      "bytes": 23413,
+      "sha256": "a1adacb297f33dde2042c61bb8226c730ab663108dcf4ba2e1f5a072e2786296"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 977,
+      "sha256": "6255e97f95e94792ac1b4b63d8a8d401b216d5a6d595d30cf4411f1ecb9a39da"
+    },
+    {
+      "name": "Set-UC-DRSBackupSchedules-v1.6.2.ps1",
+      "bytes": 120816,
+      "sha256": "5ea426a7cac17d250f069bbb33d94bb009fc076db26d417365524ee1d1eeaa1d"
+    },
+    {
+      "name": "Test-LocalSftpSetup.ps1",
+      "bytes": 12462,
+      "sha256": "42243370a81f7b0ad4f588012c93bec26ca393292178666bd93e60e26d01971f"
+    },
+    {
+      "name": "Test-UC-DRSBackupSchedules.ps1",
+      "bytes": 72016,
+      "sha256": "9dd93c7ed2900fb2f5ceee1863c5106864dbd715febaea2dd083f810765186a9"
+    },
+    {
+      "name": "UC-DRS-v1.6.2-testing.zip",
+      "bytes": 83543,
+      "sha256": "b4b105d79517be80704417e999458a32202eda86c76fa6fc788597e00ffabfdc"
+    },
+    {
+      "name": "VALIDATION.txt",
+      "bytes": 9789,
+      "sha256": "1f11391e0e9ac923621e63ed4bc035001c92effda6c7cd7e5c5291ddefac1eaf"
+    },
+    {
+      "name": "core-test-results.txt",
+      "bytes": 34773,
+      "sha256": "0d0ee8316a189ded0e289b33a8ffac9db691baf54018e12767221b4615e05843"
+    },
+    {
+      "name": "local-setup-test-results.txt",
+      "bytes": 9009,
+      "sha256": "386fe236c05dc2a26301dc59d3134ba6bb2391a0473be86339c279d4d68e7624"
+    },
+    {
+      "name": "profile-example.json",
+      "bytes": 816,
+      "sha256": "19f080360f9b4fc470f25aadab44cb8f1f6c8c7fa68da1192c39ccfb72be6cbd"
+    },
+    {
+      "name": "registration-fixtures.json",
+      "bytes": 3357,
+      "sha256": "ede855d05a33dcf2dc6b9bfd6ab7d1bf14d3ae0e18195ec1671726feab2dc58f"
+    },
+    {
+      "name": "targets-example.csv",
+      "bytes": 379,
+      "sha256": "2854cf50fc35458edab4a722fbe0bdf88a9073ceae90623811894e97bc3b8e08"
+    }
+  ]
+}

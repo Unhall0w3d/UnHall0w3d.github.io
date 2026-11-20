@@ -1,0 +1,1089 @@
+WARNING: Choose a displayed number; use each number only once.
+WARNING: Choose a displayed number; use each number only once.
+WARNING: Choose a displayed number; use each number only once.
+WARNING: Choose a displayed number; use each number only once.
+WARNING: Choose a displayed number; use each number only once.
+WARNING: Choose a displayed number; use each number only once.
+PASS number selection rejects invalid duplicate overflow and injected input; preserves chosen order
+WARNING: Choose a displayed number; use each number only once.
+PASS single selection rejects multiple indexes and supports Back
+No existing devices or schedules to maintain.
+PASS empty inventory skips every maintenance prompt
+PASS referenced devices are not offered for deletion
+PASS disabled schedule omitted from disable choices
+Plan existing-object changes. Nothing is applied during preview.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+  No actions selected.
+1. DisableSchedule
+2. DeleteSchedule
+1. Case_A
+2. Case_b
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A disabled
+Case_b Case_b disabled
+
+Ordered maintenance plan:
+1. DisableSchedule Case_A
+2. DisableSchedule Case_b
+PASS multi-select preserves exact case and object order
+PASS preview selection leaves original observations unchanged
+Plan existing-object changes. Nothing is applied during preview.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+  No actions selected.
+1. DisableSchedule
+2. DeleteSchedule
+1. Case_A
+2. Case_b
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_A
+1. DisableSchedule
+2. DeleteSchedule
+3. DeleteDevice
+1. Case_A
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_A
+2. DeleteDevice Case_A
+WARNING: Plan unchanged: Device Case_A is still referenced by a schedule; plan those schedule deletions first.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_A
+2. DeleteDevice Case_A
+1. DisableSchedule
+2. DeleteSchedule
+1. Case_A
+2. Case_b
+WARNING: Plan unchanged: Device Case_A is still referenced by a schedule; plan those schedule deletions first.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_A
+2. DeleteDevice Case_A
+PASS invalid removal/edit keeps the complete dependent plan unchanged
+Plan existing-object changes. Nothing is applied during preview.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+  No actions selected.
+1. DisableSchedule
+2. DeleteSchedule
+1. Case_A
+2. Case_b
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A disabled
+Case_b Case_b disabled
+
+Ordered maintenance plan:
+1. DisableSchedule Case_A
+2. DisableSchedule Case_b
+1. DisableSchedule
+2. DeleteSchedule
+1. Case_A
+2. Case_b
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A disabled
+
+Ordered maintenance plan:
+1. DisableSchedule Case_A
+2. DeleteSchedule Case_b
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_b
+PASS valid edit and removal rebuild the remaining ordered plan
+Plan existing-object changes. Nothing is applied during preview.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+  No actions selected.
+1. DisableSchedule
+2. DeleteSchedule
+1. Case_A
+2. Case_b
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_A
+1. DisableSchedule
+2. DeleteSchedule
+3. DeleteDevice
+1. Case_A
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+1. DeleteSchedule Case_A
+2. DeleteDevice Case_A
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+  No actions selected.
+PASS dependent actions can be removed together without implicit deletion of other selections
+Plan existing-object changes. Nothing is applied during preview.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name   Type    Details
+----   ----    -------
+Case_A NETWORK 
+Case_b NETWORK 
+
+Schedules:
+
+Name   Device Status
+----   ------ ------
+Case_A Case_A enabled
+Case_b Case_b enabled
+
+Ordered maintenance plan:
+  No actions selected.
+PASS preview Cancel has a distinct cancellation exception
+
+Selected environments (remove here means remove from this run only):
+1. Lab/Cluster1  CUCM  192.0.2.10
+PASS target selection Cancel uses the same cancellation contract
+PASS failure guidance identifies a no-write attempt
+PASS failure guidance retains verified earlier work
+PASS unresolved write guidance takes priority over earlier successes
+PASS failure guidance is specific to the failed target
+The device was created, but this script has not tested SFTP login or a backup.
+To save this password, run and verify a manual backup in another CLI or DRS session, then return here.
+Choose Skip to finish without saving. You can enter the password on a later run.
+PASS SFTP backup validation defaults to Skip without saving
+The device was created, but this script has not tested SFTP login or a backup.
+To save this password, run and verify a manual backup in another CLI or DRS session, then return here.
+Choose Skip to finish without saving. You can enter the password on a later run.
+PASS verified manual backup reaches the separate credential-save consent function
+PASS stored or read-only credentials do not prompt for saving
+PASS target normalization supplies SSH port
+PASS reject shorthand IP
+PASS reject IP command injection
+PASS reject unsafe CLI token
+PASS reject credential field in inventory
+PASS reject duplicate targets
+PASS credential key includes site purpose endpoint and user
+PASS SSH and SFTP namespaces differ
+PASS native wrapper compiles without calling Windows APIs
+PASS topology retains IM&P database role
+PASS subscriber cannot become configuration endpoint
+PASS unauthenticated member blocks topology
+PASS unknown topology row blocks partial success
+PASS CUCM 14 mixed processnode footer retains four authenticated nodes
+PASS footer case does not rewrite canonical node names
+PASS IM&P DBPub remains distinct from cluster Subscriber
+PASS reported footer accepts CRLF terminal output
+PASS four-node response without footer remains supported
+PASS footer FQDN identity reconciles case-insensitively
+PASS unknown row before footer still blocks
+PASS unknown footer identity blocks
+PASS empty footer cannot establish complete topology
+PASS missing footer member blocks
+PASS extra footer member blocks
+PASS duplicate footer identity via name and address blocks
+PASS authenticated-shaped row after footer is not silently skipped
+PASS repeated footer header blocks
+PASS footer before authenticated nodes blocks
+PASS footer never excuses unauthenticated member
+PASS ambiguous footer identity blocks
+PASS single-hyphen named profile binds without remote firewall sources
+PASS double-hyphen Profile rejected at binding before main
+PASS unnamed positional input rejected before main
+PASS named local SFTP setup arguments remain supported
+PASS reported CUC pair uses shared footer parser and preserves case
+PASS reported CUC publisher role retained
+PASS reported CUC topology feeds synthetic CUC registration coverage
+PASS registration table retains components
+PASS registration label format retains components
+PASS truncated registration blocks
+PASS partly parsed registration blocks
+PASS CUCM-only coverage
+PASS IM&P pair included in schedule features
+PASS missing publisher DB component blocks
+PASS missing IM&P subscriber blocks
+PASS IM&P publisher-only coverage
+PASS unexpected IM&P blocks None profile
+PASS CUC single-node feature mapping
+PASS CUC rejects mismatched technology registrations
+PASS CER single-node feature mapping
+PASS CER rejects mismatched technology registrations
+PASS UCCX single-node feature mapping
+PASS UCCX rejects mismatched technology registrations
+PASS parse release
+PASS UCCX release uses separate policy
+PASS reject nonexistent UCCX 14 adapter
+PASS UCCX 12.50 cannot pass the 12.5 minor-version gate
+PASS UCCX 12.51 cannot pass the 12.5 minor-version gate
+PASS UCCX 15 accepted with Active Version form
+PASS parenthesized CUCM release preserved
+PASS unknown technology cannot bypass release policy
+PASS IM&P-only declared CUCM is blocked despite complete IM&P components
+PASS UCM on an undiscovered node cannot satisfy CUCM coverage
+PASS CUCM with IM&P remains accepted
+PASS CUCM-only remains accepted
+PASS primary feature retains exact node-name matching
+PASS CUC expected primary feature accepted
+PASS CUC wrong primary feature blocked
+PASS CER expected primary feature accepted
+PASS CER wrong primary feature blocked
+PASS UCCX expected primary feature accepted
+PASS UCCX wrong primary feature blocked
+PASS empty discovered inventory cannot pass coverage
+PASS operator CUCM and IM&P registrations pass with UCM feature
+PASS discovered CLI feature tokens preserved unchanged for scheduling
+PASS missing UCM subscriber registration still blocks
+PASS operator fixture missing IM&P publisher DB still blocks
+PASS explicit no-registration response cannot count as coverage
+PASS no-registration output reports appliance condition instead of parser fallback
+PASS failed registration command with data still rejected
+PASS CUC checks publisher registration and preserves both inventory nodes
+PASS CUC publisher without registrations remains blocked
+PASS CUC subscriber registration cannot substitute for publisher
+PASS CUC subscriber inventory expectation still enforced
+PASS CUC without selected publisher cannot define DRS scope
+PASS CUC subscriber is visibly inventory-only
+PASS operator CUC publisher response passes with nine component registrations
+PASS all five reported CUC backup features retained
+PASS CUC schedule plan retains complete discovered publisher feature list
+Declared technology: CUC; detected release: 14.0.1.16900-10
+PASS CUC discovery queries publisher only and completes coverage
+PASS CUC discovery never queries subscriber registrations
+PASS list parser preserves schedule enabled state
+PASS unknown list is not empty configuration
+PASS partial device list blocks
+PASS explicit empty list accepted
+PASS new configuration plan has two create pairs
+PASS weekly start respects minimum elapsed two days
+PASS monthly scheduling is next calendar day not weekday
+PASS declining monthly creates no monthly device
+PASS disabled existing schedule is not already_ok
+PASS shared destinations rejected
+PASS expected new pair preserves empty baseline
+PASS lost existing configuration detected
+PASS stale admin prompt cannot finish output
+PASS colon status is not CLI prompt
+PASS unexpected password prompt not treated as CLI
+PASS expected password prompt recognized
+PASS weekly prompt recognized
+PASS final admin prompt accepts trailing newline
+PASS unverified command cannot continue anyway
+PASS failure overrides success token
+Saved ssh credential: osadmin @ 192.0.2.10 (site Lab)
+PASS confirmed username precedes vault lookup and saved use avoids password prompt
+PASS profile username override reuses matching saved account
+PASS missing confirmed-account credential prompts for password after lookup
+Saved ssh credential: osadmin @ 192.0.2.10 (site Lab)
+PASS New prompts without deleting existing credential
+Saved ssh credential: osadmin @ 192.0.2.10 (site Lab)
+PASS Forget deletes only confirmed account then prompts
+Saved ssh credential: osadmin @ 192.0.2.10 (site Lab)
+PASS read-only allows saved use but excludes Forget
+PASS Never does not access native vault
+PASS fresh authentication retry bypasses rejected stored credential
+PASS native write success gets explicit console confirmation
+PASS save requires consent and records success after native write
+PASS already stored credential not saved again
+PASS native failure does not claim or log successful persistence
+PASS declined persistence is explicit and never writes
+PASS read-only or WhatIf context cannot save
+PASS Never context cannot offer saving
+Credential saved to Windows Credential Manager: UC-DRS/Lab/ssh/192.0.2.10:22/osadmin
+PASS audit failure after native success propagates instead of reporting native failure
+PASS successful native write remains recorded in memory when audit fails
+PASS relative LogPath follows PowerShell location
+PASS relative existing log still refuses overwrite
+PASS relative SaveProfile follows PowerShell location
+PASS non-filesystem output provider rejected
+PASS redaction preserves valid JSON and handles escaped secrets
+PASS nested log data redacted
+PASS transport rejects writes when mode disables them
+PASS mode guard sends no bytes
+PASS write response does not resolve pending intent
+PASS verified write resolves matching intent
+PASS stale buffered output stops next command
+PASS disconnect detected without timeout loop
+PASS secret-exchange timeout stops
+PASS secret exchange omitted from timeout audit
+PASS normal cleanup disposes stream and removes own session
+WARNING: SSH Stream cleanup failed; inspect this run's audit log.
+PASS stream cleanup failure still removes session
+PASS state drift blocks execution before credential prompt
+PASS WhatIf/ShouldProcess refusal skips writes and credential requests
+PASS nonsecret profile roundtrip
+PASS profile cannot silently overwrite existing file
+
+169 checks passed. Windows vault and live Cisco behavior were not exercised.
+Weekly: created and enabled.
+  Verified by CLI readback: device name/type, schedule-to-device association, enabled status.
+  Check in DRS and a backup test: features, recurrence/start date/time, retention, SFTP credentials/access, device server, device path.
+Monthly: created and enabled.
+  Verified by CLI readback: device name/type, schedule-to-device association, enabled status.
+  Check in DRS and a backup test: features, recurrence/start date/time, retention, SFTP credentials/access, device server, device path.
+PASS full simulated create workflow completes weekly and monthly
+PASS simulated schedules enabled and read back
+PASS all six simulated writes have matching verification receipts
+PASS echoed SFTP password absent from full-run audit
+PASS full before and after configuration captured per operation
+PASS repeat run reports existing settings as unverified
+PASS repeat run sends no configuration writes
+PASS contradictory read-only/apply flags rejected before setup
+PASS maintenance requires explicit apply
+PASS WhatIf forbids module installation
+
+FINAL: 179 offline checks passed. Live Windows/Cisco tests remain operator work.
+Maintenance mode: no new devices or schedules will be created.
+WARNING: List output is not a restorable export. Record full settings in DRS before deleting anything.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "enabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+WARNING: Device is referenced by a schedule. Resolve that dependency first.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "enabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+PASS referenced device cannot be deleted
+Maintenance mode: no new devices or schedules will be created.
+WARNING: List output is not a restorable export. Record full settings in DRS before deleting anything.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "enabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+Weekly: DisableSchedule verified.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "disabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+PASS maintenance disables only selected schedule with readback
+Maintenance mode: no new devices or schedules will be created.
+WARNING: List output is not a restorable export. Record full settings in DRS before deleting anything.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Weekly",
+      "Device": "Weekly",
+      "Status": "disabled"
+    },
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+Weekly: DeleteSchedule verified.
+{
+  "Devices": [
+    {
+      "Name": "Weekly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    },
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+Weekly: DeleteDevice verified.
+{
+  "Devices": [
+    {
+      "Name": "Monthly",
+      "Type": "NETWORK",
+      "Details": null,
+      "Server": null,
+      "Path": null
+    }
+  ],
+  "Schedules": [
+    {
+      "Name": "Monthly",
+      "Device": "Monthly",
+      "Status": "enabled"
+    }
+  ]
+}
+PASS explicit maintenance deletion preserves unrelated pair
+PASS maintenance has matching intent verification receipts
+PASS show date parsed as exact appliance-local time and reported timezone
+PASS show date accepts padded single-digit day
+PASS bare show date echo retains exact appliance clock
+PASS unexpected command-like output still blocks clock parsing
+PASS repeated bare date echo is rejected
+PASS trailing command echo is not silently discarded
+PASS inconsistent weekday rejected
+PASS invalid calendar date rejected
+PASS invalid appliance clock time rejected
+PASS ambiguous multi-line date response rejected
+PASS missing timezone never falls back to Windows clock
+Using appliance clock: 2026-11-17 23:55:17 EST
+PASS clock acquisition requires no operator input
+PASS maintenance projection preserves source snapshot and unrelated objects
+PASS projected device deletion rejects remaining schedule reference
+PASS duplicate disable selection rejected
+PASS planned CLI name injection rejected
+PASS unknown planned mutation rejected
+PASS creation is planned against projected post-maintenance state
+PASS maintenance-only saved plan excludes additions
+PASS additions without deletion preserve existing names
+Plan existing-object changes. Nothing is applied during preview.
+
+Inventory after the planned actions:
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    enabled
+Unrelated Unrelated enabled
+
+Ordered maintenance plan:
+  No actions selected.
+1. DisableSchedule
+2. DeleteSchedule
+1. Weekly
+2. Unrelated
+
+Inventory after the planned actions:
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    disabled
+Unrelated Unrelated enabled
+
+Ordered maintenance plan:
+1. DisableSchedule Weekly
+1. DisableSchedule
+2. DeleteSchedule
+1. Weekly
+2. Unrelated
+
+Inventory after the planned actions:
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Unrelated Unrelated enabled
+
+Ordered maintenance plan:
+1. DisableSchedule Weekly
+2. DeleteSchedule Weekly
+1. DisableSchedule
+2. DeleteSchedule
+3. DeleteDevice
+1. Weekly
+
+Inventory after the planned actions:
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Unrelated Unrelated enabled
+
+Ordered maintenance plan:
+1. DisableSchedule Weekly
+2. DeleteSchedule Weekly
+3. DeleteDevice Weekly
+PASS interactive planning collects numbered ordered selections without remote commands
+PASS planning consumes only the expected prompts
+PASS saved preview roundtrip retains exact maintenance selections
+PASS saved plan contains no credential or password fields
+PASS saved preview plan cannot overwrite existing evidence
+PASS maintenance-only plan roundtrip preserves empty additions
+PASS additions-only plan roundtrip preserves empty maintenance
+PASS multi-target saved plans preserve target order and settings
+PASS apply preserves saved start time rather than recalculating it
+PASS saved plan rejects release drift
+PASS saved plan rejects changed DRS objects
+PASS saved plan rejects topology drift
+PASS saved plan rejects registration drift
+PASS saved plan rejects changed appliance timezone
+PASS saved plan rejects appliance clock moving backward
+PASS saved plan rejects elapsed start time
+PASS saved action description cannot diverge from reconstructed plan
+PASS saved target rejects embedded secret fields
+PASS saved plan rejects unsupported executable action
+PASS saved plan rejects incompatible candidate schema
+PASS declining a later deletion prevents earlier disable and all additions
+PASS SFTP identity change is rejected before maintenance
+PASS SFTP input rejection leaves existing schedules and devices intact
+PASS WhatIf/no-write context cannot apply maintenance or additions
+Weekly: DisableSchedule verified.
+Weekly: DeleteSchedule verified.
+Weekly: DeleteDevice verified.
+Weekly: created and enabled.
+  Verified by CLI readback: device name/type, schedule-to-device association, enabled status.
+  Check in DRS and a backup test: features, recurrence/start date/time, retention, SFTP credentials/access, device server, device path.
+PASS combined plan executes disable delete-schedule delete-device then creation in order
+PASS combined maintenance and creation writes have verified receipts
+PASS combined execution preserves unrelated schedule and device
+PASS live configuration drift before first operation rejects execution
+PASS drift rejection sends no configuration commands
+Weekly: DisableSchedule verified.
+PASS later maintenance failure aborts remaining sequence
+PASS earlier verified disable remains visible after failure without blind rollback
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/preview-run.jsonl
+
+Inspecting CUCM 192.0.2.10 ...
+cucm (192.0.2.10, Publisher): UCM; 2 component registrations
+Coverage: registered_features_checked. Registration checks do not prove backup success or completeness of every product component.
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    enabled
+Unrelated Unrelated enabled
+
+
+=== Lab/Cluster1 | CUCM 14.0.1 ===
+SFTP: 192.0.2.50 / backup; retention 2
+Features: UCM
+Weekly: planned DisableSchedule
+Weekly: planned DeleteSchedule
+Weekly: planned DeleteDevice
+WARNING: Maintenance runs before additions. A later failure does not roll back completed changes.
+Weekly: update_needed; WEEKLY; Lab/Weekly/; starts 2026-11-24 01:00 (node local time)
+  Create device, create schedule, enable and read back.
+
+=== SUMMARY ===
+
+Id       Technology ConfigurationStatus CoverageStatus              BackupExecu
+                                                                    tionStatus
+--       ---------- ------------------- --------------              -----------
+Cluster1 CUCM       preview_only        registered_features_checked not_run
+
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/preview-run.jsonl
+This script does not start backup or restore jobs. Review any unverified settings in DRS.
+Saved preview plan: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/preview-run.plan.json
+Apply with: .\Set-UC-DRSBackupSchedules-v1.6.2.ps1 -Apply -Plan '/tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/preview-run.plan.json'
+PASS normal preview writes a saved plan without invoking execution
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/apply-run.jsonl
+Applying saved target settings and selections; no profile is reloaded.
+
+Inspecting CUCM 192.0.2.10 ...
+cucm (192.0.2.10, Publisher): UCM; 2 component registrations
+Coverage: registered_features_checked. Registration checks do not prove backup success or completeness of every product component.
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    enabled
+Unrelated Unrelated enabled
+
+
+=== Lab/Cluster1 | CUCM 14.0.1 ===
+SFTP: 192.0.2.50 / backup; retention 2
+Features: UCM
+Weekly: planned DisableSchedule
+Weekly: planned DeleteSchedule
+Weekly: planned DeleteDevice
+WARNING: Maintenance runs before additions. A later failure does not roll back completed changes.
+Weekly: update_needed; WEEKLY; Lab/Weekly/; starts 2026-11-24 01:00 (node local time)
+  Create device, create schedule, enable and read back.
+
+=== SUMMARY ===
+
+Id       Technology ConfigurationStatus      CoverageStatus              Backup
+                                                                         Execut
+                                                                         ionSta
+                                                                         tus
+--       ---------- -------------------      --------------              ------
+Cluster1 CUCM       applied_verified_limited registered_features_checked not_r…
+
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/apply-run.jsonl
+This script does not start backup or restore jobs. Review any unverified settings in DRS.
+PASS apply loads saved selections without repeating target or maintenance selection
+PASS saved maintenance actions reach the apply executor unchanged
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/stale-run.jsonl
+Applying saved target settings and selections; no profile is reloaded.
+
+Inspecting CUCM 192.0.2.10 ...
+cucm (192.0.2.10, Publisher): UCM; 2 component registrations
+Coverage: registered_features_checked. Registration checks do not prove backup success or completeness of every product component.
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    enabled
+Unrelated Unrelated enabled
+
+WARNING: Cluster1: Saved plan is stale: release, topology, registrations or DRS objects changed. Run a fresh preview.
+No configuration writes were attempted for this target. Correct the reported issue and run a new preview.
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/stale-run.jsonl
+
+=== SUMMARY ===
+
+Id       Technology ConfigurationStatus     CoverageStatus              BackupE
+                                                                        xecutio
+                                                                        nStatus
+--       ---------- -------------------     --------------              -------
+Cluster1 CUCM       stopped_review_required registered_features_checked not_run
+
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/stale-run.jsonl
+This script does not start backup or restore jobs. Review any unverified settings in DRS.
+PASS main rejects stale plan before execution
+PASS normal apply requires a saved preview plan
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/failed-preview.jsonl
+
+Inspecting CUCM 192.0.2.10 ...
+WARNING: Cluster1: simulated inspection error
+No configuration writes were attempted for this target. Correct the reported issue and run a new preview.
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/failed-preview.jsonl
+
+=== SUMMARY ===
+
+Id       Technology ConfigurationStatus     CoverageStatus BackupExecutionStatu
+                                                           s
+--       ---------- -------------------     -------------- --------------------
+Cluster1 CUCM       stopped_review_required unknown        not_run
+
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/failed-preview.jsonl
+This script does not start backup or restore jobs. Review any unverified settings in DRS.
+No preview plan was saved. Resolve the reported issue and run a new preview.
+PASS failed preview writes no saved plan
+PASS failed preview audit supplies no-write recovery guidance
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/cancel-selection.jsonl
+Cancelled before connecting.
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/cancel-selection.jsonl
+PASS main cancellation exits 3, records cancellation and saves no plan
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/cancel-connected.jsonl
+
+Inspecting CUCM 192.0.2.10 ...
+cucm (192.0.2.10, Publisher): UCM; 2 component registrations
+Coverage: registered_features_checked. Registration checks do not prove backup success or completeness of every product component.
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    enabled
+Unrelated Unrelated enabled
+
+Preview cancelled. No plan saved.
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/cancel-connected.jsonl
+PASS connected preview cancellation records target result and returns ordinary cancellation
+UC DRS v1.6.2 candidate revision 5. Log: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/cancel-cleanup-failed.jsonl
+
+Inspecting CUCM 192.0.2.10 ...
+cucm (192.0.2.10, Publisher): UCM; 2 component registrations
+Coverage: registered_features_checked. Registration checks do not prove backup success or completeness of every product component.
+Backup devices:
+
+Name      Type    Details
+----      ----    -------
+Weekly    NETWORK 
+Unrelated NETWORK 
+
+Schedules:
+
+Name      Device    Status
+----      ------    ------
+Weekly    Weekly    enabled
+Unrelated Unrelated enabled
+
+Preview cancelled. No plan saved.
+Audit: /tmp/uc-drs-plans-02dc55e6d8fc403e8695dab922acd037/cancel-cleanup-failed.jsonl
+PASS cleanup failure takes precedence over cancellation exit code
+WARNING: Authentication rejected. One fresh credential attempt is available.
+SSH connected; waiting up to 120 seconds for the Cisco admin prompt.
+PASS authentication rejection gets exactly one fresh attempt
+PASS credential save offered only after authentication success
+WARNING: Authentication rejected. One fresh credential attempt is available.
+PASS second authentication rejection stops target
+PASS failed credentials never saved and retry is bounded
+PASS CLI startup stream failure stops target after successful authentication
+PASS save occurs before CLI startup and later failure still cleans SSH session
+PASS nested settings validated during profile import
+
+FINAL: 251 offline checks passed. These offline checks do not test native Windows or live Cisco behavior.
+PASS documented device server/path retained for verification
+PASS Get-Help synopsis is discoverable
+
+FINAL: 253 offline checks passed. These offline checks do not test native Windows or live Cisco behavior.

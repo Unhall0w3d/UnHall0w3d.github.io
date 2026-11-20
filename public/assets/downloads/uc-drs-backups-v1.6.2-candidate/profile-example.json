@@ -1,0 +1,30 @@
+{
+  "SchemaVersion": 1,
+  "Targets": [
+    {
+      "Site": "Example",
+      "Id": "Voice",
+      "Technology": "CUCM",
+      "Address": "192.0.2.10",
+      "Port": 22,
+      "Username": "admin",
+      "ExpectedNodes": "cucm-pub;cucm-sub;imp-pub;imp-sub",
+      "ImpTopology": "Pair",
+      "ImpPublisher": "imp-pub",
+      "ImpSubscriber": "imp-sub",
+      "Settings": {
+        "SftpAddress": "192.0.2.50",
+        "SftpUsername": "cmsbackup",
+        "Retention": 2,
+        "WeeklyPath": "SFTPBackups/Example/Voice/CUCM/Weekly/",
+        "MonthlyPath": "SFTPBackups/Example/Voice/CUCM/Monthly/",
+        "WeeklyName": "Probe_Weekly",
+        "MonthlyName": "Probe_Monthly",
+        "WeeklyDay": "Tuesday",
+        "WeeklyTime": "01:00",
+        "MonthlyDay": 1,
+        "MonthlyTime": "01:00"
+      }
+    }
+  ]
+}

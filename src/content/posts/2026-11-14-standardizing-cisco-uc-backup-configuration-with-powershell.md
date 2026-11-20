@@ -1,7 +1,7 @@
 ---
 title: "Standardizing Cisco UC Backup Configuration Across Managed Networks With PowerShell"
 date: 2026-11-14T12:00:00-05:00
-description: "A PowerShell workflow for Windows SFTP setup and Cisco UC DRS schedules across separate managed networks, with reusable profiles, coverage checks, and useful logs."
+description: "Reusable site profiles, a saved preview plan, and an ordered replacement workflow for Cisco UC DRS backup devices and schedules."
 categories:
   - Cisco
   - Unified Communications
@@ -21,47 +21,40 @@ draft: false
 
 Configuring a Cisco UC backup schedule is familiar work. Add the SFTP destination, select the features, set the schedule, enable it, and check the result.
 
-The repetition starts when that same job spans numerous separated managed networks. Each network has its own local SFTP server and UC clusters. The procedure stays much the same, but the publisher addresses, credentials, paths, and topology change with every site.
+The repetition starts when that job spans numerous separated managed networks. Each network has its own local SFTP server and UC clusters. The procedure stays much the same, but the publisher addresses, credentials, paths, and topology change at every site.
 
-That was the reason for this script. I wanted one repeatable way to prepare the local destination and configure the related backup schedules, with the details for each network kept in a reusable profile. Less time rebuilding the procedure from notes, and fewer opportunities to carry the previous site's settings into the next one.<!--more-->
+That was the reason for this script. I wanted a repeatable way to prepare the destination and configure weekly and monthly backups, with each network's settings kept in its own profile. Replacing an old configuration needed the same treatment: inspect what exists, choose what stays and what goes, then see the whole sequence before changing anything.<!--more-->
 
 ## What Is Our Mission?
 
-Standardize weekly and monthly DRS backup configuration across managed networks, while keeping each site's settings separate.
+Standardize the configuration work without losing sight of the environment we are changing.
 
-The script accepts CUCM, Unity Connection, Cisco Emergency Responder, and UCCX targets. For CUCM environments with IM and Presence, it also checks the associated IM&P nodes and their registered backup components.
+The tool has two jobs: prepare a local Windows SFTP destination where needed, and configure Cisco UC DRS devices and schedules. It includes product-specific handling for CUCM, Unity Connection, Cisco Emergency Responder, and UCCX. CUCM discovery also accounts for associated IM and Presence nodes. The validation record identifies which versions and workflows have been exercised.
 
-There are two parts to the workflow:
+Each network keeps its own profile and local SFTP server. There is no requirement for a central server that can reach every customer environment.
 
-1. Prepare the local Windows SFTP server.
-2. Inspect and configure the UC backup devices and schedules that use it.
+The examples below use the v1.6.2 revision 5 saved-plan workflow. Use [Tools & Downloads](/tools.html#uc-drs-title) to choose the available package and review its README, changelog, and validation details.
 
-Each part has a preview and an explicit apply step. Both use the same nonsecret site profile. The work stays local to the managed network; a central server with access to every customer environment is unnecessary.
+## Where the Manual Work Adds Up
 
-The examples here use **v1.6.1**. The [Tools & Downloads](/tools.html) page provides the entry point for tool revisions, with version-specific details in the accompanying README and changelog.
+For a single cluster, the individual steps are manageable. Across several networks, keeping those steps consistent becomes the job.
 
-## The Manual Work We Wanted to Make Consistent
-
-This follows the same idea as the [auto-answer](/2026/09/11/updating-cucm-auto-answer-from-a-phone-list-with-python.html) and [BLF-label](/2026/09/11/updating-cucm-blf-labels-with-python.html) scripts: define the scope, inspect the existing configuration, make the requested changes, and keep a useful record.
-
-| Step | Manual workflow | Script workflow |
+| Task | Manual workflow | Script workflow |
 | --- | --- | --- |
-| Select the environment | Track publisher addresses and site settings in notes. | Load the site's profile or CSV. |
-| Prepare SFTP | Check OpenSSH, the account, folders, permissions, service, and firewall. | Display the local setup plan, then apply it explicitly. |
-| Establish backup scope | Identify the cluster nodes and their registered features. | Query registration for each discovered node and compare the expected topology. |
-| Configure DRS | Create devices, select features, set recurrence, and enable schedules. | Preview the proposed additions, create them with `-Apply`, and read back the available settings. |
-| Handle existing objects | Check whether a familiar name has the intended settings. | Preserve the object and identify settings the CLI cannot fully verify. |
-| Record the work | Maintain notes and screenshots for each environment. | Write discovery, proposed changes, write intent, and results to a fresh JSONL log. |
+| Select the environment | Work from notes containing publisher addresses and site settings. | Load a site profile, CSV, or interactive selection. |
+| Prepare the destination | Check OpenSSH, the account, folders, permissions, service, and firewall. | Review a separate local setup plan and apply it explicitly. |
+| Establish backup scope | Identify nodes and registered backup features. | Discover topology and registrations using the product's backup scope. |
+| Replace old configuration | Disable selected schedules, remove schedules, then remove unused devices. | Select numbered objects and review the ordered maintenance plan. |
+| Add the new configuration | Create each device and schedule, then enable it. | Include weekly/monthly additions in the same saved UC plan. |
+| Check the result | Compare DRS settings and keep notes. | Read back available fields after each write and record the results. |
 
-The useful part is consistency. The same inputs drive the local folders and the DRS paths. The same checks run for each cluster. The result is a procedure we can inspect and reuse, instead of another set of remembered clicks.
+This follows the same approach as the [auto-answer](/2026/09/11/updating-cucm-auto-answer-from-a-phone-list-with-python.html) and [BLF-label](/2026/09/11/updating-cucm-blf-labels-with-python.html) tools: define the scope, inspect the existing configuration, and keep a record of each change.
 
-## One Profile for Each Managed Network
+## Keep the Site Details in a Profile
 
-The original workflow prompted for CUCM and Unity Connection. The selection list now supports adding, editing, and removing targets for all four technologies, including multiple clusters of the same type.
+CSV provides target inventory. JSON also holds destination paths, retention, names, and schedule settings. Passwords belong in neither.
 
-CSV handles the target inventory. JSON holds the complete site profile, including SFTP settings and schedules. Passwords belong in neither.
-
-Here is a shortened fictional CSV:
+A shortened fictional CSV looks like this:
 
 ```csv
 Site,Id,Technology,Address,Port,Username,ExpectedNodes,ImpTopology,ImpPublisher,ImpSubscriber
@@ -71,108 +64,139 @@ SiteA,Emergency,CER,192.0.2.30,22,admin,cer-pub;cer-sub,None,,
 SiteA,ContactCenter,UCCX,192.0.2.40,22,admin,ccx-pub;ccx-sub,None,,
 ```
 
-`ExpectedNodes` contains the exact, case-preserved short hostnames for the cluster, including any subscribers. The sample voice cluster has a CUCM publisher and an IM&P pair. Missing or unexpected nodes become a coverage issue. Without an expected list, discovery describes what the publisher returned but cannot establish whether a node is absent from that inventory.
+`ExpectedNodes` uses the actual short hostnames, including subscribers and any IM&P nodes. Missing or extra nodes stop configuration. Leaving it blank allows discovery and review, but the returned inventory alone cannot tell us about a node that is missing from that response.
 
-The example JSON provides a starting profile. The wizard can also save its settings with `-SaveProfile .\site-a.json`, using a new filename. Each network gets its own profile. The site name also forms part of the credential-store key, which matters when separate networks reuse the same private IP addresses.
-
-## Preparing the Local SFTP Server
-
-Local setup runs in an elevated, 64-bit PowerShell window on that network's Windows SFTP server. The configured SFTP address must belong to the machine, and the selected targets must agree on the site, SFTP address, and local username.
-
-The backup account must already exist and be enabled. The script resolves its SID and Windows profile location instead of assuming the home directory is always `C:\Users\<username>`. If the account has no initialized profile, apply mode can create one through the Windows profile API. Account creation, password changes, and enabling disabled accounts remain outside this operation. [Microsoft CreateProfile documentation](https://learn.microsoft.com/en-us/windows/win32/api/userenv/nf-userenv-createprofile)
-
-A profile using `cmsbackup` might produce:
+Use a separate backup path for each cluster and frequency. For example:
 
 ```text
-C:\Users\cmsbackup\SFTPBackups\SiteA\Voice\CUCM\Weekly\
-C:\Users\cmsbackup\SFTPBackups\SiteA\Voice\CUCM\Monthly\
-C:\Users\cmsbackup\SFTPBackups\SiteA\Voicemail\CUC\Weekly\
-C:\Users\cmsbackup\SFTPBackups\SiteA\Voicemail\CUC\Monthly\
+SFTPBackups/SiteA/Voice/CUCM/Weekly/
+SFTPBackups/SiteA/Voice/CUCM/Monthly/
+SFTPBackups/SiteA/Voicemail/CUC/Weekly/
+SFTPBackups/SiteA/Voicemail/CUC/Monthly/
 ```
 
-DRS uses the corresponding relative paths, such as `SFTPBackups/SiteA/Voice/CUCM/Weekly/`.
+The site name also separates Windows Credential Manager entries. That matters when several managed networks reuse the same private addresses.
 
-In apply mode, local setup installs the Windows OpenSSH Server capability when absent, creates the folder hierarchy, grants the backup account Modify access, and configures `sshd` to start automatically. A new `SFTPBackups` root gets a private permission baseline for the backup account, SYSTEM, and Administrators. Existing folder permissions are preserved, with the required grant added where absent. Conflicting deny entries stop the operation.
+## Preview the Whole Replacement
 
-For a fresh OpenSSH installation, the script replaces the newly created broad default firewall rule with a rule scoped to the selected local address and supplied UC source addresses or subnets, on Domain/Private profiles. Pre-existing firewall rules remain in place, so the new rule does not narrow access those rules already allow. [Microsoft OpenSSH installation guidance](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse)
+The original script allowed optional cleanup before creation. That remains useful when replacing a backup destination or standardizing existing schedules. The revised workflow puts those choices into the preview so the complete sequence can be reviewed and saved.
 
-The preview command is:
+Run it from a local Windows folder with the appropriate publisher OS-administrator account:
 
 ```powershell
-.\Set-UC-DRSBackupSchedules-v1.6.1.ps1 -Profile .\site-a.json -SetupLocalSftp -SftpRemoteAddress 192.0.2.0/24
+.\Set-UC-DRSBackupSchedules-v1.6.2.ps1 -Profile .\site-a.json -LogPath .\preview-001.jsonl
 ```
 
-The subnet is fictional. The actual source scope includes the UC nodes that originate backup traffic, which can include subscribers. Adding `-Apply` enables the displayed setup changes after confirmation.
+If Posh-SSH is missing, add `-InstallDependencies` to install it for the current user and continue. Run this from the PowerShell edition you intend to use. Our fresh PowerShell 7 session did not find the module installed for Windows PowerShell 5.1; the existing installation option handled that without a script change.
 
-This mode preserves existing SSH configuration. It does not create an SFTP-only jail or adapt custom chroots, forced commands, or nonstandard subsystem paths. Those configurations sit outside the supported local setup workflow. [Microsoft OpenSSH configuration guidance](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh-server-configuration)
+After discovery, the script displays a compact device and schedule inventory. Choose **Add** to select an available action, then select one or more objects by number. The tool retains their exact names, including capitalization.
 
-## A Publisher Login Does Not Establish Backup Coverage
+A replacement plan might contain:
 
-One of the more useful changes came from looking at feature discovery. A successful publisher login says very little about whether every expected node and component appears in DRS.
+```text
+1. DisableSchedule SiteA_Weekly
+2. DisableSchedule SiteA_Monthly
+3. DeleteSchedule SiteA_Weekly
+4. DeleteSchedule SiteA_Monthly
+5. DeleteDevice SiteA_Weekly
+6. DeleteDevice SiteA_Monthly
+```
 
-The script discovers the cluster nodes and queries registration for each one through the publisher. It retains the feature and component information, builds the schedule's feature list, and compares it with the expected topology.
+Weekly and monthly creation can follow those actions, or the plan can contain maintenance only. Nothing is disabled or deleted during preview.
 
-For CUCM with IM&P, that includes `IM_AND_PRESENCE` and the expected publisher/subscriber component sets. Cisco documents cases where missing registrations cause backup failures. The script reports those gaps rather than attempting to repair registration as part of schedule creation. [Cisco IM&P component guidance](https://www.cisco.com/c/en/us/support/docs/unified-communications/unified-communications-manager-im-presence-service/220186-troubleshoot-missing-drf-components-in-t.html)
+**Edit** changes a planned action. **Remove** takes actions out of the plan. The script checks the resulting sequence before accepting either change. Removing a schedule deletion while leaving a dependent device deletion is rejected; removing both together is allowed. It does not quietly discard later actions to make an edit fit.
 
-The release checks recognize CUCM, Unity Connection, and CER 14/15, plus UCCX 12.5/15. Unrecognized output or unavailable node registration stops that target. These are input and coverage checks; an accepted release number is not proof that a backup completed.
+Already-disabled schedules are omitted from the disable list. Referenced devices cannot be selected for deletion until the plan removes their schedules. An empty inventory skips maintenance selection. **Cancel** ends the preview without saving a plan.
 
-Two corrections in v1.6.1 make that distinction more useful. The UCCX check compares complete major and minor version components, so a value such as `12.50` cannot accidentally satisfy the rule for `12.5`. A declared CUCM environment also requires `CCM` registration on an exact discovered node. An IM&P-only inventory cannot stand in for evidence of CUCM itself.
+A successful preview saves `preview-001.plan.json` beside the log and prints the apply command.
 
-The existing per-node and IM&P component checks remain in place. The product-to-feature mapping is shared across input validation, release checks, and coverage checks, so those parts of the script use the same definition of each technology.
+## Apply the Saved Selections
 
-## Preview, Then Apply
-
-UC operations use Posh-SSH and the appliance's SSH/OS administrator credentials. The README covers module setup and the full command options.
-
-Inspection reads the environment without creating a device or schedule:
+Apply loads that file:
 
 ```powershell
-.\Set-UC-DRSBackupSchedules-v1.6.1.ps1 -Profile .\site-a.json -ReadOnly -CredentialMode Never -LogPath .\site-a-inspect-001.jsonl
+.\Set-UC-DRSBackupSchedules-v1.6.2.ps1 -Apply -Plan .\preview-001.plan.json -LogPath .\apply-001.jsonl
 ```
 
-A normal run presents the proposed additions. `-Apply` enables writes after the script's confirmation step:
+It reconnects and compares the release, topology, registrations, and DRS inventory with the preview. It also checks the appliance clock and planned start dates. Changes that invalidate the plan stop the target; changing the intended work means creating a new preview.
+
+The script reads `show date` from the appliance. It uses that local time and timezone to calculate the schedule start dates, rather than asking the operator to copy them into a particular format. Unrecognized output stops planning instead of falling back to the Windows clock.
+
+Before the first configuration write, apply displays the plan, collects the required confirmations, and obtains any needed SFTP credentials. Deletions require recorded recovery settings, retained credential access, and a typed `DELETE <exact-name>` confirmation. Declining a deletion stops that target's sequence before an earlier planned disable can run.
+
+Each change is followed by readback. An existing name left outside the selected cleanup remains in place and is reported for review. A familiar name does not establish that its destination, timing, or retention matches the profile.
+
+## Product Differences Matter
+
+The first corrections came from real appliance output. The cluster command can include a separate processnode table after its authenticated node rows. Treating that footer as another cluster row blocked valid CUCM and Unity Connection inventories.
+
+Feature names also needed to follow the returned DRS registrations. CUCM's feature token is `UCM`; `CCM` appears in other product terminology but is not a substitute in the backup feature list. Cisco's CLI examples use `show_registration` to obtain that list. [Cisco DRS CLI operations](https://www.cisco.com/c/en/us/support/docs/unified-communications/unified-communications-manager-callmanager/211975-CUCM-DRS-Backup-and-Restore-Operations-v.html)
+
+Unity Connection uses publisher-only backup scope. Its subscriber still belongs in topology checks, but the script queries registrations on the publisher. Applying CUCM's per-node registration expectation to CUC had blocked a valid cluster. [Cisco Unity Connection backup guidance](https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/connection/15/install_upgrade/guide/b_15cuciumg/b_15cuciumg_chapter_01.html)
+
+For CUCM with IM&P, the script checks the associated nodes and applicable `IM_AND_PRESENCE` components. Unknown output and missing required registrations stop configuration. The README describes each product adapter and its limits; recognizing a release number does not establish that every topology works the same way.
+
+## Credentials and the Local SFTP Server
+
+The SSH username is confirmed before the credential-store lookup. A newly entered password can be saved immediately after SSH authentication succeeds, before discovery starts. A later parsing failure therefore does not force another password entry on the next run.
+
+Storage is optional and belongs to the current Windows user. Entries include the site, purpose, address, port, and username. SSH and SFTP credentials are separate, and host-key checking remains enabled. Use `-CredentialMode Never` to avoid the store.
+
+Creating a backup device is not treated as independent proof of SFTP access. For a new SFTP credential, the script explains how to verify a manual backup in another CLI or DRS session, then return to the save prompt. **Skip** is the default. Saving still requires separate consent after verification.
+
+The optional Windows setup runs on the site's SFTP host in an elevated shell:
 
 ```powershell
-.\Set-UC-DRSBackupSchedules-v1.6.1.ps1 -Profile .\site-a.json -CredentialMode Never -LogPath .\site-a-preview-001.jsonl
-.\Set-UC-DRSBackupSchedules-v1.6.1.ps1 -Profile .\site-a.json -CredentialMode Never -LogPath .\site-a-apply-001.jsonl -Apply
+.\Set-UC-DRSBackupSchedules-v1.6.2.ps1 -Profile .\site-a.json -SetupLocalSftp -SftpRemoteAddress 192.0.2.10,192.0.2.11
 ```
 
-Each log filename is new. Apply performs fresh discovery and checks; it does not replay a saved preview. The prompts include the UC node's displayed date, time, and timezone because the schedule uses that node's wall clock. Weekly and monthly settings are configurable. A `MonthlyDay` of `0` omits the monthly device and schedule.
+Review that local plan, then repeat with `-Apply`. This is a separate setup mode; it does not use the UC saved-plan file.
 
-The examples use `-CredentialMode Never`. Optional `-CredentialMode Ask` stores SSH and SFTP credentials separately in Windows Credential Manager, scoped by site, purpose, address, port, and username. New SSH credentials are offered for storage after authentication succeeds. Host-key checking stays enabled. The DRS cluster security password is separate from this credential feature.
+The account must already exist and be enabled. Local setup can install inbox OpenSSH Server, initialize the account's Windows profile, create the required folders, add the required permissions, configure a scoped firewall rule, and start `sshd`. It preserves existing SSH configuration and existing folder permissions. Broader pre-existing firewall rules still need consideration.
 
-Existing objects are preserved. A device named `Probe_Weekly` may exist without having the intended destination or retention, and the CLI does not expose every setting. Those cases are reported as `unverified_existing`. Disabling or deleting existing configuration belongs to the separate `-ManageExisting -Apply` workflow.
+This setup enables ordinary Windows SSH/SFTP. Custom chroots, forced commands, and unusual SSH installations require their own administration. The README covers the accepted account types, paths, source addresses, and setup restrictions.
 
-## Keeping a Useful Record When Something Fails
+## What the Lab Changed
 
-Before each appliance write, the script flushes an intent record to the log. The response and available read-back results follow it. If the result is uncertain, the script stops that target and attempts a fresh read-only connection to capture its current state. It does not automatically replay the command.
+Using the tool through the same Windows prompts exposed friction that parser tests did not: repeated JSON inventories, exact-name typing for every selection, and cancellation presented as a red error.
 
-SSH streams and sessions have independent cleanup attempts. A failure disposing one resource does not prevent the attempt to close the other.
+The numbered menus, editable plan, and plain cancellation result came from that experience. The output now separates fields checked through CLI readback from settings that require DRS review. Failure guidance distinguishes a preview that attempted no writes from an apply run with earlier successful changes or an unresolved write.
 
-A run is not a transaction. A device, installed Windows feature, or folder can remain after a later failure. The log records that sequence, but it is not a restore package and the script does not automatically roll back current configuration.
+We then tested revision 5 from a fresh PowerShell 7.7.0 window on Windows, using Posh-SSH 3.2.7 against a single CUCM 15.0.1.15900-150 publisher. The test followed the same interactive preview and saved-plan apply workflow used at a managed site.
 
-The tool's scope is backup configuration. An enabled schedule, a completed backup, and a usable restore are different results. Keeping those distinctions in the output makes the record more useful when something goes wrong.
+| Revision 5 check | Observed result |
+| --- | --- |
+| Select and revise the work | Multiple selection, Add, Edit, and Remove worked. Removing a prerequisite schedule deletion was rejected, leaving the plan unchanged. |
+| Save the preview | Six maintenance actions and two creation pairs were saved. Preview sent zero configuration writes. |
+| Apply the replacement | Both schedules were disabled and deleted, followed by their devices. Both device/schedule pairs were then recreated and enabled. All 12 writes had matching CLI readback verification records. |
+| Reuse credentials and close connections | Saved SSH and SFTP credentials were offered after username confirmation. Both runs completed without connection cleanup errors. |
+
+The intermediate inventory was empty after deletion, and the final inventory contained both network devices with their matching enabled schedules. No code correction was needed during this retest. The result remains `applied_verified_limited`: CLI readback verifies device names/types, schedule-to-device associations, and enabled status, but does not expose every destination or schedule setting.
+
+The manual backup results came from revision 4. In that earlier test, backups to the weekly and monthly destinations each completed with all nine registered components successful. Its replacement cycle also preserved the sizes and hashes of all 20 existing backup files. Revision 5's retest exercised preview and replacement; it did not run another manual backup.
+
+Revision 5 also passed 253 core checks and 53 local-setup checks using simulated dependencies. Those checks cover branches beyond the successful lab run, including cancellation and failure handling. They do not establish native Windows SFTP provisioning, other-product apply behavior, scheduled firing, or restore success. The package's validation record keeps those distinctions with the relevant revision.
+
+## When a Run Stops Partway Through
+
+A durable intent record precedes each appliance write. The response and readback verification follow it. If a write has no verification record, the tool stops and attempts one fresh read-only connection to capture current state. It does not replay the command automatically.
+
+Earlier successful changes remain applied. There is no rollback transaction covering the run, and the audit log is not a complete recovery export. Both SSH stream disposal and session removal are attempted independently.
+
+The tool configures backups. It does not start backup or restore jobs. An enabled schedule, a completed backup, and a usable restore remain separate results.
 
 ## Review and Download
 
-The package contains the script, README, fictional CSV and JSON inputs, offline test harnesses, validation notes, a changelog, and SHA-256 checksums. The expandable sections below show the script and usage guide before download.
+Use [Tools & Downloads](/tools.html#uc-drs-title) for the script, README, examples, changelog, checksums, and the validation record for the available revision. The README contains the detailed commands, supported inputs, and recovery instructions.
 
-The packaging checks compare the source files, individual downloads, and ZIP contents. The site checks also cover the expandable preview targets. That keeps the code shown in the article aligned with the files in the package. Revision and release details belong with the tool, while this post explains the job it solves and the decisions behind it.
+The download checks compare the source, staged files, ZIP members, and checksums. The Tools page is the download location so package updates and validation details stay together. The panels below let you inspect the script and README before downloading.
 
-<details class="code-preview" data-code-preview="/assets/downloads/uc-drs-backups-candidate/Set-UC-DRSBackupSchedules-v1.6.1.ps1">
+<details class="code-preview" data-code-preview="/assets/downloads/uc-drs-backups-v1.6.2-candidate/Set-UC-DRSBackupSchedules-v1.6.2.ps1">
   <summary><span>Review the PowerShell script</span><small>POWERSHELL // UC DRS AND LOCAL SFTP</small></summary>
   <pre aria-live="polite"><code>Open this panel to load the PowerShell script.</code></pre>
 </details>
 
-<details class="code-preview" data-code-preview="/assets/downloads/uc-drs-backups-candidate/README.txt">
+<details class="code-preview" data-code-preview="/assets/downloads/uc-drs-backups-v1.6.2-candidate/README.txt">
   <summary><span>Review the README and usage examples</span><small>TEXT // SETUP AND OPERATION</small></summary>
   <pre aria-live="polite"><code>Open this panel to load the usage guide.</code></pre>
 </details>
-
-- <a href="/assets/downloads/uc-drs-backups-candidate/UC-DRS-v1.6.1-testing.zip" download>Download the complete v1.6.1 package</a>
-- <a href="/assets/downloads/uc-drs-backups-candidate/Set-UC-DRSBackupSchedules-v1.6.1.ps1" download>Download the PowerShell script</a>
-- <a href="/assets/downloads/uc-drs-backups-candidate/README.txt" download>Download the README</a>
-- <a href="/assets/downloads/uc-drs-backups-candidate/targets-example.csv" download>Download the fictional target CSV</a>
-- <a href="/assets/downloads/uc-drs-backups-candidate/profile-example.json" download>Download the example profile</a>
-
-The next managed network starts with its own settings and the same procedure. That was the point of making the script: keep the repeated work consistent, keep the site-specific details visible, and leave a record of what happened.

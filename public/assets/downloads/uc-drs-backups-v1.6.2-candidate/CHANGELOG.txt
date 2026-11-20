@@ -1,0 +1,93 @@
+UC DRS v1.6.2 candidate revision 5 -- 2026-11-19
+
+- Replace repeated JSON planning screens with compact inventory and an ordered
+  action list. Select available actions and objects by number; support multiple
+  objects, editing and removal while preserving exact names and dependencies.
+- Skip empty inventories and hide inapplicable actions. Revalidate the complete
+  sequence after edits; reject broken dependencies without changing the plan.
+- Handle explicit target/plan cancellation with exit 3 and an audit record;
+  cleanup failures still return 1. No cancelled preview plan is saved.
+- Distinguish no-write failures, earlier verified changes and unresolved writes
+  in recovery guidance. Keep all mutation/readback and confirmation safeguards.
+- Explain which fields CLI readback verifies and which need DRS review. Clarify
+  external manual-backup validation before SFTP password saving; default Skip.
+- State that this script does not start backup/restore jobs.
+- Rewrite the README around operator tasks, retaining inputs, examples, recovery
+  steps and local setup limits. Remove repeated history and stale test claims.
+- Require a fresh revision5 preview. Preserve prior delivery folders and originals.
+- Qualify revision5 preview/editing and saved-plan replacement on Windows
+  PowerShell 7.7.0 / Posh-SSH 3.2.7 / CUCM 15: zero preview writes, 12 matched
+  write/readback receipts and clean connection teardown. No runtime repair needed.
+- Clarify dependency installation when switching PowerShell editions.
+
+UC DRS v1.6.2 candidate revision 4 -- 2026-11-19
+
+- Fix appliance-clock parsing for the bare leading show date echo observed in
+  a CUCM 15.0.1.15900-150 SSH shell stream during lab preview.
+- Ignore only one exact leading echo in the date parser; do not broaden shared
+  output filtering. Unknown, repeated or trailing command-like rows still stop.
+- Add four regression checks, including the actual CRLF response shape. The
+  new fixture fails before the fix; all 226 core checks pass after it.
+- Bump candidate and saved-plan revision; require a fresh preview after upgrade.
+- Record live Windows/CUCM 15 create, manual weekly/monthly backups and full
+  saved-plan replacement qualification, including all 12 write receipts and
+  preservation of 20 backup files. SSH and SFTP vault reuse passed.
+- Clarify local extraction, execution-policy and first-install prompts in README.
+- Preserve the original releases and prior revision3 Work delivery. No push.
+
+UC DRS v1.6.2 candidate revision 3
+
+- Restore optional schedule disable/delete and backup-device deletion to the
+  normal workflow as a no-write plan, followed by optional weekly/monthly additions.
+- Save exact selections/settings beside the JSONL log in a versioned nonsecret
+  plan. Apply requires -Apply -Plan; no repeated action selection or profile reload.
+- Rediscover each target and reject release/topology/registration/configuration
+  drift, incompatible plans, altered creation descriptions and expired starts.
+- Read and parse show date automatically as appliance-local time plus timezone.
+  Reject unrecognized dates, timezone changes and backward clocks; no host fallback.
+- Require all per-object confirmations before the first change; collect required
+  SFTP input before maintenance. Verify ordered changes and unrelated objects.
+- Preserve standalone -ManageExisting and local SFTP setup; no automatic rollback.
+- 222 core and 53 local-setup checks pass; saved-plan and combined execution
+  tests are offline. Update guide, validation, tracker and staged package.
+- Preserve published v1.6.1 and ~/Work main copy. No commit/push/appliance writes.
+
+UC DRS v1.6.2 candidate revision 2 -- 2026-11-17
+
+- Confirm username before native credential lookup; reuse the correct saved key
+  even when the operator overrides the username in a profile.
+- Clearly confirm successful credential persistence or an operator-declined save.
+  Distinguish vault-write errors from audit failures. Keep saving after verified
+  SSH authentication and before CLI startup/discovery; consent remains required.
+- Correct CUCM primary feature from CCM to UCM and CUC from CONNECTION to CUC.
+  Preserve actual returned feature tokens in the schedule command.
+- Use documented CUC publisher-only DRS scope without omitting subscribers from
+  topology or ExpectedNodes checks. Display subscribers as inventory-only.
+- Give explicit diagnostics for no registrations and unsuccessful commands.
+- Resolve relative log/profile output paths from PowerShell's current location.
+- Add sanitized operator registration fixtures and credential/coverage/path tests.
+- 171 core checks pass; 53 existing local-setup checks remain applicable.
+- No native Windows credential, remote configuration or backup operations run by
+  engineering. Published files and the original main copy remain untouched.
+
+UC DRS v1.6.2 candidate revision 1 -- 2026-11-17
+
+- Preserve the published v1.6.1 script, package and existing profiles/logs.
+- Parse and reconcile the optional CUCM processnode inventory footer separately.
+- Match footer IP/hostname/FQDN aliases one-to-one; keep authenticated-row names
+  and roles authoritative. Reject incomplete, duplicate or conflicting inventory.
+- Retain compatibility with cluster responses that have no processnode footer.
+- Disable positional binding so --Profile cannot become an SFTP source argument.
+- Cover sanitized operator-supplied CUCM and CUC cluster output formats.
+- Add 24 regression assertions: core total 130; local setup remains 53.
+- Expand the sanitized profile example to both CUCM and IM&P publisher/subscriber
+  pairs and clarify exact hostnames and single-hyphen parameter syntax.
+- No change to remote mutation, credentials, SSH lifecycle or local provisioning.
+- Package separately for operator testing; no publication or promotion.
+
+v1.6.1 -- prior release
+- Compare complete UCCX major/minor components; reject 12.50 and 12.51.
+- Require declared-product registration on an exact discovered node, so IM&P-only
+  evidence cannot qualify CUCM. Share product mapping across validation paths.
+- Preserve inventory, component checks, credential handling and write gates.
+- Added 17 regression assertions: 106 core and 53 local-setup checks.

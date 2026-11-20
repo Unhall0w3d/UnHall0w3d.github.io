@@ -1,0 +1,144 @@
+UC DRS v1.6.2 candidate revision 5 -- validation
+
+Offline results (2026-11-19): 253 core checks and 53 local-setup checks passed
+in fresh PowerShell 7.7.0/Linux processes. Full results are included. These use
+mocks/simulated SSH and do not establish native Windows or appliance behavior.
+
+New checks cover numbered/multiple selection, exact-name preservation, empty
+inventory, applicable actions, dependency-safe edits/removals, Back and Cancel,
+no saved plan on cancellation/failure, cleanup precedence, per-target recovery
+guidance, SFTP credential-save choices and accurate readback field descriptions.
+
+Impact review: no mutation command, confirmation order, readback verification,
+uncertain-write reconciliation, secret handling or connection teardown was
+removed. Menu choices resolve to discovered canonical names. Every edit/removal
+rebuilds the whole projected sequence from the original snapshot. Cancel is
+exit 3; cleanup failure remains exit 1. WriteAttempts tracks nonsecret intent
+metadata for guidance only and does not grant write authority or drive replay.
+Saved plans require revision 5, preventing accidental use of an older preview.
+
+Revision 5 live preview/apply passed (2026-11-19 local time): Windows PowerShell
+7.7.0 / Posh-SSH 3.2.7 against one CUCM 15.0.1.15900-150 publisher. The fresh
+PowerShell 7 session installed its missing module through -InstallDependencies.
+Saved SSH and SFTP credentials were offered after username confirmation.
+- Preview exercised multiple selection, Add, Edit and Remove. Removing a
+  prerequisite schedule deletion was rejected without changing the plan.
+- Preview saved six maintenance actions and two creation pairs, with zero writes.
+- Apply revalidated the saved plan, disabled both schedules, deleted schedules
+  then devices, and recreated/enabled both pairs. All 12 write intents have
+  matching verification receipts; intermediate inventory was empty as expected.
+- Final readback contains both NETWORK devices and their enabled schedules.
+  Status: applied_verified_limited. Both runs finished without failure,
+  incomplete work or connection cleanup errors. No code repair was needed.
+This establishes the tested preview/replacement path, not full DRS settings,
+scheduled firing, restore, native Windows SFTP setup or other-product apply.
+No manual backup was run with revision 5; revision4 backup evidence is below.
+
+Cleanup: at the operator's explicit request, the temporary lab SFTP service was
+stopped and the 20 files from the two prior test backups were removed after
+checking their exact paths, sizes and SHA-256 against retained private manifests.
+SFTP was temporarily restored for this retest, then stopped again. Its account
+is locked, its listener is absent and its two temporary firewall rules are gone.
+Both backup folders remain empty. Recreated schedules remain enabled; the
+operator handles final schedule disables. Raw logs/plans stay outside the package.
+No originals were changed and no publication or push was performed.
+
+--- Historical evidence ---
+
+UC DRS v1.6.2 candidate revision 4 -- validation
+
+Environment: PowerShell 7.7.0/Linux, official Microsoft archive verified against
+published SHA-256. Fresh processes for core and local-setup harnesses.
+Commands (from package directory):
+  pwsh -NoLogo -NoProfile -NonInteractive -File ./Test-UC-DRSBackupSchedules.ps1
+  pwsh -NoLogo -NoProfile -NonInteractive -File ./Test-LocalSftpSetup.ps1
+Results: 226 core checks and 53 local-setup checks passed, both exit 0.
+A final isolated syntax/parameter-binding check also verifies -Apply -Plan.
+Full offline logs included. Native/SSH boundaries in those harnesses are mocked
+or simulated. Separate live lab evidence is recorded below.
+
+Revision4 live lab evidence (2026-11-19):
+- Windows PowerShell 5.1.26100.9711 / Posh-SSH 3.2.7 successfully discovered a
+  single CUCM 15.0.1.15900-150 publisher with UCM and CDR_CAR registrations.
+- Revision3 rejected the bare show date command echo. A regression reproduces
+  that failure; revision4 accepts one exact leading echo without broad filtering.
+- Four new checks cover the live CRLF form and reject extra/repeated/trailing
+  command-like output. All 226 core and 53 local-setup checks pass after the fix.
+- Operator approved Windows vault storage; the saved SSH credential was reused
+  on later runs without password entry. The live revision4 preview completed,
+  saved a fresh plan, recorded zero write intents and CleanupFailed=false.
+- Temporary Linux OpenSSH SFTP upload/readback and chroot checks passed locally.
+  This is separate from the script's Windows local-SFTP provisioning adapter.
+- Initial saved-plan apply created both network devices and schedules, enabled
+  both, and matched all six write intents with readback verification receipts.
+- Separate manual backups to the weekly and monthly devices each completed
+  at 100 percent with all nine registered components reporting SUCCESS.
+- Replacement preview saved six ordered maintenance actions and two creation
+  pairs, with zero write intents and clean connection cleanup. Saved-plan apply
+  disabled both schedules, deleted both schedules and devices, then recreated
+  and enabled both pairs. All 12 writes have matching verification receipts;
+  the intermediate inventory was empty and the final inventory had both pairs.
+- SSH and SFTP credentials were reused from Windows Credential Manager. Apply
+  finished with Failed=false, Incomplete=false and CleanupFailed=false. The
+  auxiliary direct SSH session was explicitly closed afterward.
+- All 20 backup files retained their pre-replacement sizes and SHA-256 hashes.
+  Replacement changed DRS definitions, not existing backup files. No restore ran.
+- Lab IPs, hostnames, credentials and raw logs are excluded from the download.
+
+New revision-3 behavior and evidence:
+- show date parsing retains exact appliance-local time and timezone without a
+  host-clock fallback or prompt. Tests reject invalid dates/weekdays/times,
+  missing timezone and multiple date rows; accept padded days and CLI echoes.
+- Planning simulates optional disable/delete schedule and device deletion before
+  additions. Original snapshots and unrelated objects are preserved. Remaining
+  references, repeated disable and unsupported/injected actions are rejected.
+- Interactive preview sends no configuration commands. Complete preview writes a
+  nonsecret plan beside the log. Main apply loads selections without reprompting.
+- Saved-plan roundtrip covers mixed, maintenance-only, additions-only and multiple
+  targets. Existing files, unknown/secret fields and incompatible versions fail.
+- Apply checks fresh release/topology/registration/DRS-state fingerprints, timezone,
+  backward clocks, expired starts and reconstructed creation descriptions.
+- Destructive confirmations are all obtained before the first change. A declined
+  deletion prevents an earlier planned disable too. WhatIf/write-disabled contexts
+  perform no mutation; required SFTP input/identity is checked before maintenance.
+- Combined simulated execution verifies disable schedule, delete schedule, delete
+  device, create device, create schedule and enable, preserving unrelated objects
+  and matching write receipts. Later failure stops without automatic rollback.
+- Existing credential lookup/save, UCM/CUC feature mapping, CUC publisher-only
+  scope, cluster footer, relative path, release, cleanup and provisioning tests pass.
+
+Source/impact review:
+Only the separate candidate and its docs/staged package are changed. The saved
+plan is declarative data, not executable input or approval. Targets/settings use
+existing validators; maintenance names/actions are checked; creation commands are
+rebuilt from validated settings and live registrations rather than replayed strings.
+Fingerprints detect observed state drift; they are not signatures. Apply displays
+all intended settings and requires operator confirmation. The CLI list cannot
+establish every field of an existing object; full recovery settings remain a
+manual prerequisite for deletion. SFTP input checks do not prove authentication.
+Per-target validation/execution is not a cross-target transaction: completed work
+on earlier targets remains if a later target fails. No rollback or backup is run.
+
+Observed operator evidence, earlier revisions:
+Windows PowerShell 5.1.26100.9711 / Posh-SSH 3.2.7 connected to CUCM
+14.0.1.16900-4 and CUC 14.0.1.16900-10. Revision 1 saved credentials before CLI
+startup but failed on feature/scope assumptions. Revision 2 preview reused saved
+credentials, parsed both cluster footers, passed both coverage checks, resolved
+relative logs correctly and showed weekly/monthly creation plans without writes.
+Sanitized fixtures preserve 46 CUCM/IM&P registrations and nine CUC publisher
+registrations across its five features. The supplied show date example is tested.
+
+Remaining qualification:
+The revision4 single-publisher CUCM 15 lab create/backup/replace workflow passed.
+This does not qualify CUC/CER/UCCX apply, multi-node IM&P coverage, every CUCM
+release, actual scheduled firing or restoration. Backups were manually started
+before replacement; no post-replacement backup was run. CLI list readback does
+not expose every device/schedule field. Windows native SFTP provisioning and
+restore remain separate checks. Earlier production startup
+banners reported an ungraceful shutdown; this tool does not diagnose appliance health.
+
+Package checks:
+SHA256SUMS.txt lists each payload. Staged mirror and ZIP bytes/member set checked by:
+  python3 -B scripts/check_downloads.py --audit-staged-draft uc-drs-backups-v1.6.2-candidate
+Normal download checks verify draft absence from public paths and released parity.
+Original v1.6.1 source hashes and ~/Work main copy remain unchanged. No push.
