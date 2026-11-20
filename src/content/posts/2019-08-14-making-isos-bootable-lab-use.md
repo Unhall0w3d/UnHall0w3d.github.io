@@ -21,6 +21,8 @@ So once again it's lab season as I'll be re-certifying in the CCNP Collaboration
 
 Enter this solution, gracefully provided by a colleague years ago in order to alleviate such issues, and in lab-time fashion I have to dig through my resources to find the steps.
 
+**Update (November 19, 2026)** — I used CUCM 12.5 on ESXi for the steps below. This time I rebuilt the ISO, installed a publisher and checked SSH and AXL in my [CUCM 15SU5 lab walkthrough for Proxmox](/2026/11/19/cucm-15su5-bootable-iso-proxmox.html).
+
 ## Disclaimer
 
 1. I did not create, and do not provide or host the cdrtools-latest.zip file, nor do I have any technical expertise in the tools beyond the below described usage.
