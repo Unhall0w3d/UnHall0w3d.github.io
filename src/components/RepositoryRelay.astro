@@ -1,4 +1,6 @@
 ---
+import privateDates from "../config/private-relay-dates.json";
+
 type RepositorySpec = {
   name: string;
   displayName: string;
@@ -33,7 +35,7 @@ const repositorySpecs: RepositorySpec[] = [
     language: "Python",
     branch: "main",
     head: "<REDACTED>",
-    pushedAt: "2026-08-26",
+    pushedAt: privateDates.aletheiauc,
     visibility: "PRIVATE",
   },
   {
@@ -45,7 +47,7 @@ const repositorySpecs: RepositorySpec[] = [
     branch: "main",
     head: "<REDACTED>",
     visibility: "PRIVATE",
-    pushedAt: "2026-11-05",
+    pushedAt: privateDates["soul-slash"],
   },
   {
     name: "mind-enigma",
