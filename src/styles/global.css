@@ -930,14 +930,14 @@ h1 em {
   grid-column: 1 / -1;
 }
 
-.repository-node:hover,
+.repository-node:has(> a):hover,
 .repository-node:focus-within {
   border-color: color-mix(in srgb, var(--signal) 55%, transparent);
   box-shadow: 0 0 2rem color-mix(in srgb, var(--signal) 7%, transparent);
   transform: translateY(-2px);
 }
 
-.repository-node > a {
+.repository-node > :is(a, div) {
   display: flex;
   min-height: 100%;
   flex-direction: column;
