@@ -52,6 +52,7 @@ const socialImageType = (() => {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#070913" />
+    <script is:inline src="/assets/site-theme.js"></script>
     <meta name="description" content={description} />
     {robots && <meta name="robots" content={robots} />}
     <meta name="google-site-verification" content={site.verification.google} />
@@ -115,6 +116,10 @@ const socialImageType = (() => {
         <a href="/tags.html">Tags</a>
         <a href="/about.html">Operator</a>
       </nav>
+      <label class="site-theme" hidden>
+        <span>Theme</span>
+        <select id="site-theme"></select>
+      </label>
     </header>
 
     <main id="main-content">

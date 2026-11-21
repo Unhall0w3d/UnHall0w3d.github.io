@@ -1,0 +1,104 @@
+/* Shared navigation for the standalone Experiments pages. This styles only the
+   navigation and leaves each experiment's artwork and controls untouched. */
+.experiment-nav,
+.experiment-nav__home,
+.experiment-header__identity {
+  display: flex;
+  align-items: center;
+}
+
+.experiment-nav {
+  --nav-ink: #e8e8f2;
+  --nav-muted: #a2a6bf;
+  --nav-line: #37394d;
+  --nav-accent: #ff8b45;
+  gap: 1rem;
+}
+
+html[data-theme="aftertone"] .experiment-nav,
+html[data-theme="aftertone"] .experiment-nav__home {
+  --nav-accent: #b43c26;
+}
+
+html[data-theme="polar"] .experiment-nav,
+html[data-theme="polar"] .experiment-nav__home {
+  --nav-accent: #76d4e8;
+}
+
+html[data-theme="moss"] .experiment-nav,
+html[data-theme="moss"] .experiment-nav__home {
+  --nav-accent: #d4a85c;
+}
+
+html[data-theme="darkroom"] .experiment-nav,
+html[data-theme="darkroom"] .experiment-nav__home {
+  --nav-accent: #e681ac;
+}
+
+html[data-theme="carbon"] .experiment-nav,
+html[data-theme="carbon"] .experiment-nav__home {
+  --nav-accent: #b7a3ff;
+}
+
+/* Aftertone keeps its own light paper masthead while the other two experiments
+   use dark mastheads. Keep foregrounds tied to that local surface, not the site
+   theme, so every palette remains readable. */
+.mast .experiment-nav,
+.mast .experiment-nav__home {
+  --nav-ink: #292b26;
+  --nav-muted: #605f53;
+  --nav-line: #aca99e;
+}
+
+.experiment-nav__home {
+  gap: 0.55rem;
+  color: var(--nav-ink, inherit);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.experiment-nav__sigil {
+  display: block;
+  width: 1.7rem;
+  height: 1.7rem;
+  flex: none;
+  color: var(--nav-accent, currentColor);
+}
+
+.experiment-nav__experiments {
+  color: var(--nav-muted, inherit);
+  font-size: 0.82em;
+  text-underline-offset: 0.25em;
+  white-space: nowrap;
+}
+
+.experiment-nav__home:focus-visible,
+.experiment-nav__experiments:focus-visible {
+  outline: 3px solid var(--nav-ink, currentColor);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.experiment-nav__home:hover,
+.experiment-nav__experiments:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.experiment-header__identity {
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .experiment-header { flex-wrap: wrap; }
+  .top .shell { min-height: 0; flex-wrap: wrap; padding-block: 10px; }
+  .experiment-header__identity { gap: 0.7rem; }
+  .experiment-nav { gap: 0.7rem; }
+  .experiment-nav__sigil { width: 1.45rem; height: 1.45rem; }
+  .experiment-nav__home { gap: 0.4rem; font-size: 0.68rem; }
+  .experiment-nav__experiments { font-size: 0.68rem; }
+}

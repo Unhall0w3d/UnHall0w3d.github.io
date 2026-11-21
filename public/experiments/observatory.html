@@ -6,6 +6,8 @@
 <meta name="color-scheme" content="dark">
 <meta name="description" content="An interactive, simulated replay of a local inference-to-render handoff.">
 <title>Local LLM Observatory · NOC Thoughts</title>
+<link rel="stylesheet" href="/assets/experiment-nav.css">
+<script src="/assets/site-theme.js"></script>
 <style>
   :root {
     color-scheme: dark;
@@ -124,7 +126,10 @@
 <body>
 <header class="top">
   <div class="shell">
-    <a class="back" href="/experiments.html"><span aria-hidden="true">←</span>NOC Thoughts / Experiments</a>
+    <nav class="experiment-nav" aria-label="Site navigation">
+      <a class="experiment-nav__home" href="/" aria-label="NOC Thoughts home"><svg class="experiment-nav__sigil" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 30 16 16 30 2 16 16 2Z M16 8 24 16 16 24 8 16 16 8Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m9 9 14 14m0-14L9 23" stroke="currentColor" stroke-width="1.5"/></svg><span>NOC Thoughts</span></a>
+      <a class="experiment-nav__experiments" href="/experiments.html">Experiments</a>
+    </nav>
     <span class="badge">Simulated data</span>
   </div>
 </header>
