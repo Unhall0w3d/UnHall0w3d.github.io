@@ -1,5 +1,6 @@
 ---
 title: "RUCKUS SmartZone Backup Retriever"
+description: "Use PowerShell on Windows to pull RUCKUS SmartZone and vSZ backups over HTTPS, log results, and schedule retrieval without inbound FTP or SFTP."
 layout: single
 classes: wide
 date: 2026-07-01T08:00:00-05:00
@@ -266,6 +267,8 @@ The switch configuration endpoints also require a service ticket associated with
 These endpoints may vary across versions. This was built and tested against the environment I had access to, so if you are working with a different version, test carefully before trusting it with anything important. Software versions are where assumptions go to get mugged.
 
 ## Where To Get It
+
+The [SmartZone retriever entry on Tools](/tools.html#ruckus-backups) lists the Windows and controller access requirements.
 
 The repository is here:
 

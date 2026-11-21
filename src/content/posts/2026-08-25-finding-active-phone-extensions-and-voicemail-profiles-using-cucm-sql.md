@@ -209,3 +209,5 @@ That is enough to stop guessing and start the true-up with something CUCM itself
 ## Download the query pack
 
 Use `configured-phone-lines.sql` as supplied. It returns one row per matching device-line assignment. The ZIP includes all four SELECT statements, CLI and AXL instructions, example results, and checksums. [Download the CUCM SQL pack](/assets/downloads/cucm-sql-2026-11-20/cucm-sql-2026-11-20.zip).
+
+See the [CUCM 15 test results for the extension and voicemail profile query](/tools.html#extension-audit) on the Tools page.

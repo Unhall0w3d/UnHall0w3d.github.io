@@ -37,3 +37,11 @@ export const site = {
     adsensePublisher: "ca-pub-7351461893377144"
   }
 } as const;
+
+export const authorSchema = {
+  "@type": "Person",
+  "@id": new URL("/about.html#author", site.url).href,
+  name: site.author.name,
+  url: new URL("/about.html", site.url).href,
+  sameAs: [site.social.github, site.social.linkedin]
+};

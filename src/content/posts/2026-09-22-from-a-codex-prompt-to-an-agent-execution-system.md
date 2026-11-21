@@ -95,6 +95,8 @@ Review the policy and the roles before merging them into your setup. The config 
 - [Changelog](/assets/downloads/codex-routing-2026-11-15/CHANGELOG.txt)
 - [SHA-256 checksums](/assets/downloads/codex-routing-2026-11-15/SHA256SUMS.txt)
 
+The [Codex workflow entry on Tools](/tools.html#codex-workflows) lists the tested CLI version, configuration package, and checksums.
+
 ## The September Configuration
 
 <figure>

@@ -1,7 +1,7 @@
 ---
 import type { MarkdownHeading } from "astro";
 import type { Post } from "../lib/posts";
-import { site } from "../config/site";
+import { authorSchema, site } from "../config/site";
 import { formatPostDate, postExcerpt, postMetaDescription, postUrl, readingTime, termSlug } from "../lib/posts";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -24,12 +24,7 @@ const jsonLd = {
   ...(post.data.updated ? { dateModified: post.data.updated.toISOString() } : {}),
   mainEntityOfPage: url,
   ...(post.data.image ? { image: new URL(post.data.image, site.url) } : {}),
-  author: {
-    "@type": "Person",
-    name: site.author.name,
-    url: new URL("/about.html", site.url),
-    sameAs: [site.social.github, site.social.linkedin]
-  },
+  author: authorSchema,
   publisher: {
     "@type": "Organization",
     name: site.name,
@@ -62,7 +57,7 @@ const jsonLd = {
       <h1>{post.data.title}</h1>
       <p class="post-deck">{postExcerpt(post)}</p>
       <div class="post-byline">
-        <span>By {site.author.name}</span>
+        <span>By <a href="/about.html" rel="author">{site.author.name}</a></span>
         <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
         {post.data.updated && <time datetime={post.data.updated.toISOString()}>Updated {formatPostDate(post.data.updated)}</time>}
         <span>{readingTime(post)} min read</span>

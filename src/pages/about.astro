@@ -1,5 +1,6 @@
 ---
 import { getEntry, render } from "astro:content";
+import { authorSchema } from "../config/site";
 import PageLayout from "../layouts/PageLayout.astro";
 
 const page = await getEntry("pages", "about");
@@ -8,5 +9,6 @@ const { Content } = await render(page);
 ---
 
 <PageLayout title={page.data.title} description="The engineer, operator, and caffeine-driven human behind NOC Thoughts." eyebrow="OPERATOR PROFILE">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", ...authorSchema })} />
   <Content />
 </PageLayout>

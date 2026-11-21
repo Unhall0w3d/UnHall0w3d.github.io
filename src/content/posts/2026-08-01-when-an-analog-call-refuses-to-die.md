@@ -221,6 +221,8 @@ Every additional port type or IOS variation should earn its way into the policy 
 
 ## Download The Sanitized Reference Files
 
+Check the [analog guard release and supported port type](/tools.html#analog-guard) before deploying the policy.
+
 <details class="code-preview" data-code-preview="/assets/downloads/analog-stuck-call-guard-deployment-v1.0.6.md">
   <summary>
     <span>Preview the deployment and validation notes</span>

@@ -270,3 +270,5 @@ That is where I want to start the audit.
 ## Download the query pack
 
 Use `css-primary-line.sql` for Line 1 or `css-all-lines.sql` to include secondary lines. Supply the same exact pattern and partition when comparing results. The ZIP includes all four SELECT statements, CLI and AXL instructions, example results, and checksums. [Download the CUCM SQL pack](/assets/downloads/cucm-sql-2026-11-20/cucm-sql-2026-11-20.zip).
+
+See the [CUCM 15 test results for the calling access queries](/tools.html#calling-access) on the Tools page.

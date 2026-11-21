@@ -1,5 +1,6 @@
 ---
 title: "Who has Jabber? Where are they?"
+description: "Use CUCM SQL to find Jabber users, their devices and device pools, service profiles, and assigned extensions."
 layout: single
 classes: wide
 date: 2020-02-20T08:00:00-05:00
@@ -81,7 +82,7 @@ What these allow us to do is compare and combine the foreign key (device) in dev
 ## Query Update 2 - Adding User Extension Assignments
 
 ```text
-run sqlselect eu.userid, d.name as devicename, dp.name as devicepool, eu.islocaluser as homecluster, ucp.name as serviceprofile, n.dnorpattern as DN from device as dinner join devicepool as dp on d.fkdevicepool=dp.pkidinner join enduserdevicemap as eudm on eudm.fkdevice=d.pkidinner join enduser as eu on eudm.fkenduser=eu.pkidinner join ucserviceprofile as ucp on ucp.pkid=eu.fkucserviceprofileinner join devicenumplanmap as dmap on dmap.fkdevice=d.pkidinner join numplan as n on dmap.fknumplan=n.pkidwhere eu.islocaluser='t'order by eu.userid
+run sql select eu.userid, d.name as devicename, dp.name as devicepool, eu.islocaluser as homecluster, ucp.name as serviceprofile, n.dnorpattern as DN from device as d inner join devicepool as dp on d.fkdevicepool=dp.pkid inner join enduserdevicemap as eudm on eudm.fkdevice=d.pkid inner join enduser as eu on eudm.fkenduser=eu.pkid inner join ucserviceprofile as ucp on ucp.pkid=eu.fkucserviceprofile inner join devicenumplanmap as dmap on dmap.fkdevice=d.pkid inner join numplan as n on dmap.fknumplan=n.pkid where eu.islocaluser='t' order by eu.userid
 ```
 
 And what does the output then look like? Well, it looks like this:

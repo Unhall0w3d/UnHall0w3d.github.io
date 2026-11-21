@@ -199,3 +199,5 @@ That is it. One read-only query gives us a fast, consistent way to find all of t
 ## Download the query pack
 
 Use `speed-dial-references.sql` and replace all three `<EXTENSION>` values with the same extension. The ZIP includes all four SELECT statements, CLI and AXL instructions, example results, and checksums. [Download the CUCM SQL pack](/assets/downloads/cucm-sql-2026-11-20/cucm-sql-2026-11-20.zip).
+
+See the [CUCM 15 test results for the speed-dial and BLF query](/tools.html#speed-dial-audit) on the Tools page.
