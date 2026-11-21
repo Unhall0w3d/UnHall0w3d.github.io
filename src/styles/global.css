@@ -2034,6 +2034,16 @@ h1 em {
   --ember: #ff9382;
 }
 
+/* Keep the full word “infrastructure” inside the headline column. */
+:root[data-theme="carbon"] .hero-copy {
+  container-type: inline-size;
+}
+
+:root[data-theme="carbon"] #theme-headline {
+  max-width: 100%;
+  font-size: min(7.8rem, 9.75cqi);
+}
+
 :root[data-theme="carbon"] {
   --ink-950: #171422;
   --ink-900: #201a2a;
