@@ -18,6 +18,13 @@ type Tool = {
   downloads?: { label: string; href: string }[];
 };
 
+const cucmSqlDownloads = [
+  { label: "CUCM SQL pack (ZIP)", href: "/assets/downloads/cucm-sql-2026-11-20/cucm-sql-2026-11-20.zip" },
+  { label: "README", href: "/assets/downloads/cucm-sql-2026-11-20/README.md" },
+  { label: "Examples", href: "/assets/downloads/cucm-sql-2026-11-20/EXAMPLES.md" },
+  { label: "Checksums", href: "/assets/downloads/cucm-sql-2026-11-20/SHA256SUMS.txt" },
+];
+
 export const tools: Tool[] = [
   {
     id: "blf-labels", group: "phone-changes", title: "CUCM BLF label updater",
@@ -58,23 +65,26 @@ export const tools: Tool[] = [
   {
     id: "speed-dial-audit", group: "audits", title: "Find speed dials and BLFs",
     description: "Locate phones monitoring a particular extension and compare labels before and after an ownership change.",
-    requires: "CUCM administrative CLI access and the destination to investigate.",
-    status: "Read-only SQL, with query examples and interpretation in the guide.",
+    requires: "CUCM publisher CLI or AXL SQL query access.",
+    status: "CUCM 15 AXL test found regular speed-dial and DN-backed BLF references to the same extension.",
     post: "2026-08-09-finding-cucm-speed-dials-and-blf-speed-dials-using-sql",
+    downloads: cucmSqlDownloads,
   },
   {
     id: "extension-audit", group: "audits", title: "Extensions and voice mail profiles",
     description: "Inventory directory numbers assigned to phone-class devices, including partitions and voice mail profiles.",
-    requires: "CUCM administrative CLI access.",
-    status: "Reports configured assignments; it does not establish registration or successful calls.",
+    requires: "CUCM publisher CLI or AXL SQL query access.",
+    status: "CUCM 15 AXL test returned four configured line appearances. Registration requires a separate check.",
     post: "2026-08-25-finding-active-phone-extensions-and-voicemail-profiles-using-cucm-sql",
+    downloads: cucmSqlDownloads,
   },
   {
     id: "calling-access", group: "audits", title: "Local and long-distance calling access",
     description: "Inspect configured route-pattern reachability and authorization-code requirements instead of relying on CSS names.",
-    requires: "CUCM administrative CLI access and environment-specific route/partition inputs.",
-    status: "Configuration analysis, not proof that an end-to-end call will succeed.",
+    requires: "CUCM publisher CLI or AXL SQL query access.",
+    status: "CUCM 15 AXL test returned one primary line and two lines across all appearances for the same pattern and partition.",
     post: "2026-08-25-auditing-local-and-long-distance-calling-access-with-cucm-sql",
+    downloads: cucmSqlDownloads,
   },
   {
     id: "uc-drs", group: "operations", title: "Cisco UC DRS backup configuration",

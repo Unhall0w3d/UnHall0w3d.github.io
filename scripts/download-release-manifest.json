@@ -110,6 +110,21 @@
         "journal_summary.py",
         "README.txt"
       ]
+    },
+    "cucm-sql-2026-11-20": {
+      "state": "released",
+      "mirrors": [
+        "EXAMPLES.md",
+        "README.md",
+        "configured-phone-lines.sql",
+        "css-all-lines.sql",
+        "css-primary-line.sql",
+        "speed-dial-references.sql"
+      ],
+      "archive": {
+        "folder": "cucm-sql-2026-11-20",
+        "filename": "cucm-sql-2026-11-20.zip"
+      }
     }
   }
 }

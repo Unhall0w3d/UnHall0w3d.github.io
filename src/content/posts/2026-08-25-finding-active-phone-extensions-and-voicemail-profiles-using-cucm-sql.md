@@ -205,3 +205,7 @@ The query does not tell us whether the person in the description still works the
 What it does is replace a vague question—*which extensions are actually on phones?*—with a concrete list of configured device-line relationships.
 
 That is enough to stop guessing and start the true-up with something CUCM itself can defend.
+
+## Download the query pack
+
+Use `configured-phone-lines.sql` as supplied. It returns one row per matching device-line assignment. The ZIP includes all four SELECT statements, CLI and AXL instructions, example results, and checksums. [Download the CUCM SQL pack](/assets/downloads/cucm-sql-2026-11-20/cucm-sql-2026-11-20.zip).

@@ -195,3 +195,7 @@ where b.blfdestination='5222' or n.dnorpattern='5222'
 Keep both BLF conditions. Removing the `n.dnorpattern` condition would miss BLF Speed Dial records that reference the Directory Number through `fknumplan` instead of storing the destination directly in `blfdestination`.
 
 That is it. One read-only query gives us a fast, consistent way to find all of the Speed Dial and BLF Speed Dial references that should be reviewed after an extension owner or display name changes.
+
+## Download the query pack
+
+Use `speed-dial-references.sql` and replace all three `<EXTENSION>` values with the same extension. The ZIP includes all four SELECT statements, CLI and AXL instructions, example results, and checksums. [Download the CUCM SQL pack](/assets/downloads/cucm-sql-2026-11-20/cucm-sql-2026-11-20.zip).
