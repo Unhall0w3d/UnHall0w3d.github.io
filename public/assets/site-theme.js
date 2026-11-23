@@ -22,7 +22,7 @@
   }
 
   function apply(value) {
-    const key = Object.hasOwn(themes, value) ? value : "cyberpunk";
+    const key = Object.hasOwn(themes, value) ? value : "aftertone-dark";
     root.dataset.theme = key;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themes[key].color);
     const picker = document.getElementById("site-theme");
