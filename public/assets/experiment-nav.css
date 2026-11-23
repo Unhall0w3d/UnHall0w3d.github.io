@@ -20,6 +20,14 @@ html[data-theme="aftertone"] .experiment-nav__home {
   --nav-accent: #b43c26;
 }
 
+html[data-theme="aftertone-dark"] :is(.experiment-nav, .experiment-nav__home) {
+  --nav-accent: #f49b70;
+}
+
+html[data-theme="aftertone-dark"] .mast .experiment-nav__home {
+  --nav-accent: #963b26;
+}
+
 html[data-theme="polar"] .experiment-nav,
 html[data-theme="polar"] .experiment-nav__home {
   --nav-accent: #76d4e8;

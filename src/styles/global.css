@@ -1979,7 +1979,7 @@ h1 em {
   --on-signal: #fff4e8;
 }
 
-:root[data-theme="aftertone"] h1 em {
+:root:is([data-theme="aftertone"], [data-theme="aftertone-dark"]) h1 em {
   color: var(--arcane);
   -webkit-text-stroke: 0;
   text-shadow: none;
@@ -1987,6 +1987,23 @@ h1 em {
 
 :root[data-theme="aftertone"] :is(.signal-card, .operator-links, .ambient-signal, .repository-relay, .prose img) {
   box-shadow: 0 0.6rem 2rem rgb(65 49 30 / 12%);
+}
+
+:root[data-theme="aftertone-dark"] {
+  color-scheme: dark;
+  --ink-950: #2b2c2e;
+  --ink-900: #252628;
+  --ink-850: #303133;
+  --ink-800: #383a3c;
+  --ink-700: #454647;
+  --paper: #f1efe6;
+  --prose-text: #dedbd3;
+  --muted: #c0bab0;
+  --signal: #f49b70;
+  --signal-soft: #ffc09b;
+  --arcane: #a8d0ed;
+  --ember: #f2c373;
+  --on-signal: #292b2d;
 }
 
 :root[data-theme="polar"] {

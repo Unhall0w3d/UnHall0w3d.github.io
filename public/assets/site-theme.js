@@ -3,6 +3,7 @@
   const themes = {
     cyberpunk: { name: "Cyberpunk", color: "#070913", lead: "Where network operations meet", emphasis: "techno-sorcery." },
     aftertone: { name: "Aftertone", color: "#f1efe6", lead: "Field notes from the", emphasis: "shortwave end of the network." },
+    "aftertone-dark": { name: "Aftertone Dark", color: "#2b2c2e", lead: "The rack hums.", emphasis: "One link stays dark." },
     polar: { name: "Polar Night", color: "#0d1924", lead: "Notes from the", emphasis: "overnight shift." },
     moss: { name: "Moss & Brass", color: "#141b16", lead: "A field guide to", emphasis: "the networks we tend." },
     darkroom: { name: "Darkroom", color: "#191419", lead: "A closer look at", emphasis: "what the traces reveal." },
