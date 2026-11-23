@@ -1,0 +1,25 @@
+.reference-page { max-width: 64rem; margin-inline: auto; }
+.reference-page .page-hero { padding-block: clamp(2rem, 5vw, 4rem) 1.65rem; }
+.reference-page .page-hero h1 { max-width: none; font-size: clamp(2.3rem, 4.6vw, 4.6rem); line-height: 1.04; letter-spacing: -.048em; text-transform: none; }
+.reference-page .page-deck { max-width: 60ch; margin-top: 1rem; }
+.reference-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem); gap: 2rem clamp(2rem, 6vw, 6rem); align-items: start; padding-block: 2rem; }
+.reference-grid .prose { min-width: 0; line-height: 1.75; }
+.reference-grid .prose > :first-child { margin-top: 0; }
+.operator-profile aside { background: var(--ink-850); border: 1px solid var(--line); padding: 1rem; }
+.operator-profile aside img { width: 100%; height: auto; display: block; }
+.reference-grid :is(aside, nav) h2 { margin: 1.25rem 0 .7rem; font: 600 1.15rem/1.2 var(--font-body); letter-spacing: 0; }
+.reference-grid :is(aside, nav) ul { list-style: none; padding: 0; margin: 0; }
+.reference-grid :is(aside, nav) li { border-top: 1px solid var(--line); }
+.reference-grid :is(aside, nav) a { display: block; padding: .55rem 0; color: var(--paper); text-decoration: none; font-size: .94rem; }
+.reference-grid :is(aside, nav) a:is(:hover,:focus-visible) { text-decoration: underline; color: var(--signal); }
+.policy nav { grid-column: 2; grid-row: 1; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; border-left: 2px solid var(--signal); padding-left: 1rem; }
+.policy nav h2 { margin-top: 0; }
+.policy .prose { grid-column: 1; grid-row: 1; }
+.policy .prose h2 { font: 650 clamp(1.4rem, 2.5vw, 2rem)/1.2 var(--font-display); text-transform: none; scroll-margin: 2rem; }
+@media (max-width: 48rem) {
+  .reference-grid { display: flex; flex-direction: column; gap: 1.75rem; }
+  .reference-grid :is(aside,nav) { position: static; width: 100%; max-height: none; }
+  .operator-profile aside img { width: min(100%, 13rem); }
+  .policy nav ul { columns: 2; column-gap: 1rem; }
+  .policy nav li { break-inside: avoid; }
+}

@@ -4,9 +4,8 @@ date: 2022-02-17T08:00:00-05:00
 excerpt_separator: "<!--more-->"
 permalink: /about/
 ---
-## About Me
+<div class="prose">
 
-<span class="image left"><img src="/assets/images/me.jpg" alt="Every About page needs a picture! This one's... well... me!" width="1826" height="1826" /></span>
 
 Hey there! If you’re here you must be curious about who I am and what I do, right? Well, my name is Ken Perry and I function as a Senior UC Engineer (Level 3) at a Managed Services Provider. Through my UC Journey thus far I have functioned as a front line Service Desk engineer (with all the glory that entails), a Senior UC Engineer focusing on supporting/administrating/maintaining Cisco UC deployments including UCM, CUC, CER, IM&P, UCCX, IOS Gateways/VGs, CUBE, ESXi Hypervisor, Cisco UCS-C/B/E, UCSM and UCS Central, Unified SIP Proxy and more, typically in 20+ separate environments on a weekly basis. It can get crazy. I have also functioned as a “Day 1” implementation engineer building out “pilot” or “proof of concept” environments, including creating documentation and how-to training videos.
 
@@ -20,11 +19,18 @@ I started the NOC Thoughts blog as a way to give back to the IT community, blogg
 
 And as always, my thoughts, comments, and posts are my own and do not reflect on any other individual or company by which I associate.
 
+</div>
+
+<aside aria-labelledby="certifications">
+<img src="/assets/images/me.jpg" alt="Every About page needs a picture! This one's... well... me!" width="1826" height="1826" />
+
 ## Certifications
 
-[CCNP Collaboration](https://www.youracclaim.com/badges/2d279524-027b-4122-9464-4f0a7c8ff84a/public_url)
-[CCNP Data Center](https://www.youracclaim.com/badges/356da7c5-47f9-42c9-b5c8-749304d57b01/public_url)
-[CCNA Route Switch](https://www.youracclaim.com/badges/2675a7a1-f8c0-49b7-a070-5d315238d3c3/public_url)
-[CCNA wireless](https://www.youracclaim.com/badges/ce199e29-b5c9-49e5-bd40-c68c2765a4bd/public_url)
-[VMWare VCP6-DCV](https://www.youracclaim.com/badges/e4dab60b-1d69-49fb-b63f-50ddad56a1d7/public_url)
-[AudioCodes Associate](https://www.linkedin.com/in/kperryuc/)
+- [CCNP Collaboration](https://www.youracclaim.com/badges/2d279524-027b-4122-9464-4f0a7c8ff84a/public_url)
+- [CCNP Data Center](https://www.youracclaim.com/badges/356da7c5-47f9-42c9-b5c8-749304d57b01/public_url)
+- [CCNA Route Switch](https://www.youracclaim.com/badges/2675a7a1-f8c0-49b7-a070-5d315238d3c3/public_url)
+- [CCNA wireless](https://www.youracclaim.com/badges/ce199e29-b5c9-49e5-bd40-c68c2765a4bd/public_url)
+- [VMWare VCP6-DCV](https://www.youracclaim.com/badges/e4dab60b-1d69-49fb-b63f-50ddad56a1d7/public_url)
+- [AudioCodes Associate](https://www.linkedin.com/in/kperryuc/)
+
+</aside>
