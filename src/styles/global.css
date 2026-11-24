@@ -380,6 +380,8 @@ h1 em {
   position: absolute;
   z-index: 1;
   bottom: 0.7rem;
+  padding: 0.12rem 0.3rem;
+  background: var(--ink-900);
   font-family: var(--font-code);
   font-size: 0.56rem;
   letter-spacing: 0.08em;
@@ -387,12 +389,12 @@ h1 em {
 
 .signal-face-label {
   left: 0.75rem;
-  color: #56f2d0;
+  color: var(--signal);
 }
 
 .signal-flip-prompt {
   right: 0.75rem;
-  color: #e7f2ef;
+  color: var(--paper);
 }
 
 .signal-stats {
