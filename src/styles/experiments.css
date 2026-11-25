@@ -1,0 +1,141 @@
+#main-content.experiment-index {
+  --index-ease: cubic-bezier(.2, .8, .2, 1);
+  padding-block: clamp(1.75rem, 3.4vw, 3rem) clamp(2rem, 3.4vw, 3rem);
+}
+
+#main-content.experiment-index .experiment-title {
+  max-width: none;
+  margin-block-end: clamp(1.3rem, 2.5vw, 2rem);
+  font-size: clamp(2rem, 10vw, 5.25rem);
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+
+#main-content.experiment-index .experiment-entries {
+  border-block: 1px solid var(--line);
+}
+
+#main-content.experiment-index .experiment-entry + .experiment-entry {
+  border-block-start: 1px solid var(--line);
+}
+
+#main-content.experiment-index .experiment-link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 37%) 2rem;
+  grid-template-areas: "copy preview arrow";
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  position: relative;
+  padding-block: 1rem;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+#main-content.experiment-index .experiment-copy {
+  grid-area: copy;
+}
+
+#main-content.experiment-index .experiment-copy h2 {
+  width: fit-content;
+  margin-block-end: .55rem;
+  font-size: clamp(1.5rem, 2.6vw, 2.35rem);
+  line-height: 1.08;
+  background: linear-gradient(var(--signal), var(--signal)) 0 100% / 0 1px no-repeat;
+  padding-block-end: .18em;
+  transition: background-size 150ms var(--index-ease);
+}
+
+#main-content.experiment-index .experiment-copy p {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--prose-text);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+#main-content.experiment-index .experiment-preview {
+  grid-area: preview;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ink-850);
+}
+
+#main-content.experiment-index .experiment-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 400ms var(--index-ease);
+}
+
+#main-content.experiment-index .experiment-arrow {
+  grid-area: arrow;
+  justify-self: center;
+  color: var(--signal);
+  font: 1.35rem/1 var(--font-code);
+  transition: transform 150ms var(--index-ease);
+}
+
+#main-content.experiment-index .experiment-link:focus-visible {
+  z-index: 1;
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+#main-content.experiment-index .experiment-link:focus-visible h2 {
+  background-size: 100% 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #main-content.experiment-index .experiment-link:hover h2 {
+    background-size: 100% 1px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  #main-content.experiment-index .experiment-link:hover img {
+    transform: scale(1.025);
+  }
+
+  #main-content.experiment-index .experiment-link:hover .experiment-arrow {
+    transform: translateX(3px);
+  }
+}
+
+@media (max-width: 46rem) {
+  #main-content.experiment-index .experiment-link {
+    grid-template-columns: minmax(0, 1fr) 1.5rem;
+    grid-template-areas: "copy arrow" "preview preview";
+    align-items: start;
+    gap: .8rem .55rem;
+  }
+
+  #main-content.experiment-index .experiment-arrow {
+    margin-block-start: .25em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #main-content.experiment-index .experiment-title {
+    animation: experiment-title-arrival 480ms var(--index-ease);
+  }
+
+  @keyframes experiment-title-arrival {
+    from { opacity: .83; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main-content.experiment-index .experiment-copy h2,
+  #main-content.experiment-index .experiment-preview img,
+  #main-content.experiment-index .experiment-arrow {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  #main-content.experiment-index .experiment-link:focus-visible {
+    outline-color: Highlight;
+  }
+}

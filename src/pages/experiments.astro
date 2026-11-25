@@ -1,4 +1,5 @@
 ---
+import "../styles/experiments.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const experiments = [
@@ -19,24 +20,19 @@ const experiments = [
   }
 ];
 ---
-<BaseLayout title="Experiments" description="Explore interactive experiments from NOC Thoughts, including Local LLM Observatory, Kestrel Sound, and Aftertone.">
-  <header class="post-header"><h1>Experiments</h1></header>
-  <div class="tool-grid">
+<BaseLayout mainClass="experiment-index" title="Experiments" description="Explore interactive experiments from NOC Thoughts, including Local LLM Observatory, Kestrel Sound, and Aftertone.">
+  <h1 class="experiment-title">Experiments</h1>
+  <div class="experiment-entries">
     {experiments.map(({slug, name, description}) => (
-      <article class="tool-card">
-        <a href={`/experiments/${slug}.html`}>
-          <img src={`/assets/images/experiments/${slug}.webp`} alt="" width="850" height="356" />
-          <h2>{name}</h2>
+      <article class="experiment-entry">
+        <a class="experiment-link" href={`/experiments/${slug}.html`}>
+          <div class="experiment-copy"><h2>{name}</h2><p>{description}</p></div>
+          <div class="experiment-preview">
+            <img src={`/assets/images/experiments/${slug}.webp`} alt="" width="850" height="356" />
+          </div>
+          <span class="experiment-arrow" aria-hidden="true">→</span>
         </a>
-        <p>{description}</p>
       </article>
     ))}
   </div>
 </BaseLayout>
-<style>
-  article a { display: block; color: var(--paper); text-decoration: none; }
-  article img { display: block; width: 100%; height: auto; aspect-ratio: 2.39; object-fit: cover; }
-  article h2 { margin: 1rem 0 .45rem; }
-  article a:hover h2, article a:focus-visible h2 { text-decoration: underline; text-underline-offset: .18em; }
-  article p { margin: 0; }
-</style>

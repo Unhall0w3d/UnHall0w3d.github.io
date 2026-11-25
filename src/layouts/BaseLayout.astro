@@ -1,8 +1,10 @@
 ---
 import { site } from "../config/site";
 import "../styles/global.css";
+import "../styles/editorial.css";
 
 interface Props {
+  mainClass?: string;
   title?: string;
   description?: string;
   type?: "website" | "article";
@@ -16,6 +18,7 @@ interface Props {
 }
 
 const {
+  mainClass,
   title = site.title,
   description = site.description,
   type = "website",
@@ -122,7 +125,7 @@ const socialImageType = (() => {
       </label>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" class={mainClass} tabindex="-1">
       <slot />
     </main>
 

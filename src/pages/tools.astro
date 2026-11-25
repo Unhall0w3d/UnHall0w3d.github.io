@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/tools.css";
 import { tools, toolGroups } from "../config/tools";
 import { postUrl } from "../lib/posts";
 
@@ -11,29 +12,38 @@ const entries = tools.map((tool) => {
   return { ...tool, guide: postUrl(post) + (tool.guideSection ? `#${tool.guideSection}` : "") };
 });
 ---
-<BaseLayout title="Tools & Downloads" description="Practical Cisco UC scripts, read-only audit queries, backup tools, and agent workflow references, with guides and validation limits.">
-  <header class="post-header tools-header">
-    <p class="eyebrow">THE FIELD TOOLBOX</p>
-    <h1>Tools &amp; downloads</h1>
-    <p class="post-deck">Find the resource for the job. Read the procedure, inspect the code, and start with the documented preview or read-only checks.</p>
-    <p>Scripts, query guides, and reference workflows are free to read and use. Each guide explains its inputs, operating limits, and verification steps.</p>
-  </header>
-  <nav class="tool-jump-links" aria-label="Tool categories">
-    {toolGroups.map((group) => <a href={`#${group.id}`}>{group.title}</a>)}
-  </nav>
+<BaseLayout mainClass="tools-index" title="Tools & Downloads" description="Practical Cisco UC scripts, read-only audit queries, backup tools, and agent workflow references, with guides and validation limits.">
+  <div class="catalog-intro">
+    <header class="post-header tools-header">
+      <p class="eyebrow">THE FIELD TOOLBOX</p>
+      <h1>Tools &amp; downloads</h1>
+      <p class="post-deck">Find the resource for the job. Read the procedure, inspect the code, and start with the documented preview or read-only checks.</p>
+      <p>Scripts, query guides, and reference workflows are free to read and use. Each guide explains its inputs, operating limits, and verification steps.</p>
+    </header>
+    <nav class="tool-jump-links" aria-label="Tool categories">
+      {toolGroups.map((group) => <a href={`#${group.id}`}>{group.title}</a>)}
+    </nav>
+  </div>
   {toolGroups.map((group) => (
     <section class="tool-group" id={group.id} aria-labelledby={`${group.id}-title`}>
       <header class="section-header"><div><h2 id={`${group.id}-title`}>{group.title}</h2><p>{group.description}</p></div></header>
       <div class="tool-grid">
         {entries.filter((tool) => tool.group === group.id).map((tool) => (
           <article id={tool.id} class="tool-card" aria-labelledby={`${tool.id}-title`}>
-            <h3 id={`${tool.id}-title`}><a href={tool.guide}>{tool.title}</a></h3>
-            <p>{tool.description}</p>
-            <dl><dt>Requirements</dt><dd>{tool.requires}</dd><dt>Scope &amp; validation</dt><dd>{tool.status}</dd></dl>
-            <a class="text-link" href={tool.guide}>Read guide &amp; review →</a>
-            {tool.downloads && <nav class="tool-downloads" aria-label={`${tool.title} downloads`}>
-              {tool.downloads.map((download) => <a href={download.href} download>{download.label} <span aria-hidden="true">↓</span></a>)}
-            </nav>}
+            <div class="catalog-summary">
+              <h3 id={`${tool.id}-title`}><a href={tool.guide}>{tool.title}</a></h3>
+              <p>{tool.description}</p>
+            </div>
+            <dl>
+              <div><dt>Requirements</dt><dd>{tool.requires}</dd></div>
+              <div><dt>Scope &amp; validation</dt><dd>{tool.status}</dd></div>
+            </dl>
+            <div class="catalog-actions">
+              <a class="text-link" href={tool.guide}>Read guide &amp; review →</a>
+              {tool.downloads && <nav class="tool-downloads" aria-label={`${tool.title} downloads`}>
+                {tool.downloads.map((download) => <a href={download.href} download>{download.label} <span aria-hidden="true">↓</span></a>)}
+              </nav>}
+            </div>
           </article>
         ))}
       </div>
