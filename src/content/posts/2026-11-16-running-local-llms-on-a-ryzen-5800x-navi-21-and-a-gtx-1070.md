@@ -17,28 +17,32 @@ tags:
 draft: false
 ---
 
-The GTX 1070 in my workstation still has a job. It keeps a 2B model loaded for context compaction while the AMD card handles most of the foreground work. For a couple of the larger models, I split layers across both cards. Embeddings stay on the CPU.
+The GTX 1070 in my workstation still has a job. In my usual setup it handles context compaction with a 2B model, leaving the AMD card free for most foreground work. For a couple of the larger models, I split layers across both cards. Embeddings stay on the CPU.
 
-Getting the models loaded was the first job. Then I wanted to know what the machine was spending to keep them useful. How much memory does each setup use? How long do requests take? And what happens to the AMD card when the prompt is long enough to keep it busy? That meant recording the settings and measuring the work.<!--more-->
+Once the models loaded, I wanted to know what it cost to keep them useful. I measured how long a request took, how much memory it left for the desktop and how hot the Radeon got when I kept it busy.<!--more-->
 
-*Updated November 17, 2026 with the Ministral Technical Writer rollout and the OpenClaw heavy-coder check. The roster is a November 16 snapshot, and each benchmark section retains its original test conditions.*
+*Updated November 26, 2026 after checking the running services and retiring the Maya pilot.*
 
 ## What Is in the Workstation?
 
 - **CPU and RAM.** Ryzen 7 5800X with eight cores, 16 threads and 64GB of RAM. The DIMMs occupy slots 1B and 2B, running dual-channel at DDR4-3800 with Infinity Fabric at 1,900 MHz.
 - **AMD GPU.** Navi 21 (RDNA 2) with 16GB of VRAM, recorded in my configuration as an RX 6900 XT. The shared PCI identifier leaves the exact board SKU to be confirmed.
 - **NVIDIA GPU.** GeForce GTX 1070 with 8GB of VRAM and driver 580.196.07.
-- **Serving.** llama-swap v272 (`802f1c43`) routes requests to llama.cpp, using Vulkan for AMD and CUDA architecture 61 for the GTX 1070. OpenClaw and OpenCode are the clients. The runtime revisions and model-specific repairs are covered below.
+- **Serving.** The November 16 baseline used llama-swap v272 (`802f1c43`). The November 18 router ran v273-1 and routed requests to llama.cpp, using Vulkan for AMD and CUDA architecture 61 for the GTX 1070.
 
-## What Stays Loaded?
+## What’s running on November 26?
 
-Qwen 2B handles compaction and EmbeddingGemma handles embeddings. I keep both resident. The remaining base models and active specialists load as needed for foreground work.
+OpenClaw and OpenCode both point to llama-swap on port 18080. When I checked, the router reported `v272-idle-restore1`, a local build based on `802f1c43`. Its catalog listed 22 profiles. In the normal routing configuration, Qwen3.5 2B handles compaction on the GTX 1070, EmbeddingGemma runs on the CPU, and the router can load a foreground model alongside them. The gaming configuration pairs the Capri Gemma E4B profile on the GTX with the CPU embedder.
+
+Most foreground profiles use the Radeon through Vulkan. The 27B Qwen splits layers across both GPUs. The 35B Qwen and heavy coder also keep experts in system RAM. Both Flint context profiles use the Radeon and CPU experts. The catalog includes separate stock and Heretic Gemma 12B profiles, both on AMD. The common llama.cpp package is still pinned to `a06044b`, with separate builds for Command R7B, Phi and the CPU embedder. Bonsai 2.5 27B has its own AMD ROCm runtime at `41c86f7`.
+
+Only EmbeddingGemma showed up as ready. Qwen 2B was on the preload list but had no running process. A separate Qwen3.5 9B test process had 32 layers assigned to CUDA and was using 7,572 MiB on the GTX. The router’s own 9B profile calls for the Radeon. I checked the process arguments and GPU allocation and left the test running without sending a request.
 
 ## November 16 Serving Roster
 
-On November 16, I had 15 active profiles. I also measured Ministral as a candidate, which is how it appears in the tables. As of November 17, the router has 15 on-demand profiles and two resident helpers. Ministral is active as my tool-free Technical Writer.
+I measured 15 active profiles on November 16, plus Ministral as a candidate. By November 17, Ministral was my tool-free Technical Writer and the router had 15 on-demand profiles alongside the two resident helpers. On November 18, two context profiles for Flint brought the count to 17 on-demand profiles across 16 distinct foreground models. The helpers stayed in their own persistent group.
 
-The original 15 active profiles now use the `a06044b` source pin. Twelve GPU profiles share the common package. Command R7B has its parser repair, Phi has its scheduler repair, and EmbeddingGemma uses the CPU package. Qwen 35B also uses a 192 MiB expert cache with CPU share set to zero, in addition to the attention K/V cache listed below.
+After the November 16 upgrade, the original 15 active profiles used the `a06044b` source pin. Twelve GPU profiles share the common package. Command R7B has its parser repair, Phi has its scheduler repair, and EmbeddingGemma uses the CPU package. Qwen 35B also uses a 192 MiB expert cache with CPU share set to zero, in addition to the attention K/V cache listed below.
 
 | Model | Weight quant | Weights (GiB) | Placement | GGUF blocks | Configured / native context | K / V cache | Batch / microbatch |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -59,17 +63,17 @@ The original 15 active profiles now use the `a06044b` source pin. Twelve GPU pro
 | Qwen3.8 27B | UD-IQ4_XS | 13.27 | AMD + NVIDIA | 65 | 32,768 / 262,144 | q8_0 / q8_0 | 1,024 / 512 |
 | Ministral 3 14B Instruct 2512 (candidate) | Q4_K_M | 7.67 | AMD | 40 | 24,576 / 262,144 | q8_0 / q8_0 | 512 / 512 |
 
-The weight column is the size of the GGUF on disk. For context, I’ve listed the setting I actually run alongside the native context in the GGUF header. Batch and microbatch govern how the runtime groups prompt work. The eight base profiles use eight generation threads and eight batch threads. The seven base GPU profiles enable Flash Attention and cap output at 8,192 tokens. The specialist ceilings are 4,096 tokens, with 8,192 for Phi. I don’t have KV cache or output ceiling values recorded for the embedder.
+I use model names in the tables and keep the older routing IDs in the records so existing chats and memory still resolve. The weight column gives the size of the GGUF on disk. The context column pairs the configured window with the native limit from the GGUF header. Batch and microbatch govern how the runtime groups prompt work. The eight base profiles use eight generation threads and eight batch threads. The seven base GPU profiles enable Flash Attention and cap output at 8,192 tokens. The specialist ceilings are 4,096 tokens, with 8,192 for Phi. I don’t have KV cache or output ceiling values recorded for the embedder.
 
-The 35B is where the two GPUs and system RAM come together. I use a 79:21 AMD/NVIDIA layer split and keep the expert tensors from 17 blocks in RAM. The 27B uses an 88:12 split. These ratios control scheduling across the GPUs. Actual memory use appears in the measured footprint tables. The GPU profiles specify `all` for the GPU-layer setting, and the embedder specifies zero. The table counts blocks from the GGUF headers. That includes one auxiliary multi-token prediction (MTP) block in each of the 9B and 27B artifacts, alongside 32 and 64 main transformer blocks, respectively.
+For the 35B, I use a 79:21 AMD/NVIDIA layer split and keep the expert tensors from 17 blocks in RAM. The 27B uses an 88:12 split. Those are layer splits. The footprint table shows what each card actually allocated. The GPU profiles specify `all` for the GPU-layer setting, and the embedder specifies zero. The table counts blocks from the GGUF headers. That includes one auxiliary multi-token prediction (MTP) block in each of the 9B and 27B artifacts, alongside 32 and 64 main transformer blocks, respectively.
 
-The active 12B Gemma artifact is the Heretic i1 Q4 build. Five additional inactive GGUFs include the older 12B Gemma Q6 and Qwen 9B Q4 builds, Twin Turbo 27B, GLM-OCR and LFM2 Extract. The inventory also tracks two vision projectors separately from model weights.
+The November 16 roster used the Heretic i1 Q4 build. Five additional GGUFs were inactive at the time, including the older 12B Gemma Q6 and Qwen 9B Q4 builds, Twin Turbo 27B, GLM-OCR and LFM2 Extract. The inventory also tracks two vision projectors separately from model weights.
 
 ## Updating the Runtime and Testing the MoE Cache
 
 I built the replacement runtime from pinned commit `a06044b934db085e373286444e0c15b93635a20c`. Eight parser, grammar, template and server-component tests passed for each CPU and mixed-GPU build. The 13 upgraded GPU profiles passed native chat checks, with extra tool-call/follow-up checks for GPT-OSS and Qwen35B, plus a synthetic vision check for Gemma12B. The argument-parser test was built and left unrun because it includes external HTTP download assertions. Model startup exercised the configured argument sets.
 
-The first upgrade attempt exposed two compatibility problems. Phi initially aborted during graph reservation after exhausting a scheduler hash table. A later isolated repair passed qualification and was activated for Phi only, as described below. The candidate CPU embedder produced vectors with cosine similarity 0.9998728 to the previous b9851 build and a 1.595% relative L2 difference. I kept b9851 in service during the compatibility investigation, then migrated the indexes and activated the new CPU package after the retrieval checks below.
+The first upgrade attempt exposed two compatibility problems. Phi initially aborted during graph reservation after exhausting a scheduler hash table. The candidate CPU embedder produced vectors with cosine similarity 0.9998728 to the previous b9851 build and a 1.595% relative L2 difference. I kept b9851 serving embeddings until I could check what that difference did to retrieval.
 
 For the MoE trial, Qwen3.6 35B-A3B kept its UD-Q6_K weights, 32K context, Q8 K/V, Flash Attention, 1024/1024 batch settings, eight threads, 79:21 GPU split and 17 host-expert blocks. I used the matching upstream tuner’s trace parsing, cache simulation and fitted cost model, with the existing temperature, memory and process checks around each test.
 
@@ -85,9 +89,9 @@ Seven conditions covered a cache-disabled control, then 192 and 384 MiB at CPU s
 | 384 | 0.5 | 29.91 / 29.62 | 29.77 |
 | 384 | 0.95 | 27.39 / 27.50 | 27.45 |
 
-The fitted model matched its calibration measurements with a maximum relative error of 0.073%. It predicted about 34.19 tok/s at 192 MiB/share 0 and 35.68 tok/s at 384 MiB/share 0. I then needed to check the selected setting on different prompts.
+The fitted model matched its calibration measurements with a maximum relative error of 0.073%. It predicted about 34.19 tok/s at 192 MiB/share 0 and 35.68 tok/s at 384 MiB/share 0.
 
-I selected 192 MiB with CPU share 0 for confirmation. Its measured mean was within 5% of the fastest candidate while using half the cache allocation. It was then tested with different short and long prompts and a synthetic tool exchange.
+I took 192 MiB with CPU share 0 into the next test. It came within 5% of the fastest candidate on half the cache. This time I used different short and long prompts and added a synthetic tool exchange.
 
 | Fixture | Cache MiB | Prompt tokens | Prefill tok/s | Decode tok/s | Wall seconds |
 | --- | --- | --- | --- | --- | --- |
@@ -100,27 +104,27 @@ Generation improved about 30% on the short prompt and 23% on the long prompt. Sh
 
 In confirmation, the 192 MiB cache raised AMD process-reported VRAM from about 12.652 to 12.840 GiB. NVIDIA process allocation at startup stayed about 5.174 GiB. AMD process-reported host GTT stayed about 10.658 GiB, while sampled RSS remained below 0.80 GiB. Host available RAM stayed above 33.1 GiB, and whole-device AMD free memory stayed above 1,637 MiB during candidate measurement. RSS and GTT have different scopes and can overlap. The highest sampled hotspot across the confirmation conditions was 62°C.
 
-A missing copy of the split-memory approval record stopped the first confirmation launch before inference. After fixing the launcher, I repeated confirmation with that check in place. The stopped attempt remains in the test record. Calibration and completed confirmation used 20 inference requests in total. All owned processes and listeners were independently verified released afterward.
+A missing copy of the split-memory approval record stopped the first confirmation launch before inference. After fixing the launcher, I repeated confirmation with that check in place. Calibration and completed confirmation used 20 inference requests in total. Afterward I checked that the test processes had exited and their ports were free.
 
-After reviewing those results, I activated 192 MiB with CPU share 0 for Qwen 35B. The router reload and resident-helper readiness checks passed without inference. The measured cache trials above preceded activation, and the full-roster benchmarks below used the older runtime with the MoE cache disabled. Higher CPU shares slowed this setup, which uses pinned host experts through `--load-mode none`. The upstream documentation notes that CPU miss handling often helps less when pinned-memory uploads are already fast. The disposable cache-statistics tests used verbosity 4, including its diagnostic CUDA context overhead. The production logging setting remains unchanged. [Pinned MoE documentation](https://github.com/ggml-org/llama.cpp/blob/a06044b934db085e373286444e0c15b93635a20c/docs/moe-cache.md), [matching tuner](https://github.com/ggml-org/llama.cpp/blob/a06044b934db085e373286444e0c15b93635a20c/scripts/moe-cache-tune.py).
+After reviewing those results, I activated 192 MiB with CPU share 0 for Qwen 35B. The router reload and resident-helper readiness checks passed without inference. Higher CPU shares slowed this setup, which uses pinned host experts through `--load-mode none`. The upstream documentation notes that CPU miss handling often helps less when pinned-memory uploads are already fast. The disposable cache-statistics tests used verbosity 4, including its diagnostic CUDA context overhead. I kept the extra logging confined to the test. [Pinned MoE documentation](https://github.com/ggml-org/llama.cpp/blob/a06044b934db085e373286444e0c15b93635a20c/docs/moe-cache.md), [matching tuner](https://github.com/ggml-org/llama.cpp/blob/a06044b934db085e373286444e0c15b93635a20c/scripts/moe-cache-tune.py).
 
 ## Repairing Phi's Scheduler Startup
 
 Phi's startup failure came from a scheduler tensor table sized for graph nodes that also needed entries for leaf tensors. A CPU-only regression reproduced the exact abort. The isolated patch doubled that capacity and added an overflow assertion. All 33 allocator tests and eight existing component tests passed, followed by two small Vulkan ADD comparisons against the CPU reference.
 
-The first native qualification used the generic test's temperature zero and a 2,048-token output cap. It reached that cap after starting successfully. Microsoft's Phi Reasoning Plus card specifies temperature 0.8, top-k 50 and top-p 0.95. A versioned recovery used those request settings and the deployed 8,192-token output ceiling. It used the two remaining replies in the original three-request budget. The individual effects of sampling and output allowance were not isolated. [Microsoft model card](https://huggingface.co/microsoft/Phi-4-reasoning-plus#usage).
+The first native qualification used the generic test's temperature zero and a 2,048-token output cap. It reached that cap after starting successfully. Microsoft's Phi Reasoning Plus card specifies temperature 0.8, top-k 50 and top-p 0.95. For the two replies left in my three-request budget, I used those settings and the deployed 8,192-token ceiling. Changing both together left me unable to tell which made the difference. [Microsoft model card](https://huggingface.co/microsoft/Phi-4-reasoning-plus#usage).
 
 With the repaired runtime, Phi started in 2.75 seconds. The arithmetic response completed in 6.76 seconds at 47.19 tok/s, and its follow-up completed in 11.73 seconds at 47.08 tok/s. Both response checks passed, with reasoning kept separate. Generation rates include reasoning tokens. The first prompt had 245 tokens. The follow-up had 269 total prompt tokens, including 243 cached tokens.
 
-The native tests retained 16K context, Q8 K/V, Flash Attention, 1024/1024 and eight threads on AMD. Peak sampled hotspot was 64°C, AMD process-reported VRAM reached 10.174 GiB, and whole-device AMD free memory stayed above 4164 MiB. These short checks establish startup and protocol behavior at the tested settings. They leave full-context and broader quality work to separate evaluation.
+The native tests retained 16K context, Q8 K/V, Flash Attention, 1024/1024 and eight threads on AMD. Peak sampled hotspot was 64°C, AMD process-reported VRAM reached 10.174 GiB, and whole-device AMD free memory stayed above 4164 MiB. That was enough to check startup and the exchange of replies. Full-context behavior and answer quality still need a longer test.
 
-After cleanup review, only Phi's runtime path was switched to the versioned repaired package. The first activation verifier caught an ambiguous PID observation during resident handover. Read-only reconciliation then passed two stable identity and health checks, without repeating the configuration write or restart. The prior working package and all failed evidence are retained. The later embedding migration completed the remaining runtime change. Qwen 35B keeps its 192 MiB/share-0 expert cache.
+I switched only Phi to the repaired package. During the handover, the first check couldn’t reliably identify the resident process. Two further checks confirmed its identity and health without another restart. I kept the previous package and the failed-run records.
 
 ## Checking Embedding Compatibility
 
-The CPU embedding follow-up compared the working b9851 build with a06044b using the same 300M QAT Q8_0 artifact and frozen synthetic inputs. Fresh b9851 output matched its retained reference bit-for-bit, and tokenization matched across builds. The original short query measured cosine similarity 0.9998728 between runtimes. Source changes include FP16-to-FP32 accumulation in CPU Flash Attention, while thread and weight-buffer ablations did not remove the drift. Disabling Flash Attention recovered equality for that original query, but other probes still differed.
+The CPU embedding follow-up compared the working b9851 build with a06044b using the same 300M QAT Q8_0 artifact and frozen synthetic inputs. Fresh b9851 output matched its retained reference bit-for-bit, and tokenization matched across builds. I could reproduce the difference on the original short query. Source changes include FP16-to-FP32 accumulation in CPU Flash Attention, while thread and weight-buffer ablations did not remove the drift. Disabling Flash Attention recovered equality for that original query, but other probes still differed.
 
-A corpus of 36 documents and 24 queries was tested as raw text and with the model's published prefixes, giving 48 query cases. The newer runtime retained the same top result in every case. Against old document vectors, its new query vectors changed three top-five result sets across those 48 cases. Maximum absolute cosine-score movement was about 0.0030 for that mixed path and 0.0032 when both queries and documents were new. Those differences prompted the frozen-corpus retrieval checks before cutover.
+A corpus of 36 documents and 24 queries was tested as raw text and with the model's published prefixes, giving 48 query cases. The newer runtime retained the same top result in every case. Against old document vectors, its new query vectors changed three top-five result sets across those 48 cases. Maximum absolute cosine-score movement was about 0.0030 for that mixed path and 0.0032 when both queries and documents were new. That was enough movement to warrant checking the existing indexes before switching.
 
 The initial diagnostic adapter omitted six requested overrides from the effective command. A corrected version verified those arguments and ran the six missing ablations, retaining the earlier evidence. In total the investigation produced 430 synthetic vectors in 20 embedding requests, plus two tokenizer requests. I then completed the migration with versioned indexes and cache identity, preserving the original b9851 runtime and index snapshots for rollback.
 
@@ -128,31 +132,31 @@ The completed migration covered 16 agent indexes and 532 chunks, with canonical 
 
 The first live validator expected a session chunk, while the default search scope selects memory sources. Correcting the probes resolved that mismatch. Indexed sessions were preserved and the source policy stayed in place.
 
-The active embedder recipe now explicitly selects the new CPU package. The CPU macro still provides the old fallback, and the original runtime and index snapshots remain available for rollback. These checks establish retrieval consistency for the tested corpus and live paths. The historical performance tables retain their original runtimes.
+The embedder now selects the new CPU package directly. The CPU macro still points to the old fallback.
 
 ## What the Optimization Screening Changed
 
-Before the full-roster collection and runtime upgrade, I tested 168 conditions across 575 screening requests. Those comparisons informed the deployed settings used above. Screening peaked at 90 °C, while the final collection peaked at 88 °C across its own workloads.
+Before the full-roster collection and runtime upgrade, I tested 168 conditions across 575 screening requests. Screening peaked at 90 °C, while the final collection peaked at 88 °C across its own workloads.
 
-Batch changes were the useful adjustments. MTP confidence thresholds from 0.25 to 0.9 and draft depth 1 supplied no useful request-latency improvement on the tested fixtures, so I kept the existing MTP settings. Separate MTP-off references in the screening showed decode benefits for those fixtures. The final collection itself has no paired MTP-off comparison.
+Batch changes were the useful adjustments. MTP confidence thresholds from 0.25 to 0.9 and draft depth 1 supplied no useful request-latency improvement on the tested fixtures, so I kept the existing MTP settings. Separate MTP-off references in the screening showed decode benefits for those fixtures.
 
 Eight CPU threads stayed in place for the embedder and the 35B expert offload. Twelve and 16 threads were slower in the measured comparisons. Loading and host-operation alternatives improved the best long-request time by less than 0.2%, so the current specialist policies stayed in place too.
 
-The attention-cache trials also favored the existing settings. Q4 supplied no compelling speed benefit over the Q8 attention profiles. Gemma E4B kept F16 after Q8 and Q4 slowed decode and total request time. These tests measured performance at the tested input lengths.
+The attention-cache trials also favored the existing settings. Q4 supplied no compelling speed benefit over the Q8 attention profiles. Gemma E4B kept F16 after Q8 and Q4 slowed decode and total request time.
 
 For CPU embeddings, I compared isolated native and generic Netlib BLAS builds from the same b9851 source. Three native control conditions completed three requests each, with roughly one-second median long-input latency. The two generic Netlib BLAS conditions returned no responses before their 30-second request deadlines. That screening favored the native backend. Optimized OpenBLAS, AOCL and ZenDNN remain untested.
 
 ## Full-Roster Measurements Before the Runtime Update
 
-The following tables cover the full roster on the earlier v0.8.0 GPU runtime and b9851 CPU runtime, with the MoE cache disabled. They show the batch settings I carried into the runtime upgrade. The newer Qwen 35B cache measurements above are the follow-up.
+The following tables cover the full roster on the earlier v0.8.0 GPU runtime and b9851 CPU runtime, with the MoE cache disabled. They show the batch settings I carried into the runtime upgrade.
 
-After screening batch sizes, I applied the selected settings, including 1,024/1,024 for Phi. The screening required more than 3% improvement in long-request time beyond baseline drift, then favored smaller batches within 1% of the best result. The tables below come from the final collection with those settings.
+After screening batch sizes, I applied the selected settings, including 1,024/1,024 for Phi. The screening required more than 3% improvement in long-request time beyond baseline drift, then favored smaller batches within 1% of the best result.
 
 All 15 active profiles and the installed Ministral candidate completed the collection. That amounted to 141 measurement requests and 344 sustained-load requests. Each generative model ran three repetitions of a repetitive 120-record prompt, a varied 20-record prompt and a varied 220-record prompt. The same text produces different token counts across tokenizers.
 
 I used native completion requests with temperature zero, seed 20261116 and 128 forced output tokens, ignoring EOS. Prompt caching was disabled and cached-token counts were verified as zero. Embeddings used the native embedding endpoint. The resident servers were measured directly, while the other test processes used their deployed arguments. The operating system page cache was uncontrolled.
 
-The repetitive fixture favors MTP. There is no paired MTP-off condition here, and these synthetic timings leave chat performance and full-context behavior to separate tests. Each model allocated its configured context.
+The repetitive fixture favors MTP. For the MTP comparison, I used the paired runs from screening. Each model allocated its configured context, though the prompts used only part of it.
 
 ### The Original 120-Record Fixture
 
@@ -178,7 +182,7 @@ Prefill measures prompt processing, decode measures generation, and wall time co
 
 ### Short and Long Varied Prompts
 
-The long fixture below uses the varied 220-record input. The older 9,404-token Hermes thermal test appears later with its original settings.
+Here’s what changed when I switched from repeated records to the varied 20- and 220-record prompts.
 
 | Model | Fixture | Prompt tokens | Prefill (tok/s) | Decode (tok/s) | Wall (s) |
 | --- | --- | --- | --- | --- | --- |
@@ -247,9 +251,9 @@ Model VRAM and AMD GTT are reported for the process. Board totals include the de
 
 The 35B illustrates why RSS alone gives an incomplete picture. Its process reported about 0.79 GiB of peak RSS alongside 10.66 GiB of AMD GTT. GTT accounts for GPU-accessible host memory, and it can overlap with RSS. Adding them can overstate unique RAM use. The whole-host `MemAvailable` change also includes other activity and page-cache behavior.
 
-Hermes recorded a peak of about 121 MiB in process swap (VmSwap), while sampled host available memory stayed above 42.3 GiB. During its five-minute sustained phase, that counter stayed between 120.61 and 120.64 MiB. Linux reports swapped private anonymous pages through this counter. The host uses compressed-RAM zram swap, and the inspected cgroup ancestors had unlimited memory caps with zero limit or OOM events. These observations are consistent with cold host pages being paged out. The exact pages and historical reclaim trigger were not captured. Every other profile recorded zero process swap, and the operating guards passed. RSS, GTT and logical swapped bytes require separate accounting.
+During the five-minute Hermes run, process swap (VmSwap) stayed between 120.61 and 120.64 MiB even with more than 42.3 GiB of host memory available in every sample. Linux reports swapped private anonymous pages through this counter. The host uses compressed-RAM zram swap, and the inspected cgroup ancestors had unlimited memory caps with zero limit or OOM events. These observations are consistent with cold host pages being paged out. The exact pages and historical reclaim trigger were not captured. Every other profile recorded zero process swap, and the operating guards passed.
 
-GPT-OSS was configured for AMD compute and reported exactly 84 MiB of NVIDIA process memory. Follow-up traced this to its verbosity-4 startup diagnostics, which query memory on every GPU and create a CUDA primary context. A disposable probe using the same backend library reproduced zero NVIDIA allocation before the memory query and 84 MiB afterward, loading zero model weights and making zero inference requests. Exit released the allocation. The logging-only reduction to verbosity 2 was then activated with a healthy resident-helper reload and zero inference requests. The subsequent new-runtime GPT-OSS startup qualification reported no NVIDIA process allocation at verbosity 2. The recorded benchmark retains its original settings.
+GPT-OSS was configured for AMD compute and reported exactly 84 MiB of NVIDIA process memory. Follow-up traced this to its verbosity-4 startup diagnostics, which query memory on every GPU and create a CUDA primary context. A disposable probe using the same backend library reproduced zero NVIDIA allocation before the memory query and 84 MiB afterward, loading zero model weights and making zero inference requests. Exit released the allocation. The logging-only reduction to verbosity 2 was then activated with a healthy resident-helper reload and zero inference requests. The subsequent new-runtime GPT-OSS startup qualification reported no NVIDIA process allocation at verbosity 2.
 
 The current 35B keeps expert tensors from 17 blocks in RAM. That change followed an earlier load hitting the AMD free-memory guard at 16 blocks. The failed attempt remains recorded, with the exact triggering sample unavailable. The two split Qwen profiles use a 768 MiB AMD free-memory floor. The other profiles retain 1,536 MiB.
 
@@ -280,7 +284,7 @@ The collection used the saved 255 W cap, −50 mV offset, automatic core clocks 
 
 Starting conditions changed during collection. A two-minute cooldown expired before GPT-OSS launched. The continuation initially allowed five minutes for the same starting-temperature targets. From Command R7B onward, I removed that low-temperature starting gate and began at idle operating temperatures. The hard thermal, fan, memory and process-ownership guards stayed active. That difference matters when comparing temperatures and elapsed times.
 
-These runs establish behavior over the recorded workloads and durations. Hours-long operation and full-context performance remain open. Final checks confirmed the test processes and listeners were released, resident identities were preserved and idle, and the saved settings were intact.
+I haven’t run these loads for hours. Final checks confirmed the test processes and listeners were released, resident identities were preserved and idle, and the saved settings were intact.
 
 ## What Did the Earlier Runs Look Like?
 
@@ -304,7 +308,7 @@ I also record the MTP depth. On the 9B, the long-form depth-6 run was slower tha
 
 ## The Earlier Specialist Pilot
 
-Before the common benchmark, I tested the eight specialist candidates individually on November 15. Each ran by itself on AMD with SHA-verified weights, Q8 attention K and V, Flash Attention, and a 256/256 batch and microbatch. Falcon also kept its recurrent state in native F32. The 40 measured cases cover feasibility and follow-up runs. Here are the selected role timings and the associated memory observations.
+Before the common benchmark, I tested the eight specialist candidates individually on November 15. Each ran by itself on AMD with SHA-verified weights, Q8 attention K and V, Flash Attention, and a 256/256 batch and microbatch. Falcon also kept its recurrent state in native F32. The 40 measured cases cover feasibility and follow-up runs.
 
 | Candidate | Weight quant | Context | Prefill (tok/s) | Decode (tok/s) | Wall time (s) | AMD total (GiB) | Process RSS (GiB) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -329,7 +333,7 @@ This pilot capped ordinary outputs at 1,024 tokens and Phi at 4,096, below their
 
 ## Putting Seven Specialists Into Service
 
-On November 15, I added seven roles to OpenClaw and OpenCode. I checked a direct reply from each role in each client and verified model attribution for all 14 paths. Here’s how the models map to the roles and which ones have read tools enabled.
+On November 15, I added seven roles to OpenClaw and OpenCode. I checked a direct reply from each role in each client and verified model attribution for all 14 paths.
 
 | Model | Role | Read tools enabled |
 | --- | --- | --- |
@@ -347,18 +351,18 @@ Client smoke-check elapsed time includes startup and prompt overhead. The prefil
 
 The original activation batch stopped at the 95 °C junction guard and released the foreground slot. After resuming the work, an OpenCode check returned from the expected local Hermes model in 11.408 seconds. The sampled hotspot peaked at 79 °C and the thermal and resource guards stayed clear. The role resolved after a catalog refresh. A November 16 native delegation pilot subsequently checked Granite extraction and follow-up, Qwen 27B code proposals, GPT-OSS independent review and cancellation of an active Phi request. Model selection, native receipts and return delivery to the parent were verified for those paths.
 
-Command R7B’s earlier tools-unavailable refusal led to a parser repair for legacy response delimiters and streaming prefixes. Its Coordinator-to-isolated-Grounded-Research answer and corrected follow-up in the same child subsequently reached the parent with verified model attribution. Command’s executable path changed, and the Research role gained supplied-source guidance. The measured model settings retain their original values.
+Command R7B’s earlier tools-unavailable refusal led to a parser repair for legacy response delimiters and streaming prefixes. After the repair, the Coordinator received both the Grounded Research answer and a corrected follow-up from the same child. I checked that Command produced both replies. I also updated its executable path and gave the Research role instructions for working from supplied sources.
 
 The delegation checks also exposed problems with completed-job receipts and cancellation recovery. Those paths have since been repaired and checked. Standalone Grounded Research source handling, occasional missing child citations and specialist formatting remain open. Local OpenClaw patches will need requalification after an upstream package replacement.
 
 <details>
 <summary>Receipt and cancellation-recovery checks</summary>
 
-Completed native receipts now survive the in-memory cache expiry. A lookup 632 seconds after termination returned the matching receipt beyond the 600-second expiry, with zero new inference. This verifies receipt retrieval without adding a throughput measurement.
+Completed native receipts now survive the in-memory cache expiry. A lookup 632 seconds after termination returned the matching receipt beyond the 600-second expiry, with zero new inference.
 
-Restart recovery had also revived cancelled Coordinator reconciliation. The cancellation repair now retires the cancelled session’s recovery and pending-delivery claims, while Coordinator guidance limits reconciliation to the listed unfinished jobs. Twenty deterministic controls passed, followed by a 240-second live campaign covering delegation, final delivery, cancellation during inference and two minutes of post-restart observation with event wakes enabled. No duplicate or revived work was observed in that window. Compliance with the reconciliation guidance remains qualified to the exercised case.
+Restart recovery had also revived cancelled Coordinator reconciliation. The cancellation repair now retires the cancelled session’s recovery and pending-delivery claims, while Coordinator guidance limits reconciliation to the listed unfinished jobs. Twenty deterministic controls passed, followed by a 240-second live campaign covering delegation, final delivery, cancellation during inference and two minutes of post-restart observation with event wakes enabled. No duplicate or revived work was observed in that window.
 
-Preservation results belong to their respective repair windows. The earlier receipt repair preserved transcript and indexed-chunk hashes but changed two source-index metadata rows. The cancellation-recovery repair preserved every baseline transcript, chunk and source-index metadata row. Heartbeat cadence was restored and test resources were released.
+The earlier receipt repair preserved transcript and indexed-chunk hashes but changed two source-index metadata rows. The cancellation-recovery repair preserved every baseline transcript, chunk and source-index metadata row. Heartbeat cadence was restored and test resources were released.
 
 The legacy paused Developer follow-up was subsequently retired through authenticated native cancellation. Its pause state cleared, no other tasks were cancelled, and all 237 baseline Developer transcript rows were preserved. The gateway reported zero active work. The earlier HTTP 403 remains part of the test history.
 
@@ -370,17 +374,45 @@ The cancellation notice was later settled as intentional non-delivery, retaining
 
 On November 17, I ran two AMD-only writing checks with 24 requests each. Both finished within the original hardware guards and released the model cleanly. In the second check, an experimental grammar removed the leading Markdown fences from all 15 structured replies. The harder problem was what went inside the JSON. Ministral took a missing installation record to mean installation had never been attempted. In another draft, it described a request due to be sent tomorrow as already sent.
 
-I activated Ministral 3 14B Instruct 2512 Q4_K_M in llama-swap, OpenClaw and OpenCode as a tool-free `technical-writer`. I use it for general technical drafts and check the facts myself, especially where the source is silent or describes work still to come. The active recipe runs on AMD with a 24,576-token context, Q8_0 K/V, 512/512 batching and Flash Attention. I left the experimental grammar out, and I can ask for a draft with or without a source packet.
+I activated Ministral 3 14B Instruct 2512 Q4_K_M in llama-swap, OpenClaw and OpenCode as a tool-free `technical-writer`. I use it for general technical drafts and check the facts myself, especially where the source is silent or describes work still to come. The active recipe runs on AMD with a 24,576-token context, Q8_0 K/V, 512/512 batching and Flash Attention. I left the experimental grammar out of the deployed profile.
 
-The first OpenClaw check returned HTTP 500 when two user turns arrived back to back. I repaired Ministral’s chat template and checked that it preserved role boundaries in 13 deterministic cases. OpenClaw and OpenCode then each returned a handoff from supplied material and an open-ended explanation without a source packet. All four replies came from the expected local model. The OpenClaw handoff added a verification step nobody had assigned, exactly the kind of edit I look for in review. After the checks, the foreground model unloaded, both resident helpers were idle, and WinBoat was still running.
+The first OpenClaw check returned HTTP 500 when two user turns arrived back to back. I repaired Ministral’s chat template and checked that it preserved role boundaries in 13 deterministic cases. OpenClaw and OpenCode then each returned a handoff from supplied material and an open-ended explanation without a source packet. All four replies came from the expected local model. In the OpenClaw handoff, I caught one more factual slip. It added a verification step nobody had assigned. After the checks, the foreground model unloaded, both resident helpers were idle, and WinBoat was still running.
 
 ## A Heavy-Coder Job Through OpenClaw
 
-On November 17, I tried the next step through OpenClaw. The Qwen3.5 9B Coordinator handed one read-only synthetic coding job to Unsloth Qwen3-Coder-Next UD-Q4_K_M, then returned the corrected answer. The records showed exactly one accepted dispatch and matching child and parent completion receipts. I reviewed the generated code without executing it. The whole exchange took about 309 seconds, including orchestration.
+On November 17, I gave the Qwen3.5 9B Coordinator a read-only synthetic coding job in OpenClaw. It handed the job to Unsloth Qwen3-Coder-Next UD-Q4_K_M, then returned the corrected answer. I found one accepted dispatch, and the completion receipts matched at both ends. I reviewed the generated code without executing it. The whole exchange took about 309 seconds, including orchestration.
 
-Startup selected a 1,792 MiB expert cache within the available memory budget. The preferred setting is 2,048 MiB when the admission forecast allows it. The MTP 2B and CPU embedder stayed resident while WinBoat was running. Sampled minimum free memory was 2,091 MiB on AMD and 1,215 MiB on NVIDIA, with 40.89 GiB available on the host. The hotspot peaked at 84 °C and no guard tripped. Owned sessions settled, and both resident helpers were ready and idle at release.
+The launcher aims for a 2,048 MiB expert cache. On this run it picked 1,792 MiB to fit the available memory. The MTP 2B and CPU embedder stayed resident while WinBoat was running. Sampled minimum free memory was 2,091 MiB on AMD and 1,215 MiB on NVIDIA, with 40.89 GiB available on the host. The hotspot peaked at 84 °C and no guard tripped. Both helpers were idle when the job finished. I still haven’t tested that handoff through OpenCode.
 
-That timing covers one job from dispatch through delivery. The equivalent OpenCode path remains unverified.
+## Flint 40B on the Radeon and system RAM
+
+With Flint Preview 40B, I wanted to know whether streaming the experts would get a coding job back sooner. I tried the same UD-Q4_K_XL weights three ways. The Radeon ran the trunk, the Ryzen computed routed experts, and the GTX 1070 remained available to the resident 2B. At 16K context, the 4,290-token prompt and 128-token response took 21.53 seconds on stock llama.cpp, 21.98 seconds on the TokenWing control and 63.54 seconds with TokenWing’s 12 GiB streaming pool. Stock reached 295.7 prompt and 18.1 generation tok/s. Streaming reached 80.9 and 12.1. The streamed worker read about 91 GiB during that request and again on the immediate repeat. Streaming reduced startup time and host memory use, but stock finished this task sooner.
+
+I kept two stock profiles, 16K and 32K. They share one weights file and use Flash Attention, Q8_0 K/V, 1,024/256 batching, eight threads and up to 8,192 output tokens within the selected window. The longer test asked Flint to build an interactive HTML/Canvas depth journal from records scattered through a synthetic ledger. Each run started cold with zero cached prompt tokens.
+
+| Context tested | Actual input tokens | Prefill | Prompt tok/s | Generation tok/s | Cold start to result | Output |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 32K | 24,072 | 1m 28s | 272.3 | 17.92 | 6m 07s | Natural stop at 4,718 tokens |
+| 64K | 60,886 | 4m 05s | 248.6 | 15.84 | 8m 39s | Hit the 4,096-token cap |
+| 128K | 126,426 | 9m 56s | 212.1 | 12.79 | 15m 30s | Hit the 4,096-token cap |
+
+At 32K the first visible output arrived at 1m 50s. The page still lacked its closing HTML tag at token 4,096. The completed desktop artifact passed the interaction checks, with mobile layout and high-DPI scaling issues left for review. The Radeon peaked at 64 °C hotspot, with at least 11.10 GiB of AMD VRAM free and 18.10 GiB of host memory available at sampled points. Both helpers kept their processes. I kept 32K for larger coding requests. The 128K run spent nearly ten minutes on prefill alone. The prompt lengths and output caps differed, so these are task turnaround measurements. Flint’s callable role covers text and coding. Tool execution still needs qualification.
+
+## Two Coordinator handoffs
+
+For a structured-data request, stock Qwen3.5 9B and Ornith 1.5 9B each delegated to Granite and returned all four fields with the requested values and types. Stock returned standalone JSON in 60.601 seconds. Ornith took 58.872 seconds and wrapped its JSON in a sentence and a Markdown fence. One exchange per model gives me little reason to trade a working default for that timing difference. I kept stock 9B as Coordinator and the 35B in Main.
+
+Video uses a different path. The 9B handed a request to Rapid 14B Q5_K and released its idle GPU cache before the seven-minute expiry. Admission took 6.16 seconds. The worker took 162 seconds to produce the 624 × 352, 17-frame H.264 clip. The Radeon hotspot peaked at 87 °C, sampled whole-card VRAM use peaked at 13.79 GiB, and host available memory stayed at or above 25.39 GiB in the samples. Both resident helpers kept their original processes. The returned file matched the worker’s checksum in the requesting chat, and Observatory passed all 11 handoff checks. I still need to see the native 9B Workshop review run on a render.
+
+## Could Maya run a larger MoE on this box?
+
+Maya gave me a way to try GLM-5.3-Flash Maya-XS without fitting all its experts in VRAM. The idea was to keep the busiest experts on the Radeon, hold another set in pinned system RAM and fetch the rest from NVMe. I wanted to see whether that left enough speed for offline review while the GTX kept its usual 2B loaded.
+
+My best AMD-only run on Maya v1.1.80 used 5.97 GiB of GPU cache and 23.99 GiB of pinned RAM with the 2B resident. Maya answered all six short checks correctly. Across five separate technical paragraph prompts, median decode was 2.9 tok/s and median time to first token was 7.8 seconds. I used one client, greedy sampling, reasoning off, a 4,096-token context, INT8 KV and a 48-token output cap. On the request closest to the median, the engine recorded 344 ms per generated token, including 306 ms in disk waits and about 93 disk reads per token. Unloading the 2B for the matched run brought decode to 2.8 tok/s.
+
+Could the GTX hold another tier of experts? Single-expert checks passed in both directions. With the Radeon leading and real model weights on the GTX helper, the fixed-input check reached layer 43 and measured a relative L2 error of 0.000056 against a limit of 0.000010. Startup stopped there, before the mixed setup generated a token.
+
+The AMD run fell short of my 5 tok/s floor for offline review on this workstation. I kept llama-swap for everyday use and retired Maya on November 25. After removing the pilot weights and builds, I got an `OK` back from the 2B through the router. Both helpers kept their ready timestamps across cleanup, and the Maya listener was closed. I archived the measurements before cleanup. I didn’t test long-context quality or run the same prompts against my larger llama.cpp models.
 
 ## The Earlier Power and Thermal Tests
 
@@ -396,7 +428,7 @@ Before the full-roster collection, I used a longer Hermes prompt to compare powe
 
 The three-request 252 W pilot and 281 W reference both used a −50 mV offset, a 2,400 MHz core-clock ceiling and a 95 °C junction stop. The lower cap coincided with a 5 °C lower sampled peak, 2.6% lower mean prefill throughput and effectively unchanged decode throughput. That was enough to make the lower cap worth keeping for this workload. The 255 W short replay also changed the voltage offset and clock policy, so its temperature and throughput changes cannot be assigned to the power cap alone.
 
-The longer trials used the 100 °C junction stop selected for those runs, with other thermal and resource guards still active. At −75 mV, the tenth request produced a different output hash and the run stopped after 164 seconds. No thermal guard or kernel GPU fault was recorded. The temporary −50 mV control completed 35 identical-output requests over 575 seconds, with a 94 °C sampled peak. Its hash matched the earlier reference. That gave me a reason to keep −50 mV for this workload. The trials ran sequentially for different durations, and the retained hash alone cannot explain the earlier mismatch or establish repeatability across other workloads.
+For the longer trials I set the junction stop to 100 °C and kept the other thermal and resource guards in place. At −75 mV, the tenth request produced a different output hash and the run stopped after 164 seconds. No thermal guard or kernel GPU fault was recorded. The temporary −50 mV control completed 35 identical-output requests over 575 seconds, with a 94 °C sampled peak. Its hash matched the earlier reference. That gave me a reason to keep −50 mV for this workload. The trials ran sequentially for different durations, and the retained hash alone cannot explain the earlier mismatch or establish repeatability across other workloads.
 
 Whole-device AMD VRAM, including desktop usage, peaked at about 11.5–11.6 GiB across these runs. The minimum sampled system `MemAvailable` ranged from about 43.6 to 44.6 GiB. Process RSS and NVIDIA VRAM were unmeasured.
 
@@ -406,6 +438,4 @@ I saved a 255 W cap and a −50 mV offset with automatic core clocks. The fan co
 
 ## What I Still Want to Measure
 
-Next I’d like to measure cold-filesystem loading, more varied real tasks and operation near the configured context limit. The specialists also have room for placement and weight comparisons beyond the AMD configurations measured here. The completed screening and sustained runs give me a baseline for that work.
-
-The underlying records retain legacy routing IDs to preserve conversation and memory bindings. The tables use friendly model names, with quantization and configured placement listed separately.
+Next I’d like to measure cold-filesystem loading, more varied real tasks and operation near the configured context limit. For the specialists, I’d also like to run the same task with different weights and GPU placements. What I care about on this box is how soon I get a usable reply while the rest of the desktop keeps working.
