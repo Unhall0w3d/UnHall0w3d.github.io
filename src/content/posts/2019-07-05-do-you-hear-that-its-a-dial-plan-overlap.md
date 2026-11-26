@@ -98,8 +98,8 @@ So now we pull traces from CUCM, right? Right. I load up Cisco RTMT and attempt 
 C:\Users\kenop\Downloads\CCMTraces\Node3\2019-07-04_20-04-25\cm\trace\ccm\calllogs\calllogs_00001146.txt  (4 hits)     
 Line 11448: 2019/07/04  14:37:15.142|CC|SETUP|55808087|55808096|user@domain.com|00919888654|00919888654   
 Line 11448: 2019/07/04  14:37:15.142|CC|SETUP|55808087|55808096| user@domain.com |00919888654|00919888654    
-Line 11449: 2019/07/04  14:37:15.146|CC|OFFERED|55808087|55808096| +559335552222 |00919888654|00919888654|SEP00D6FE047204|10.96.26.126     
-Line 11449: 2019/07/04  14:37:15.146|CC|OFFERED|55808087|55808096| 559335552222 |009198160656|009198160656|SEP00D6FE047204|10.96.26.126 
+Line 11449: 2019/07/04  14:37:15.146|CC|OFFERED|55808087|55808096| +559335552222 |00919888654|00919888654|SEP020000000003|10.96.26.126     
+Line 11449: 2019/07/04  14:37:15.146|CC|OFFERED|55808087|55808096| 559335552222 |009198160656|009198160656|SEP020000000003|10.96.26.126 
 ```
 
 We can see that even in the call logs we have a shortened called party missing the "3" at the end. By now, the user's already gone and my attempts to reconfigure a test Jabber account are met with me quickly realizing that Jabber works. So testing this is only going to give me a 'good' example which may not be as useful as I expect. So my mind now goes to "DNA". Can I get the answer I need via DNA? I sure can. Load up DNA and input my calling party using the specific test SEP phone as the source.
