@@ -4,6 +4,7 @@ import "../styles/global.css";
 import "../styles/editorial.css";
 
 interface Props {
+  downloadPage?: boolean;
   mainClass?: string;
   title?: string;
   description?: string;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const {
+  downloadPage = false,
   mainClass,
   title = site.title,
   description = site.description,
@@ -53,6 +55,7 @@ const socialImageType = (() => {
 <html lang="en-US" data-theme="aftertone-dark">
   <head>
     <meta charset="utf-8" />
+    {downloadPage && <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#2b2c2e" />
     <script is:inline src="/assets/site-theme.js"></script>
@@ -87,14 +90,16 @@ const socialImageType = (() => {
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
     <title>{documentTitle}</title>
-    <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.integrations.adsensePublisher}`} crossorigin="anonymous"></script>
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.integrations.googleAnalytics}`}></script>
-    <script is:inline define:vars={{ measurementId: site.integrations.googleAnalytics }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', measurementId);
-    </script>
+    {!downloadPage && <>
+      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.integrations.adsensePublisher}`} crossorigin="anonymous"></script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.integrations.googleAnalytics}`}></script>
+      <script is:inline define:vars={{ measurementId: site.integrations.googleAnalytics }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', measurementId);
+      </script>
+    </>}
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>

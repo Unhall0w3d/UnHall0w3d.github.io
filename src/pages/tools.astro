@@ -12,13 +12,17 @@ const entries = tools.map((tool) => {
   return { ...tool, guide: postUrl(post) + (tool.guideSection ? `#${tool.guideSection}` : "") };
 });
 ---
-<BaseLayout mainClass="tools-index" title="Tools & Downloads" description="Practical Cisco UC scripts, read-only audit queries, backup tools, and agent workflow references, with guides and validation limits.">
+<BaseLayout downloadPage mainClass="tools-index" title="Tools & Downloads" description="Practical Cisco UC scripts, read-only audit queries, backup tools, and agent workflow references, with guides and validation limits.">
   <div class="catalog-intro">
     <header class="post-header tools-header">
       <p class="eyebrow">THE FIELD TOOLBOX</p>
       <h1>Tools &amp; downloads</h1>
       <p class="post-deck">Find the resource for the job. Read the procedure, inspect the code, and start with the documented preview or read-only checks.</p>
       <p>Scripts, query guides, and reference workflows are free to read and use. Each guide explains its inputs, operating limits, and verification steps.</p>
+      <details><summary>Verify a downloaded ZIP</summary>
+        <p>Replace <code>package.zip</code> with the downloaded filename. GitHub CLI checks whether this site's release workflow attested to those exact bytes.</p>
+        <pre><code>gh attestation verify package.zip --repo Unhall0w3d/UnHall0w3d.github.io --signer-workflow Unhall0w3d/UnHall0w3d.github.io/.github/workflows/deploy.yml</code></pre>
+      </details>
     </header>
     <nav class="tool-jump-links" aria-label="Tool categories">
       {toolGroups.map((group) => <a href={`#${group.id}`}>{group.title}</a>)}

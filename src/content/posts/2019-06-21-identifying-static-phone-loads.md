@@ -81,9 +81,9 @@ run sql select d.name as MACAddress, d.specialloadinformation as PhoneLoad, d.de
 
 macaddress      phoneload                  devicedescription                                       dn
 =============== ========================== ======================================================= =====
-SEPAAAAAAAAAAAA sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851                      7444
-SEPAAAAAAAAAAAA sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851                      78444
-SEPAAAAAAAAAAAB sipdx650.10-2-3-33         Boulder - Desk Alpha - DX650                                7478
+SEP020000000001 sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851                      7444
+SEP020000000001 sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851                      78444
+SEP020000000002 sipdx650.10-2-3-33         Boulder - Desk Alpha - DX650                                7478
 ```
 
 ## Modified Query
@@ -99,9 +99,9 @@ run sql select d.name as MACAddress, d.specialloadinformation as PhoneLoad, d.de
 ```text
 macaddress phoneload devicedescription
 ========== ========= =================
-SEPAAAAAAAAAAAA sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851
-SEPAAAAAAAAAAAA sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851
-SEPAAAAAAAAAAAB sipdx650.10-2-3-33         Boulder - Desk Alpha - DX650
+SEP020000000001 sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851
+SEP020000000001 sip88xx.12-0-1SR1-1        VPN - USER 1 - 8851
+SEP020000000002 sipdx650.10-2-3-33         Boulder - Desk Alpha - DX650
 ```
 
 If anyone is interested in a full break down of my pre/post upgrade verification steps, and/or the firmware upgrade process I follow let me know! I may do a series on upgrades from servers to endpoints in the future, knowing you're looking for it helps me set a priority on it.

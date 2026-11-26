@@ -39,7 +39,7 @@ As with many of the queries I run, I like to define the attributes I am pulling 
 
 ### Attributes
 
-- d.name - Device Name/MAC Address. (e.g. CUCIFLAST, CSFFLAST, SEPAAAABBBBCCCC, TCTFLAST, BOTFLAST)
+- d.name - Device Name/MAC Address. (e.g. CUCIFLAST, CSFFLAST, SEP020000000004, TCTFLAST, BOTFLAST)
 - d.description - Description placed on the given device, usually denotes user name and extension, physical location, or hotel phone.
 - d.fkenduser - Extension Mobility user, or, if EM not used, associated end user.
 
@@ -69,7 +69,7 @@ run sql select d.name as MAC, d.description as Description, d.fkenduser as endus
 mac                                                description                                             enduser
 ================================================== ======================================================= ====================================
 CIPCJHARTMAN                              Jack Hartman - CIPC                                     0e08f1ac-f136-bb5e-bdb2-a582054756c6
-SEPD0C789D7B328                                    Hotel BOLCO - 7962                                      c029bf68-3b1a-4f23-bde6-98466fe5dc3d
+SEP020000000005                                    Hotel BOLCO - 7962                                      c029bf68-3b1a-4f23-bde6-98466fe5dc3d
 EMJDOE                                         Jane Doe - EM                                    NULL
 ```
 
@@ -83,7 +83,7 @@ Finally we would filter for "NULL", and that would leave us with our list of pho
 
 ### Attributes
 
-- d.name - Device Name/MAC Address. (e.g. SEPAAAABBBBCCCC, EMFLAST)
+- d.name - Device Name/MAC Address. (e.g. SEP020000000004, EMFLAST)
 - d.description - Description of the device.
 - eudm.pkid - Device PKID found within the EndUserDeviceMap table. This will be used to check that the user association count is "0" and thus the device is unassigned.
 - eudm.fkdevice - End user association to devices and device profiles by way of the EndUserDeviceMap table.
@@ -146,7 +146,7 @@ ATA00778D34E8C0                                    BOLCO - Main Fax - 3333
 Auto-registration Template                         #FirstName# #LastName# (#Product# #Protocol#)
 BOTJDOE                                         Jane Doe - Samsung Galaxy Tab 3
 CIPJHARTMAN                                         Jack Hartman - CIPC
-SEP003094C3393C                                    Hotel Phone - 7960
+SEP020000000006                                    Hotel Phone - 7960
 EMJHARTMAN                                           Jack Hartman - EM
 TCTJHARTMAN                                        Jack Hartman - 1139 
 ```

@@ -77,10 +77,10 @@ And there we go. Looking at the contents of the file we can see some of the data
 Example RegisteredDevicesReport contents are below; excess output was omitted as file contents can be lengthy depending on device count.
 
 ```text
-10.1.1.2 SEPBC16F517F626 VPN Phone - Summer Smith - 7962 Registered
-10.1.1.3 SEP00A289FAA96E VPN Phone - Rick Sanchez - 8851 Registered
+10.1.1.2 SEP020000000009 VPN Phone - Summer Smith - 7962 Registered
+10.1.1.3 SEP02000000000A VPN Phone - Rick Sanchez - 8851 Registered
 10.1.1.4 CIPCRSANCHEZ Rick Sanchez - CIPC Registered
-10.1.1.5 SEP1C1D862F6808 VPN Phone - Morty Smith - 7962 Registered
+10.1.1.5 SEP02000000000B VPN Phone - Morty Smith - 7962 Registered
 ```
 
 Example UnregisteredDevicesReport contents are below; excess output was omitted as file contents can be lengthy depending on device count.

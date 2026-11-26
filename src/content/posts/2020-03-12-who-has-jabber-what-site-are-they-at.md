@@ -49,7 +49,7 @@ For good measure we'll sort by userid, but it's not entirely necessary. Below is
 ```text
 userid devicename devicepool homecluster serviceprofile
 ====== =============== ============= =========== ======================
-kperry SEPCCBBAACCBBAA Remote_EST_DP t Test-ServiceProfile
+kperry SEP020000000007 Remote_EST_DP t Test-ServiceProfile
 kperry CUCIkperry Remote_EST_DP t TestServiceProfile
 kperry CIPCKPERRY Remote_EST_DP t Test-ServiceProfile
 ```
@@ -90,8 +90,8 @@ And what does the output then look like? Well, it looks like this:
 ```text
 userid devicename devicepool homecluster serviceprofile dn
 ====== =============== ============= =========== ====================== =====
-kperry SEPE0899DFA7228 Remote_EST_DP t Test-ServiceProfile 1234
-kperry SEPE0899DFA7228 Remote_EST_DP t Test-ServiceProfile 52289
+kperry SEP020000000008 Remote_EST_DP t Test-ServiceProfile 1234
+kperry SEP020000000008 Remote_EST_DP t Test-ServiceProfile 52289
 kperry CUCIkperry Remote_EST_DP t Test-ServiceProfile 1234
 kperry CIPCKPERRY Remote_EST_DP t Test-ServiceProfile 1234
 kperry CIPCKPERRY Remote_EST_DP t Test-ServiceProfile 52047

@@ -131,13 +131,13 @@ Here is the initial return for extension `3012`:
 ```text
 entrytype  name              description                 buttonindex  label          destination  partitionname
 ---------  ----------------  --------------------------  -----------  -------------  -----------  -------------
-BLF        SEPA4780687DE0E  CO - Tuesday - 3016          12           Peter          3012         PT_EXTENSIONS
-BLF        SEPA4780687E2CA  CO - Jarvis - 3007           2            Peter Parker   3012         PT_EXTENSIONS
-BLF        SEPA4780698888C  CO - Steve Rogers - 3002     2            Peter Parker   3012         PT_EXTENSIONS
-BLF        SEPA47806B2F5C0  CO - Tony Stark - 3006       2            Peter Parker   3012         PT_EXTENSIONS
-BLF        SEPD47798E0F470  CO - Dr. Banner - 3001       2            Peter Parker   3012         PT_EXTENSIONS
-BLF        SEPD47798E14A20  CO - Thor Odinson - 3015     14           Peter Parker   3012         PT_EXTENSIONS
-BLF        SEPD47798E159B8  CO - Loki Odinson - 3003     2            Peter          3012         PT_EXTENSIONS
+BLF        SEP02000000000C  CO - Tuesday - 3016          12           Peter          3012         PT_EXTENSIONS
+BLF        SEP02000000000D  CO - Jarvis - 3007           2            Peter Parker   3012         PT_EXTENSIONS
+BLF        SEP02000000000E  CO - Steve Rogers - 3002     2            Peter Parker   3012         PT_EXTENSIONS
+BLF        SEP02000000000F  CO - Tony Stark - 3006       2            Peter Parker   3012         PT_EXTENSIONS
+BLF        SEP020000000010  CO - Dr. Banner - 3001       2            Peter Parker   3012         PT_EXTENSIONS
+BLF        SEP020000000011  CO - Thor Odinson - 3015     14           Peter Parker   3012         PT_EXTENSIONS
+BLF        SEP020000000012  CO - Loki Odinson - 3003     2            Peter          3012         PT_EXTENSIONS
 ```
 
 The important part here is not just that `3012` appears seven times. We also know exactly which devices have it, which button index to inspect, and which labels are stale. In this example, the old labels are a mix of `Peter` and `Peter Parker`, so a broad search-and-replace would be less useful than reviewing the returned buttons directly.
@@ -159,13 +159,13 @@ Run the same query again after saving the changes:
 ```text
 entrytype  name              description                 buttonindex  label          destination  partitionname
 ---------  ----------------  --------------------------  -----------  -------------  -----------  -------------
-BLF        SEPA4780687DE0E  CO - Tuesday - 3016          12           Miles          3012         PT_EXTENSIONS
-BLF        SEPA4780687E2CA  CO - Jarvis - 3007           2            Miles Morales  3012         PT_EXTENSIONS
-BLF        SEPA4780698888C  CO - Steve Rogers - 3002     2            Miles Morales  3012         PT_EXTENSIONS
-BLF        SEPA47806B2F5C0  CO - Tony Stark - 3006       2            Miles Morales  3012         PT_EXTENSIONS
-BLF        SEPD47798E0F470  CO - Dr. Banner - 3001       2            Miles Morales  3012         PT_EXTENSIONS
-BLF        SEPD47798E14A20  CO - Thor Odinson - 3015     14           Miles Morales  3012         PT_EXTENSIONS
-BLF        SEPD47798E159B8  CO - Loki Odinson - 3003     2            Miles          3012         PT_EXTENSIONS
+BLF        SEP02000000000C  CO - Tuesday - 3016          12           Miles          3012         PT_EXTENSIONS
+BLF        SEP02000000000D  CO - Jarvis - 3007           2            Miles Morales  3012         PT_EXTENSIONS
+BLF        SEP02000000000E  CO - Steve Rogers - 3002     2            Miles Morales  3012         PT_EXTENSIONS
+BLF        SEP02000000000F  CO - Tony Stark - 3006       2            Miles Morales  3012         PT_EXTENSIONS
+BLF        SEP020000000010  CO - Dr. Banner - 3001       2            Miles Morales  3012         PT_EXTENSIONS
+BLF        SEP020000000011  CO - Thor Odinson - 3015     14           Miles Morales  3012         PT_EXTENSIONS
+BLF        SEP020000000012  CO - Loki Odinson - 3003     2            Miles          3012         PT_EXTENSIONS
 ```
 
 The destination did not change; it is still `3012` in the expected partition. What changed is the label users see on the physical or soft button. That re-check is a small thing, but it is the difference between assuming the cleanup was complete and proving it.
