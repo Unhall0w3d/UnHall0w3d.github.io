@@ -4,6 +4,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const experiments = [
   {
+    slug: "fold-register",
+    name: "Fold Register",
+    description: "Sculpt a neural surface by editing its weights. Trace a path between four programs, then probe a fold to see how far it moved."
+  },
+  {
     slug: "observatory",
     name: "Local LLM Observatory",
     description: "Replay a simulated handoff from a 9B language model to the Rapid renderer. Follow the worker, GPU memory, and timeline as the run unfolds."
@@ -20,7 +25,7 @@ const experiments = [
   }
 ];
 ---
-<BaseLayout mainClass="experiment-index" title="Experiments" description="Explore interactive experiments from NOC Thoughts, including Local LLM Observatory, Kestrel Sound, and Aftertone.">
+<BaseLayout mainClass="experiment-index" title="Experiments" description="Explore interactive experiments from NOC Thoughts, including Fold Register, Local LLM Observatory, Kestrel Sound, and Aftertone.">
   <h1 class="experiment-title">Experiments</h1>
   <div class="experiment-entries">
     {experiments.map(({slug, name, description}) => (
