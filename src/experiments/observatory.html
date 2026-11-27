@@ -6,21 +6,22 @@
 <meta name="color-scheme" content="dark">
 <meta name="description" content="An interactive, simulated replay of a local inference-to-render handoff.">
 <title>Local LLM Observatory · NOC Thoughts</title>
-<link rel="stylesheet" href="/assets/experiment-nav.css">
+<link rel="stylesheet" href="/assets/site-header.css">
+<link rel="stylesheet" href="/assets/experiment-theme.css">
 <script src="/assets/site-theme.js"></script>
 <style>
   :root {
     color-scheme: dark;
-    --page: #0d1211;
-    --panel: #131b19;
-    --raised: #182321;
-    --line: #2b3935;
-    --ink: #eff4f0;
-    --soft: #bac9c2;
-    --muted: #a0b3aa;
-    --mint: #85efbc;
-    --amber: #f5be75;
-    --lilac: #c6b7f6;
+    --page: var(--noc-surface);
+    --panel: var(--experiment-panel);
+    --raised: var(--experiment-raised);
+    --line: var(--experiment-line);
+    --ink: var(--noc-text);
+    --soft: var(--noc-muted);
+    --muted: var(--noc-muted);
+    --mint: var(--noc-accent);
+    --amber: var(--experiment-warm);
+    --lilac: var(--experiment-cool);
     --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
   }
   *, *::before, *::after { box-sizing: border-box; }
@@ -31,15 +32,14 @@
   button { cursor: pointer; }
   :focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
   .shell { width: min(1170px, calc(100% - 56px)); margin-inline: auto; }
-  .top { border-bottom: 1px solid var(--line); }
-  .top .shell { min-height: 61px; display: flex; gap: 16px; align-items: center; justify-content: space-between; }
   .back { text-decoration: none; font-size: .87rem; font-weight: 650; }
   .back:hover { text-decoration: underline; text-underline-offset: .24em; }
   .back span { color: var(--mint); padding-right: .45em; }
   .badge, .kicker, .label, .time, .source, .legend, .tag { font-family: var(--mono); }
-  .badge { color: var(--mint); border: 1px solid #375c4d; background: #14251e; border-radius: 100px; padding: 5px 10px; font-size: .7rem; }
+  .replay-caption { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .badge { color: var(--mint); border: 1px solid var(--experiment-line); background: var(--experiment-selected); border-radius: 100px; padding: 5px 10px; font-size: .7rem; }
   .badge::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: currentColor; vertical-align: 1px; }
-  .hero { padding-block: clamp(34px, 6vw, 72px) 30px; background: radial-gradient(ellipse at 73% 0%, #203a2c99, transparent 66%); }
+  .hero { padding-block: clamp(34px, 6vw, 72px) 30px; background: radial-gradient(ellipse at 73% 0%, color-mix(in srgb, var(--mint) 11%, transparent), transparent 66%); }
   .hero .shell { display: grid; grid-template-columns: 1fr auto; gap: 18px 36px; align-items: end; }
   .kicker, .label { color: var(--muted); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
   .hero .kicker { color: var(--mint); font-size: .72rem; }
@@ -48,21 +48,21 @@
   h2 { font-size: 1.32rem; letter-spacing: -.025em; }
   .hero p { max-width: 65ch; color: var(--soft); }
   .route { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding-block: 0 4px; color: var(--ink); font: .8rem var(--mono); }
-  .route span { padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: #101816; }
+  .route span { padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--experiment-panel); }
   .route b { color: var(--mint); }
   .control-bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 15px; align-items: center; border: 1px solid var(--line); background: var(--panel); border-radius: 13px; padding: 13px; margin-bottom: 15px; }
   .button-pair { display: flex; gap: 7px; }
-  .action, select, .event { border: 1px solid var(--line); border-radius: 7px; background: #1c2926; min-height: 40px; }
+  .action, select, .event { border: 1px solid var(--line); border-radius: 7px; background: var(--experiment-raised); min-height: 40px; }
   .action { padding: 0 11px; font-size: .82rem; font-weight: 660; }
-  .action:hover, select:hover, .event:hover { background: #2a3a35; }
-  .play { min-width: 86px; background: var(--mint); border-color: var(--mint); color: #0c251a; }
-  .play:hover { background: #aefbd3; }
+  .action:hover, select:hover, .event:hover { background: var(--experiment-selected); }
+  .play { min-width: 86px; background: var(--mint); border-color: var(--mint); color: var(--noc-surface); }
+  .play:hover { background: var(--noc-text); }
   .play span { margin-right: 5px; }
   .seek { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; }
   input[type="range"] { width: 100%; margin: 0; min-height: 34px; accent-color: var(--mint); cursor: ew-resize; }
   .time { color: var(--soft); white-space: nowrap; font-size: .77rem; font-variant-numeric: tabular-nums; }
   .speed { display: flex; align-items: center; gap: 7px; font-size: .77rem; color: var(--soft); }
-  select { padding: 0 5px; background: #17211f; }
+  select { padding: 0 5px; background: var(--experiment-raised); }
   .dashboard { display: grid; grid-template-columns: minmax(0, 2.25fr) minmax(265px, 1fr); gap: 15px; align-items: start; }
   .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 13px; min-width: 0; }
   .chart-panel { overflow: hidden; }
@@ -80,9 +80,9 @@
   .chart-note { margin: 4px 20px 17px; color: var(--muted); font-size: .77rem; }
   .phase { padding: 18px; }
   .phase-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-  .tag { display: inline-block; color: var(--mint); font-size: .7rem; line-height: 1.4; border: 1px solid #39604f; border-radius: 5px; padding: 3px 6px; background: #172a21; }
+  .tag { display: inline-block; color: var(--mint); font-size: .7rem; line-height: 1.4; border: 1px solid var(--experiment-line); border-radius: 5px; padding: 3px 6px; background: var(--experiment-selected); }
   .cells { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-block: 0 13px; }
-  .cell { background: #101816; border: 1px solid var(--line); min-width: 0; border-radius: 7px; padding: 8px; }
+  .cell { background: var(--experiment-panel); border: 1px solid var(--line); min-width: 0; border-radius: 7px; padding: 8px; }
   .cell dt { line-height: 1.3; }
   .cell dd { margin: 3px 0 0; color: var(--ink); font: .72rem/1.4 var(--mono); overflow-wrap: anywhere; }
   .cell dd small { display: block; color: var(--muted); font: .68rem/1.4 system-ui, sans-serif; margin-top: 2px; }
@@ -95,7 +95,7 @@
   .events h2 { font-size: 1rem; margin-bottom: 9px; }
   .event-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
   .event { display: grid; align-content: center; gap: 3px; width: 100%; height: 100%; padding: 8px; text-align: left; font-size: .76rem; font-weight: 650; line-height: 1.3; }
-  .event[aria-current="step"] { border-color: var(--mint); background: #19392c; }
+  .event[aria-current="step"] { border-color: var(--mint); background: var(--experiment-selected); }
   .event .time { font-size: .69rem; color: var(--mint); }
   footer { color: var(--muted); font-size: .8rem; padding-block: 18px 28px; }
   .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
@@ -123,21 +123,12 @@
   }
 </style>
 </head>
-<body>
-<header class="top">
-  <div class="shell">
-    <nav class="experiment-nav" aria-label="Site navigation">
-      <a class="experiment-nav__home" href="/" aria-label="NOC Thoughts home"><svg class="experiment-nav__sigil" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 30 16 16 30 2 16 16 2Z M16 8 24 16 16 24 8 16 16 8Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m9 9 14 14m0-14L9 23" stroke="currentColor" stroke-width="1.5"/></svg><span>NOC Thoughts</span></a>
-      <a class="experiment-nav__experiments" href="/experiments.html">Experiments</a>
-    </nav>
-    <span class="badge">Simulated data</span>
-  </div>
-</header>
+<body><!-- SITE_HEADER -->
 <main>
   <section class="hero" aria-labelledby="title">
     <div class="shell">
       <div>
-        <div class="kicker">Local inference replay</div>
+        <div class="replay-caption"><span class="kicker">Local inference replay</span><span class="badge">Simulated data</span></div>
         <h1 id="title">Local LLM Observatory</h1>
         <p>Follow a chat request as it hands a render job to Rapid. Replay the moment the chat model releases the GPU and the renderer takes over.</p>
       </div>
@@ -333,25 +324,27 @@
     const handoffEnd = x(phases[6].at);
     const cursor = x(state.readingAt);
 
-    context.fillStyle = 'rgba(133, 239, 188, 0.048)';
+    const colors = getComputedStyle(document.documentElement);
+    const ink = key => colors.getPropertyValue(key).trim();
+    context.fillStyle = ink('--experiment-selected');
     context.fillRect(handoffStart, top, handoffEnd - handoffStart, bottom - top);
     context.font = '11px ui-monospace, monospace';
     context.textBaseline = 'middle';
     for (const ratio of [0, .25, .5, .75, 1]) {
       const row = y(ratio);
-      context.strokeStyle = '#2b3935';
+      context.strokeStyle = ink('--line');
       context.beginPath();
       context.moveTo(left, row);
       context.lineTo(right, row);
       context.stroke();
-      context.fillStyle = '#a0b3aa';
+      context.fillStyle = ink('--muted');
       context.textAlign = 'right';
       context.fillText(String(Math.round(ratio * 100)), left - 7, row);
       context.textAlign = 'left';
       context.fillText(String(Math.round(ratio * 16)), right + 6, row);
     }
     for (const phase of phases.slice(1)) {
-      context.strokeStyle = '#34463f';
+      context.strokeStyle = ink('--line');
       context.setLineDash([3, 5]);
       context.beginPath();
       context.moveTo(x(phase.at), top);
@@ -384,11 +377,11 @@
       context.stroke();
       context.restore();
     }
-    line('busy', 100, '#85efbc');
-    line('vram', 16, '#f5be75');
+    line('busy', 100, ink('--mint'));
+    line('vram', 16, ink('--amber'));
 
     function band(name, lane, end, color) {
-      context.fillStyle = '#26342f';
+      context.fillStyle = ink('--raised');
       context.fillRect(left, lane - 5, right - left, 10);
       context.fillStyle = color;
       context.globalAlpha = .3;
@@ -396,26 +389,26 @@
       context.globalAlpha = .9;
       context.fillRect(left, lane - 5, x(Math.min(end, state.readingAt)) - left, 10);
       context.globalAlpha = 1;
-      context.fillStyle = '#a0b3aa';
+      context.fillStyle = ink('--muted');
       context.textAlign = 'right';
       context.fillText(name, left - 5, lane);
     }
-    band('Route', requestLane, requestFinished, '#85efbc');
-    band('Ready', readyLane, modelReleased, '#c6b7f6');
+    band('Route', requestLane, requestFinished, ink('--mint'));
+    band('Ready', readyLane, modelReleased, ink('--lilac'));
 
-    context.strokeStyle = '#c3dfd0';
+    context.strokeStyle = ink('--ink');
     context.lineWidth = 1;
     context.beginPath();
     context.moveTo(cursor, top - 5);
     context.lineTo(cursor, readyLane + 8);
     context.stroke();
-    for (const [ratio, color] of [[state.busy / 100, '#85efbc'], [state.vram / 16, '#f5be75']]) {
+    for (const [ratio, color] of [[state.busy / 100, ink('--mint')], [state.vram / 16, ink('--amber')]]) {
       context.fillStyle = color;
       context.beginPath();
       context.arc(cursor, y(ratio), 3.5, 0, Math.PI * 2);
       context.fill();
     }
-    context.fillStyle = '#a0b3aa';
+    context.fillStyle = ink('--muted');
     const ticks = width < 420 ? [0, 21, 42, 63, duration] : [0, 14, 28, 42, 56, 70, duration];
     for (const tick of ticks) {
       context.textAlign = 'center';
@@ -501,6 +494,7 @@
     if (document.hidden && frame !== null) pause();
   });
   render();
+  document.addEventListener('noc-theme-change', () => render(true));
   if ('ResizeObserver' in window) new ResizeObserver(() => render(true)).observe(canvas);
   else window.addEventListener('resize', () => render(true));
 })();

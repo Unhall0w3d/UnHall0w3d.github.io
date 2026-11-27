@@ -9,16 +9,17 @@
       content="An illustrated field receiver for five calls that slipped out of the dial plan."
     />
     <title>Aftertone — NOC Thoughts</title>
-    <link rel="stylesheet" href="/assets/experiment-nav.css" />
+    <link rel="stylesheet" href="/assets/site-header.css" />
+<link rel="stylesheet" href="/assets/experiment-theme.css">
     <script src="/assets/site-theme.js"></script>
     <style>
       :root {
         color-scheme: light;
-        --paper: #f3efe4;
-        --ink: #282923;
-        --quiet: #605f53;
-        --rule: #bcb9a9;
-        --red: #a63a23;
+        --paper: var(--noc-surface);
+        --ink: var(--noc-text);
+        --quiet: var(--noc-muted);
+        --rule: var(--experiment-line);
+        --red: var(--noc-accent);
         --mono: "IBM Plex Mono", "Courier New", monospace;
         --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
         --serif: "Spectral", Georgia, serif;
@@ -47,7 +48,7 @@
       button:focus-visible,
       input:focus-visible,
       a:focus-visible {
-        outline: 3px solid #a63a23;
+        outline: 3px solid var(--noc-accent);
         outline-offset: 4px;
       }
       button:disabled {
@@ -106,7 +107,7 @@
       .sound:hover,
       .secondary:hover:enabled,
       .log-card:hover:enabled {
-        background: #e5e0d2;
+        background: var(--experiment-raised);
       }
       .bars {
         height: 13px;
@@ -230,7 +231,7 @@
       }
       .console {
         padding: 21px clamp(19px, 2vw, 32px) 18px;
-        background: #dfdccd44;
+        background: var(--experiment-panel);
         display: flex;
         flex-direction: column;
       }
@@ -341,7 +342,7 @@
         color: var(--paper);
       }
       .primary:hover {
-        background: #41443a;
+        background: var(--noc-accent);
       }
       .secondary {
         background: transparent;
@@ -563,23 +564,13 @@
       }
     </style>
   </head>
-  <body>
+  <body><!-- SITE_HEADER -->
     <main class="page">
       <header class="mast">
-        <a class="experiment-nav__home" href="/" aria-label="NOC Thoughts home">
-          <canvas
-            class="mark"
-            id="mark"
-            width="64"
-            height="64"
-            aria-hidden="true"
-          ></canvas>
-          <strong class="brand">NOC Thoughts</strong>
-        </a>
+
+        <canvas class="mark" id="mark" width="64" height="64" aria-hidden="true"></canvas>
         <span class="mast-label">Experimental Systems</span>
-        <nav class="experiment-nav" aria-label="Site navigation">
-          <a class="experiment-nav__experiments" href="/experiments.html">Experiments</a>
-        </nav>
+
         <button class="sound" id="sound" aria-pressed="false">
           <span class="bars" aria-hidden="true"
             ><i></i><i></i><i></i><i></i></span
@@ -1159,14 +1150,15 @@
       const lessMotion = matchMedia("(prefers-reduced-motion: reduce)");
       const nameOf = (n) => String(n + 1).padStart(2, "0");
       function wave(c, width, height, i, active) {
+        const colors = getComputedStyle(document.documentElement);
         const mid = height / 2;
-        line(c, 0, mid, width, mid, "#aaa897", 1);
+        line(c, 0, mid, width, mid, colors.getPropertyValue("--rule"), 1);
         const r = seeded(stations[i].seed);
         for (let x = 0; x < width; x += 2.7) {
           const envelope = Math.sin((Math.PI * x) / width) ** 1.4;
           const a =
             (0.2 + r() * 0.8) * envelope * height * 0.45 * (active ? 1 : 0.35);
-          line(c, x, mid - a, x, mid + a, active ? "#a63a23" : "#8a8979", 1);
+          line(c, x, mid - a, x, mid + a, active ? colors.getPropertyValue("--red") : colors.getPropertyValue("--quiet"), 1);
         }
       }
       function canvasSize(canvas) {
@@ -1179,6 +1171,7 @@
         return { c, w: box.width, h: box.height };
       }
       function dial() {
+        const colors = getComputedStyle(document.documentElement);
         const { c, w, h } = canvasSize(get("ruler")),
           p = (range.value - range.min) / (range.max - range.min);
         for (let i = 0; i <= 80; i++) {
@@ -1189,13 +1182,13 @@
             i % 8 === 0 ? 4 : i % 2 === 0 ? 12 : 18,
             x,
             h - 4,
-            i % 8 === 0 ? "#44483d" : "#989887",
+            i % 8 === 0 ? colors.getPropertyValue("--ink") : colors.getPropertyValue("--quiet"),
             1,
           );
         }
         const needle = 3 + (w - 6) * p;
-        line(c, needle, 0, needle, h, "#a63a23", 2);
-        c.fillStyle = "#a63a23";
+        line(c, needle, 0, needle, h, colors.getPropertyValue("--red"), 2);
+        c.fillStyle = colors.getPropertyValue("--red");
         c.beginPath();
         c.moveTo(needle - 4.5, 0);
         c.lineTo(needle + 4.5, 0);
@@ -1481,9 +1474,7 @@
         }
       };
       const logo = get("mark").getContext("2d");
-      const navAccent = getComputedStyle(get("mark").closest("a"))
-        .getPropertyValue("--nav-accent")
-        .trim() || "#a63a23";
+      const navAccent = "#a63a23";
       logo.translate(32, 32);
       for (let i = 0; i < 4; i++) {
         logo.rotate(Math.PI / 2);
@@ -1492,10 +1483,12 @@
         line(logo, 3, -15, 13, -25, navAccent, 4);
       }
       disc(logo, 0, 0, 4, navAccent);
-      new ResizeObserver(() => {
+      function refreshDialAndCards() {
         dial();
         cards();
-      }).observe(get("cards"));
+      }
+      document.addEventListener("noc-theme-change", refreshDialAndCards);
+      new ResizeObserver(refreshDialAndCards).observe(get("cards"));
       document.addEventListener("visibilitychange", refreshAnimation);
       lessMotion.addEventListener("change", refreshAnimation);
       update();

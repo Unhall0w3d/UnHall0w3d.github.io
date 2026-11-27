@@ -1,0 +1,15 @@
+/* Surfaces and controls use the site palette. Canvas artwork keeps its own inks. */
+:root[data-theme] {
+  color-scheme: dark;
+  --experiment-panel: color-mix(in srgb, var(--noc-text) 5%, var(--noc-surface));
+  --experiment-raised: color-mix(in srgb, var(--noc-text) 10%, var(--noc-surface));
+  --experiment-line: color-mix(in srgb, var(--noc-muted) 55%, var(--noc-surface));
+  --experiment-selected: color-mix(in srgb, var(--noc-accent) 13%, var(--noc-surface));
+  --experiment-warm: #f5be75;
+  --experiment-cool: #c6b7f6;
+}
+:root[data-theme="aftertone"] {
+  color-scheme: light;
+  --experiment-warm: #7c550a;
+  --experiment-cool: #67519b;
+}

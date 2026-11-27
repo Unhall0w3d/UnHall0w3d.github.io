@@ -23,11 +23,13 @@
 
   function apply(value) {
     const key = Object.hasOwn(themes, value) ? value : "aftertone-dark";
+    const changed = root.dataset.theme !== key;
     root.dataset.theme = key;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themes[key].color);
     const picker = document.getElementById("site-theme");
     if (picker) picker.value = key;
     updateHeadline();
+    if (changed) document.dispatchEvent(new Event("noc-theme-change"));
   }
 
   function restore() {
@@ -38,6 +40,26 @@
   restore();
   window.nocThoughtsTheme = { updateHeadline };
   document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector(".noc-bar");
+    if (header) {
+      const menu = header.querySelector(".noc-menu");
+      menu.hidden = false;
+      menu.addEventListener("click", () => {
+        menu.setAttribute("aria-expanded", String(menu.getAttribute("aria-expanded") !== "true"));
+      });
+      header.addEventListener("keydown", event => {
+        if (event.key === "Escape" && menu.offsetWidth && menu.getAttribute("aria-expanded") === "true") {
+          menu.setAttribute("aria-expanded", "false");
+          menu.focus();
+        }
+      });
+      for (const link of header.querySelectorAll("nav a")) {
+        if (link.pathname === location.pathname) link.setAttribute("aria-current", "page");
+        else if (link.pathname === "/experiments.html" && location.pathname.startsWith("/experiments/")) {
+          link.setAttribute("aria-current", "location");
+        }
+      }
+    }
     const picker = document.getElementById("site-theme");
     if (!picker) return;
     for (const [key, theme] of Object.entries(themes)) picker.add(new Option(theme.name, key));
