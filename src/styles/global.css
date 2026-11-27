@@ -1343,6 +1343,7 @@ h1 em {
 }
 
 .prose :not(pre) > code {
+  overflow-wrap: anywhere;
   padding: 0.12rem 0.35rem;
 }
 
