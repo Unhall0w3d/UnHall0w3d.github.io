@@ -4,9 +4,6 @@
   --editorial-rule: 1px solid var(--line);
 }
 body { background: var(--ink-950); }
-.site-header { min-height: 5.1rem; padding-block: .85rem; gap: 1rem; }
-.brand-copy strong { letter-spacing: -.035em; }
-.site-nav a[aria-current] { color: var(--signal); text-decoration: underline; text-underline-offset: .45em; }
 .hero { padding-block: clamp(2.3rem, 5vw, 5rem); }
 .hero h1, .page-hero h1, .post-header h1, .error-page h1 {
   text-transform: none; text-wrap: balance; letter-spacing: -.048em; line-height: 1.04;
@@ -32,13 +29,7 @@ body { background: var(--ink-950); }
 .tag-cloud a { border-radius: .25rem; padding: .4rem .65rem; }
 .site-footer { margin-top: 2.25rem; }
 :where(a,button,input,select,summary):focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
-@media(max-width:55rem) {
- .site-header { gap: .75rem; }
- .site-nav { flex-wrap: wrap; row-gap: .35rem; }
-}
 @media(max-width:38rem) {
- .site-header, .site-footer, main { width: calc(100% - 2rem); }
- .site-nav { column-gap: .85rem; }
- .site-nav a { padding-block: .35rem; }
+ .site-footer, main { width: calc(100% - 2rem); }
  .transmission-card { grid-template-columns: 1.5rem minmax(0,1fr); }
 }
