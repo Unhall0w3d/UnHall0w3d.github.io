@@ -1,19 +1,11 @@
 ---
 title: "Checking Device Registration Using Python"
-layout: single
-classes: wide
-date: 2020-06-01T08:00:00-05:00
+description: "Check Cisco IP Phone registration status at scale using Python and CUCM RISPort SOAP queries instead of manual GUI pagination."
+pubDate: 2020-06-01T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["python", "cucm", "axl"]
+legacyCategories: ["Cisco", "Python"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Python
-tags:
-  - Python
-  - Cisco Unified Communications Manager
-  - AXL
-  - Automation
-  - Unified Communications
-  - Cisco
 ---
 
 ## When You Really Want To Use Python

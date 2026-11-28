@@ -1,19 +1,11 @@
 ---
 title: "Updating Primary Extensions The Fun Way"
-layout: single
-classes: wide
-date: 2020-02-06T08:00:00-05:00
+description: "Inspect and update CUCM End User Primary Extension mappings via SQL when standard GUI workflows hit association snags."
+pubDate: 2020-02-06T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Cisco UC
-  - Database
-  - Unified Communications
 ---
 
 ## How to Update Primary Extensions the Fun Way

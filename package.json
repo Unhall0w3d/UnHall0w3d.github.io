@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "npm run check:downloads && ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/build-sitemap.mjs && python3 -B scripts/check_downloads.py --check-built",
+    "build": "npm run check:downloads && ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && ./node_modules/.bin/pagefind --site dist && node scripts/build-sitemap.mjs && python3 -B scripts/check_downloads.py --check-built",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "validate": "npm run test:downloads && npm run test:site-validator && npm run build && node scripts/validate-site.mjs",
@@ -15,10 +15,19 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
-    "astro": "7.4.13"
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "astro": "7.4.13",
+    "astro-expressive-code": "^0.44.4"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/node": "^26.6.11",
+    "pagefind": "^1.6.0",
+    "playwright": "^1.65.1",
+    "satori": "^0.63.2",
     "sharp": "0.35.5",
     "typescript": "5.9.3"
   }

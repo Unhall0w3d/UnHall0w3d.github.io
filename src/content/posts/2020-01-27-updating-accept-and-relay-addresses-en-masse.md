@@ -1,18 +1,11 @@
 ---
 title: "Bulk Accept and Relay Config Update SQL"
-layout: single
-classes: wide
-date: 2020-01-27T08:00:00-05:00
+description: "Bulk-update SMTP Proxy and Relay address actions across Cisco Unity Connection users with targeted Informix SQL statements."
+pubDate: 2020-01-27T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["unity-connection", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unity Connection
-  - Cisco
-  - Database
-  - Unified Communications
 ---
 ## Update
 

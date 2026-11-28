@@ -1,18 +1,11 @@
 ---
 title: "Linux - Automating SSL Cert Trust Install"
-layout: single
-classes: wide
-date: 2023-05-16T08:00:00-05:00
+description: "Automate internal CA certificate chain import and system trust store updates across Arch and Debian Linux hosts with Bash."
+pubDate: 2023-05-16T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["linux"]
+legacyCategories: ["Linux", "Arch", "Debian"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Linux
-  - Arch
-  - Debian
-tags:
-  - Linux
-  - Arch
-  - Debian
-  - General
 ---
 
 ## Automating Certificate Chain Import and Trust with a Bash Script

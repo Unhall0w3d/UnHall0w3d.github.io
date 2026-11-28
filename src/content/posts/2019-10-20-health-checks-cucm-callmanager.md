@@ -1,18 +1,11 @@
 ---
 title: "Health Checks - CUCM - CallManager"
-layout: single
-classes: wide
-date: 2020-06-14T08:00:00-05:00
+description: "Baseline CLI health checks to capture replication, service, DB, and NTP state on CUCM clusters before maintenance windows."
+pubDate: 2020-06-14T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["health-checks", "cucm"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Health Checks
-  - Cisco
-  - Unified Communications
-  - Action Plan
-  - Cisco Unified Communications Manager
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

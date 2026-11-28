@@ -1,15 +1,11 @@
 ---
 title: "VMWare ESXi Toolkit Script"
-layout: single
-classes: wide
-date: 2023-01-06T08:00:00-05:00
+description: "Build an interactive Python SSH toolkit to collect host diagnostics and storage details from standalone VMware ESXi servers."
+pubDate: 2023-01-06T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["virtualization", "python"]
+legacyCategories: ["VMWare", "Python"]
 excerpt_separator: "<!--more-->"
-categories:
-  - VMWare
-  - Python
-tags:
-  - VMWare ESXi
-  - Python
 ---
 
 ## Trying Something New In The New Year

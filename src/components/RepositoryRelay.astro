@@ -1,4 +1,5 @@
 ---
+import Badge from "./Badge.astro";
 import privateDates from "../config/private-relay-dates.json";
 
 type RepositorySpec = {
@@ -10,64 +11,57 @@ type RepositorySpec = {
   branch: string;
   head: string;
   pushedAt: string;
-  visibility?: "PUBLIC" | "PRIVATE" | "UNAVAILABLE";
-};
-
-type GitHubRepository = {
-  description?: string | null;
-  private: boolean;
-  default_branch?: string;
-  language?: string | null;
-  pushed_at?: string;
-};
-
-type GitHubCommit = {
-  sha?: string;
+  visibility: "PUBLIC" | "PRIVATE";
+  architectureHref?: string;
 };
 
 const owner = "Unhall0w3d";
-const repositorySpecs: RepositorySpec[] = [
+const repositories: RepositorySpec[] = [
   {
     name: "aletheiauc",
     displayName: "AletheiaUC",
     classification: "ASSESSMENT ENGINE",
-    description: "Cisco Collaboration health assessment, diagnostics, and reporting.",
+    description: "Read-only Cisco Collaboration health assessment, normalized fact collection, and evidence-led reporting.",
     language: "Python",
     branch: "main",
-    head: "<REDACTED>",
+    head: "REDACTED",
     pushedAt: privateDates.aletheiauc,
     visibility: "PRIVATE",
+    architectureHref: "/2026/07/25/aletheiauc-bringing-uc-health-to-light.html"
   },
   {
     name: "soul-slash",
     displayName: "Soul/",
     classification: "LOCAL INTELLIGENCE",
-    description: "Local-first assistant with deterministic skills, safety gates, and human-approved memory.",
+    description: "Local-first multi-Core assistant with deterministic skills, safety gates, and human-approved memory.",
     language: "Ruby",
     branch: "main",
-    head: "<REDACTED>",
-    visibility: "PRIVATE",
+    head: "REDACTED",
     pushedAt: privateDates["soul-slash"],
+    visibility: "PRIVATE",
+    architectureHref: "/2026/07/15/why-i-am-building-soul-slash.html"
   },
   {
     name: "mind-enigma",
     displayName: "Mind Enigma",
     classification: "CISCO AUTOMATION",
-    description: "Cisco Collaboration scripts and operational automation.",
+    description: "Cisco Collaboration operational scripts, registration checks, and diagnostic utilities.",
     language: "Python",
     branch: "master",
     head: "f37fcfe2",
     pushedAt: "2026-07-28",
+    visibility: "PUBLIC"
   },
   {
     name: "ruckus-backup-retriever",
     displayName: "Ruckus Backup Retriever",
     classification: "NETWORK UTILITY",
-    description: "PowerShell backup downloader for RUCKUS SmartZone environments.",
+    description: "Repeatable PowerShell backup downloader for RUCKUS SmartZone and vSZ controllers over HTTPS.",
     language: "PowerShell",
     branch: "main",
     head: "dee4dcdf",
     pushedAt: "2026-07-28",
+    visibility: "PUBLIC"
   },
   {
     name: "unreal-codex-playtesting-pipeline",
@@ -78,100 +72,184 @@ const repositorySpecs: RepositorySpec[] = [
     branch: "main",
     head: "9c028216",
     pushedAt: "2026-08-25",
-  },
+    visibility: "PUBLIC"
+  }
 ];
 
-async function refreshRepository(spec: RepositorySpec): Promise<RepositorySpec> {
-  if (spec.visibility === "PRIVATE") return spec;
-
-  try {
-    const repositoryResponse = await fetch(`https://api.github.com/repos/${owner}/${spec.name}`, {
-      headers: { Accept: "application/vnd.github+json" },
-    });
-    if (!repositoryResponse.ok) return { ...spec, visibility: "UNAVAILABLE" };
-
-    const repository = (await repositoryResponse.json()) as GitHubRepository;
-    const pushedAt = repository.pushed_at || spec.pushedAt;
-    if (repository.private !== false) {
-      return { ...spec, pushedAt, visibility: repository.private ? "PRIVATE" : "UNAVAILABLE" };
-    }
-    const branch = repository.default_branch || spec.branch;
-    const result: RepositorySpec = {
-      ...spec, branch, pushedAt, visibility: "PUBLIC",
-      description: repository.description || spec.description,
-      language: repository.language || spec.language,
-      head: "UNAVAILABLE",
-    };
-    try {
-      const response = await fetch(
-        `https://api.github.com/repos/${owner}/${spec.name}/commits/${encodeURIComponent(branch)}`,
-        { headers: { Accept: "application/vnd.github+json" } },
-      );
-      if (response.ok) {
-        const commit = (await response.json()) as GitHubCommit;
-        result.head = commit.sha?.slice(0, 8) || result.head;
-      }
-    } catch { /* Repository visibility and push date remain verified. */ }
-    return result;
-  } catch {
-    return { ...spec, visibility: "UNAVAILABLE" };
-  }
-}
-
-const repositories = await Promise.all(repositorySpecs.map(refreshRepository));
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "2-digit",
   month: "short",
   year: "numeric",
-  timeZone: "UTC",
+  timeZone: "UTC"
 });
 ---
 
-<section class="repository-relay" aria-labelledby="repository-relay-title">
-  <header class="repository-relay-header">
+<section class="af-relay" aria-labelledby="repository-relay-title">
+  <header class="af-section-head">
     <div>
-      <p class="eyebrow">PUBLIC CODEX // SELECTED WORKS</p>
-      <h2 id="repository-relay-title">Repository relay</h2>
+      <p class="af-eyebrow">REPOSITORY RELAY // SELECTED WORKS</p>
+      <h2 id="repository-relay-title">Active code &amp; architecture</h2>
     </div>
-    <div class="repository-relay-state" aria-label={`${repositories.length} selected repositories`}>
-      <span class="repository-relay-pulse" aria-hidden="true"></span>
-      GH-{String(repositories.length).padStart(2, "0")} // INDEXED
-    </div>
+    <a class="af-section-link" href={`https://github.com/${owner}`}>All public repositories ↗</a>
   </header>
 
-  <div class="repository-grid">
-    {repositories.map((repository, index) => {
-      const linked = repository.visibility === "PUBLIC";
-      const Card = linked ? "a" : "div";
+  <div class="af-relay__grid">
+    {repositories.map((repo, index) => {
+      const isPublic = repo.visibility === "PUBLIC";
+      const href = isPublic
+        ? `https://github.com/${owner}/${repo.name}`
+        : repo.architectureHref!;
       return (
-      <article class="repository-node">
-        <Card href={linked ? `https://github.com/${owner}/${repository.name}` : undefined} aria-label={linked ? `Open ${repository.displayName} on GitHub` : undefined}>
-          <div class="repository-node-header">
-            <span>NODE {String(index + 1).padStart(2, "0")}</span>
-            <span>{repository.classification}</span>
+        <article class="af-relay__card">
+          <div class="af-relay__top">
+            <span class="af-relay__node">NODE {String(index + 1).padStart(2, "0")} // {repo.classification}</span>
+            <Badge variant={isPublic ? "verified" : "neutral"} pill>
+              STATUS // {repo.visibility}
+            </Badge>
           </div>
-          <div class="repository-node-copy">
-            <h3>{repository.displayName}</h3>
-            <p>{repository.description}</p>
-          </div>
-          <dl class="repository-node-stats">
-            <div><dt>BRANCH</dt><dd>{repository.branch}</dd></div>
-            <div><dt>HEAD</dt><dd><code>{linked ? repository.head : "<REDACTED>"}</code></dd></div>
-            <div><dt>STACK</dt><dd>{repository.language}</dd></div>
-            <div><dt>SYNC</dt><dd>{dateFormatter.format(new Date(repository.pushedAt)).toUpperCase()}</dd></div>
+
+          <h3 class="af-relay__title">
+            <a href={href}>{repo.displayName}</a>
+          </h3>
+          <p class="af-relay__desc">{repo.description}</p>
+
+          <dl class="af-relay__meta">
+            <div><dt>STACK</dt><dd>{repo.language}</dd></div>
+            <div><dt>BRANCH</dt><dd>{repo.branch}</dd></div>
+            <div><dt>HEAD</dt><dd><code>{repo.head}</code></dd></div>
+            <div><dt>SYNC</dt><dd>{dateFormatter.format(new Date(repo.pushedAt)).toUpperCase()}</dd></div>
           </dl>
-          <div class="repository-node-footer">
-            <span>STATUS // {repository.visibility}</span>
-            <strong>{linked ? "OPEN REPOSITORY ↗" : repository.visibility === "PRIVATE" ? "ACCESS DENIED" : "ACCESS UNAVAILABLE"}</strong>
+
+          <div class="af-relay__footer">
+            <a class="af-relay__action" href={href}>
+              {isPublic ? "OPEN REPOSITORY ↗" : "READ ARCHITECTURE →"}
+            </a>
           </div>
-        </Card>
-      </article>
+        </article>
       );
     })}
   </div>
-
-  <footer class="repository-relay-footer">
-    <span>HEAD IDENTIFIERS // 8-CHAR SHORT SHA OR REDACTED</span>
-    <a href={`https://github.com/${owner}`}>ALL PUBLIC NODES ↗</a>
-  </footer>
 </section>
+
+<style is:global>
+  .af-relay {
+    padding-block: 2.5rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .af-relay__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .af-relay__card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.15rem 1.25rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+  }
+
+  .af-relay__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .af-relay__node {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .af-relay__title {
+    font-size: 1.15rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .af-relay__title a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .af-relay__title a:hover {
+    color: var(--accent-signal-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .af-relay__desc {
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .af-relay__meta {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .af-relay__meta dt {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .af-relay__meta dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .af-relay__meta code {
+    font-family: inherit;
+    color: var(--text-secondary);
+  }
+
+  .af-relay__footer {
+    padding-top: 0.75rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .af-relay__action {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent-signal-ink);
+    text-decoration: none;
+  }
+
+  .af-relay__action:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (max-width: 52rem) {
+    .af-relay__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .af-relay__meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

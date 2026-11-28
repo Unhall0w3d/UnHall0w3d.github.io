@@ -1,17 +1,11 @@
 ---
 title: "CDR Export to Billing Server Failing"
-layout: single
-classes: wide
-date: 2019-07-25T08:00:00-05:00
+description: "Diagnosing and clearing stuck CUCM CDR Repository Manager billing exports to third-party SFTP accounting servers."
+pubDate: 2019-07-25T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["cucm"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco Unified Communications Manager
-  - Call Detail Record
-  - Unified Communications
-  - Cisco
 ---
 
 ## Let's Talk Billing Servers

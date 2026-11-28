@@ -1,19 +1,10 @@
 ---
 title: "Giving Codex a Playwright-Style Loop for Unreal Engine"
-date: 2026-08-17T12:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Unreal Engine
-  - Codex
-  - MCP
-  - Game Development
-  - Automation
-  - Linux
 description: "A practical, bounded architecture for letting Codex inspect a packaged Unreal Engine game, drive real input, collect rendered evidence, and stop before automation becomes a substitute for human playtesting."
-draft: false
+pubDate: 2026-08-17T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["unreal-engine", "codex", "agent-workflows", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 ---
 
 ## A Game Does Not Have A DOM. That Does Not Mean It Has To Be Opaque.

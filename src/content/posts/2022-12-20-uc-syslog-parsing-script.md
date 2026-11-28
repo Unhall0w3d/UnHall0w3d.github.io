@@ -1,19 +1,11 @@
 ---
 title: "Cisco UCSyslogParser Script"
-layout: single
-classes: wide
-date: 2022-12-20T08:00:00-05:00
+description: "Parse exported Cisco Unified Communications Manager syslog files with Python to surface recurring errors and device events."
+pubDate: 2022-12-20T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "python"]
+legacyCategories: ["Cisco", "Unified Communications", "Python"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-  - Python
-tags:
-  - Cisco
-  - Callmanager
-  - CUCM
-  - Unified Communications
-  - Python
 ---
 
 ## The Nail That Stands Out Gets Hammered Down

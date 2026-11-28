@@ -1,17 +1,11 @@
 ---
 title: "Detecting a Dial Plan Overlap"
-layout: single
-classes: wide
-date: 2019-07-05T08:00:00-05:00
+description: "Diagnosing inter-site call failures caused by overlapping CUCM translation patterns and interdigit timeouts on Cisco IP Phones."
+pubDate: 2019-07-05T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["cucm", "dial-plan"]
+legacyCategories: ["Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Reports
-  - Unified Communications
 ---
 
 ## User Report & Context

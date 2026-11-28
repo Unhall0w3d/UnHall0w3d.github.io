@@ -1,27 +1,69 @@
 ---
 import { getCollection } from "astro:content";
 import PostList from "../../components/PostList.astro";
+import { site } from "../../config/site";
+import { PILLAR_META, RETIRED_CATEGORY_REDIRECTS } from "../../config/taxonomy";
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getTerms, sortPosts, termSlug, type Post } from "../../lib/posts";
+import { getPillars, type Post } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
-  return getTerms(posts, "categories").map(([category, entries]) => ({
-    params: { category: termSlug(category) },
-    props: { category, posts: sortPosts(entries) }
+  const activePaths = getPillars(posts).map(({ slug, title, posts: entries }) => ({
+    params: { category: slug },
+    props: {
+      title,
+      description: PILLAR_META[slug].description,
+      posts: entries,
+      redirectTo: undefined as string | undefined
+    }
   }));
+
+  const activeSlugs = new Set(activePaths.map((p) => p.params.category as string));
+  const redirectPaths = Object.entries(RETIRED_CATEGORY_REDIRECTS)
+    .filter(([slug]) => !activeSlugs.has(slug))
+    .map(([slug, redirectTo]) => ({
+      params: { category: slug },
+      props: {
+        title: slug,
+        description: "",
+        posts: [] as Post[],
+        redirectTo
+      }
+    }));
+
+  return [...activePaths, ...redirectPaths];
 }
 
-interface Props { category: string; posts: Post[]; }
-const { category, posts } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  posts: Post[];
+  redirectTo?: string;
+}
+
+const { title, description, posts, redirectTo } = Astro.props;
 const signalLabel = posts.length === 1 ? "signal" : "signals";
 ---
 
-<PageLayout
-  title={`${category} articles`}
-  description={`${posts.length} ${signalLabel} classified under ${category}.`}
-  eyebrow="CATEGORY NODE"
-  robots={posts.length === 1 ? "noindex,follow" : undefined}
->
-  <PostList posts={posts} numbered />
-</PageLayout>
+{redirectTo ? (
+  <html lang="en-US">
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="refresh" content={`0;url=${redirectTo}`} />
+      <link rel="canonical" href={new URL(redirectTo, site.url).href} />
+      <title>Redirecting…</title>
+    </head>
+    <body>
+      <a href={redirectTo}>Continue to {redirectTo}</a>
+    </body>
+  </html>
+) : (
+  <PageLayout
+    title={title}
+    description={`${posts.length} ${signalLabel} — ${description}`}
+    eyebrow="OPERATIONAL PILLAR"
+    robots={posts.length === 1 ? "noindex,follow" : undefined}
+  >
+    <PostList posts={posts} numbered />
+  </PageLayout>
+)}

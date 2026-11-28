@@ -1,21 +1,11 @@
 ---
 title: "Windows NTP Is Not Supported In Cisco UC"
-layout: single
-classes: wide
-date: 2019-12-15T08:00:00-05:00
+description: "Why Windows W32Time NTP servers cause clock drift and unsupported synchronization failures on Cisco UC VOS appliances."
+pubDate: 2019-12-15T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["unity-connection", "emergency-responder", "uccx", "im-presence", "cucm"]
+legacyCategories: ["Unified Communications", "Cisco", "Microsoft Windows"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - Microsoft Windows
-tags:
-  - Cisco Unity Connection
-  - Cisco
-  - Cisco Emergency Responder
-  - Unified Communications
-  - Cisco Unified Contact Center Express
-  - Cisco Unified IM & Presence
-  - Cisco Unified Communications Manager
 ---
 
 ## Windows NTP Is A No-Go

@@ -1,20 +1,11 @@
 ---
 title: "Call Drops On Agent Delivery"
-layout: single
-classes: wide
-date: 2020-02-20T08:00:00-05:00
+description: "Root-cause analysis of UCCX calls dropping upon agent transfer due to region codec and Calling Search Space mismatches."
+pubDate: 2020-02-20T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["uccx", "cucm", "health-checks"]
+legacyCategories: ["Cisco Unified Contact Center", "Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco Unified Contact Center
-  - Unified Communications
-  - Cisco
-tags:
-  - UCCX
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Cisco Unified Contact Center Express
-  - Unified Communications
-  - Log Review
 ---
 
 ## Some Context and Story

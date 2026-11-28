@@ -1,0 +1,714 @@
+---
+// Persistent bottom-right floating micro-player for the 9 Soul Slash Synthesis tracks.
+// Mounted in BaseLayout.astro with transition:persist="ambient-player".
+---
+
+<aside
+  class="af-ambient"
+  data-ambient-player
+  data-state="paused"
+  data-expanded="false"
+  transition:persist="ambient-player"
+  data-pagefind-ignore
+  aria-label="Ambient signal audio player"
+>
+  <div class="af-ambient__popover" id="af-ambient-popover" hidden>
+    <div class="af-ambient__header">
+      <span data-ambient-cue>SOUL SYNTHESIS // GEN 09</span>
+      <a
+        href="https://www.youtube.com/watch?v=un7jfZsbDRE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="af-ambient__source"
+        data-ambient-source
+      >
+        Source // YouTube ↗
+      </a>
+    </div>
+
+    <div class="af-ambient__video-wrap">
+      <div
+        class="af-ambient__video"
+        id="ambient-youtube-player"
+        aria-label="YouTube player for Rooms Between Seconds"
+      ></div>
+    </div>
+
+    <div class="af-ambient__meta">
+      <strong class="af-ambient__track-heading" data-ambient-title>Rooms Between Seconds</strong>
+      <span class="af-ambient__artist" data-ambient-artist>SOUL SLASH SYNTHESIS</span>
+    </div>
+
+    <label class="af-ambient__selector">
+      <span class="af-ambient__label">Signal Select (9 Tracks)</span>
+      <select data-ambient-track aria-label="Select ambient signal track">
+        <option value="0">01 // Rooms Between Seconds</option>
+        <option value="1">02 // The Hallway Moves First</option>
+        <option value="2">03 // Familiar Geometry</option>
+        <option value="3">04 // This Thought Is Not Your Own</option>
+        <option value="4">05 // The Void Learned Hunger</option>
+        <option value="5">06 // The Weight Remembered</option>
+        <option value="6">07 // Compiler Bloom</option>
+        <option value="7">08 // When Hope Forgot Our Names</option>
+        <option value="8">09 // Afterimage Current</option>
+      </select>
+    </label>
+
+    <div class="af-ambient__transport" role="group" aria-label="Playback transport controls">
+      <button class="af-ambient__ctrl" type="button" data-ambient-restart aria-label="Restart track">↶</button>
+      <button class="af-ambient__ctrl af-ambient__ctrl--primary" type="button" data-ambient-play aria-label="Play song">▶</button>
+      <button class="af-ambient__ctrl" type="button" data-ambient-next aria-label="Next track">↠</button>
+      <button class="af-ambient__ctrl" type="button" data-ambient-loop aria-label="Enable track loop" aria-pressed="false">↻</button>
+      <label class="af-ambient__volume">
+        <span>VOL <output data-ambient-volume-output>50</output></span>
+        <input data-ambient-volume type="range" min="0" max="100" value="50" aria-label="Ambient player volume" />
+      </label>
+    </div>
+
+    <p class="af-ambient__status" data-ambient-status aria-live="polite">STANDBY // PRESS PLAY</p>
+  </div>
+
+  <div class="af-ambient__pill">
+    <button
+      type="button"
+      class="af-ambient__pill-play"
+      data-ambient-pill-play
+      aria-label="Play ambient audio"
+    >
+      <span data-ambient-pill-icon aria-hidden="true">▶</span>
+    </button>
+    <button
+      type="button"
+      class="af-ambient__pill-expand"
+      data-ambient-expand
+      aria-expanded="false"
+      aria-controls="af-ambient-popover"
+    >
+      <span class="af-ambient__eq" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <span class="af-ambient__pill-title" data-ambient-summary-title>Rooms Between Seconds</span>
+      <span class="af-ambient__chevron" aria-hidden="true">▴</span>
+    </button>
+  </div>
+</aside>
+
+<script>
+  function initAmbientPlayer() {
+    const root = document.querySelector<HTMLElement>("[data-ambient-player]");
+    if (!root || root.dataset.initialized === "true") return;
+    root.dataset.initialized = "true";
+
+    const tracks = [
+      {
+        videoId: "un7jfZsbDRE",
+        title: "Rooms Between Seconds",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 09",
+        source: "https://www.youtube.com/watch?v=un7jfZsbDRE",
+        startSeconds: 0
+      },
+      {
+        videoId: "ZFA6t2PAqyI",
+        title: "The Hallway Moves First",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 08",
+        source: "https://www.youtube.com/watch?v=ZFA6t2PAqyI",
+        startSeconds: 0
+      },
+      {
+        videoId: "Mkx_2QRyKcI",
+        title: "Familiar Geometry",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 07",
+        source: "https://www.youtube.com/watch?v=Mkx_2QRyKcI",
+        startSeconds: 0
+      },
+      {
+        videoId: "q35PDSyTwA0",
+        title: "This Thought Is Not Your Own",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 06",
+        source: "https://www.youtube.com/watch?v=q35PDSyTwA0",
+        startSeconds: 0
+      },
+      {
+        videoId: "9J2zrAoTfB4",
+        title: "The Void Learned Hunger",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 05",
+        source: "https://www.youtube.com/watch?v=9J2zrAoTfB4",
+        startSeconds: 0
+      },
+      {
+        videoId: "BNN0D39P4Ic",
+        title: "The Weight Remembered",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 04",
+        source: "https://www.youtube.com/watch?v=BNN0D39P4Ic",
+        startSeconds: 0
+      },
+      {
+        videoId: "-ilV0X9-PR8",
+        title: "Compiler Bloom",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 03",
+        source: "https://www.youtube.com/watch?v=-ilV0X9-PR8",
+        startSeconds: 0
+      },
+      {
+        videoId: "xV-XJT78tn0",
+        title: "When Hope Forgot Our Names",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 02",
+        source: "https://www.youtube.com/watch?v=xV-XJT78tn0",
+        startSeconds: 0
+      },
+      {
+        videoId: "863-KXJRfyA",
+        title: "Afterimage Current",
+        artist: "SOUL SLASH SYNTHESIS",
+        cue: "SOUL SYNTHESIS // GEN 01",
+        source: "https://www.youtube.com/watch?v=863-KXJRfyA",
+        startSeconds: 0
+      }
+    ];
+
+    const popover = root.querySelector<HTMLElement>("#af-ambient-popover")!;
+    const expandBtn = root.querySelector<HTMLButtonElement>("[data-ambient-expand]")!;
+    const pillPlayBtn = root.querySelector<HTMLButtonElement>("[data-ambient-pill-play]")!;
+    const pillIcon = root.querySelector<HTMLElement>("[data-ambient-pill-icon]")!;
+    const summaryTitle = root.querySelector<HTMLElement>("[data-ambient-summary-title]")!;
+    const playControl = root.querySelector<HTMLButtonElement>("[data-ambient-play]")!;
+    const restartControl = root.querySelector<HTMLButtonElement>("[data-ambient-restart]")!;
+    const nextControl = root.querySelector<HTMLButtonElement>("[data-ambient-next]")!;
+    const loopControl = root.querySelector<HTMLButtonElement>("[data-ambient-loop]")!;
+    const volumeControl = root.querySelector<HTMLInputElement>("[data-ambient-volume]")!;
+    const volumeOutput = root.querySelector<HTMLOutputElement>("[data-ambient-volume-output]")!;
+    const trackControl = root.querySelector<HTMLSelectElement>("[data-ambient-track]")!;
+    const title = root.querySelector<HTMLElement>("[data-ambient-title]")!;
+    const artist = root.querySelector<HTMLElement>("[data-ambient-artist]")!;
+    const cue = root.querySelector<HTMLElement>("[data-ambient-cue]")!;
+    const source = root.querySelector<HTMLAnchorElement>("[data-ambient-source]")!;
+    const video = root.querySelector<HTMLElement>(".af-ambient__video")!;
+    const status = root.querySelector<HTMLElement>("[data-ambient-status]")!;
+
+    let player: any;
+    let ready = false;
+    let looping = false;
+    let playWhenReady = false;
+
+    const trackStorageKey = "noc-ambient-track-v7";
+    let currentTrackIndex = 0;
+    try {
+      const savedTrack = Number(localStorage.getItem(trackStorageKey));
+      if (Number.isInteger(savedTrack) && savedTrack >= 0 && savedTrack < tracks.length) {
+        currentTrackIndex = savedTrack;
+      }
+    } catch {}
+
+    let initialVolume = 50;
+    try {
+      const savedVolume = localStorage.getItem("noc-ambient-volume");
+      const parsed = savedVolume === null ? Number.NaN : Number(savedVolume);
+      if (Number.isFinite(parsed) && parsed >= 0 && parsed <= 100) {
+        initialVolume = parsed;
+      }
+    } catch {}
+    volumeControl.value = String(initialVolume);
+    volumeOutput.value = String(initialVolume);
+
+    const setExpanded = (open: boolean) => {
+      popover.hidden = !open;
+      root.dataset.expanded = String(open);
+      expandBtn.setAttribute("aria-expanded", String(open));
+    };
+
+    const displayTrack = (index: number) => {
+      const track = tracks[index];
+      title.textContent = track.title;
+      summaryTitle.textContent = track.title;
+      artist.textContent = track.artist;
+      cue.textContent = track.cue;
+      source.href = track.source;
+      trackControl.value = String(index);
+      video.setAttribute("aria-label", `YouTube player for ${track.title}`);
+      try {
+        localStorage.setItem(trackStorageKey, String(index));
+      } catch {}
+    };
+
+    const updatePlayback = (playing: boolean) => {
+      root.dataset.state = playing ? "playing" : "paused";
+      playControl.textContent = playing ? "Ⅱ" : "▶";
+      pillIcon.textContent = playing ? "Ⅱ" : "▶";
+      playControl.setAttribute("aria-label", playing ? "Pause song" : "Play song");
+      pillPlayBtn.setAttribute("aria-label", playing ? "Pause ambient audio" : "Play ambient audio");
+      status.textContent = playing ? "TRANSMITTING // SIGNAL ACTIVE" : "PAUSED // SIGNAL HELD";
+      window.dispatchEvent(
+        new CustomEvent("noc:ambient-playback", { detail: { playing } })
+      );
+    };
+
+    const initializePlayer = () => {
+      const YT = (window as any).YT;
+      if (player || !YT?.Player) return;
+      player = new YT.Player("ambient-youtube-player", {
+        width: "100%",
+        height: "148",
+        videoId: tracks[currentTrackIndex].videoId,
+        playerVars: {
+          controls: 0,
+          playsinline: 1,
+          rel: 0,
+          start: tracks[currentTrackIndex].startSeconds,
+          origin: window.location.origin
+        },
+        events: {
+          onReady: (event: any) => {
+            ready = true;
+            event.target.setVolume(initialVolume);
+            if (playWhenReady) {
+              playWhenReady = false;
+              event.target.playVideo();
+            } else {
+              updatePlayback(false);
+              status.textContent = "STANDBY // PRESS PLAY";
+            }
+          },
+          onStateChange: (event: any) => {
+            if (event.data === YT.PlayerState.PLAYING) updatePlayback(true);
+            if (event.data === YT.PlayerState.PAUSED) updatePlayback(false);
+            if (event.data === YT.PlayerState.ENDED) {
+              if (looping) {
+                player.seekTo(tracks[currentTrackIndex].startSeconds, true);
+                player.playVideo();
+              } else {
+                selectTrack(currentTrackIndex + 1, true);
+              }
+            }
+          },
+          onError: (event: any) => {
+            updatePlayback(false);
+            status.textContent =
+              event.data === 101 || event.data === 150
+                ? "ERROR 150 // EMBED BLOCKED"
+                : `ERROR ${event.data} // OPEN SOURCE LINK`;
+          }
+        }
+      });
+    };
+
+    const requestPlayer = (autoplay = false) => {
+      playWhenReady ||= autoplay;
+      if (ready) {
+        if (autoplay) player.playVideo();
+        return;
+      }
+      status.textContent = "TUNING // OPENING SIGNAL";
+      if ((window as any).YT?.Player) {
+        initializePlayer();
+        return;
+      }
+      (window as any).onYouTubeIframeAPIReady = initializePlayer;
+      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+        const api = document.createElement("script");
+        api.src = "https://www.youtube.com/iframe_api";
+        api.async = true;
+        document.head.append(api);
+      }
+    };
+
+    const selectTrack = (index: number, autoplay = true) => {
+      currentTrackIndex = (index + tracks.length) % tracks.length;
+      const track = tracks[currentTrackIndex];
+      displayTrack(currentTrackIndex);
+      if (!ready) {
+        if (autoplay) requestPlayer(true);
+        return;
+      }
+      const playback = {
+        videoId: track.videoId,
+        startSeconds: track.startSeconds
+      };
+      if (autoplay) {
+        player.loadVideoById(playback);
+        status.textContent = `TUNING // ${track.title.toUpperCase()}`;
+      } else {
+        player.cueVideoById(playback);
+        status.textContent = "STANDBY // PRESS PLAY";
+      }
+    };
+
+    const togglePlay = () => {
+      if (!ready) {
+        requestPlayer(true);
+        return;
+      }
+      const YT = (window as any).YT;
+      const isPlaying = player.getPlayerState() === YT.PlayerState.PLAYING;
+      if (isPlaying) {
+        playWhenReady = false;
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    };
+
+    displayTrack(currentTrackIndex);
+
+    expandBtn.addEventListener("click", () => {
+      setExpanded(popover.hidden);
+    });
+
+    root.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !popover.hidden) {
+        setExpanded(false);
+        expandBtn.focus();
+      }
+    });
+
+    pillPlayBtn.addEventListener("click", togglePlay);
+    playControl.addEventListener("click", togglePlay);
+
+    restartControl.addEventListener("click", () => {
+      if (!ready) {
+        requestPlayer(true);
+        return;
+      }
+      const track = tracks[currentTrackIndex];
+      player.seekTo(track.startSeconds, true);
+      status.textContent = `REWOUND // ${track.cue}`;
+    });
+
+    nextControl.addEventListener("click", () => {
+      selectTrack(currentTrackIndex + 1, true);
+    });
+
+    trackControl.addEventListener("change", () => {
+      selectTrack(Number(trackControl.value), true);
+    });
+
+    loopControl.addEventListener("click", () => {
+      looping = !looping;
+      loopControl.classList.toggle("is-active", looping);
+      loopControl.setAttribute("aria-pressed", String(looping));
+      loopControl.setAttribute("aria-label", looping ? "Disable track loop" : "Enable track loop");
+      status.textContent = looping ? "LOOP // ENGAGED" : "LOOP // DISENGAGED";
+    });
+
+    volumeControl.addEventListener("input", () => {
+      const volume = Number(volumeControl.value);
+      volumeOutput.value = String(volume);
+      try {
+        localStorage.setItem("noc-ambient-volume", String(volume));
+      } catch {}
+      if (ready) player.setVolume(volume);
+    });
+
+    document.addEventListener("noc:toggle-ambient-audio", () => {
+      togglePlay();
+    });
+  }
+
+  initAmbientPlayer();
+  document.addEventListener("astro:page-load", initAmbientPlayer);
+</script>
+
+<style is:global>
+  .af-ambient {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 55;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    max-width: calc(100vw - 2rem);
+  }
+
+  .af-ambient__pill {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-strong);
+    background: color-mix(in srgb, var(--bg-surface-elevated) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-primary);
+    overflow: hidden;
+  }
+
+  .af-ambient[data-state="playing"] .af-ambient__pill {
+    border-color: var(--accent-signal);
+  }
+
+  .af-ambient__pill-play {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-right: 1px solid var(--border-subtle);
+    background: transparent;
+    color: var(--accent-signal-ink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+  }
+
+  .af-ambient__pill-play:hover,
+  .af-ambient__pill-expand:hover {
+    background: var(--bg-surface);
+  }
+
+  .af-ambient__pill-expand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 0 0.75rem 0 0.6rem;
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+  }
+
+  .af-ambient__pill-title {
+    max-width: 18ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+
+  .af-ambient[data-state="playing"] .af-ambient__pill-title {
+    color: var(--text-primary);
+  }
+
+  .af-ambient__chevron {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    transition: transform 140ms ease;
+  }
+
+  .af-ambient[data-expanded="true"] .af-ambient__chevron {
+    transform: rotate(180deg);
+  }
+
+  .af-ambient__eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+    width: 14px;
+  }
+
+  .af-ambient__eq i {
+    display: block;
+    width: 2px;
+    height: 35%;
+    background: var(--text-muted);
+    border-radius: 1px;
+  }
+
+  .af-ambient__eq i:nth-child(2) { height: 70%; }
+  .af-ambient__eq i:nth-child(3) { height: 50%; }
+  .af-ambient__eq i:nth-child(4) { height: 85%; }
+
+  .af-ambient[data-state="playing"] .af-ambient__eq i {
+    background: var(--accent-verified);
+    animation: af-eq-bounce 0.9s ease-in-out infinite alternate;
+  }
+
+  .af-ambient[data-state="playing"] .af-ambient__eq i:nth-child(2) { animation-delay: 0.18s; }
+  .af-ambient[data-state="playing"] .af-ambient__eq i:nth-child(3) { animation-delay: 0.35s; }
+  .af-ambient[data-state="playing"] .af-ambient__eq i:nth-child(4) { animation-delay: 0.52s; }
+
+  @keyframes af-eq-bounce {
+    0% { height: 25%; }
+    100% { height: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .af-ambient[data-state="playing"] .af-ambient__eq i {
+      animation: none;
+    }
+  }
+
+  .af-ambient__popover {
+    width: min(21.5rem, calc(100vw - 2rem));
+    padding: 0.9rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+  }
+
+  .af-ambient__popover[hidden] {
+    display: none;
+  }
+
+  .af-ambient__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .af-ambient__source {
+    color: var(--accent-signal-ink);
+    text-decoration: none;
+  }
+
+  .af-ambient__source:hover {
+    text-decoration: underline;
+  }
+
+  .af-ambient__video-wrap {
+    width: 100%;
+    height: 148px;
+    margin-bottom: 0.65rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-code);
+    overflow: hidden;
+  }
+
+  .af-ambient__video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .af-ambient__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .af-ambient__track-heading {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .af-ambient__artist {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .af-ambient__selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .af-ambient__label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .af-ambient__selector select {
+    width: 100%;
+    min-height: 2rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .af-ambient__transport {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .af-ambient__ctrl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-surface-elevated);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .af-ambient__ctrl--primary {
+    border-color: var(--accent-signal);
+    background: var(--accent-signal);
+    color: var(--text-on-signal);
+  }
+
+  .af-ambient__ctrl.is-active {
+    border-color: var(--accent-verified);
+    color: var(--accent-verified-ink);
+  }
+
+  .af-ambient__volume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .af-ambient__volume input[type="range"] {
+    width: 4.5rem;
+    accent-color: var(--accent-signal);
+  }
+
+  .af-ambient__status {
+    margin: 0;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 639px) {
+    .af-ambient {
+      right: 0.75rem;
+      bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    body:has(.af-exp-tray) .af-ambient {
+      bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .af-ambient__pill-title {
+      max-width: 13ch;
+    }
+  }
+</style>

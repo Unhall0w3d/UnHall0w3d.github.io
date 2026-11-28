@@ -1,18 +1,11 @@
 ---
 title: "Identifying Static Phone Loads With SQL"
-layout: single
-classes: wide
-date: 2019-06-21T08:00:00-05:00
+description: "Use a CUCM SQL query to identify IP phones pinned to static firmware load names before running cluster-wide upgrades."
+pubDate: 2019-06-21T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Database
-  - Unified Communications
 ---
 ## What Is Our Mission
 

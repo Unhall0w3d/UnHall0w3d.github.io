@@ -1,23 +1,14 @@
 ---
 title: "Administration Without Autonomy"
-date: 2026-08-09T12:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Automation
-  - Linux
-  - Security
-  - Backup
 description: "Soul/'s administration surfaces collect evidence, prepare exact device-scoped work, preserve recovery paths, and stop before unattended maintenance, remediation, or public consequences can begin."
+pubDate: 2026-08-09T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux", "security", "backups"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-administration-security-posture.jpg"
 imageAlt: "Soul Slash Guided Maintenance showing the device-scoped maintenance workflow, fleet evidence, and read-only Wazuh security posture."
 imageWidth: 1270
 imageHeight: 714
-draft: false
 ---
 
 ## An Assistant Is Not A Sysadmin With Better Branding

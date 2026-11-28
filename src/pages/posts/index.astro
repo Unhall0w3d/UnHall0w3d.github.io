@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import PostList from "../../components/PostList.astro";
+import { PILLARS, PILLAR_META } from "../../config/taxonomy";
 import PageLayout from "../../layouts/PageLayout.astro";
 import { sortPosts, type Post } from "../../lib/posts";
 
@@ -9,30 +10,290 @@ const posts = sortPosts((await getCollection("posts", ({ data }) => !data.draft)
 
 <PageLayout
   title="Signal archive"
-  description={`${posts.length} field notes spanning unified communications, automation, infrastructure, Linux, and the incidents between.`}
-  eyebrow="COMPLETE TRANSMISSION INDEX"
+  description={`${posts.length} field notes spanning unified communications, automation, local AI, and systems infrastructure.`}
+  eyebrow="FIELD NOTES // SIGNAL ARCHIVE"
 >
-  <label class="archive-search">
-    <span>Filter archive</span>
-    <input id="archive-filter" type="search" placeholder="Try CUCM, Python, ESXi…" autocomplete="off" />
-  </label>
-  <p class="filter-status" id="filter-status" aria-live="polite"></p>
+  <section class="af-facets" data-archive-facets aria-label="Archive filters">
+    <div class="af-facets__pillars" role="group" aria-label="Filter by operational pillar">
+      <button type="button" class="af-chip is-active" data-pillar-chip="" aria-pressed="true">
+        All
+      </button>
+      {PILLARS.map((slug) => (
+        <button type="button" class="af-chip" data-pillar-chip={slug} aria-pressed="false">
+          {PILLAR_META[slug].title}
+        </button>
+      ))}
+    </div>
+
+    <div class="af-facets__bar">
+      <div class="af-facets__toggles" role="group" aria-label="Quick filters">
+        <button type="button" class="af-chip af-chip--toggle" data-toggle-tools aria-pressed="false">
+          Includes Downloadable Tool
+        </button>
+        <button type="button" class="af-chip af-chip--toggle" data-toggle-modern aria-pressed="false">
+          2026+ Only
+        </button>
+      </div>
+
+      <label class="af-facets__search">
+        <span class="sr-only">Keyword filter</span>
+        <input
+          id="archive-filter"
+          type="search"
+          placeholder="Filter by keyword (CUCM, BLF, Codex, NixOS)…"
+          autocomplete="off"
+        />
+      </label>
+
+      <p class="af-facets__count" id="filter-status" aria-live="polite" data-total-count={posts.length}>
+        Showing {posts.length} of {posts.length} signals
+      </p>
+    </div>
+  </section>
+
   <PostList posts={posts} numbered />
 </PageLayout>
 
 <script>
-  const input = document.querySelector<HTMLInputElement>("#archive-filter");
-  const status = document.querySelector<HTMLElement>("#filter-status");
-  const items = [...document.querySelectorAll<HTMLElement>("[data-search-item]")];
+  let cleanupFacets: (() => void) | null = null;
 
-  input?.addEventListener("input", () => {
-    const query = input.value.trim().toLowerCase();
-    let visible = 0;
-    for (const item of items) {
-      const matches = !query || item.dataset.searchItem?.includes(query);
-      item.hidden = !matches;
-      if (matches) visible += 1;
+  function setupArchiveFacets() {
+    cleanupFacets?.();
+    cleanupFacets = null;
+
+    const root = document.querySelector<HTMLElement>("[data-archive-facets]");
+    if (!root) return;
+
+    const pillarBtns = [...root.querySelectorAll<HTMLButtonElement>("[data-pillar-chip]")];
+    const toolsBtn = root.querySelector<HTMLButtonElement>("[data-toggle-tools]");
+    const modernBtn = root.querySelector<HTMLButtonElement>("[data-toggle-modern]");
+    const searchInput = root.querySelector<HTMLInputElement>("#archive-filter");
+    const statusEl = root.querySelector<HTMLElement>("#filter-status");
+    const items = [...document.querySelectorAll<HTMLElement>(".transmission-card[data-pillar]")];
+    const total = items.length;
+
+    let activePillar = "";
+    let onlyTools = false;
+    let onlyModern = false;
+    let query = "";
+
+    const readUrlState = () => {
+      const params = new URLSearchParams(window.location.search);
+      activePillar = params.get("pillar") || "";
+      if (!pillarBtns.some((b) => b.dataset.pillarChip === activePillar)) {
+        activePillar = "";
+      }
+      onlyTools = params.get("tools") === "1";
+      onlyModern = params.get("era") === "2026";
+      query = params.get("q") || "";
+      if (searchInput) searchInput.value = query;
+    };
+
+    const writeUrlState = () => {
+      const params = new URLSearchParams();
+      if (activePillar) params.set("pillar", activePillar);
+      if (onlyTools) params.set("tools", "1");
+      if (onlyModern) params.set("era", "2026");
+      if (query.trim()) params.set("q", query.trim());
+      const qs = params.toString();
+      const nextUrl = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
+      window.history.replaceState(null, "", nextUrl);
+    };
+
+    const renderFilters = (syncUrl = true) => {
+      for (const btn of pillarBtns) {
+        const selected = (btn.dataset.pillarChip || "") === activePillar;
+        btn.classList.toggle("is-active", selected);
+        btn.setAttribute("aria-pressed", String(selected));
+      }
+      if (toolsBtn) {
+        toolsBtn.classList.toggle("is-active", onlyTools);
+        toolsBtn.setAttribute("aria-pressed", String(onlyTools));
+      }
+      if (modernBtn) {
+        modernBtn.classList.toggle("is-active", onlyModern);
+        modernBtn.setAttribute("aria-pressed", String(onlyModern));
+      }
+
+      const normalizedQuery = query.trim().toLowerCase();
+      let visible = 0;
+      for (const item of items) {
+        const matchPillar = !activePillar || item.dataset.pillar === activePillar;
+        const matchTool = !onlyTools || item.dataset.hasTool === "1";
+        const matchModern = !onlyModern || Number(item.dataset.year) >= 2026;
+        const matchQuery = !normalizedQuery || (item.dataset.searchItem || "").includes(normalizedQuery);
+        const show = matchPillar && matchTool && matchModern && matchQuery;
+        item.hidden = !show;
+        if (show) visible += 1;
+      }
+
+      if (statusEl) {
+        statusEl.textContent = `Showing ${visible} of ${total} signals`;
+      }
+      if (syncUrl) writeUrlState();
+    };
+
+    const cleanups: Array<() => void> = [];
+
+    for (const btn of pillarBtns) {
+      const onClick = () => {
+        activePillar = btn.dataset.pillarChip || "";
+        renderFilters(true);
+      };
+      btn.addEventListener("click", onClick);
+      cleanups.push(() => btn.removeEventListener("click", onClick));
     }
-    if (status) status.textContent = query ? `${visible} matching signals` : "";
+
+    if (toolsBtn) {
+      const onTools = () => {
+        onlyTools = !onlyTools;
+        renderFilters(true);
+      };
+      toolsBtn.addEventListener("click", onTools);
+      cleanups.push(() => toolsBtn.removeEventListener("click", onTools));
+    }
+
+    if (modernBtn) {
+      const onModern = () => {
+        onlyModern = !onlyModern;
+        renderFilters(true);
+      };
+      modernBtn.addEventListener("click", onModern);
+      cleanups.push(() => modernBtn.removeEventListener("click", onModern));
+    }
+
+    if (searchInput) {
+      const onInput = () => {
+        query = searchInput.value;
+        renderFilters(true);
+      };
+      searchInput.addEventListener("input", onInput);
+      cleanups.push(() => searchInput.removeEventListener("input", onInput));
+    }
+
+    const onPopState = () => {
+      readUrlState();
+      renderFilters(false);
+    };
+    window.addEventListener("popstate", onPopState);
+    cleanups.push(() => window.removeEventListener("popstate", onPopState));
+
+    readUrlState();
+    renderFilters(false);
+
+    cleanupFacets = () => {
+      for (const fn of cleanups) fn();
+    };
+  }
+
+  setupArchiveFacets();
+  document.addEventListener("astro:page-load", setupArchiveFacets);
+  document.addEventListener("astro:before-swap", () => {
+    cleanupFacets?.();
+    cleanupFacets = null;
   });
 </script>
+
+<style is:global>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .af-facets {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+  }
+
+  .af-facets__pillars,
+  .af-facets__toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .af-facets__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .af-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-surface-elevated);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+  }
+
+  .af-chip:hover {
+    border-color: var(--accent-signal);
+    color: var(--text-primary);
+  }
+
+  .af-chip.is-active {
+    border-color: var(--accent-signal);
+    background: var(--accent-signal-soft);
+    color: var(--accent-signal-ink);
+  }
+
+  .af-chip--toggle.is-active {
+    border-color: var(--accent-verified);
+    background: var(--accent-verified-soft);
+    color: var(--accent-verified-ink);
+  }
+
+  .af-facets__search {
+    flex: 1 1 14rem;
+  }
+
+  .af-facets__search input {
+    width: 100%;
+    min-height: 2.1rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+  }
+
+  .af-facets__count {
+    margin: 0 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 42rem) {
+    .af-facets__count {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

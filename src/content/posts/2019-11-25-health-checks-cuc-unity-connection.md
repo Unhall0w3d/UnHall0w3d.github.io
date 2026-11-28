@@ -1,18 +1,11 @@
 ---
 title: "Health Checks - CUC - Unity Connection"
-layout: single
-classes: wide
-date: 2019-11-25T08:00:00-05:00
+description: "Operational CLI checklist for verifying Cisco Unity Connection cluster status, replication, ports, and diagnostics around changes."
+pubDate: 2019-11-25T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["health-checks", "unity-connection"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Health Checks
-  - Cisco
-  - Cisco Unity Connection
-  - Unified Communications
-  - Action Plan
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

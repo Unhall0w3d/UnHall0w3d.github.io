@@ -1,18 +1,11 @@
 ---
 title: "CCM Synced End Users -- And How To Delete Them"
-layout: single
-classes: wide
-date: 2020-01-19T08:00:00-05:00
+description: "Convert orphaned CUCM-synced Unity Connection mailboxes back to local users via SQL so stale accounts can be cleanly removed."
+pubDate: 2020-01-19T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["unity-connection", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unity Connection
-  - Cisco
-  - Database
-  - Unified Communications
 ---
 
 ## When You Delete The Parent Before The Child

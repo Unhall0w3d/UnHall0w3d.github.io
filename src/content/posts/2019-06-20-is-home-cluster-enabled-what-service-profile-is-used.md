@@ -1,20 +1,11 @@
 ---
 title: "Home Cluster And Service Profile Check"
-layout: single
-classes: wide
-date: 2019-06-20T08:00:00-05:00
+description: "Query CUCM via SQL to list end users with Home Cluster enabled alongside their assigned UC Service Profiles."
+pubDate: 2019-06-20T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["sql", "im-presence", "cucm"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco
-  - Database
-  - Unified Communications
-  - Cisco Jabber
-  - Cisco Unified IM & Presence
-  - Cisco Unified Communications Manager
 ---
 ## What Is Our Mission
 

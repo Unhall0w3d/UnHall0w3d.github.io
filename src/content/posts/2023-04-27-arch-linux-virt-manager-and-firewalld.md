@@ -1,17 +1,11 @@
 ---
 title: "Virt-Manager, Firewalld, & Missing libvirt Zone"
-layout: single
-classes: wide
-date: 2023-04-26T08:00:00-05:00
+description: "Fix missing libvirt firewalld zone errors when setting up KVM and Virt-Manager on Arch-based Linux desktops."
+pubDate: 2023-04-26T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["linux"]
+legacyCategories: ["Linux", "Arch"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Linux
-  - Arch
-tags:
-  - Linux
-  - Arch
-  - EndeavorOS
-  - General
 ---
 
 ## What Are We Doing Here

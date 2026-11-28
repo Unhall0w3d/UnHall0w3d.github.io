@@ -1,21 +1,11 @@
 ---
 title: "Jabber Video Calling SQL Query"
-layout: single
-classes: wide
-date: 2020-04-07T08:00:00-05:00
+description: "Audit Cisco Jabber device configurations in CUCM via SQL to verify whether Video Calling is enabled or disabled per endpoint."
+pubDate: 2020-04-07T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "im-presence", "expressway", "sql"]
+legacyCategories: ["SQL", "Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - SQL
-  - Unified Communications
-  - Cisco
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Cisco Jabber
-  - Reports
-  - Unified Communications
-  - Telepresence
-  - Database
 ---
 ## We Need To Know If Video Calling Is Enabled
 

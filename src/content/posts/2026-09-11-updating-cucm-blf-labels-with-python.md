@@ -1,17 +1,15 @@
 ---
 title: "Updating CUCM BLF Labels With Python Without Dropping the Other BLFs"
-date: 2026-09-11T12:00:00-04:00
 description: "A CSV-driven BLF label updater with full-collection preservation, preview mode, automatic AXL toolkit setup, and per-phone verification."
-categories:
-  - Cisco
-  - Automation
-tags:
-  - cucm
-  - axl
-  - python
-  - blf
-  - csv
-draft: false
+pubDate: 2026-09-11T12:00:00-04:00
+pillar: "automation-tooling"
+tags: ["cucm", "axl", "python", "phone-config"]
+legacyCategories: ["Cisco", "Automation"]
+hasTool: true
+validation:
+  posture: "preview-first"
+  testedOn: "Python 3.10+, CUCM 14 lab (single + batch), CUCM 15 offline schema"
+  limits: "Requires AXL credentials and explicit phone CSV; verify shared-appearance expectations before apply."
 ---
 
 The request was small: update the Busy Lamp Field (BLF) Speed Dial label for one extension across a list of phones. Some phones still showed an old role-based label. Others already had the person's name but needed its capitalization corrected.

@@ -1,14 +1,20 @@
 ---
 import { getCollection } from "astro:content";
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getTerms, termSlug, type Post } from "../../lib/posts";
+import { getCanonicalTags, type Post } from "../../lib/posts";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
-const tags = getTerms(posts, "tags").sort(([, a], [, b]) => b.length - a.length);
+const tags = getCanonicalTags(posts).sort((a, b) => b.posts.length - a.posts.length || a.label.localeCompare(b.label));
 ---
 
-<PageLayout title="Signal tags" description="Technologies, platforms, and recurring fault lines across the archive." eyebrow="ARCHIVE LEXICON">
+<PageLayout
+  title="Signal tags"
+  description="Normalized platforms, protocols, and tooling topics across the archive."
+  eyebrow="ARCHIVE LEXICON"
+>
   <div class="tag-cloud">
-    {tags.map(([tag, entries]) => <a href={`/tags/${termSlug(tag)}.html`}>{tag}<sup>{entries.length}</sup></a>)}
+    {tags.map(({ slug, label, posts: entries }) => (
+      <a href={`/tags/${slug}.html`}>{label}<sup>{entries.length}</sup></a>
+    ))}
   </div>
 </PageLayout>

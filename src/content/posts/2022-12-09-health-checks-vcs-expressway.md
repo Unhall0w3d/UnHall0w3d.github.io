@@ -1,17 +1,11 @@
 ---
 title: "Health Checks - VCS/Expressway"
-layout: single
-classes: wide
-date: 2022-12-09T08:00:00-05:00
+description: "Standardized CLI and status checks for Cisco VCS and Expressway-C/E traversal pairs before upgrades or certificate renewals."
+pubDate: 2022-12-09T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["health-checks", "expressway"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Health Checks
-  - Cisco
-  - Unified Communications
-  - Telepresence
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

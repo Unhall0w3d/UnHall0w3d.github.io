@@ -1,17 +1,10 @@
 ---
 title: "The Cheapest Adequate Worker: Re-Evaluating My Codex Subagent Strategy"
-date: 2026-08-20T12:00:00-04:00
-categories:
-  - General
-  - Automation
-tags:
-  - Codex
-  - Artificial Intelligence
-  - Automation
-  - Software Development
-  - Subagents
 description: "Why I re-tested a Codex multi-agent strategy one day after publishing it, what Luna, Terra, Spark, and Sol found in two real repositories, and the cost-aware routing policy that replaced my first version."
-draft: false
+pubDate: 2026-08-20T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["codex", "local-llm", "agent-workflows"]
+legacyCategories: ["General", "Automation"]
 ---
 
 > **November 15, 2026 update.** The [current Codex configuration](/2026/09/22/from-a-codex-prompt-to-an-agent-execution-system.html#current-configuration-november-15-2026)

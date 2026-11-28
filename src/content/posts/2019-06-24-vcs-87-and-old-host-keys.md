@@ -1,18 +1,11 @@
 ---
 title: "VCS/Expressway 8.7 & Old Host Keys"
-layout: single
-classes: wide
-date: 2019-06-24T08:00:00-05:00
+description: "Resolve OpenSSH host key algorithm rejections when connecting from modern Linux jump hosts to legacy Cisco VCS and Expressway nodes."
+pubDate: 2019-06-24T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["expressway"]
+legacyCategories: ["Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-tags:
-  - Cisco VCS
-  - Cisco Expressway
-  - Unified Communications
-  - Cisco
-  - Telepresence
 ---
 ## A Wild Permission Denied Has Appeared
 

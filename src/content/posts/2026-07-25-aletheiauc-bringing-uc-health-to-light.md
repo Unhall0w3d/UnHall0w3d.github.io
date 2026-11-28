@@ -1,27 +1,14 @@
 ---
 title: "AletheiaUC: Bringing UC Health to Light"
-date: 2026-07-25T12:00:00-04:00
-categories:
-  - Cisco
-  - Unified Communications
-  - Automation
-  - Python
-tags:
-  - AletheiaUC
-  - Cisco
-  - Cisco UC
-  - Cisco Unified Communications Manager
-  - Unity Connection
-  - Automation
-  - Python
-  - Health Checks
-  - Reports
 description: "A look at what AletheiaUC is becoming: a read-only, evidence-led Cisco Collaboration assessment framework with normalized facts, conservative findings, and reports people can actually use."
+pubDate: 2026-07-25T12:00:00-04:00
+pillar: "automation-tooling"
+tags: ["aletheia-uc", "cucm", "unity-connection", "python", "health-checks"]
+legacyCategories: ["Cisco", "Unified Communications", "Automation", "Python"]
 image: "/assets/images/aletheiauc-current-state-social.jpg"
 imageAlt: "Synthetic AletheiaUC Collaboration Health Assessment showing the report header and executive overview."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## There Has To Be A Better Way To Do This
@@ -36,7 +23,7 @@ The difficult part is not obtaining *some* data. Cisco UC systems are quite capa
 
 The difficult part is preserving where it came from, deciding what it actually proves, connecting related pieces across different interfaces, and turning the result into something useful without quietly upgrading an incomplete observation into a confident conclusion.
 
-That is what [AletheiaUC](https://github.com/Unhall0w3d/aletheiauc) is being built to do.
+That is what **AletheiaUC** is being built to do.
 
 The name comes from *Aletheia*: truth, disclosure, or unconcealedness. The idea is not that a script can descend from the mountain carrying perfect knowledge of every Collaboration environment. It is that the tool should make the evidence visible, keep its reasoning traceable, and be honest about what it could not collect.
 

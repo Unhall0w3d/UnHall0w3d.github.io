@@ -1,15 +1,10 @@
 ---
 title: "Making a CUCM 15SU5 ISO Bootable for Lab Use on Proxmox"
-date: 2026-11-19T12:00:00-05:00
 description: "Rebuild the CUCM 15SU5 ISO for BIOS boot, install a lab publisher on Proxmox VE 9, and verify SSH and AXL access."
-categories:
-  - Unified Communications
-  - Cisco
-tags:
-  - Proxmox
-  - CUCM
-  - AXL
-  - Lab
+pubDate: 2026-11-19T12:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["virtualization", "cucm", "axl", "lab"]
+legacyCategories: ["Unified Communications", "Cisco"]
 ---
 
 Back in 2019 I needed a CUCM lab for recertification. This time I needed a publisher I could point a tool at, send it an AXL request, and see what came back. I had a Proxmox host, some room on thin storage, and a familiar problem. The CUCM ISO I had on hand wouldn't boot.

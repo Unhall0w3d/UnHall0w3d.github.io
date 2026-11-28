@@ -1,18 +1,11 @@
 ---
 title: "Modding Fallout 4 on Linux"
-layout: single
-classes: wide
-date: 2023-04-30T08:00:00-05:00
+description: "Configure Steam Proton, Mod Organizer 2, and F4SE to run a modded Fallout 4 installation cleanly on Arch Linux."
+pubDate: 2023-04-30T08:00:00-05:00
+pillar: "field-log-craft"
+tags: ["linux", "unreal-engine"]
+legacyCategories: ["Linux", "Arch", "Gaming"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Linux
-  - Arch
-  - Gaming
-tags:
-  - Linux
-  - Arch
-  - Gaming
-  - General
 ---
 
 ## And Now For Something A Little Different

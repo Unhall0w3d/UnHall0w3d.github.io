@@ -1,21 +1,11 @@
 ---
 title: "Verifying Memory Usage on Cisco VCS"
-layout: single
-classes: wide
-date: 2021-01-08T08:00:00-05:00
+description: "Automate SSH memory utilization checks across Cisco VCS Control and Expressway appliances using Python and Paramiko."
+pubDate: 2021-01-08T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["expressway", "python"]
+legacyCategories: ["Unified Communications", "Cisco", "Python"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - Python
-tags:
-  - Cisco VCS
-  - Cisco Expressway
-  - Python
-  - Paramiko
-  - Unified Communications
-  - Cisco
-  - Telepresence
 ---
 
 ## Gotta Do It Faster

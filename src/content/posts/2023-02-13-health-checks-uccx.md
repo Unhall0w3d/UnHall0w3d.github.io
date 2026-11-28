@@ -1,19 +1,11 @@
 ---
 title: "Cisco UCCX Health Checks"
-layout: single
-classes: wide
-date: 2023-02-14T08:00:00-05:00
+description: "Pre-change CLI verification commands for Cisco Unified Contact Center Express (UCCX) engines, replication, and subsystems."
+pubDate: 2023-02-14T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["health-checks", "cucm", "uccx"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Health Checks
-  - Cisco
-  - Unified Communications
-  - Action Plan
-  - Cisco Unified Communications Manager
-  - Cisco Unified Contact Center Express
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

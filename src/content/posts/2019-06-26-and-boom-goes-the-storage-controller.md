@@ -1,19 +1,11 @@
 ---
 title: "And Boom Goes The Storage Controller"
-layout: single
-classes: wide
-date: 2019-06-26T08:00:00-05:00
+description: "Field post-mortem on recovering virtual machines after an unscheduled Cisco UCS-C RAID controller failure."
+pubDate: 2019-06-26T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["cisco-ucs", "virtualization"]
+legacyCategories: ["Cisco", "Cisco UCS", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Cisco UCS
-  - Unified Communications
-tags:
-  - Cisco UCS
-  - Cisco UCS-C
-  - Storage
-  - Cisco
-  - Data Center
 ---
 
 ## The Story Begins

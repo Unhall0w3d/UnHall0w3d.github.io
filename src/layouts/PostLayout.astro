@@ -1,8 +1,18 @@
 ---
 import type { MarkdownHeading } from "astro";
-import type { Post } from "../lib/posts";
+import Badge from "../components/Badge.astro";
+import ValidationScope from "../components/ValidationScope.astro";
 import { authorSchema, site } from "../config/site";
-import { formatPostDate, postExcerpt, postMetaDescription, postUrl, readingTime, termSlug } from "../lib/posts";
+import { pillarTitle, tagLabel } from "../config/taxonomy";
+import type { Post } from "../lib/posts";
+import {
+  formatPostDate,
+  postDateParts,
+  postExcerpt,
+  postMetaDescription,
+  postUrl,
+  readingTime
+} from "../lib/posts";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
@@ -15,13 +25,20 @@ const { post, headings, related } = Astro.props;
 const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 const url = new URL(postUrl(post), site.url);
 const metaDescription = postMetaDescription(post);
+const pillarName = pillarTitle(post.data.pillar);
+const { year: postYearStr } = postDateParts(post);
+const postYear = Number(postYearStr);
+const isModernEra = postYear >= 2026;
+const eraLabel = isModernEra ? "2026 SPEC" : `ARCHIVE NOTE · ${postYear}`;
+const readMins = readingTime(post);
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: post.data.title,
   description: metaDescription,
-  datePublished: post.data.date.toISOString(),
-  ...(post.data.updated ? { dateModified: post.data.updated.toISOString() } : {}),
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
   mainEntityOfPage: url,
   ...(post.data.image ? { image: new URL(post.data.image, site.url) } : {}),
   author: authorSchema,
@@ -40,105 +57,624 @@ const jsonLd = {
 ---
 
 <BaseLayout
+  pagefindBody
   title={post.data.title}
   description={metaDescription}
   type="article"
-  publishedTime={post.data.date.toISOString()}
-  modifiedTime={post.data.updated?.toISOString()}
-  image={post.data.image}
-  imageAlt={post.data.imageAlt}
-  imageWidth={post.data.imageWidth}
-  imageHeight={post.data.imageHeight}
+  publishedTime={post.data.pubDate.toISOString()}
+  modifiedTime={post.data.updatedDate?.toISOString()}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  <article class="post-shell">
-    <header class="post-header">
-      <p class="eyebrow"><span>ARCHIVE SIGNAL</span> {post.data.categories[0] ?? "FIELD NOTE"}</p>
-      <h1>{post.data.title}</h1>
-      <p class="post-deck">{postExcerpt(post)}</p>
-      <div class="post-byline">
-        <span>By <a href="/about.html" rel="author">{site.author.name}</a></span>
-        <time datetime={post.data.date.toISOString()}>{formatPostDate(post.data.date)}</time>
-        {post.data.updated && <time datetime={post.data.updated.toISOString()}>Updated {formatPostDate(post.data.updated)}</time>}
-        <span>{readingTime(post)} min read</span>
-      </div>
-    </header>
 
-    <div class="post-grid">
-      <aside class="post-rail">
-        <div class="operator-card">
-          <img src={site.author.thumbnail} width="144" height="144" alt="" />
-          <div><strong>{site.author.name}</strong><span>{site.author.role}</span></div>
+  <div class="af-progress-top" aria-hidden="true" data-pagefind-ignore>
+    <span class="af-progress-top__fill" data-reading-progress-horizontal></span>
+  </div>
+
+  <article class="af-article" data-article-root>
+    <aside class="af-article__left" aria-label="Signal telemetry metadata" data-pagefind-ignore>
+      <div class="af-article__left-sticky">
+        <div class="af-progress-rail" aria-hidden="true">
+          <span class="af-progress-rail__fill" data-reading-progress-vertical></span>
         </div>
-        {toc.length > 0 && (
-          <nav class="toc" aria-label="On this page">
-            <p>On this signal</p>
-            <ol>
-              {toc.map((heading) => (
-                <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>
+        <div class="af-article__telemetry">
+          <Badge variant={isModernEra ? "signal" : "neutral"}>{eraLabel}</Badge>
+          <Badge variant="verified" href={`/categories/${post.data.pillar}.html`}>
+            {pillarName}
+          </Badge>
+          <dl class="af-article__meta-list">
+            <div>
+              <dt>Published</dt>
+              <dd>
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {formatPostDate(post.data.pubDate)}
+                </time>
+              </dd>
+            </div>
+            {post.data.updatedDate && (
+              <div>
+                <dt>Updated</dt>
+                <dd>
+                  <time datetime={post.data.updatedDate.toISOString()}>
+                    {formatPostDate(post.data.updatedDate)}
+                  </time>
+                </dd>
+              </div>
+            )}
+            <div>
+              <dt>Duration</dt>
+              <dd>{readMins} min read</dd>
+            </div>
+            <div>
+              <dt>Operator</dt>
+              <dd><a href="/about.html" rel="author">{site.author.name}</a></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </aside>
+
+    <div class="af-article__well">
+      <header class="af-article__header">
+        <div class="af-article__mobile-badges" data-pagefind-ignore>
+          <Badge variant={isModernEra ? "signal" : "neutral"}>{eraLabel}</Badge>
+          <Badge variant="verified" href={`/categories/${post.data.pillar}.html`}>
+            {pillarName}
+          </Badge>
+        </div>
+        <h1>{post.data.title}</h1>
+        <p class="af-article__deck">{postExcerpt(post)}</p>
+        <div class="af-article__mobile-byline" data-pagefind-ignore>
+          <span>By <a href="/about.html" rel="author">{site.author.name}</a></span>
+          <span>·</span>
+          <time datetime={post.data.pubDate.toISOString()}>{formatPostDate(post.data.pubDate)}</time>
+          <span>·</span>
+          <span>{readMins} min read</span>
+        </div>
+      </header>
+
+      {toc.length > 0 && (
+        <details class="af-mobile-toc" data-pagefind-ignore>
+          <summary>On This Signal ({toc.length} sections)</summary>
+          <ol>
+            {toc.map((heading) => (
+              <li class:list={{ "is-nested": heading.depth === 3 }}>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
+
+      {post.data.validation && (
+        <ValidationScope
+          posture={post.data.validation.posture}
+          testedOn={post.data.validation.testedOn}
+          limits={post.data.validation.limits}
+        />
+      )}
+
+      <div class="prose af-article__prose" data-article-prose>
+        <slot />
+      </div>
+
+      <footer class="af-article__footer" data-pagefind-ignore>
+        <div class="af-article__tax-row">
+          <span class="af-article__tax-label">Pillar</span>
+          <Badge variant="verified" href={`/categories/${post.data.pillar}.html`}>{pillarName}</Badge>
+        </div>
+        {post.data.tags.length > 0 && (
+          <div class="af-article__tax-row">
+            <span class="af-article__tax-label">Tags</span>
+            <div class="af-article__tag-list">
+              {post.data.tags.map((tag) => (
+                <Badge variant="neutral" href={`/tags/${tag}.html`}>{tagLabel(tag)}</Badge>
               ))}
-            </ol>
-          </nav>
+            </div>
+          </div>
         )}
-      </aside>
+      </footer>
 
-      <div class="post-main">
-        <div class="prose">
-          <slot />
-        </div>
-
-        <footer class="post-footer">
-          <div class="taxonomy">
-            <span>Filed under</span>
-            {post.data.categories.map((category) => <a href={`/categories/${termSlug(category)}.html`}>{category}</a>)}
+      {related.length > 0 && (
+        <section class="af-adjacent" aria-labelledby="adjacent-signals-title" data-pagefind-ignore>
+          <p class="af-eyebrow">ADJACENT SIGNALS // CONTINUE READING</p>
+          <h2 id="adjacent-signals-title" class="af-adjacent__heading">Related field notes</h2>
+          <div class="af-adjacent__grid">
+            {related.map((item) => (
+              <a class="af-adjacent__card" href={postUrl(item)}>
+                <span class="af-adjacent__pillar">{pillarTitle(item.data.pillar)}</span>
+                <strong>{item.data.title}</strong>
+                <span class="af-adjacent__meta">
+                  {formatPostDate(item.data.pubDate)} · {readingTime(item)} min read
+                </span>
+              </a>
+            ))}
           </div>
-          <div class="taxonomy">
-            <span>Signal tags</span>
-            {post.data.tags.map((tag) => <a href={`/tags/${termSlug(tag)}.html`}>{tag}</a>)}
-          </div>
-        </footer>
-      </div>
+        </section>
+      )}
     </div>
 
-    {related.length > 0 && (
-      <section class="related-posts" aria-labelledby="related-title">
-        <p class="eyebrow">ADJACENT SIGNALS</p>
-        <h2 id="related-title">Continue through the archive</h2>
-        <div class="related-grid">
-          {related.map((item) => (
-            <a href={postUrl(item)}>
-              <span>{item.data.categories[0] ?? "Field Note"}</span>
-              <strong>{item.data.title}</strong>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
+    <aside class="af-article__right" aria-label="Table of contents" data-pagefind-ignore>
+      {toc.length > 0 && (
+        <nav class="af-toc" aria-label="On This Signal">
+          <p class="af-toc__title">On This Signal</p>
+          <ol class="af-toc__list">
+            {toc.map((heading) => (
+              <li class:list={["af-toc__item", { "is-nested": heading.depth === 3 }]}>
+                <a href={`#${heading.slug}`} data-toc-link={heading.slug}>
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+    </aside>
   </article>
 </BaseLayout>
 
 <script>
-  document.querySelectorAll<HTMLDetailsElement>("[data-code-preview]").forEach((preview) => {
-    let loaded = false;
+  let cleanupArticle: (() => void) | null = null;
 
-    preview.addEventListener("toggle", async () => {
-      if (!preview.open || loaded) return;
+  function setupArticleReadingView() {
+    cleanupArticle?.();
+    cleanupArticle = null;
 
-      const source = preview.dataset.codePreview;
-      const code = preview.querySelector<HTMLElement>("code");
-      if (!source || !code) return;
+    const root = document.querySelector<HTMLElement>("[data-article-root]");
+    if (!root) return;
 
-      code.textContent = "Loading preview…";
+    const prose = root.querySelector<HTMLElement>("[data-article-prose]");
+    const vFill = document.querySelector<HTMLElement>("[data-reading-progress-vertical]");
+    const hFill = document.querySelector<HTMLElement>("[data-reading-progress-horizontal]");
+    const tocLinks = [...root.querySelectorAll<HTMLAnchorElement>("[data-toc-link]")];
 
-      try {
-        const response = await fetch(source);
-        if (!response.ok) throw new Error(`Preview request failed with ${response.status}`);
-        code.textContent = await response.text();
-        loaded = true;
-      } catch {
-        code.textContent = "Preview unavailable. Use the download link below to open the file directly.";
-        preview.classList.add("code-preview-error");
+    let rafId: number | null = null;
+
+    const updateProgress = () => {
+      rafId = null;
+      if (!prose) return;
+      const rect = prose.getBoundingClientRect();
+      const total = Math.max(1, prose.offsetHeight - window.innerHeight * 0.55);
+      const scrolled = Math.min(total, Math.max(0, -rect.top + window.innerHeight * 0.2));
+      const pct = Math.round((scrolled / total) * 1000) / 10;
+      if (vFill) vFill.style.height = `${pct}%`;
+      if (hFill) hFill.style.width = `${pct}%`;
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateProgress);
       }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateProgress();
+
+    // IntersectionObserver scroll-spy for right-rail TOC
+    let observer: IntersectionObserver | null = null;
+    if (tocLinks.length > 0 && "IntersectionObserver" in window) {
+      const linkMap = new Map(tocLinks.map((link) => [link.dataset.tocLink!, link]));
+      const setActive = (slug: string) => {
+        for (const [key, link] of linkMap) {
+          link.classList.toggle("is-active", key === slug);
+        }
+      };
+      setActive(tocLinks[0].dataset.tocLink!);
+
+      const headingEls = tocLinks
+        .map((l) => document.getElementById(l.dataset.tocLink!))
+        .filter((el): el is HTMLElement => Boolean(el));
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length > 0) {
+            setActive(visible[0].target.id);
+          }
+        },
+        { rootMargin: "-76px 0px -68% 0px", threshold: [0, 1] }
+      );
+
+      for (const h of headingEls) observer.observe(h);
+    }
+
+    // Expandable code preview blocks
+    const previewCleanups: Array<() => void> = [];
+    root.querySelectorAll<HTMLDetailsElement>("[data-code-preview]").forEach((preview) => {
+      let loaded = false;
+      const onToggle = async () => {
+        if (!preview.open || loaded) return;
+        const source = preview.dataset.codePreview;
+        const code = preview.querySelector<HTMLElement>("code");
+        if (!source || !code) return;
+        code.textContent = "Loading preview…";
+        try {
+          const response = await fetch(source);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          code.textContent = await response.text();
+          loaded = true;
+        } catch {
+          code.textContent =
+            "Preview unavailable. Use the download link below to open the file directly.";
+          preview.classList.add("code-preview-error");
+        }
+      };
+      preview.addEventListener("toggle", onToggle);
+      previewCleanups.push(() => preview.removeEventListener("toggle", onToggle));
     });
+
+    cleanupArticle = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      observer?.disconnect();
+      for (const fn of previewCleanups) fn();
+    };
+  }
+
+  setupArticleReadingView();
+  document.addEventListener("astro:page-load", setupArticleReadingView);
+  document.addEventListener("astro:before-swap", () => {
+    cleanupArticle?.();
+    cleanupArticle = null;
   });
 </script>
+
+<style is:global>
+  .af-progress-top {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    height: 2px;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .af-progress-top__fill {
+    display: block;
+    width: 0%;
+    height: 100%;
+    background: var(--accent-signal);
+  }
+
+  .af-article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 1.75rem 3rem;
+  }
+
+  .af-article__left,
+  .af-article__right {
+    display: none;
+  }
+
+  .af-article__well {
+    width: 100%;
+    max-width: var(--measure-prose);
+    margin-inline: auto;
+    min-width: 0;
+  }
+
+  .af-article__header {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .af-article__mobile-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .af-article__header h1 {
+    max-width: none;
+    font-size: clamp(1.9rem, 3.8vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+
+  .af-article__deck {
+    margin: 0.85rem 0 0;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .af-article__mobile-byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .af-article__mobile-byline a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .af-article__mobile-byline a:hover {
+    color: var(--accent-signal-ink);
+    text-decoration: underline;
+  }
+
+  .af-mobile-toc {
+    margin: 0 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+  }
+
+  .af-mobile-toc summary {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  .af-mobile-toc ol {
+    margin: 0.65rem 0 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .af-mobile-toc li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+
+  .af-mobile-toc li.is-nested {
+    padding-left: 0.75rem;
+  }
+
+  .af-mobile-toc a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .af-mobile-toc a:hover {
+    color: var(--accent-signal-ink);
+    text-decoration: underline;
+  }
+
+  .af-article__prose {
+    min-width: 0;
+  }
+
+  .af-article__prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .af-article__prose :is(h2, h3, h4) {
+    scroll-margin-top: 5rem;
+  }
+
+  .af-article__footer {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .af-article__tax-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .af-article__tax-label {
+    min-width: 3.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .af-article__tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .af-adjacent {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .af-adjacent__heading {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .af-adjacent__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .af-adjacent__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    text-decoration: none;
+    transition: border-color 140ms ease;
+  }
+
+  .af-adjacent__card:hover {
+    border-color: var(--accent-signal);
+  }
+
+  .af-adjacent__pillar,
+  .af-adjacent__meta {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .af-adjacent__card strong {
+    font-family: var(--font-display);
+    font-size: 0.96rem;
+    line-height: 1.3;
+    color: var(--text-primary);
+  }
+
+  @media (min-width: 1180px) {
+    .af-progress-top,
+    .af-article__mobile-badges,
+    .af-article__mobile-byline,
+    .af-mobile-toc {
+      display: none;
+    }
+
+    .af-article {
+      grid-template-columns: 180px minmax(0, 66ch) 220px;
+      justify-content: space-between;
+      align-items: start;
+      gap: 2.25rem;
+      padding-block: 2.5rem 4rem;
+    }
+
+    .af-article__left,
+    .af-article__right {
+      display: block;
+    }
+
+    .af-article__left-sticky,
+    .af-toc {
+      position: sticky;
+      top: 5.25rem;
+    }
+
+    .af-article__left-sticky {
+      display: grid;
+      grid-template-columns: 2px minmax(0, 1fr);
+      gap: 0.9rem;
+    }
+
+    .af-progress-rail {
+      width: 2px;
+      min-height: 12rem;
+      background: var(--border-subtle);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .af-progress-rail__fill {
+      display: block;
+      width: 100%;
+      height: 0%;
+      background: var(--accent-signal);
+    }
+
+    .af-article__telemetry {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .af-article__meta-list {
+      margin: 0.5rem 0 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .af-article__meta-list dt {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .af-article__meta-list dd {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .af-article__meta-list a {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .af-article__meta-list a:hover {
+      color: var(--accent-signal-ink);
+      text-decoration: underline;
+    }
+
+    .af-toc {
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      padding-left: 0.9rem;
+      border-left: 1px solid var(--border-subtle);
+    }
+
+    .af-toc__title {
+      margin: 0 0 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .af-toc__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .af-toc__item.is-nested {
+      padding-left: 0.7rem;
+    }
+
+    .af-toc__item a {
+      display: block;
+      font-size: 0.8125rem;
+      line-height: 1.4;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 120ms ease;
+    }
+
+    .af-toc__item a:hover {
+      color: var(--text-primary);
+    }
+
+    .af-toc__item a.is-active {
+      color: var(--accent-signal-ink);
+      font-weight: 500;
+    }
+  }
+</style>

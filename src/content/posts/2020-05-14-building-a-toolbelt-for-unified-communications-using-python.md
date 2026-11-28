@@ -1,23 +1,11 @@
 ---
 title: "Building a Toolbelt for UC w/ Python"
-layout: single
-classes: wide
-date: 2020-05-14T08:00:00-05:00
+description: "Expand a Python phone-scraping script into a multi-tool UC utility with error handling and structured CSV reporting."
+pubDate: 2020-05-14T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "python", "phone-config", "im-presence", "sql"]
+legacyCategories: ["Python", "Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Python
-  - Unified Communications
-  - Cisco
-tags:
-  - Automation
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Python
-  - Unified Communications
-  - Reports
-  - Cisco Phone
-  - Cisco Jabber
-  - Database
 ---
 
 ## Like Batman's Belt, But Not As Cool

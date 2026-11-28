@@ -1,17 +1,11 @@
 ---
 title: "NixOS & My Configs"
-layout: single
-classes: wide
-date: 2023-08-13T08:00:00-05:00
+description: "Migrating a daily-driver Linux workstation to declarative NixOS configurations for reproducible packages and rollbacks."
+pubDate: 2023-08-13T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["linux", "nixos"]
+legacyCategories: ["General", "Linux"]
 excerpt_separator: "<!--more-->"
-categories:
-  - General
-  - Linux
-tags:
-  - Linux
-  - NixOS
-  - Nix
-  - Git
 ---
 
 <span class="image fit"><img src="/assets/images/nixos_1.png" alt="NixOS. It just.. keeps.. booting..." width="992" height="532" /></span>

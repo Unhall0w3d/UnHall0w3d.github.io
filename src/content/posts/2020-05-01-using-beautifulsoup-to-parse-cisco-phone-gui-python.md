@@ -1,23 +1,11 @@
 ---
 title: "Using BS4 To Parse Cisco Phone WebGUI"
-layout: single
-classes: wide
-date: 2020-05-01T08:00:00-05:00
+description: "Use Python and BeautifulSoup to scrape Cisco IP Phone web interfaces for serial numbers, firmware loads, and network details."
+pubDate: 2020-05-01T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "python", "phone-config", "im-presence", "sql"]
+legacyCategories: ["Python", "Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Python
-  - Unified Communications
-  - Cisco
-tags:
-  - Automation
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Python
-  - Unified Communications
-  - Reports
-  - Cisco Phone
-  - Cisco Jabber
-  - Database
 ---
 
 ## When You Just Want Some BeautifulSoup

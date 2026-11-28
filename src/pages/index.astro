@@ -1,15 +1,16 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import OperatorLinks from "../components/OperatorLinks.astro";
-import PostList from "../components/PostList.astro";
-import MusicPlayer from "../components/MusicPlayer.astro";
-import RepositoryRelay from "../components/RepositoryRelay.astro";
-import { site } from "../config/site";
 import { getCollection } from "astro:content";
-import { sortPosts, type Post } from "../lib/posts";
+import Badge from "../components/Badge.astro";
+import RepositoryRelay from "../components/RepositoryRelay.astro";
+import SignalScope from "../components/SignalScope.astro";
+import { site } from "../config/site";
+import { pillarTitle } from "../config/taxonomy";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatPostDate, postExcerpt, postUrl, readingTime, sortPosts, type Post } from "../lib/posts";
 
 const allPosts = sortPosts((await getCollection("posts", ({ data }) => !data.draft)) as Post[]);
-const latestPosts = allPosts.slice(0, 5);
+const [leadPost, ...ledgerPosts] = allPosts.slice(0, 5);
+
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -17,111 +18,528 @@ const websiteJsonLd = {
   alternateName: ["The NOC Thoughts Blog", "nocthoughts.com"],
   url: `${site.url}/`
 };
+
+const toolboxCards = [
+  {
+    title: "Phone Config",
+    href: "/tools.html#phone-changes",
+    pill: "PREVIEW FIRST",
+    variant: "signal" as const,
+    summary: "CSV-driven CUCM BLF label updates, primary-line auto-answer, and offline JSONL journal review."
+  },
+  {
+    title: "Read-Only UC Audits",
+    href: "/tools.html#audits",
+    pill: "READ-ONLY SQL",
+    variant: "verified" as const,
+    summary: "Informix queries for speed dials, assigned extensions, voicemail profiles, and CSS route-pattern access."
+  },
+  {
+    title: "Backups & Guardrails",
+    href: "/tools.html#operations",
+    pill: "OBSERVE DEFAULT",
+    variant: "verified" as const,
+    summary: "Standardized Cisco UC DRS schedules, SmartZone HTTPS retrieval, and IOS XE stuck-call recovery."
+  }
+];
 ---
 
-<BaseLayout description="Field notes on Cisco UC, network automation, and local AI, with PowerShell and Python tools, CUCM queries, and fixes from the lab and the field.">
+<BaseLayout description="Field notes on Cisco UC, network automation, and local AI, with PowerShell and Python tools, CUCM queries, and interactive signal instruments.">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
-  <section class="hero">
-    <div class="hero-copy">
-      <p class="eyebrow"><span>TRANSMISSION ACTIVE</span> INFRASTRUCTURE FIELD LOG</p>
-      <h1 id="theme-headline">The rack hums. <em>One link stays dark.</em></h1>
-      <script is:inline>window.nocThoughtsTheme?.updateHeadline();</script>
-      <p class="hero-deck">
-        {site.tagline}. Hard-won fixes, useful scripts, and the operational
-        knowledge that usually appears only after something catches fire.
+
+  <section class="af-console-hero">
+    <div class="af-console-hero__copy">
+      <p class="af-eyebrow">
+        <span>FIELD LOG</span> // <a href="/experiments/aftertone.html">6.830 MHz</a>
       </p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="/tools.html">Find a tool</a>
-        <a class="button button-ghost" href="/posts.html">Read the field notes</a>
+      <h1 class="af-console-hero__title">Where network operations meet local AI.</h1>
+      <p class="af-console-hero__subtitle">
+        Verified Cisco UC procedures, preview-first automation scripts, and local multi-GPU agent engineering from the lab and the overnight shift.
+      </p>
+      <div class="af-console-hero__actions">
+        <a class="button button-primary" href="/tools.html">Explore Field Toolbox</a>
+        <a class="button button-ghost" href="/posts.html">Read Field Notes</a>
       </div>
     </div>
 
-    <aside class="signal-card" aria-label="Site signal status">
-      <div class="signal-card-header">
-        <span>SYSTEM SIGNAL</span>
-        <a class="signal-frequency" href="/experiments/aftertone.html" aria-label="Tune to 6.830 MHz in Aftertone">6.830 MHz</a>
-      </div>
-      <button class="signal-flip" type="button" aria-pressed="false" aria-label="Kenneth Perry. Show Soul's Chippy avatar">
-        <span class="signal-flip-inner">
-          <span class="signal-face signal-face-portrait" aria-hidden="true">
-            <img src={site.author.avatar} width="2048" height="2048" alt="" />
-            <span class="signal-face-label">OPERATOR // 01</span>
-            <span class="signal-flip-prompt">TAP TO DECRYPT ↻</span>
-          </span>
-          <span class="signal-face signal-face-soul" aria-hidden="true">
-            <chippy-pet state="idle" paused hide-label></chippy-pet>
-            <span class="signal-face-label">SOUL // CHIPPY</span>
-            <span class="signal-flip-prompt">RETURN TO OPERATOR ↻</span>
-          </span>
-        </span>
-      </button>
-      <dl class="signal-stats">
-        <div><dt>FOCUS</dt><dd>UC / AUTOMATION</dd></div>
-        <div><dt>ARCHIVE</dt><dd>{allPosts.length} ENTRIES</dd></div>
-        <div><dt>STATE</dt><dd class="online">ONLINE</dd></div>
-      </dl>
-    </aside>
-  </section>
-
-  <section class="tool-start" aria-labelledby="tool-start-title">
-    <header class="section-header">
-      <div><p class="eyebrow">THE FIELD TOOLBOX</p><h2 id="tool-start-title">What are you working on?</h2></div>
-      <a class="text-link" href="/tools.html">All tools &amp; downloads →</a>
-    </header>
-    <div class="tool-start-grid">
-      <a href="/tools.html#phone-changes"><strong>Update CUCM phones</strong><span>CSV-driven BLF labels and primary-line auto answer.</span></a>
-      <a href="/tools.html#audits"><strong>Audit a UC deployment</strong><span>Read-only SQL for extensions, speed dials, and calling access.</span></a>
-      <a href="/tools.html#operations"><strong>Handle operational tasks</strong><span>SmartZone backup retrieval and an analog call guard.</span></a>
+    <div class="af-console-hero__instrument">
+      <SignalScope postCount={allPosts.length} />
     </div>
   </section>
 
-  <section class="transmissions" aria-labelledby="transmissions-title">
-    <header class="section-header">
+  <section class="af-console-section" aria-labelledby="toolbox-strip-title">
+    <header class="af-section-head">
       <div>
-        <p class="eyebrow">LATEST SIGNALS</p>
-        <h2 id="transmissions-title">Recent transmissions</h2>
+        <p class="af-eyebrow">FIELD TOOLBOX // QUICK ENTRY</p>
+        <h2 id="toolbox-strip-title">Start with the safety posture</h2>
       </div>
-      <a class="text-link" href="/posts.html">View complete archive <span>→</span></a>
+      <a class="af-section-link" href="/tools.html">All tools &amp; downloads →</a>
     </header>
 
-    <PostList posts={latestPosts} numbered />
+    <div class="af-bento-3">
+      {toolboxCards.map((card) => (
+        <a class="af-bento-card" href={card.href}>
+          <div class="af-bento-card__top">
+            <h3>{card.title}</h3>
+            <Badge variant={card.variant} pill>{card.pill}</Badge>
+          </div>
+          <p>{card.summary}</p>
+          <span class="af-bento-card__cta">Open specification →</span>
+        </a>
+      ))}
+    </div>
   </section>
 
-  <div class="signal-utility-row">
-    <OperatorLinks />
+  <section class="af-console-section" aria-labelledby="lab-band-title">
+    <header class="af-section-head">
+      <div>
+        <p class="af-eyebrow">THE SIGNAL LAB // INTERACTIVE INSTRUMENTS</p>
+        <h2 id="lab-band-title">Hands-on telemetry &amp; audio studies</h2>
+      </div>
+      <a class="af-section-link" href="/experiments.html">Open Signal Lab →</a>
+    </header>
 
-    <MusicPlayer />
-  </div>
+    <div class="af-bento-3">
+      <a class="af-lab-mini" href="/experiments/observatory.html">
+        <div class="af-lab-mini__art af-lab-mini__art--obs" aria-hidden="true">
+          <svg viewBox="0 0 280 96" width="280" height="96">
+            <rect x="0" y="0" width="280" height="96" fill="#0B0D10" />
+            <line x1="16" y1="26" x2="264" y2="26" stroke="rgba(255,255,255,0.08)" />
+            <line x1="16" y1="52" x2="264" y2="52" stroke="rgba(255,255,255,0.08)" />
+            <line x1="16" y1="76" x2="264" y2="76" stroke="rgba(255,255,255,0.08)" />
+            <rect x="20" y="18" width="96" height="10" rx="2" fill="#38C6B8" opacity="0.85" />
+            <rect x="122" y="18" width="74" height="10" rx="2" fill="#E5A448" opacity="0.9" />
+            <rect x="20" y="44" width="154" height="10" rx="2" fill="#60A5FA" opacity="0.8" />
+            <polyline fill="none" stroke="#38C6B8" stroke-width="2" points="20,74 62,68 98,42 138,40 176,60 220,35 260,32" />
+          </svg>
+        </div>
+        <div class="af-lab-mini__body">
+          <span class="af-lab-mini__idx">EXP // 01 · TELEMETRY REPLAY</span>
+          <h3>Local LLM Observatory</h3>
+          <p>Trace VRAM allocation and worker handoff from a 9B model to Rapid rendering.</p>
+          <span class="af-bento-card__cta">Launch instrument →</span>
+        </div>
+      </a>
+
+      <a class="af-lab-mini" href="/experiments/kestrel-sound.html">
+        <div class="af-lab-mini__art af-lab-mini__art--sonar" aria-hidden="true">
+          <svg viewBox="0 0 280 96" width="280" height="96">
+            <rect x="0" y="0" width="280" height="96" fill="#071318" />
+            <circle cx="140" cy="48" r="14" fill="none" stroke="#38C6B8" stroke-opacity="0.85" stroke-width="1.5" />
+            <circle cx="140" cy="48" r="28" fill="none" stroke="#38C6B8" stroke-opacity="0.48" stroke-width="1.2" />
+            <circle cx="140" cy="48" r="42" fill="none" stroke="#38C6B8" stroke-opacity="0.24" stroke-width="1" />
+            <line x1="140" y1="48" x2="178" y2="24" stroke="#34D399" stroke-width="1.75" />
+            <circle cx="168" cy="30" r="3" fill="#E5A448" />
+            <circle cx="108" cy="62" r="2.5" fill="#34D399" />
+          </svg>
+        </div>
+        <div class="af-lab-mini__body">
+          <span class="af-lab-mini__idx">EXP // 02 · WEB AUDIO SONAR</span>
+          <h3>Kestrel Sound</h3>
+          <p>Sweep acoustic pulses across a submerged inlet to chart three bronze bells.</p>
+          <span class="af-bento-card__cta">Launch instrument →</span>
+        </div>
+      </a>
+
+      <a class="af-lab-mini" href="/experiments/aftertone.html">
+        <div class="af-lab-mini__art af-lab-mini__art--dial" aria-hidden="true">
+          <svg viewBox="0 0 280 96" width="280" height="96">
+            <rect x="0" y="0" width="280" height="96" fill="#12100E" />
+            <line x1="20" y1="54" x2="260" y2="54" stroke="rgba(229,164,72,0.3)" stroke-width="1" />
+            <g stroke="rgba(236,238,242,0.35)" stroke-width="1">
+              <line x1="36" y1="42" x2="36" y2="54" />
+              <line x1="68" y1="46" x2="68" y2="54" />
+              <line x1="100" y1="40" x2="100" y2="54" />
+              <line x1="132" y1="46" x2="132" y2="54" />
+              <line x1="164" y1="40" x2="164" y2="54" />
+              <line x1="196" y1="46" x2="196" y2="54" />
+              <line x1="228" y1="42" x2="228" y2="54" />
+            </g>
+            <line x1="118" y1="20" x2="118" y2="76" stroke="#E5A448" stroke-width="2" />
+            <circle cx="118" cy="24" r="3.5" fill="#E5A448" />
+          </svg>
+        </div>
+        <div class="af-lab-mini__body">
+          <span class="af-lab-mini__idx">EXP // 03 · SHORTWAVE RECEIVER</span>
+          <h3>Aftertone</h3>
+          <p>Tune across five lost calls on the band and log each intercepted transmission.</p>
+          <span class="af-bento-card__cta">Launch instrument →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="af-console-section" aria-labelledby="ledger-title">
+    <header class="af-section-head">
+      <div>
+        <p class="af-eyebrow">LATEST TRANSMISSIONS // ARCHIVE LEDGER</p>
+        <h2 id="ledger-title">Recent field notes</h2>
+      </div>
+      <a class="af-section-link" href="/posts.html">Complete archive ({allPosts.length}) →</a>
+    </header>
+
+    {leadPost && (
+      <article class="af-lead-post">
+        <div class="af-lead-post__meta">
+          <Badge variant="signal" pill>FEATURED DISPATCH</Badge>
+          <Badge variant="neutral" href={`/categories/${leadPost.data.pillar}.html`}>
+            {pillarTitle(leadPost.data.pillar)}
+          </Badge>
+          <time datetime={leadPost.data.pubDate.toISOString()}>
+            {formatPostDate(leadPost.data.pubDate)}
+          </time>
+          <span>{readingTime(leadPost)} min read</span>
+        </div>
+        <h3 class="af-lead-post__title">
+          <a href={postUrl(leadPost)}>{leadPost.data.title}</a>
+        </h3>
+        <p class="af-lead-post__summary">{postExcerpt(leadPost, 220)}</p>
+        <a class="af-bento-card__cta" href={postUrl(leadPost)}>Read full transmission →</a>
+      </article>
+    )}
+
+    <div class="af-ledger">
+      {ledgerPosts.map((post) => (
+        <article class="af-ledger__row">
+          <time class="af-ledger__date" datetime={post.data.pubDate.toISOString()}>
+            {formatPostDate(post.data.pubDate)}
+          </time>
+          <div class="af-ledger__pillar">
+            <Badge variant="neutral" href={`/categories/${post.data.pillar}.html`}>
+              {pillarTitle(post.data.pillar)}
+            </Badge>
+          </div>
+          <div class="af-ledger__main">
+            <h3><a href={postUrl(post)}>{post.data.title}</a></h3>
+            <p>{postExcerpt(post, 150)}</p>
+          </div>
+          <span class="af-ledger__read">{readingTime(post)} min</span>
+        </article>
+      ))}
+    </div>
+  </section>
 
   <RepositoryRelay />
 </BaseLayout>
 
-<script is:inline type="module" src="/assets/chippy/chippy.mjs"></script>
+<style is:global>
+  .af-eyebrow {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
 
-<script>
-  document.querySelectorAll<HTMLButtonElement>(".signal-flip").forEach((control) => {
-    const showFace = (showSoul: boolean, musicActive = false) => {
-      control.setAttribute("aria-pressed", String(showSoul));
-      control.toggleAttribute("aria-disabled", musicActive);
-      control.querySelector("chippy-pet")?.toggleAttribute("paused", !showSoul);
-      control.setAttribute(
-        "aria-label",
-        musicActive
-          ? "Soul's Chippy avatar. Music is playing."
-          : showSoul
-            ? "Soul's Chippy avatar. Show Kenneth Perry"
-            : "Kenneth Perry. Show Soul's Chippy avatar"
-      );
-    };
+  .af-eyebrow span {
+    color: var(--accent-signal-ink);
+  }
 
-    control.addEventListener("click", () => {
-      if (control.hasAttribute("aria-disabled")) return;
-      const flipped = control.getAttribute("aria-pressed") !== "true";
-      showFace(flipped);
-    });
+  .af-eyebrow a {
+    color: var(--accent-verified-ink);
+    text-decoration: none;
+  }
 
-    window.addEventListener("noc:ambient-playback", ((event: CustomEvent<{ playing: boolean }>) => {
-      showFace(event.detail.playing, event.detail.playing);
-    }) as EventListener);
-  });
-</script>
+  .af-eyebrow a:hover {
+    text-decoration: underline;
+  }
+
+  .af-section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .af-section-head h2 {
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    line-height: 1.15;
+  }
+
+  .af-section-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent-signal-ink);
+    text-decoration: none;
+  }
+
+  .af-section-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .af-console-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+    align-items: center;
+    padding-block: clamp(2rem, 5vw, 3.75rem);
+  }
+
+  .af-console-hero__title {
+    max-width: 16ch;
+    font-size: clamp(2.35rem, 4.8vw, 3.9rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .af-console-hero__subtitle {
+    max-width: 54ch;
+    margin: 1.1rem 0 0;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 1.3vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  .af-console-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.6rem;
+  }
+
+  .af-console-section {
+    padding-block: 2.25rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .af-bento-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .af-bento-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.15rem 1.2rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    text-decoration: none;
+    transition: border-color 140ms ease, background-color 140ms ease;
+  }
+
+  .af-bento-card:hover {
+    border-color: var(--accent-signal);
+    background: var(--bg-surface-elevated);
+  }
+
+  .af-bento-card__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .af-bento-card__top h3 {
+    font-size: 1.08rem;
+    color: var(--text-primary);
+  }
+
+  .af-bento-card p {
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .af-bento-card__cta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent-signal-ink);
+    text-decoration: none;
+  }
+
+  .af-lab-mini {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 140ms ease;
+  }
+
+  .af-lab-mini:hover {
+    border-color: var(--accent-verified);
+  }
+
+  .af-lab-mini__art {
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-code);
+  }
+
+  .af-lab-mini__art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .af-lab-mini__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.15rem 1.15rem;
+    flex: 1;
+  }
+
+  .af-lab-mini__idx {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .af-lab-mini__body h3 {
+    font-size: 1.08rem;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .af-lab-mini__body p {
+    margin: 0 0 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .af-lead-post {
+    padding: 1.35rem 1.4rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+  }
+
+  .af-lead-post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .af-lead-post__title {
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    line-height: 1.18;
+    margin-bottom: 0.55rem;
+  }
+
+  .af-lead-post__title a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .af-lead-post__title a:hover {
+    color: var(--accent-signal-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+  }
+
+  .af-lead-post__summary {
+    max-width: 72ch;
+    margin: 0 0 0.9rem;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .af-ledger {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    overflow: hidden;
+  }
+
+  .af-ledger__row {
+    display: grid;
+    grid-template-columns: 9.5rem 11.5rem minmax(0, 1fr) 4.5rem;
+    align-items: baseline;
+    gap: 0.75rem 1rem;
+    padding: 0.9rem 1.15rem;
+  }
+
+  .af-ledger__row + .af-ledger__row {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .af-ledger__row:hover {
+    background: var(--bg-surface-elevated);
+  }
+
+  .af-ledger__date,
+  .af-ledger__read {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .af-ledger__read {
+    text-align: right;
+  }
+
+  .af-ledger__main h3 {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 0.2rem;
+  }
+
+  .af-ledger__main h3 a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .af-ledger__main h3 a:hover {
+    color: var(--accent-signal-ink);
+    text-decoration: underline;
+  }
+
+  .af-ledger__main p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (max-width: 60rem) {
+    .af-console-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .af-bento-3 {
+      grid-template-columns: 1fr;
+    }
+
+    .af-ledger__row {
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+    }
+
+    .af-ledger__pillar {
+      grid-column: 1 / -1;
+    }
+
+    .af-ledger__main {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

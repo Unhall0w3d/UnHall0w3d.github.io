@@ -1,20 +1,11 @@
 ---
 title: "Voice Mail Profile SQL Queries"
-layout: single
-classes: wide
-date: 2022-02-27T20:30:00-05:00
+description: "Audit CUCM directory numbers and Voice Mail Profile assignments with SQL to catch misrouted voicemail pilot configurations."
+pubDate: 2022-02-27T20:30:00-05:00
+pillar: "automation-tooling"
+tags: ["unity-connection", "sql"]
+legacyCategories: ["SQL", "Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - SQL
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco
-  - Cisco Unity Connection
-  - Reports
-  - Unified Communications
-  - Database
-  - Unity Connection
 ---
 
 ## Another Audit Using SQL

@@ -45,8 +45,15 @@ for (const file of htmlFiles) {
   if (file === path.join(dist, "tools.html")) {
     const policy = html.indexOf('http-equiv="Content-Security-Policy"');
     const scripts = [...html.matchAll(/<script\b([^>]*)>/gi)];
-    if (policy < 0 || scripts.some((tag) => tag.index < policy || !/\bsrc="\/assets\/site-theme\.js"/.test(tag[1]))) {
-      failures.add("Tools must set its content security policy before scripts and load only the local theme script");
+    if (
+      policy < 0 ||
+      scripts.some(
+        (tag) =>
+          tag.index < policy ||
+          !/\bsrc="\/(?:assets\/(?:site-theme|command-palette)\.js|_astro\/[^"]+\.js)"/.test(tag[1])
+      )
+    ) {
+      failures.add("Tools must set its content security policy before scripts and load only local scripts");
     }
   }
   const attributes = html.matchAll(/\b(?:href|src|data-code-preview)=(?:"([^"]+)"|'([^']+)')/g);

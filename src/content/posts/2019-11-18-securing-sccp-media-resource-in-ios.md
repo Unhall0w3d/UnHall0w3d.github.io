@@ -1,22 +1,11 @@
 ---
 title: "Securing SCCP Media Resources in IOS"
-layout: single
-classes: wide
-date: 2019-11-18T08:00:00-05:00
+description: "Configure an IOS certificate authority and TLS trustpoint to register secure SCCP DSP media resources with CUCM."
+pubDate: 2019-11-18T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["ios-xe", "security", "cucm"]
+legacyCategories: ["Unified Communications", "Cisco", "IOS/XE"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - IOS/XE
-tags:
-  - Cisco Unified Border Element
-  - Cisco
-  - SCCP
-  - Media Resource
-  - Security
-  - Certificates
-  - Cisco Unified Communications Manager
-  - Unified Communications
 ---
 
 ## Gotta Secure Those Media Resources

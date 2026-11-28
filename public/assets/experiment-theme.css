@@ -8,7 +8,7 @@
   --experiment-warm: #f5be75;
   --experiment-cool: #c6b7f6;
 }
-:root[data-theme="aftertone"] {
+:root[data-theme="paper"] {
   color-scheme: light;
   --experiment-warm: #7c550a;
   --experiment-cool: #67519b;

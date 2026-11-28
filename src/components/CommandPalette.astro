@@ -1,0 +1,233 @@
+---
+// ⌘K / Ctrl+K Command Palette & Pagefind Static Full-Text Search (Spec §4.6)
+---
+
+<dialog
+  class="af-cmd"
+  id="af-command-palette"
+  data-command-dialog
+  data-pagefind-ignore
+  aria-label="Search site and run commands"
+>
+  <div class="af-cmd__panel" data-command-panel>
+    <div class="af-cmd__header">
+      <svg class="af-cmd__icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <circle cx="6.75" cy="6.75" r="4.75" />
+        <path d="M10.25 10.25L14 14" />
+      </svg>
+      <input
+        type="search"
+        class="af-cmd__input"
+        data-command-input
+        placeholder="Search articles, SQL, tools, or type > for commands…"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search query or command"
+        aria-controls="af-cmd-results"
+      />
+      <button type="button" class="af-cmd__esc" data-command-close aria-label="Close command palette">
+        ESC
+      </button>
+    </div>
+
+    <div
+      class="af-cmd__results"
+      id="af-cmd-results"
+      role="listbox"
+      aria-label="Search results and commands"
+      data-command-results
+    ></div>
+
+    <div class="af-cmd__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+      <span><kbd>↵</kbd> Open / Run</span>
+      <span><kbd>&gt;</kbd> Commands</span>
+      <span><kbd>Esc</kbd> Close</span>
+    </div>
+  </div>
+</dialog>
+
+<style is:global>
+  .af-cmd {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    width: min(40rem, calc(100vw - 1.5rem));
+    max-height: min(32rem, calc(100vh - 3rem));
+    margin: clamp(2.5rem, 9vh, 5.5rem) auto auto;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    overflow: hidden;
+  }
+
+  .af-cmd:not([open]) {
+    display: none;
+  }
+
+  .af-cmd::backdrop {
+    background: rgba(8, 10, 14, 0.68);
+    backdrop-filter: blur(4px);
+  }
+
+  .af-cmd__panel {
+    display: flex;
+    flex-direction: column;
+    max-height: min(32rem, calc(100vh - 3rem));
+  }
+
+  .af-cmd__header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 0.95rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-surface-elevated);
+  }
+
+  .af-cmd__icon {
+    fill: none;
+    stroke: var(--accent-signal-ink);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    flex: none;
+  }
+
+  .af-cmd__input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    outline: none;
+  }
+
+  .af-cmd__input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .af-cmd__esc {
+    padding: 0.22rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    cursor: pointer;
+  }
+
+  .af-cmd__results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .af-cmd__group-label {
+    padding: 0.4rem 0.55rem 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .af-cmd__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-primary);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+  }
+
+  .af-cmd__item:hover,
+  .af-cmd__item.is-active {
+    background: var(--bg-surface-elevated);
+    border-color: var(--accent-signal);
+  }
+
+  .af-cmd__item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+    width: 100%;
+  }
+
+  .af-cmd__item-title {
+    font-family: var(--font-display);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .af-cmd__item-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--accent-verified-ink);
+    white-space: nowrap;
+  }
+
+  .af-cmd__item-excerpt {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .af-cmd__item-excerpt mark {
+    background: var(--accent-signal-soft);
+    color: var(--accent-signal-ink);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  .af-cmd__empty {
+    padding: 1.5rem 0.75rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .af-cmd__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1.15rem;
+    padding: 0.55rem 0.95rem;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-surface-elevated);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .af-cmd__footer kbd {
+    padding: 1px 4px;
+    border-radius: 3px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font: inherit;
+  }
+</style>

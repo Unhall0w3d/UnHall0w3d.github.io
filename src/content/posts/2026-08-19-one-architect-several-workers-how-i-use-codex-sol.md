@@ -1,17 +1,10 @@
 ---
 title: "One Architect, Several Workers: How I Use Codex Sol"
-date: 2026-08-19T12:00:00-04:00
-categories:
-  - General
-  - Automation
-tags:
-  - Codex
-  - Artificial Intelligence
-  - Automation
-  - Local LLM
-  - Software Development
 description: "How I use Codex Sol at medium reasoning as the architect and integrator for bounded subagents, evidence-based trust, proportionate revalidation, and an optional local-model worker."
-draft: false
+pubDate: 2026-08-19T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["codex", "local-llm", "agent-workflows"]
+legacyCategories: ["General", "Automation"]
 ---
 
 > **November 15, 2026 update.** The [current Codex configuration](/2026/09/22/from-a-codex-prompt-to-an-agent-execution-system.html#current-configuration-november-15-2026)
