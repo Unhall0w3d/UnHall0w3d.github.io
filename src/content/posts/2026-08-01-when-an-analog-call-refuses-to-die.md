@@ -1,23 +1,15 @@
 ---
 title: "When an Analog Call Refuses to Die"
-date: 2026-08-01T12:00:00-04:00
-categories:
-  - Cisco
-  - IOS/XE
-  - Unified Communications
-  - Automation
-tags:
-  - Cisco
-  - IOS XE
-  - EEM
-  - Tcl
-  - Voice Gateway
-  - FXO
-  - FXS
-  - Automation
-  - Analog Voice
 description: "Building a conservative IOS XE EEM guard that can identify a genuinely stuck analog call, recover one exact voice port, and prove what happened without turning a timer into a blind automation hammer."
-draft: false
+pubDate: 2026-08-01T12:00:00-04:00
+pillar: "unified-communications"
+tags: ["ios-xe"]
+legacyCategories: ["Cisco", "IOS/XE", "Unified Communications", "Automation"]
+hasTool: true
+validation:
+  posture: "observe-default"
+  testedOn: "Cisco IOS XE EEM / Tcl v1.0.6 on FXO loop-start voice port"
+  limits: "Defaults to observe-only; state matchers must be validated per gateway and FXS ports are not equivalent."
 ---
 
 ## The Call Ended. The Port Disagreed.

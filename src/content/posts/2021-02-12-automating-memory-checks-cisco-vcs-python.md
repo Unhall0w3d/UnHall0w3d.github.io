@@ -1,21 +1,11 @@
 ---
 title: "Automating Memory Checks for Cisco VCS"
-layout: single
-classes: wide
-date: 2021-02-12T08:00:00-05:00
+description: "Refactor the Cisco VCS and Expressway Python memory checker for unattended scheduled runs and cleaner alerting."
+pubDate: 2021-02-12T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["expressway", "python"]
+legacyCategories: ["Unified Communications", "Cisco", "Python"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - Python
-tags:
-  - Cisco VCS
-  - Cisco Expressway
-  - Python
-  - Paramiko
-  - Unified Communications
-  - Cisco
-  - Telepresence
 ---
 
 ## Gotta Do It With Faster... With No Hands

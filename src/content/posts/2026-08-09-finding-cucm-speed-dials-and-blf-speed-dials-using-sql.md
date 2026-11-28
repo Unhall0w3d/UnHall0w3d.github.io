@@ -1,20 +1,15 @@
 ---
 title: "Finding CUCM Speed Dials and BLF Speed Dials Using SQL"
-date: 2026-08-09T14:00:00-04:00
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco UC
-  - CUCM
-  - Informix
-  - SQL
-  - Speed Dial
-  - BLF Speed Dial
 description: "Use one read-only CUCM SQL query to find phones with a Speed Dial or BLF Speed Dial configured for a specific extension, then verify labels after an ownership change."
-draft: false
+pubDate: 2026-08-09T14:00:00-04:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql", "phone-config"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
+hasTool: true
+validation:
+  posture: "read-only"
+  testedOn: "CUCM 15 Informix CLI & AXL executeSQLQuery"
+  limits: "Inspects configured speed-dial and DN-backed BLF tables only; does not modify phone button templates."
 ---
 
 ## When The Extension Changes Hands, But The Buttons Do Not

@@ -1,22 +1,14 @@
 ---
 title: "Why I Am Building Soul/"
-date: 2026-07-15T08:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Automation
-  - Linux
 description: "Why I started building Soul/, a local-first assistant designed around conversation, useful action, explicit approval, and human control."
+pubDate: 2026-07-15T08:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-slash-conversation-social.png"
 imageAlt: "Soul Slash interface illustrating a fictional, approval-gated Downloads cleanup conversation."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## Does The World Really Need Another AI Assistant?
@@ -27,7 +19,7 @@ It already feels like every company with a website, an application, or a suffici
 
 So naturally, I decided to build one too.
 
-The project is called [Soul/](https://github.com/Unhall0w3d/soul-slash), pronounced “Soul Slash.” The name is a little strange, the repository is already larger than I originally intended, and explaining it as “my local AI assistant project” is technically accurate in the same way that describing a data center as “a room with some computers” is technically accurate.
+The project is called **Soul/**, pronounced “Soul Slash.” The name is a little strange, the repository is already larger than I originally intended, and explaining it as “my local AI assistant project” is technically accurate in the same way that describing a data center as “a room with some computers” is technically accurate.
 
 It misses the part I actually care about.<!--more-->
 
@@ -163,9 +155,7 @@ Maybe Soul/ eventually becomes the assistant I have been looking for. Maybe the 
 
 Either way, it is worth finding out.
 
-The repository is available here:
-
-[github.com/Unhall0w3d/soul-slash](https://github.com/Unhall0w3d/soul-slash)
+*Status: The `soul-slash` repository is maintained privately; follow subsequent architecture dispatches in the [Soul/ tag archive](/tags/soul-slash.html).*
 
 I will write more about the architecture, the skill lifecycle, local models, memory, and the many ways a supposedly simple conversational feature can become an entire subsystem as the project develops.
 

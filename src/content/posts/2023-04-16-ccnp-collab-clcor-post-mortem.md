@@ -1,16 +1,11 @@
 ---
 title: "CCNP Collab CLCOR Post Mortem"
-layout: single
-classes: wide
-date: 2023-04-16T08:00:00-05:00
+description: "Reflections on passing the Cisco CCNP Collaboration CLCOR exam, study focus areas, and planning a daily-driver move to Linux."
+pubDate: 2023-04-16T08:00:00-05:00
+pillar: "field-log-craft"
+tags: ["cucm", "lab"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco
-  - Unified Communications
-  - General
 ---
 <span class="image fit"><img src="/assets/images/ccnpcollab.png" alt="CCNP Collaboration" width="346" height="346" /></span>
 

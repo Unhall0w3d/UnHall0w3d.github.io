@@ -1,0 +1,175 @@
+/* Aftertone Telemetry — Semantic Design Tokens & Typography Stack (Spec §2.1 & §2.2) */
+
+:root,
+[data-theme="aftertone"] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-canvas: #0E1013;
+  --bg-surface: #15181D;
+  --bg-surface-elevated: #1C2028;
+  --bg-code: #0B0D10;
+
+  /* Borders & Hairlines */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Typography Colors (WCAG 2.1 AA >= 4.5:1 across canvas, surface, elevated) */
+  --text-primary: #ECEEF2;
+  --text-secondary: #9CA3AF;
+  --text-muted: #848D9C;
+
+  /* Semantic Signal Accents */
+  --accent-signal: #E5A448;        /* Phosphor amber: active controls, CTAs, preview/caution */
+  --accent-signal-soft: rgba(229, 164, 72, 0.14);
+  --accent-signal-ink: #E5A448;
+  --text-on-signal: #0E1013;
+
+  --accent-verified: #38C6B8;      /* Signal teal: read-only, verified, sonar/AI telemetry */
+  --accent-verified-soft: rgba(56, 198, 184, 0.14);
+  --accent-verified-ink: #38C6B8;
+
+  --accent-danger: #E05D5D;        /* Destructive / error / incident */
+  --accent-danger-soft: rgba(224, 93, 93, 0.14);
+  --accent-danger-ink: #F28B8B;
+
+  /* Typography Families (Self-hosted via @fontsource) */
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+
+  /* Geometry & Layout */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+  --measure-prose: 66ch;
+  --container-max: 1280px;
+}
+
+[data-theme="paper"] {
+  /* Archival Warm Daylight Mode */
+  color-scheme: light;
+
+  --bg-canvas: #F5F3EE;
+  --bg-surface: #EBE7DF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-code: #17191C;              /* High-contrast dark terminal inset */
+
+  --border-subtle: rgba(23, 25, 28, 0.11);
+  --border-strong: rgba(23, 25, 28, 0.22);
+
+  --text-primary: #17191C;
+  --text-secondary: #4B525C;
+  --text-muted: #59606B;
+
+  --accent-signal: #9A4A12;        /* Terracotta amber (WCAG AA >= 4.85:1 on surfaces & >= 5.98:1 with white CTA text) */
+  --accent-signal-soft: rgba(154, 74, 18, 0.12);
+  --accent-signal-ink: #863E0C;
+  --text-on-signal: #FFFFFF;
+
+  --accent-verified: #0D6B63;      /* Deep signal teal (WCAG AA >= 5.05:1 on surfaces) */
+  --accent-verified-soft: rgba(13, 107, 99, 0.12);
+  --accent-verified-ink: #0B5D56;
+
+  --accent-danger: #B91C1C;
+  --accent-danger-soft: rgba(185, 28, 28, 0.11);
+  --accent-danger-ink: #991B1B;
+}
+
+[data-theme="polar"] {
+  /* High-Contrast Late-Night NOC Mode */
+  color-scheme: dark;
+
+  --bg-canvas: #080C14;
+  --bg-surface: #0F1624;
+  --bg-surface-elevated: #162033;
+  --bg-code: #05080E;
+
+  --border-subtle: rgba(148, 184, 232, 0.12);
+  --border-strong: rgba(148, 184, 232, 0.24);
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #8596AE;
+
+  --accent-signal: #60A5FA;
+  --accent-signal-soft: rgba(96, 165, 250, 0.15);
+  --accent-signal-ink: #7AB6FC;
+  --text-on-signal: #080C14;
+
+  --accent-verified: #34D399;
+  --accent-verified-soft: rgba(52, 211, 153, 0.15);
+  --accent-verified-ink: #34D399;
+
+  --accent-danger: #F87171;
+  --accent-danger-soft: rgba(248, 113, 113, 0.15);
+  --accent-danger-ink: #FCA5A5;
+}
+
+/* Optional Legacy Easter-Egg Themes (Unlockable strictly via ⌘K Command Palette) */
+[data-theme="cyberpunk"] {
+  color-scheme: dark;
+
+  --bg-canvas: #070913;
+  --bg-surface: #0E1324;
+  --bg-surface-elevated: #151D34;
+  --bg-code: #05070E;
+
+  --border-subtle: rgba(86, 242, 208, 0.14);
+  --border-strong: rgba(86, 242, 208, 0.28);
+
+  --text-primary: #EAF4F2;
+  --text-secondary: #A6BDBF;
+  --text-muted: #889FA3;
+
+  --accent-signal: #56F2D0;
+  --accent-signal-soft: rgba(86, 242, 208, 0.14);
+  --accent-signal-ink: #56F2D0;
+  --text-on-signal: #070913;
+
+  --accent-verified: #B79CFF;
+  --accent-verified-soft: rgba(183, 156, 255, 0.15);
+  --accent-verified-ink: #C9B5FF;
+
+  --accent-danger: #FF7A90;
+  --accent-danger-soft: rgba(255, 122, 144, 0.15);
+  --accent-danger-ink: #FF99AA;
+}
+
+[data-theme="moss-brass"] {
+  color-scheme: dark;
+
+  --bg-canvas: #121814;
+  --bg-surface: #19221C;
+  --bg-surface-elevated: #212D25;
+  --bg-code: #0C110E;
+
+  --border-subtle: rgba(215, 219, 199, 0.11);
+  --border-strong: rgba(235, 184, 104, 0.26);
+
+  --text-primary: #ECEEE2;
+  --text-secondary: #B4BDA9;
+  --text-muted: #939E88;
+
+  --accent-signal: #EBB868;
+  --accent-signal-soft: rgba(235, 184, 104, 0.14);
+  --accent-signal-ink: #EBB868;
+  --text-on-signal: #121814;
+
+  --accent-verified: #78C6A3;
+  --accent-verified-soft: rgba(120, 198, 163, 0.14);
+  --accent-verified-ink: #78C6A3;
+
+  --accent-danger: #E87D72;
+  --accent-danger-soft: rgba(232, 125, 114, 0.14);
+  --accent-danger-ink: #F29C93;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+}

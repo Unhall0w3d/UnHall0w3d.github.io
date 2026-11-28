@@ -1,22 +1,11 @@
 ---
 title: "Hyprland - NOCThoughts Dotfiles"
-layout: single
-classes: wide
-date: 2023-05-29T08:00:00-05:00
+description: "Touring a reproducible Arch Linux and Hyprland Wayland desktop configuration managed with Git, Zsh, and helper scripts."
+pubDate: 2023-05-29T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["python", "linux"]
+legacyCategories: ["General", "Python", "Automation", "Linux"]
 excerpt_separator: "<!--more-->"
-categories:
-  - General
-  - Python
-  - Automation
-  - Linux
-tags:
-  - Python
-  - Automation
-  - Linux
-  - Hyprland
-  - Git
-  - Zsh
-  - Paru
 ---
 
 ## A Closer Look At My Dotfiles

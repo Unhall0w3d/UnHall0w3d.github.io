@@ -1,0 +1,505 @@
+---
+import { site } from "../config/site";
+
+interface Props {
+  postCount: number;
+}
+
+const { postCount } = Astro.props;
+---
+
+<aside class="af-scope" data-signal-scope aria-label="Signal Console instrument panel">
+  <div class="af-scope__bar">
+    <div class="af-scope__telemetry">
+      <span class="af-scope__dot" aria-hidden="true"></span>
+      <span>SYS // 6.830 MHz</span>
+    </div>
+    <div class="af-scope__tabs" role="tablist" aria-label="Instrument display mode">
+      <button
+        type="button"
+        role="tab"
+        aria-selected="true"
+        data-scope-tab="scope"
+        class="af-scope__tab is-active"
+      >
+        Scope
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-scope-tab="operator"
+        class="af-scope__tab"
+      >
+        Operator
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-scope-tab="chippy"
+        class="af-scope__tab"
+      >
+        Chippy
+      </button>
+    </div>
+  </div>
+
+  <div class="af-scope__viewport">
+    <div class="af-scope__pane" data-scope-pane="scope">
+      <canvas
+        class="af-scope__canvas"
+        data-scope-canvas
+        width="520"
+        height="260"
+        role="img"
+        aria-label="Real-time 6.830 MHz carrier and harmonic telemetry oscilloscope"
+      ></canvas>
+      <div class="af-scope__hud" aria-hidden="true">
+        <span>CH1 // CARRIER +3.2 dBm</span>
+        <span data-scope-mode-readout>TRACE // LOCKED</span>
+      </div>
+    </div>
+
+    <div class="af-scope__pane af-scope__pane--portrait" data-scope-pane="operator" hidden>
+      <img
+        src={site.author.avatar}
+        width="720"
+        height="720"
+        alt="Kenneth Perry — Operator portrait"
+        loading="lazy"
+      />
+      <div class="af-scope__caption">
+        <span>OPERATOR // KENNETH PERRY</span>
+        <span>SYRACUSE, NY</span>
+      </div>
+    </div>
+
+    <div class="af-scope__pane af-scope__pane--portrait af-scope__pane--pixel" data-scope-pane="chippy" hidden>
+      <img
+        src="/assets/images/chippy-avatar.webp"
+        width="314"
+        height="314"
+        alt="Chippy — Soul local companion avatar"
+        loading="lazy"
+      />
+      <div class="af-scope__caption">
+        <span>COMPANION // SOUL CHIPPY</span>
+        <span>LOCAL ASSET VERIFIED</span>
+      </div>
+    </div>
+  </div>
+
+  <dl class="af-scope__stats">
+    <div>
+      <dt>Focus</dt>
+      <dd>UC · Automation · Local AI</dd>
+    </div>
+    <div>
+      <dt>Signals</dt>
+      <dd>{postCount} Indexed</dd>
+    </div>
+    <div>
+      <dt>Receiver</dt>
+      <dd><a href="/experiments/aftertone.html">Tune 6.830 MHz →</a></dd>
+    </div>
+  </dl>
+</aside>
+
+<script>
+  let cleanupScope: (() => void) | null = null;
+
+  function setupSignalScope() {
+    cleanupScope?.();
+    cleanupScope = null;
+
+    const root = document.querySelector<HTMLElement>("[data-signal-scope]");
+    if (!root) return;
+
+    const canvas = root.querySelector<HTMLCanvasElement>("[data-scope-canvas]");
+    const readout = root.querySelector<HTMLElement>("[data-scope-mode-readout]");
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>("[data-scope-tab]")];
+    const panes = [...root.querySelectorAll<HTMLElement>("[data-scope-pane]")];
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let activeTab = "scope";
+    let inView = true;
+    let rafId: number | null = null;
+    let lastFrame = 0;
+    let phase = 0;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const readPalette = () => {
+      const styles = getComputedStyle(document.documentElement);
+      return {
+        bg: styles.getPropertyValue("--bg-code").trim() || "#0B0D10",
+        grid: styles.getPropertyValue("--border-subtle").trim() || "rgba(255,255,255,0.08)",
+        signal: styles.getPropertyValue("--accent-signal").trim() || "#E5A448",
+        verified: styles.getPropertyValue("--accent-verified").trim() || "#38C6B8"
+      };
+    };
+
+    let palette = readPalette();
+
+    const drawFrame = (staticMode: boolean) => {
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.fillStyle = palette.bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // Architectural graticule grid
+      ctx.strokeStyle = palette.grid;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 52) {
+        ctx.moveTo(x + 0.5, 0);
+        ctx.lineTo(x + 0.5, h);
+      }
+      for (let y = 0; y <= h; y += 52) {
+        ctx.moveTo(0, y + 0.5);
+        ctx.lineTo(w, y + 0.5);
+      }
+      ctx.stroke();
+
+      const mid = h / 2;
+      const p = staticMode ? 1.15 : phase;
+
+      // Secondary harmonic trace (verified teal)
+      ctx.strokeStyle = palette.verified;
+      ctx.globalAlpha = 0.55;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 3) {
+        const norm = x / w;
+        const env = Math.sin(norm * Math.PI);
+        const y =
+          mid +
+          Math.sin(norm * Math.PI * 6 - p * 0.8) * 28 * env +
+          Math.cos(norm * Math.PI * 14 + p * 0.5) * 9 * env;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Primary carrier waveform (phosphor signal)
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = palette.signal;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = 0; x <= w; x += 2) {
+        const norm = x / w;
+        const env = 0.25 + 0.75 * Math.sin(norm * Math.PI);
+        const y =
+          mid +
+          Math.sin(norm * Math.PI * 4 + p) * 44 * env +
+          Math.sin(norm * Math.PI * 11 - p * 1.4) * 12 * env;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    };
+
+    const stopLoop = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    const tick = (now: number) => {
+      rafId = null;
+      if (activeTab !== "scope" || !inView || document.hidden || reducedMotion.matches) {
+        return;
+      }
+      if (now - lastFrame >= 33) {
+        lastFrame = now;
+        phase += 0.055;
+        drawFrame(false);
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const syncPlayback = () => {
+      stopLoop();
+      palette = readPalette();
+      if (readout) {
+        readout.textContent = reducedMotion.matches ? "TRACE // STATIC" : "TRACE // LOCKED";
+      }
+      if (activeTab !== "scope") return;
+      if (reducedMotion.matches || !inView || document.hidden) {
+        drawFrame(true);
+      } else {
+        drawFrame(false);
+        rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    const selectTab = (next: string) => {
+      activeTab = next;
+      for (const tab of tabs) {
+        const selected = tab.dataset.scopeTab === next;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.classList.toggle("is-active", selected);
+      }
+      for (const pane of panes) {
+        pane.hidden = pane.dataset.scopePane !== next;
+      }
+      syncPlayback();
+    };
+
+    const onTabClick = (event: Event) => {
+      const btn = event.currentTarget as HTMLButtonElement;
+      if (btn.dataset.scopeTab) selectTab(btn.dataset.scopeTab);
+    };
+
+    const onTabKeydown = (event: KeyboardEvent) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      event.preventDefault();
+      const idx = tabs.findIndex((t) => t.dataset.scopeTab === activeTab);
+      const dir = event.key === "ArrowRight" ? 1 : -1;
+      const nextBtn = tabs[(idx + dir + tabs.length) % tabs.length];
+      if (nextBtn?.dataset.scopeTab) {
+        selectTab(nextBtn.dataset.scopeTab);
+        nextBtn.focus();
+      }
+    };
+
+    for (const tab of tabs) {
+      tab.addEventListener("click", onTabClick);
+      tab.addEventListener("keydown", onTabKeydown);
+    }
+
+    const observer =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver((entries) => {
+            inView = entries.some((e) => e.isIntersecting);
+            syncPlayback();
+          })
+        : null;
+    observer?.observe(root);
+
+    const onVisibility = () => syncPlayback();
+    const onThemeChange = () => syncPlayback();
+    const onMotionChange = () => syncPlayback();
+
+    document.addEventListener("visibilitychange", onVisibility);
+    document.addEventListener("noc-theme-change", onThemeChange);
+    reducedMotion.addEventListener("change", onMotionChange);
+
+    syncPlayback();
+
+    cleanupScope = () => {
+      stopLoop();
+      observer?.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("noc-theme-change", onThemeChange);
+      reducedMotion.removeEventListener("change", onMotionChange);
+      for (const tab of tabs) {
+        tab.removeEventListener("click", onTabClick);
+        tab.removeEventListener("keydown", onTabKeydown);
+      }
+    };
+  }
+
+  setupSignalScope();
+  document.addEventListener("astro:page-load", setupSignalScope);
+  document.addEventListener("astro:before-swap", () => {
+    cleanupScope?.();
+    cleanupScope = null;
+  });
+</script>
+
+<style is:global>
+  .af-scope {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    overflow: hidden;
+  }
+
+  .af-scope__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-surface-elevated);
+  }
+
+  .af-scope__telemetry {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .af-scope__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-verified);
+  }
+
+  .af-scope__tabs {
+    display: inline-flex;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--bg-canvas);
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .af-scope__tab {
+    padding: 0.24rem 0.55rem;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .af-scope__tab:hover {
+    color: var(--text-primary);
+  }
+
+  .af-scope__tab.is-active {
+    background: var(--bg-surface-elevated);
+    color: var(--accent-signal-ink);
+  }
+
+  .af-scope__viewport {
+    position: relative;
+    background: var(--bg-code);
+    min-height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .af-scope__pane {
+    width: 100%;
+    position: relative;
+  }
+
+  .af-scope__pane[hidden] {
+    display: none;
+  }
+
+  .af-scope__canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .af-scope__hud {
+    position: absolute;
+    inset-inline: 0.8rem;
+    bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: #9CA3AF;
+    pointer-events: none;
+  }
+
+  .af-scope__pane--portrait {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    gap: 0.65rem;
+    min-height: 230px;
+  }
+
+  .af-scope__pane--portrait img {
+    width: 168px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-strong);
+  }
+
+  .af-scope__pane--pixel img {
+    image-rendering: pixelated;
+    background: #15181D;
+  }
+
+  .af-scope__caption {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: #9CA3AF;
+  }
+
+  .af-scope__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+  }
+
+  .af-scope__stats > div {
+    padding: 0.65rem 0.8rem;
+  }
+
+  .af-scope__stats > div + div {
+    border-left: 1px solid var(--border-subtle);
+  }
+
+  .af-scope__stats dt {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .af-scope__stats dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .af-scope__stats dd a {
+    color: var(--accent-signal-ink);
+    text-decoration: none;
+  }
+
+  .af-scope__stats dd a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 34rem) {
+    .af-scope__stats {
+      grid-template-columns: 1fr;
+    }
+
+    .af-scope__stats > div + div {
+      border-left: 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+  }
+</style>

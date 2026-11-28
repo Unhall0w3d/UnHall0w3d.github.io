@@ -1,23 +1,14 @@
 ---
 title: "Five Cores, One Soul/"
-date: 2026-08-06T08:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - GPU
-  - Automation
-  - Linux
 description: "Soul/ now operates through five distinct Cores, moving conversation, creative work, development reasoning, or complete resource release across local hardware without becoming five different assistants."
+pubDate: 2026-08-06T08:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "gpu-tuning", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/five-cores-one-soul-social.jpg"
 imageAlt: "Soul Slash Chat with the five-Core selector showing Soul, Soul-Lite, Creative, Free, and Dev Core."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## Three Was Apparently The Minimum

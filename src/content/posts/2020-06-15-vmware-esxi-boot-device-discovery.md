@@ -1,14 +1,11 @@
 ---
 title: "VMWare ESXi Boot Device Discovery"
-layout: single
-classes: wide
-date: 2020-06-15T08:00:00-05:00
+description: "Identify backing storage media and boot bank devices on VMware ESXi hosts using esxcli storage commands."
+pubDate: 2020-06-15T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["virtualization"]
+legacyCategories: ["VMWare"]
 excerpt_separator: "<!--more-->"
-categories:
-  - VMWare
-tags:
-  - VMWare
-  - VMWare ESXi
 ---
 
 ## We Need To Know Where It Boots From

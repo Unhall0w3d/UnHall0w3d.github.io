@@ -1,19 +1,11 @@
 ---
 title: "VMWare ESXi & VCSA Lab Setup"
-layout: single
-classes: wide
-date: 2019-08-09T08:00:00-05:00
+description: "Step-by-step guide to building a home Cisco Collaboration lab on VMware ESXi, vCenter Server Appliance, and Windows DNS."
+pubDate: 2019-08-09T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["virtualization", "lab", "linux"]
+legacyCategories: ["VMWare", "Microsoft Windows"]
 excerpt_separator: "<!--more-->"
-categories:
-  - VMWare
-  - Microsoft Windows
-tags:
-  - VMWare
-  - Lab
-  - VMWare ESXi
-  - DNS
-  - vCSA
-  - vCenter
 ---
 
 ## Time To Set Up A Lab

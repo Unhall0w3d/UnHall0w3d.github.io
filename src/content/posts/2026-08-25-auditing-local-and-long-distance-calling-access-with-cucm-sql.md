@@ -1,20 +1,15 @@
 ---
 title: "Auditing Local And Long-Distance Calling Access With CUCM SQL"
-date: 2026-08-25T20:30:00-04:00
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco UC
-  - CUCM
-  - Informix
-  - SQL
-  - Calling Search Space
-  - Route Pattern
-  - Forced Authorization Code
 description: "Use read-only CUCM SQL queries to audit configured phone reachability to local and long-distance route-pattern partitions, including FAC requirements."
+pubDate: 2026-08-25T20:30:00-04:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql", "dial-plan"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
+hasTool: true
+validation:
+  posture: "read-only"
+  testedOn: "CUCM 15 Informix CLI & AXL executeSQLQuery"
+  limits: "Evaluates CSS-to-route-pattern partition reachability and FAC flags; translation hops require review."
 ---
 
 ## A Calling Search Space Name Is Not An Answer

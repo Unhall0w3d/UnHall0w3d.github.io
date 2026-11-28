@@ -1,17 +1,11 @@
 ---
 title: "Calculating VMEM Usage on Cisco UC"
-layout: single
-classes: wide
-date: 2020-08-30T08:00:00-05:00
+description: "Calculate real vs. virtual memory utilization accurately on Linux-based Cisco UC VOS appliances when interpreting SNMP alerts."
+pubDate: 2020-08-30T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["unity-connection", "cucm", "uccx"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco Unity Connection
-  - Cisco Unified Communications Manager
-  - Cisco Unified Contact Center Express
-  - Cisco
 ---
 
 ## This Process Is Burned Into My Mind

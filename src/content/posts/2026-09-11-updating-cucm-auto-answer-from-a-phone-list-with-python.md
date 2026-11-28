@@ -1,17 +1,15 @@
 ---
 title: "Updating CUCM Auto Answer From a Phone List With Python"
-date: 2026-09-11T08:00:00-04:00
 description: "A CSV-driven Python script for checking specific CUCM phones and setting their primary directory numbers to Auto Answer with Speakerphone."
-categories:
-  - Cisco
-  - Automation
-tags:
-  - cucm
-  - axl
-  - python
-  - auto-answer
-  - csv
-draft: false
+pubDate: 2026-09-11T08:00:00-04:00
+pillar: "automation-tooling"
+tags: ["cucm", "axl", "python", "phone-config"]
+legacyCategories: ["Cisco", "Automation"]
+hasTool: true
+validation:
+  posture: "preview-first"
+  testedOn: "Python 3.10+, CUCM 15 lab (CIPC Line 1 apply + journal readback)"
+  limits: "AXL 15.0 supports apply; AXL 14.0 is preview-only; shared lines are flagged during preflight."
 ---
 
 The request was straightforward: take a specific set of phones and configure their primary lines for **Auto Answer with Speakerphone**.

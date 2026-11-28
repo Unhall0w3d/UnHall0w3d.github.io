@@ -1,15 +1,10 @@
 ---
 title: "Evaluating 15 AI Skills Against My Existing Codex Setup"
-date: 2026-11-23T12:00:00-05:00
 description: "Testing 15 AI skills against an existing Codex setup, tracing their upstream sources, and deciding which review, design, and operator handoff rules to keep."
-categories:
-  - General
-  - Automation
-tags:
-  - Codex
-  - Artificial Intelligence
-  - Automation
-  - Software Development
+pubDate: 2026-11-23T12:00:00-05:00
+pillar: "local-ai-agents"
+tags: ["codex", "local-llm", "agent-workflows"]
+legacyCategories: ["General", "Automation"]
 ---
 
 At 14:06, both nodes reported healthy on retry. At 14:07, the operator approved Gate 4. At 14:10, the ticket still showed Stage 4 in progress. Given those records, my usual Codex workflow told the operator to update the ticket, then run `route inspect`. With Roost’s runbook guidance, the agent asked the operator to settle the discrepancy and held the Stage 5 command.

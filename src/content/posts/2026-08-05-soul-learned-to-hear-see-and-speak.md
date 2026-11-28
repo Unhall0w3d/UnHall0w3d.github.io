@@ -1,25 +1,14 @@
 ---
 title: "Soul/ Learned to Hear, See, and Speak"
-date: 2026-08-05T12:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Voice
-  - Computer Vision
-  - Privacy
-  - Automation
-  - Linux
 description: "Soul/ can now hear bounded spoken requests, answer in a local voice, and inspect an explicitly provided picture or screen capture without turning perception into ambient surveillance or authority."
+pubDate: 2026-08-05T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-hear-see-speak-social.jpg"
 imageAlt: "Soul Slash Chat showing a local conversation about the boundary between perception and permission."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## Apparently It Needed Ears

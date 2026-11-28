@@ -1,18 +1,11 @@
 ---
 title: "Making ISOs Bootable for Lab Use"
-layout: single
-classes: wide
-date: 2019-08-14T08:00:00-05:00
+description: "Convert non-bootable Cisco Unified Communications patch ISOs into bootable lab installation media on Windows."
+pubDate: 2019-08-14T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["powershell", "lab", "virtualization"]
+legacyCategories: ["VMWare", "Unified Communications", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - VMWare
-  - Unified Communications
-  - Cisco
-tags:
-  - Powershell
-  - Lab
-  - Cisco
-  - VMWare
 ---
 
 ## For When You Just Need It To Boot

@@ -1,17 +1,11 @@
 ---
 title: "Automating mRemoteNG - PuTTY Session Creation"
-layout: single
-classes: wide
-date: 2023-05-23T08:00:00-05:00
+description: "Generate bulk SSH connection configs for mRemoteNG and PuTTY from device inventories using a Python automation script."
+pubDate: 2023-05-23T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["python", "linux"]
+legacyCategories: ["General", "Python", "Automation"]
 excerpt_separator: "<!--more-->"
-categories:
-  - General
-  - Python
-  - Automation
-tags:
-  - Python
-  - Automation
-  - SSH
 ---
 
 ## Automating mRemoteNG and PuTTY Session Creation: A Comprehensive Overview

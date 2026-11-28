@@ -1,19 +1,11 @@
 ---
 title: "Basic Commands For ESXi on UCS"
-layout: single
-classes: wide
-date: 2019-07-29T08:00:00-05:00
+description: "Essential ESXi CLI commands for host maintenance, CIMC preparation, and hardware inspection on Cisco UCS servers."
+pubDate: 2019-07-29T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["virtualization", "cisco-ucs"]
+legacyCategories: ["Cisco", "Cisco UCS", "VMWare"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Cisco UCS
-  - VMWare
-tags:
-  - Cisco
-  - VMWare
-  - VMware ESXi
-  - Cisco UCS
-  - Cisco UCS-C
 ---
 
 ## Let's talk about ESXi and UCS

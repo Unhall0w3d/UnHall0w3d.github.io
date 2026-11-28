@@ -1,16 +1,10 @@
 ---
 title: "NOC Thoughts, Rewired"
-date: 2026-07-13T08:00:00-04:00
-categories:
-  - General
-  - Web Development
-tags:
-  - Astro
-  - GitHub Pages
-  - NOC Thoughts
-  - Website
-  - General
 description: "A look at the rebuilt NOC Thoughts website, what survived the migration, and how to navigate the new signal."
+pubDate: 2026-07-13T08:00:00-04:00
+pillar: "field-log-craft"
+tags: ["astro"]
+legacyCategories: ["General", "Web Development"]
 ---
 
 ## Well, This Looks Different

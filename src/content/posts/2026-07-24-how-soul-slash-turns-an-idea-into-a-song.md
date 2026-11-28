@@ -1,22 +1,14 @@
 ---
 title: "How Soul/ Turns an Idea Into a Song"
-date: 2026-07-24T08:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Automation
-  - Linux
 description: "A closer look at how Soul/'s Core swapping, Music Studio, and Visual Studio turn a creative brief into reviewed audio, artwork, and a local video package."
+pubDate: 2026-07-24T08:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-slash-more-than-one-brain-social.png"
 imageAlt: "Soul Slash beside interconnected local computational Cores, an audio waveform, and a visual frame."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## Apparently The Chat Box Needed A Recording Studio

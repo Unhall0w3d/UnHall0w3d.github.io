@@ -1,16 +1,11 @@
 ---
 title: "Importance of Documentation - ESXi to VM"
-layout: single
-classes: wide
-date: 2019-09-04T08:00:00-05:00
+description: "Why accurate host-to-VM inventory documentation matters when locating critical workloads across standalone ESXi hosts during an outage."
+pubDate: 2019-09-04T08:00:00-05:00
+pillar: "field-log-craft"
+tags: ["virtualization"]
+legacyCategories: ["VMWare", "General"]
 excerpt_separator: "<!--more-->"
-categories:
-  - VMWare
-  - General
-tags:
-  - VMWare
-  - VMWare ESXi
-  - General
 ---
 
 ## Preface

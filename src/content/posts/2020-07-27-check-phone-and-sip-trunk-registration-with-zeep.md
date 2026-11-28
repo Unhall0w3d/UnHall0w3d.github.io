@@ -1,19 +1,11 @@
 ---
 title: "Check Phone and SIP Trunk using ZEEP"
-layout: single
-classes: wide
-date: 2020-07-27T08:00:00-05:00
+description: "Query CUCM phone and SIP trunk registration state cleanly in Python using the Zeep SOAP client against RISPort70."
+pubDate: 2020-07-27T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["python", "cucm", "axl"]
+legacyCategories: ["Cisco", "Python"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Python
-tags:
-  - Python
-  - Cisco Unified Communications Manager
-  - AXL
-  - Automation
-  - Unified Communications
-  - Cisco
 ---
 
 ## Let's Try Out ZEEP

@@ -1,18 +1,11 @@
 ---
 title: "Finding Orphaned Devices & Device Profiles"
-layout: single
-classes: wide
-date: 2019-11-06T08:00:00-05:00
+description: "Locate unassigned Cisco IP Phones and orphaned Extension Mobility Device Profiles in CUCM using SQL queries."
+pubDate: 2019-11-06T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco
-  - Cisco Unified Communications Manager
-  - Unified Communications
-  - Database
 ---
 
 ## A New Query Approaches

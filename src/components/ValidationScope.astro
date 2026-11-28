@@ -1,0 +1,101 @@
+---
+import Badge from "./Badge.astro";
+
+type Posture = "read-only" | "preview-first" | "observe-default" | "lab-verified" | "reference";
+
+interface Props {
+  posture: Posture;
+  testedOn: string;
+  limits?: string;
+}
+
+const { posture, testedOn, limits } = Astro.props;
+
+const POSTURE_MAP: Record<
+  Posture,
+  { label: string; variant: "verified" | "signal" | "neutral" }
+> = {
+  "read-only": { label: "READ-ONLY", variant: "verified" },
+  "preview-first": { label: "PREVIEW FIRST", variant: "signal" },
+  "observe-default": { label: "OBSERVE DEFAULT", variant: "verified" },
+  "lab-verified": { label: "LAB VERIFIED", variant: "verified" },
+  reference: { label: "REFERENCE", variant: "neutral" }
+};
+
+const meta = POSTURE_MAP[posture];
+---
+
+<aside class="af-validation-scope" aria-label="Operational validation scope">
+  <div class="af-validation-scope__bar">
+    <span class="af-validation-scope__kicker">VALIDATION SCOPE // SAFETY POSTURE</span>
+    <Badge variant={meta.variant} pill>{meta.label}</Badge>
+  </div>
+  <dl class="af-validation-scope__grid">
+    <div>
+      <dt>Tested environment</dt>
+      <dd>{testedOn}</dd>
+    </div>
+    {limits && (
+      <div>
+        <dt>Operating limits</dt>
+        <dd>{limits}</dd>
+      </div>
+    )}
+  </dl>
+</aside>
+
+<style is:global>
+  .af-validation-scope {
+    margin: 0 0 1.75rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+  }
+
+  .af-validation-scope__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-surface-elevated);
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+  }
+
+  .af-validation-scope__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .af-validation-scope__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.85rem 1.25rem;
+    margin: 0;
+    padding: 0.9rem 1rem;
+  }
+
+  .af-validation-scope__grid dt {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .af-validation-scope__grid dd {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+</style>

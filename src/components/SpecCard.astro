@@ -1,0 +1,129 @@
+---
+import Badge from "./Badge.astro";
+
+interface Props {
+  id?: string;
+  title: string;
+  href?: string;
+  version?: string;
+  postureLabel?: string;
+  postureVariant?: "neutral" | "signal" | "verified" | "danger";
+  description?: string;
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  href,
+  version,
+  postureLabel,
+  postureVariant = "verified",
+  description,
+  class: className
+} = Astro.props;
+
+const headingId = id ? `${id}-title` : undefined;
+---
+
+<article id={id} class:list={["af-spec-card", className]} aria-labelledby={headingId}>
+  <header class="af-spec-card__header">
+    <div class="af-spec-card__title-row">
+      <h3 id={headingId} class="af-spec-card__title">
+        {href ? <a href={href}>{title}</a> : title}
+      </h3>
+      <div class="af-spec-card__badges">
+        {version && <Badge variant="neutral" preserveCase>{version}</Badge>}
+        {postureLabel && <Badge variant={postureVariant} pill>{postureLabel}</Badge>}
+      </div>
+    </div>
+    {description && <p class="af-spec-card__desc">{description}</p>}
+  </header>
+
+  <div class="af-spec-card__body">
+    <slot />
+  </div>
+
+  {Astro.slots.has("footer") && (
+    <footer class="af-spec-card__footer">
+      <slot name="footer" />
+    </footer>
+  )}
+</article>
+
+<style is:global>
+  .af-spec-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    scroll-margin-top: 5rem;
+  }
+
+  .af-spec-card__header {
+    padding: 1.15rem 1.25rem 0.95rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .af-spec-card__title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 0.85rem;
+  }
+
+  .af-spec-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+  }
+
+  .af-spec-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .af-spec-card__title a:hover {
+    color: var(--accent-signal-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .af-spec-card__badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .af-spec-card__desc {
+    margin: 0.55rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .af-spec-card__body {
+    padding: 1rem 1.25rem;
+    flex: 1;
+  }
+
+  .af-spec-card__footer {
+    padding: 0.85rem 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-surface-elevated);
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem 1rem;
+  }
+</style>

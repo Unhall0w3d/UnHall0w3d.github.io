@@ -15,37 +15,27 @@
   gap: 1rem;
 }
 
-html[data-theme="aftertone"] .experiment-nav,
-html[data-theme="aftertone"] .experiment-nav__home {
-  --nav-accent: #b43c26;
+html[data-theme="paper"] .experiment-nav,
+html[data-theme="paper"] .experiment-nav__home {
+  --nav-accent: #B95E1B;
 }
 
-html[data-theme="aftertone-dark"] :is(.experiment-nav, .experiment-nav__home) {
-  --nav-accent: #f49b70;
+html[data-theme="aftertone"] :is(.experiment-nav, .experiment-nav__home) {
+  --nav-accent: #E5A448;
 }
 
-html[data-theme="aftertone-dark"] .mast .experiment-nav__home {
+html[data-theme="aftertone"] .mast .experiment-nav__home {
   --nav-accent: #963b26;
 }
 
 html[data-theme="polar"] .experiment-nav,
 html[data-theme="polar"] .experiment-nav__home {
-  --nav-accent: #76d4e8;
+  --nav-accent: #60A5FA;
 }
 
-html[data-theme="moss"] .experiment-nav,
-html[data-theme="moss"] .experiment-nav__home {
+html[data-theme="moss-brass"] .experiment-nav,
+html[data-theme="moss-brass"] .experiment-nav__home {
   --nav-accent: #d4a85c;
-}
-
-html[data-theme="darkroom"] .experiment-nav,
-html[data-theme="darkroom"] .experiment-nav__home {
-  --nav-accent: #e681ac;
-}
-
-html[data-theme="carbon"] .experiment-nav,
-html[data-theme="carbon"] .experiment-nav__home {
-  --nav-accent: #b7a3ff;
 }
 
 /* Aftertone keeps its own light paper masthead while the other two experiments

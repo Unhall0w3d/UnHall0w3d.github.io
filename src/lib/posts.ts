@@ -1,4 +1,5 @@
 import type { CollectionEntry } from "astro:content";
+import { PILLARS, pillarTitle, tagLabel, type Pillar } from "../config/taxonomy";
 
 export type Post = CollectionEntry<"posts">;
 
@@ -17,7 +18,7 @@ export function postSlug(post: Post) {
 
 export function postDateParts(post: Post) {
   const parts = Object.fromEntries(
-    dateParts.formatToParts(post.data.date).map(({ type, value }) => [type, value])
+    dateParts.formatToParts(post.data.pubDate).map(({ type, value }) => [type, value])
   );
 
   return {
@@ -74,7 +75,7 @@ export function readingTime(post: Post) {
 }
 
 export function sortPosts(posts: Post[]) {
-  return [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
 export function termSlug(term: string) {
@@ -87,19 +88,30 @@ export function termSlug(term: string) {
     .replace(/^-|-$/g, "");
 }
 
-export function getTerms(posts: Post[], field: "categories" | "tags") {
-  const terms = new Map<string, { label: string; posts: Post[] }>();
+export function getPillars(posts: Post[]): Array<{ slug: Pillar; title: string; posts: Post[] }> {
+  return PILLARS.map((slug) => ({
+    slug,
+    title: pillarTitle(slug),
+    posts: sortPosts(posts.filter((post) => post.data.pillar === slug))
+  }));
+}
+
+export function getCanonicalTags(posts: Post[]): Array<{ slug: string; label: string; posts: Post[] }> {
+  const terms = new Map<string, Post[]>();
 
   for (const post of posts) {
-    for (const term of post.data[field]) {
-      const slug = termSlug(term);
-      const existing = terms.get(slug) ?? { label: term.trim(), posts: [] };
-      if (!existing.posts.some((entry) => entry.id === post.id)) existing.posts.push(post);
+    for (const slug of post.data.tags) {
+      const existing = terms.get(slug) ?? [];
+      if (!existing.some((entry) => entry.id === post.id)) existing.push(post);
       terms.set(slug, existing);
     }
   }
 
-  return [...terms.values()]
-    .map(({ label, posts: entries }) => [label, entries] as [string, Post[]])
-    .sort(([a], [b]) => a.localeCompare(b));
+  return [...terms.entries()]
+    .map(([slug, entries]) => ({
+      slug,
+      label: tagLabel(slug),
+      posts: sortPosts(entries)
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 }

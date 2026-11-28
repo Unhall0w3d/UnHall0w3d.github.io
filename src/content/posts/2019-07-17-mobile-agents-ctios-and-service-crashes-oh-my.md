@@ -1,18 +1,11 @@
 ---
 title: "Mobile Agents, CTIOS, & Crashes"
-layout: single
-classes: wide
-date: 2019-07-17T08:00:00-05:00
+description: "Troubleshooting Severity-1 Contact Center CTIOS service crashes triggered by mobile agent configuration edge cases."
+pubDate: 2019-07-17T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["cucm", "uccx", "sql"]
+legacyCategories: ["SQL", "Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - SQL
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Cisco Unified Contact Center
-  - Unified Communications
 ---
 
 ## Today's Topic - Mobile Agents using CTIOS and some crashes.

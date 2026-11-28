@@ -1,18 +1,24 @@
 ---
 import { getCollection } from "astro:content";
+import { PILLAR_META } from "../../config/taxonomy";
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getTerms, termSlug, type Post } from "../../lib/posts";
+import { getPillars, type Post } from "../../lib/posts";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
-const categories = getTerms(posts, "categories");
+const pillars = getPillars(posts);
 ---
 
-<PageLayout title="Categories" description="The archive grouped by operational domain." eyebrow="SIGNAL CLASSIFICATION">
+<PageLayout
+  title="Operational pillars"
+  description="Field notes organized across five core engineering domains."
+  eyebrow="SIGNAL CLASSIFICATION // 5 PILLARS"
+>
   <div class="term-grid">
-    {categories.map(([category, entries]) => (
-      <a href={`/categories/${termSlug(category)}.html`}>
+    {pillars.map(({ slug, title, posts: entries }) => (
+      <a href={`/categories/${slug}.html`}>
         <span>{String(entries.length).padStart(2, "0")} signals</span>
-        <strong>{category}</strong>
+        <strong>{title}</strong>
+        <small>{PILLAR_META[slug].description}</small>
       </a>
     ))}
   </div>

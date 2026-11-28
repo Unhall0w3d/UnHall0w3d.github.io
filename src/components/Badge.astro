@@ -1,0 +1,85 @@
+---
+interface Props {
+  variant?: "neutral" | "signal" | "verified" | "danger";
+  pill?: boolean;
+  href?: string;
+  preserveCase?: boolean;
+  class?: string;
+}
+
+const {
+  variant = "neutral",
+  pill = false,
+  href,
+  preserveCase = false,
+  class: className
+} = Astro.props;
+
+const Tag = href ? "a" : "span";
+---
+
+<Tag
+  href={href}
+  class:list={[
+    "af-badge",
+    `af-badge--${variant}`,
+    { "af-badge--pill": pill, "af-badge--preserve-case": preserveCase, "af-badge--link": Boolean(href) },
+    className
+  ]}
+>
+  <slot />
+</Tag>
+
+<style is:global>
+  .af-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.52rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface-elevated);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .af-badge--pill {
+    border-radius: var(--radius-pill);
+    padding-inline: 0.6rem;
+  }
+
+  .af-badge--preserve-case {
+    text-transform: none;
+    letter-spacing: 0.01em;
+  }
+
+  .af-badge--signal {
+    background: var(--accent-signal-soft);
+    color: var(--accent-signal-ink);
+    border-color: color-mix(in srgb, var(--accent-signal) 34%, transparent);
+  }
+
+  .af-badge--verified {
+    background: var(--accent-verified-soft);
+    color: var(--accent-verified-ink);
+    border-color: color-mix(in srgb, var(--accent-verified) 34%, transparent);
+  }
+
+  .af-badge--danger {
+    background: var(--accent-danger-soft);
+    color: var(--accent-danger-ink);
+    border-color: color-mix(in srgb, var(--accent-danger) 34%, transparent);
+  }
+
+  .af-badge--link:hover {
+    border-color: var(--accent-signal);
+    color: var(--text-primary);
+  }
+</style>

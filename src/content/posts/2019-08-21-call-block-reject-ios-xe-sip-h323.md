@@ -1,17 +1,11 @@
 ---
 title: "Call Block or IOS/XE on SIP/H.323"
-layout: single
-classes: wide
-date: 2019-08-21T08:00:00-05:00
+description: "Configure inbound call blocking and translation reject rules on Cisco IOS XE SIP and H.323 voice gateways."
+pubDate: 2019-08-21T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["ios-xe"]
+legacyCategories: ["Cisco", "IOS/XE", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - IOS/XE
-  - Unified Communications
-tags:
-  - IOS/XE
-  - Cisco Unified Border Element
-  - Unified Communications
 ---
 
 ## Gotta Block Those Calls, Man

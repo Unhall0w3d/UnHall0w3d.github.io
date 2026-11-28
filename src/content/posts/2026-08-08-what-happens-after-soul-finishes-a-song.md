@@ -1,23 +1,14 @@
 ---
 title: "What Happens After Soul/ Finishes a Song"
-date: 2026-08-08T15:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Music Production
-  - Automation
-  - Linux
 description: "Generation is only the beginning. Soul/'s Music Studio carries a reviewed candidate through listening evidence, revision, visual binding, export, mix continuity, and a deliberately separate publication boundary."
+pubDate: 2026-08-08T15:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-slash-music-candidate-visual-companion.png"
 imageAlt: "Soul Slash Music Studio candidate with audio evidence and a reviewed visual companion bound to the exact song."
 imageWidth: 2595
 imageHeight: 1185
-draft: false
 ---
 
 ## The Model Stopped. The Work Did Not.

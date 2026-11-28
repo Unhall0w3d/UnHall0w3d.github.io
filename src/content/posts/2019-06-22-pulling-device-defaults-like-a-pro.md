@@ -1,18 +1,11 @@
 ---
 title: "Pulling Device Defaults Like A Pro"
-layout: single
-classes: wide
-date: 2019-06-21T08:00:00-05:00
+description: "Pull active CUCM Device Default firmware assignments via SQL for phone models currently deployed in the cluster."
+pubDate: 2019-06-21T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Database
-  - Unified Communications
 ---
 
 ## What Is Our Mission

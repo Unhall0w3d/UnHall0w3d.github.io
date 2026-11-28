@@ -1,21 +1,11 @@
 ---
 title: "UC & UCC Best Practice - LRO and IR on ESXi"
-layout: single
-classes: wide
-date: 2019-08-02T08:00:00-05:00
+description: "Verify and tune VMware ESXi Large Receive Offload (LRO) and Interrupt Remapping settings for Cisco UC and Contact Center VMs."
+pubDate: 2019-08-02T08:00:00-05:00
+pillar: "systems-infrastructure"
+tags: ["virtualization", "uccx", "cucm"]
+legacyCategories: ["VMWare", "Unified Communications", "Cisco Unified Contact Center", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - VMWare
-  - Unified Communications
-  - Cisco Unified Contact Center
-  - Cisco
-tags:
-  - VMWare
-  - VMWare ESXi
-  - Cisco
-  - Cisco Unified Contact Center
-  - Cisco Unified Communications Manager
-  - Unified Communications
 ---
 
 ## Let's Talk About Best Practices

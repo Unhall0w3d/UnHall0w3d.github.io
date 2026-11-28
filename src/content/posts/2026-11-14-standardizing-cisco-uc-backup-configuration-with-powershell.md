@@ -1,22 +1,15 @@
 ---
 title: "Standardizing Cisco UC Backup Configuration Across Managed Networks With PowerShell"
-date: 2026-11-14T12:00:00-05:00
 description: "Reusable site profiles, a saved preview plan, and an ordered replacement workflow for Cisco UC DRS backup devices and schedules."
-categories:
-  - Cisco
-  - Unified Communications
-  - Automation
-tags:
-  - Cisco UC
-  - Disaster Recovery System
-  - PowerShell
-  - OpenSSH
-  - SFTP
-  - CUCM
-  - Unity Connection
-  - Emergency Responder
-  - UCCX
-draft: false
+pubDate: 2026-11-14T12:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "backups", "powershell", "linux", "unity-connection", "emergency-responder"]
+legacyCategories: ["Cisco", "Unified Communications", "Automation"]
+hasTool: true
+validation:
+  posture: "preview-first"
+  testedOn: "PowerShell 7.7.0, CUCM 15 lab (0 preview writes, 12 verified CLI writes, 306 offline checks)"
+  limits: "v1.6.2-r5 testing candidate; non-CUCM apply, scheduled execution, and DRS restore remain unqualified."
 ---
 
 Configuring a Cisco UC backup schedule is familiar work. Add the SFTP destination, select the features, set the schedule, enable it, and check the result.

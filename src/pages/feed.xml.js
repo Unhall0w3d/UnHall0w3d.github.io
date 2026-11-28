@@ -10,13 +10,29 @@ export async function GET(context) {
     title: site.title,
     description: site.description,
     site: context.site,
-    items: posts.map((post) => ({
-      title: post.data.title,
-      description: postExcerpt(post),
-      pubDate: post.data.date,
-      link: postUrl(post),
-      categories: [...post.data.categories, ...post.data.tags]
-    })),
+    items: posts.map((post) => {
+      const rawCategories = [post.data.pillar, ...post.data.tags];
+      const seen = new Set();
+      const categories = [];
+      for (const label of rawCategories) {
+        const normalized = label.trim().toLowerCase();
+        if (seen.has(normalized)) {
+          throw new Error(
+            `Duplicate RSS category/tag label "${label}" on post "${post.id}"`
+          );
+        }
+        seen.add(normalized);
+        categories.push(label);
+      }
+
+      return {
+        title: post.data.title,
+        description: postExcerpt(post),
+        pubDate: post.data.pubDate,
+        link: postUrl(post),
+        categories
+      };
+    }),
     customData: `<language>en-us</language>`
   });
 }

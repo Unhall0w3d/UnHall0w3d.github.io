@@ -10,12 +10,13 @@ export async function getStaticPaths() {
     const date = postDateParts(post);
     const related = posts
       .filter((candidate) => candidate.id !== post.id)
-      .map((candidate) => ({
-        post: candidate,
-        score: candidate.data.categories.filter((category) => post.data.categories.includes(category)).length
-      }))
+      .map((candidate) => {
+        const samePillar = candidate.data.pillar === post.data.pillar ? 2 : 0;
+        const sharedTags = candidate.data.tags.filter((tag) => post.data.tags.includes(tag)).length;
+        return { post: candidate, score: samePillar + sharedTags };
+      })
       .filter(({ score }) => score > 0)
-      .sort((a, b) => b.score - a.score || b.post.data.date.valueOf() - a.post.data.date.valueOf())
+      .sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
       .slice(0, 3)
       .map(({ post: candidate }) => candidate);
 

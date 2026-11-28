@@ -1,19 +1,11 @@
 ---
 title: "Health Checks - CUBE/VGW - IOS/XE"
-layout: single
-classes: wide
-date: 2019-06-27T08:00:00-05:00
+description: "Pre- and post-change CLI health check commands for Cisco Unified Border Element (CUBE) and IOS XE voice gateways."
+pubDate: 2019-06-27T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["ios-xe", "health-checks"]
+legacyCategories: ["Cisco", "IOS/XE", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - IOS/XE
-  - Unified Communications
-tags:
-  - IOS/XE
-  - Health Checks
-  - Action Plan
-  - Cisco
-  - Cisco Unified Border Element
 ---
 
 ## 𝄞 This Is How We Do It 𝄞

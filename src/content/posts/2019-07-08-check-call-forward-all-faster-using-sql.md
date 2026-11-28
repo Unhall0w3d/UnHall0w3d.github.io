@@ -1,19 +1,11 @@
 ---
 title: "Check Call Forward Configs Using SQL"
-layout: single
-classes: wide
-date: 2019-07-08T08:00:00-05:00
+description: "Inspect Call Forward All, Busy, and No Answer destinations and Calling Search Spaces directly from the CUCM CLI with SQL."
+pubDate: 2019-07-08T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql", "dial-plan"]
+legacyCategories: ["SQL", "Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - SQL
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Reports
-  - Unified Communications
-  - Database
 ---
 
 ## How to Check CFWD Configs using SQL - Faster

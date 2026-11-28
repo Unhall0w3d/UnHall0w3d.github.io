@@ -1,22 +1,14 @@
 ---
 title: "Soul/ Is Taking Shape"
-date: 2026-07-17T08:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Automation
-  - Linux
 description: "A look at the recent evolution of Soul/, from persistent conversation and grounded research to Skill Studio, self-assessment, and carefully bounded self-augmentation."
+pubDate: 2026-07-17T08:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-slash-conversation-social.png"
 imageAlt: "Soul Slash interface illustrating a fictional, approval-gated conversation."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## That Escalated Quickly
@@ -196,6 +188,4 @@ Soul/ is still young. It still has rough edges, incomplete paths, and a backlog 
 
 But it is taking shape.
 
-The repository is available here:
-
-[github.com/Unhall0w3d/soul-slash](https://github.com/Unhall0w3d/soul-slash)
+*Status: The `soul-slash` repository is maintained privately; follow subsequent architecture dispatches in the [Soul/ tag archive](/tags/soul-slash.html).*

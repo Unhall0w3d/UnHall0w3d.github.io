@@ -1,22 +1,14 @@
 ---
 title: "Soul/ Has More Than One Brain Now"
-date: 2026-07-19T08:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Automation
-  - Linux
 description: "Soul/ can now move between local models, GPU architectures, and purpose-built Cores without leaving its identity, memory, or boundaries behind."
+pubDate: 2026-07-19T08:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-slash-more-than-one-brain-social.png"
 imageAlt: "Soul Slash beside three interconnected local computational Cores, an audio waveform, and a visual frame."
 imageWidth: 1200
 imageHeight: 630
-draft: false
 ---
 
 ## Apparently One Brain Was Not Complicated Enough
@@ -247,6 +239,4 @@ There is considerably more machinery now.
 
 Somehow, Soul/ feels more coherent because of it.
 
-The repository is available here:
-
-[github.com/Unhall0w3d/soul-slash](https://github.com/Unhall0w3d/soul-slash)
+*Status: The `soul-slash` repository is maintained privately; follow subsequent architecture dispatches in the [Soul/ tag archive](/tags/soul-slash.html).*

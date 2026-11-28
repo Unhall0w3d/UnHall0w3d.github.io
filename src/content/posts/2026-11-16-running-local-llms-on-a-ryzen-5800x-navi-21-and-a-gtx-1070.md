@@ -1,20 +1,10 @@
 ---
 title: "Running Local LLMs on a Ryzen 5800X, Navi 21, and a GTX 1070"
-date: 2026-11-16T12:00:00-05:00
 description: "My local LLM workstation, model placement and quantization, measured memory and throughput, thermal tuning, and llama.cpp runtime updates."
-categories:
-  - General
-  - Linux
-  - Automation
-tags:
-  - Local LLM
-  - llama.cpp
-  - GPU
-  - AMD
-  - NVIDIA
-  - OpenClaw
-  - OpenCode
-draft: false
+pubDate: 2026-11-16T12:00:00-05:00
+pillar: "local-ai-agents"
+tags: ["local-llm", "llama-cpp", "gpu-tuning", "agent-workflows"]
+legacyCategories: ["General", "Linux", "Automation"]
 ---
 
 The GTX 1070 in my workstation still has a job. In my usual setup it handles context compaction with a 2B model, leaving the AMD card free for most foreground work. For a couple of the larger models, I split layers across both cards. Embeddings stay on the CPU.

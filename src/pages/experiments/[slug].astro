@@ -1,0 +1,56 @@
+---
+import ExperimentLayout from "../../layouts/ExperimentLayout.astro";
+
+export function getStaticPaths() {
+  const documents = import.meta.glob<string>("../../experiments/*.html", {
+    query: "?raw",
+    import: "default",
+    eager: true
+  });
+
+  return Object.entries(documents).map(([filePath, rawHtml]) => {
+    const slug = filePath.split("/").pop()!.replace(/\.html$/, "");
+
+    const title =
+      rawHtml.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() ??
+      `${slug} — NOC Thoughts`;
+    const description =
+      rawHtml.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i)?.[1]?.trim() ??
+      `Interactive signal instrument: ${title}`;
+
+    const styles = [...rawHtml.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/gi)]
+      .map((m) => m[0])
+      .join("\n");
+
+    let bodyContent =
+      rawHtml
+        .match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1]
+        ?.replace("<!-- SITE_HEADER -->", "") ?? "";
+
+    // Scope inline experiment scripts inside an IIFE with data-astro-rerun so ClientRouter swaps cleanly
+    bodyContent = bodyContent.replace(
+      /<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi,
+      (_full, attrs, code) => `<script${attrs} data-astro-rerun>\n(() => {\n${code}\n})();\n</script>`
+    );
+
+    return {
+      params: { slug },
+      props: { slug, title, description, inlineStyles: styles, bodyContent }
+    };
+  });
+}
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  inlineStyles: string;
+  bodyContent: string;
+}
+
+const { slug, title, description, inlineStyles, bodyContent } = Astro.props;
+---
+
+<ExperimentLayout {slug} {title} {description} {inlineStyles}>
+  <Fragment set:html={bodyContent} />
+</ExperimentLayout>

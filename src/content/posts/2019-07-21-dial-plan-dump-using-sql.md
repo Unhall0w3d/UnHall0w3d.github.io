@@ -1,19 +1,11 @@
 ---
 title: "Dial Plan Dump using SQL"
-layout: single
-classes: wide
-date: 2019-07-21T08:00:00-05:00
+description: "Export assigned directory numbers, route patterns, and partition mappings from CUCM Informix tables using read-only SQL."
+pubDate: 2019-07-21T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql", "dial-plan"]
+legacyCategories: ["SQL", "Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - SQL
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Reports
-  - Unified Communications
-  - Database
 ---
 
 ## Context

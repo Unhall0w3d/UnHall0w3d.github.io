@@ -1,0 +1,296 @@
+---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import { ClientRouter } from "astro:transitions";
+import AmbientPlayer from "../components/AmbientPlayer.astro";
+import CommandPalette from "../components/CommandPalette.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { site } from "../config/site";
+import "../styles/tokens.css";
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  inlineStyles: string;
+}
+
+const { slug, title, description, inlineStyles } = Astro.props;
+const canonicalPath = Astro.url.pathname.replace(/index\.html$/, "") || "/";
+const canonical = new URL(canonicalPath, site.url);
+const socialImage = new URL(`/assets/images/experiments/${slug}.webp`, site.url);
+---
+
+<!doctype html>
+<html lang="en-US" data-theme="aftertone">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0E1013" />
+    <link rel="stylesheet" href="/assets/site-header.css" />
+    <link rel="stylesheet" href="/assets/experiment-theme.css" />
+    <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml" sizes="any" data-site-icon />
+    <script is:inline src="/assets/site-theme.js"></script>
+    <ClientRouter />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{title}</title>
+    <Fragment set:html={inlineStyles} />
+    <style is:global>
+      /* Shared Experiment Chrome & Sticky Mobile Action/Status Tray (Spec §4.4) */
+      .af-exp-shell {
+        position: relative;
+        min-width: 0;
+      }
+
+      .af-exp-tray {
+        position: sticky;
+        bottom: 0;
+        z-index: 45;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.65rem;
+        width: 100%;
+        padding: 0.55rem 0.9rem calc(0.55rem + env(safe-area-inset-bottom, 0px));
+        border-top: 1px solid var(--noc-border-strong);
+        background: color-mix(in srgb, var(--noc-surface) 94%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: var(--noc-text);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+      }
+
+      .af-exp-tray__left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        min-width: 0;
+      }
+
+      .af-exp-tray__back {
+        color: var(--noc-muted);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .af-exp-tray__back:hover {
+        color: var(--noc-accent);
+      }
+
+      .af-exp-tray__status {
+        color: var(--noc-text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .af-exp-tray__action {
+        padding: 0.42rem 0.72rem;
+        margin: 0;
+        border-radius: 4px;
+        border: 1px solid var(--noc-accent);
+        background: var(--noc-accent);
+        color: var(--text-on-signal);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .af-exp-tray__action[hidden] {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .af-exp-tray {
+          display: flex;
+        }
+      }
+
+      /* Fit Aftertone headline, receiver controls, and sticky final-state tray cleanly at 390x844 */
+      @media (max-width: 660px) {
+        [data-exp-slug="aftertone"] .mast {
+          height: 38px;
+        }
+
+        [data-exp-slug="aftertone"] .hero {
+          padding: 10px 0 8px;
+        }
+
+        [data-exp-slug="aftertone"] .hero h1 {
+          font-size: clamp(2rem, 8vw, 2.5rem);
+        }
+
+        [data-exp-slug="aftertone"] .hero p {
+          margin-top: 4px;
+          font-size: 0.92rem;
+          line-height: 1.35;
+        }
+
+        [data-exp-slug="aftertone"] .view {
+          aspect-ratio: 2.35;
+        }
+
+        [data-exp-slug="aftertone"] figcaption {
+          min-height: 36px;
+          padding: 5px 10px;
+        }
+
+        [data-exp-slug="aftertone"] .scene-title {
+          font-size: 1.05rem;
+        }
+
+        [data-exp-slug="aftertone"] .console {
+          padding: 10px 12px;
+        }
+
+        [data-exp-slug="aftertone"] .freq {
+          margin: 4px 0 2px;
+        }
+
+        [data-exp-slug="aftertone"] .message {
+          margin: 8px 0;
+          padding: 8px 10px;
+        }
+
+        [data-exp-slug="aftertone"] .actions button {
+          padding: 9px 10px;
+        }
+      }
+    </style>
+  </head>
+  <body data-exp-slug={slug}>
+    <a class="skip-link" href="#experiment-main">Skip to instrument</a>
+    <SiteHeader />
+
+    <div id="experiment-main" class="af-exp-shell" data-pagefind-body>
+      <slot />
+
+      <div class="af-exp-tray" data-exp-tray data-pagefind-ignore role="region" aria-label="Instrument progression status">
+        <div class="af-exp-tray__left">
+          <a class="af-exp-tray__back" href="/experiments.html">← Lab</a>
+          <span aria-hidden="true">·</span>
+          <span class="af-exp-tray__status" data-exp-tray-status>INSTRUMENT READY</span>
+        </div>
+        <button type="button" class="af-exp-tray__action" data-exp-tray-action hidden>
+          Connect 5 lines ↗
+        </button>
+      </div>
+    </div>
+
+    <CommandPalette />
+    <AmbientPlayer />
+    <SiteFooter />
+    <script is:inline type="module" src="/assets/command-palette.js"></script>
+
+    <script>
+      let cleanupExpTray: (() => void) | null = null;
+
+      function initExperimentTray() {
+        cleanupExpTray?.();
+        cleanupExpTray = null;
+
+        const tray = document.querySelector<HTMLElement>("[data-exp-tray]");
+        const statusEl = document.querySelector<HTMLElement>("[data-exp-tray-status]");
+        const actionBtn = document.querySelector<HTMLButtonElement>("[data-exp-tray-action]");
+        const slug = document.body.dataset.expSlug;
+        if (!tray || !statusEl || !actionBtn || !slug) return;
+
+        const observers: MutationObserver[] = [];
+        const watch = (el: Element | null, cb: () => void) => {
+          if (!el || !("MutationObserver" in window)) return;
+          const obs = new MutationObserver(cb);
+          obs.observe(el, { childList: true, attributes: true, characterData: true, subtree: true });
+          observers.push(obs);
+        };
+
+        if (slug === "aftertone") {
+          const countEl = document.getElementById("count");
+          const replyBtn = document.getElementById("reply") as HTMLButtonElement | null;
+          const lockEl = document.getElementById("lock");
+
+          const syncAftertone = () => {
+            const countText = countEl?.textContent?.trim() || "0 / 5 logged";
+            const lockText = lockEl?.textContent?.trim();
+            const unlocked = Boolean(replyBtn && !replyBtn.hidden);
+            statusEl.textContent = unlocked
+              ? "5 / 5 LOGGED · READY"
+              : `${countText.toUpperCase()}${lockText ? ` · ${lockText}` : ""}`;
+            actionBtn.hidden = !unlocked;
+            if (unlocked && replyBtn) {
+              actionBtn.textContent = replyBtn.textContent?.trim() || "Connect the five lines ↗";
+            }
+          };
+
+          const onActionClick = () => {
+            replyBtn?.click();
+            syncAftertone();
+          };
+          actionBtn.addEventListener("click", onActionClick);
+          watch(countEl, syncAftertone);
+          watch(replyBtn, syncAftertone);
+          watch(lockEl, syncAftertone);
+          syncAftertone();
+
+          cleanupExpTray = () => {
+            actionBtn.removeEventListener("click", onActionClick);
+            observers.forEach((o) => o.disconnect());
+          };
+          return;
+        }
+
+        if (slug === "kestrel-sound") {
+          const countEl = document.getElementById("count");
+          const syncSonar = () => {
+            const found = countEl?.textContent?.trim() || "0";
+            statusEl.textContent = `BELLS CHARTED // ${found} OF 3`;
+          };
+          watch(countEl, syncSonar);
+          syncSonar();
+        } else if (slug === "observatory") {
+          statusEl.textContent = "REPLAY // 9B → RAPID HANDOFF";
+        } else if (slug === "fold-register") {
+          const spec = document.getElementById("specimen");
+          const syncFold = () => {
+            statusEl.textContent = `SURFACE // ${(spec?.textContent || "PLEAT STUDY").toUpperCase()}`;
+          };
+          watch(spec, syncFold);
+          syncFold();
+        }
+
+        cleanupExpTray = () => {
+          observers.forEach((o) => o.disconnect());
+        };
+      }
+
+      initExperimentTray();
+      document.addEventListener("astro:page-load", initExperimentTray);
+      document.addEventListener("astro:before-swap", () => {
+        cleanupExpTray?.();
+        cleanupExpTray = null;
+      });
+    </script>
+  </body>
+</html>

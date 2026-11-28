@@ -1,21 +1,16 @@
 ---
 title: "RUCKUS SmartZone Backup Retriever"
 description: "Use PowerShell on Windows to pull RUCKUS SmartZone and vSZ backups over HTTPS, log results, and schedule retrieval without inbound FTP or SFTP."
-layout: single
-classes: wide
-date: 2026-07-01T08:00:00-05:00
+pubDate: 2026-07-01T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["smartzone", "powershell", "backups"]
+legacyCategories: ["PowerShell", "RUCKUS", "Automation"]
+hasTool: true
+validation:
+  posture: "read-only"
+  testedOn: "Windows PowerShell against RUCKUS SmartZone / vSZ HTTPS API"
+  limits: "Downloads controller backup archives over HTTPS; verify external repository revision before scheduling."
 excerpt_separator: "<!--more-->"
-categories:
-  - PowerShell
-  - RUCKUS
-  - Automation
-tags:
-  - ruckus
-  - smartzone
-  - vsz
-  - powershell
-  - backup
-  - automation
 ---
 
 ## Because Of Course Backups Got Weird

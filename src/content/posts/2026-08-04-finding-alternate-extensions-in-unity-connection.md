@@ -1,20 +1,10 @@
 ---
 title: "Finding Alternate Extensions in Unity Connection Using SQL"
-date: 2026-08-04T12:00:00-04:00
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unity Connection
-  - Cisco
-  - Cisco UC
-  - Database
-  - Informix
-  - SQL
-  - Alternate Extensions
 description: "Use a targeted Unity Connection SQL query to find the mailbox user holding a specific number as an alternate extension when it blocks new-user onboarding."
-draft: false
+pubDate: 2026-08-04T12:00:00-04:00
+pillar: "automation-tooling"
+tags: ["unity-connection", "cucm", "sql"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
 ---
 
 ## When The Extension Is Already In Use—Somewhere

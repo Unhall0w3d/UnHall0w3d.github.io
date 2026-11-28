@@ -1,21 +1,11 @@
 ---
 title: "Who has Jabber? Where are they?"
 description: "Use CUCM SQL to find Jabber users, their devices and device pools, service profiles, and assigned extensions."
-layout: single
-classes: wide
-date: 2020-02-20T08:00:00-05:00
+pubDate: 2020-02-20T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["cucm", "im-presence", "sql"]
+legacyCategories: ["Unified Communications", "SQL", "Cisco"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Unified Communications
-  - SQL
-  - Cisco
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco
-  - Cisco Jabber
-  - Database
-  - SQL
-  - Unified Communications
 ---
 
 ## Who Is Your Father And What Does He Do?

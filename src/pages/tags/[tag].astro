@@ -1,27 +1,66 @@
 ---
 import { getCollection } from "astro:content";
 import PostList from "../../components/PostList.astro";
+import { site } from "../../config/site";
+import { RETIRED_TAG_REDIRECTS } from "../../config/taxonomy";
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getTerms, sortPosts, termSlug, type Post } from "../../lib/posts";
+import { getCanonicalTags, type Post } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("posts", ({ data }) => !data.draft)) as Post[];
-  return getTerms(posts, "tags").map(([tag, entries]) => ({
-    params: { tag: termSlug(tag) },
-    props: { tag, posts: sortPosts(entries) }
+  const activePaths = getCanonicalTags(posts).map(({ slug, label, posts: entries }) => ({
+    params: { tag: slug },
+    props: {
+      label,
+      posts: entries,
+      redirectTo: undefined as string | undefined
+    }
   }));
+
+  const activeSlugs = new Set(activePaths.map((p) => p.params.tag));
+  const redirectPaths = Object.entries(RETIRED_TAG_REDIRECTS)
+    .filter(([slug]) => !activeSlugs.has(slug))
+    .map(([slug, redirectTo]) => ({
+      params: { tag: slug },
+      props: {
+        label: slug,
+        posts: [] as Post[],
+        redirectTo
+      }
+    }));
+
+  return [...activePaths, ...redirectPaths];
 }
 
-interface Props { tag: string; posts: Post[]; }
-const { tag, posts } = Astro.props;
+interface Props {
+  label: string;
+  posts: Post[];
+  redirectTo?: string;
+}
+
+const { label, posts, redirectTo } = Astro.props;
 const signalLabel = posts.length === 1 ? "signal" : "signals";
 ---
 
-<PageLayout
-  title={`Posts tagged ${tag}`}
-  description={`${posts.length} ${signalLabel} tagged ${tag}.`}
-  eyebrow="TAGGED TRANSMISSIONS"
-  robots={posts.length === 1 ? "noindex,follow" : undefined}
->
-  <PostList posts={posts} numbered />
-</PageLayout>
+{redirectTo ? (
+  <html lang="en-US">
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="refresh" content={`0;url=${redirectTo}`} />
+      <link rel="canonical" href={new URL(redirectTo, site.url).href} />
+      <title>Redirecting…</title>
+    </head>
+    <body>
+      <a href={redirectTo}>Continue to {redirectTo}</a>
+    </body>
+  </html>
+) : (
+  <PageLayout
+    title={`Posts tagged ${label}`}
+    description={`${posts.length} ${signalLabel} tagged ${label}.`}
+    eyebrow="TAGGED TRANSMISSIONS"
+    robots={posts.length === 1 ? "noindex,follow" : undefined}
+  >
+    <PostList posts={posts} numbered />
+  </PageLayout>
+)}

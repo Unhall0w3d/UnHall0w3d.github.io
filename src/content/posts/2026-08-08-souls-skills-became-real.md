@@ -1,23 +1,14 @@
 ---
 title: "Soul/'s Skills Became Real"
-date: 2026-08-08T12:00:00-04:00
-categories:
-  - General
-  - Automation
-  - Linux
-tags:
-  - Soul Slash
-  - Artificial Intelligence
-  - Local LLM
-  - Skills
-  - Automation
-  - Linux
 description: "Soul/ now has an inspectable production skill registry, a human-readable invocation guide, and a gated path for turning one missing capability into tested, reviewable behavior."
+pubDate: 2026-08-08T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["soul-slash", "local-llm", "agent-workflows", "linux"]
+legacyCategories: ["General", "Automation", "Linux"]
 image: "/assets/images/soul-skills-became-real-skill-studio.jpg"
 imageAlt: "Soul Slash Skill Studio showing the controlled proposal, Beta build, trial, and production approval workflow."
 imageWidth: 1270
 imageHeight: 714
-draft: false
 ---
 
 ## The Skills Were Always The Point

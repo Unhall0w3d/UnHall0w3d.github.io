@@ -1,19 +1,15 @@
 ---
 title: "Finding Active Phone Extensions And Voice Mail Profiles Using CUCM SQL"
-date: 2026-08-25T19:30:00-04:00
-categories:
-  - Unified Communications
-  - Cisco
-  - SQL
-tags:
-  - Cisco Unified Communications Manager
-  - Cisco UC
-  - CUCM
-  - Informix
-  - SQL
-  - Directory Number
-  - Voice Mail Profile
 description: "Use one read-only CUCM SQL query to inventory directory numbers assigned to phone-class devices, including their partitions and Voice Mail Profiles."
+pubDate: 2026-08-25T19:30:00-04:00
+pillar: "automation-tooling"
+tags: ["cucm", "sql", "dial-plan", "unity-connection"]
+legacyCategories: ["Unified Communications", "Cisco", "SQL"]
+hasTool: true
+validation:
+  posture: "read-only"
+  testedOn: "CUCM 15 Informix CLI & AXL executeSQLQuery"
+  limits: "Reports configured phone-class line appearances; live RISPort registration requires a separate check."
 ---
 
 ## When The Directory Number List Stops Matching Reality

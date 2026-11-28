@@ -1,16 +1,15 @@
 ---
 title: "From a Clever Codex Prompt to an Agent Execution System"
-date: 2026-09-22T12:00:00-04:00
 description: "How our Codex policy became shorter, split general and Soul-specific rules, and connected scoped roles to evidence checks while keeping model selection explicit."
-categories:
-  - General
-  - Automation
-tags:
-  - Codex
-  - Artificial Intelligence
-  - Subagents
-  - Software Development
-draft: false
+pubDate: 2026-09-22T12:00:00-04:00
+pillar: "local-ai-agents"
+tags: ["codex", "local-llm", "agent-workflows"]
+legacyCategories: ["General", "Automation"]
+hasTool: true
+validation:
+  posture: "reference"
+  testedOn: "Codex CLI 0.166.0 across 5 scoped role/model pairs"
+  limits: "Reference multi-agent configuration; confirm model availability and sandbox permissions in your client."
 ---
 
 Our first multi-agent configuration was mostly an `AGENTS.md` that told a strong primary model when to delegate, which worker to choose, and how to review the result. It was useful. It was also asking the model to remember a growing list of authority rules, handoff details, test expectations, and exceptions.

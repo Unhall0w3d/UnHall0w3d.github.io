@@ -1,21 +1,11 @@
 ---
 title: "Verify Trace Levels using SQL on Cisco UC"
-layout: single
-classes: wide
-date: 2020-10-22T08:00:00-05:00
+description: "Audit elevated SDI/SDL service trace levels across CUCM and Cisco UC VOS nodes via SQL before disk I/O degrades."
+pubDate: 2020-10-22T08:00:00-05:00
+pillar: "automation-tooling"
+tags: ["unity-connection", "cucm", "uccx", "emergency-responder", "sql"]
+legacyCategories: ["SQL", "Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - SQL
-  - Cisco
-  - Unified Communications
-tags:
-  - Cisco Unity Connection
-  - Cisco Unified Communications Manager
-  - Cisco Unified Contact Center Express
-  - Cisco Emergency Responder
-  - Database
-  - Cisco 
-  - Unified Communications
 ---
 
 ## Elevated Traces are Risky

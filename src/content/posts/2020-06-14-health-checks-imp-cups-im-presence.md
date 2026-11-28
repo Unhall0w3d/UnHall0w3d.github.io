@@ -1,19 +1,11 @@
 ---
 title: "Health Checks - IMP/CUPS - IM & Presence"
-layout: single
-classes: wide
-date: 2020-06-14T08:00:00-05:00
+description: "Pre- and post-maintenance CLI health check procedure for Cisco Unified IM and Presence (IM&P) clusters."
+pubDate: 2020-06-14T08:00:00-05:00
+pillar: "unified-communications"
+tags: ["health-checks", "im-presence"]
+legacyCategories: ["Cisco", "Unified Communications"]
 excerpt_separator: "<!--more-->"
-categories:
-  - Cisco
-  - Unified Communications
-tags:
-  - Health Checks
-  - Cisco
-  - Cisco Unified IM & Presence
-  - Unified Communications
-  - Cisco Jabber
-  - Action Plan
 ---
 
 ## 𝄞 This Is How We Do It 𝄞
