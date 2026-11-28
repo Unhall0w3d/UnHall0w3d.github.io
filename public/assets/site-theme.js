@@ -25,6 +25,8 @@
     const key = Object.hasOwn(themes, value) ? value : "aftertone-dark";
     const changed = root.dataset.theme !== key;
     root.dataset.theme = key;
+    const icon = document.querySelector("link[data-site-icon]");
+    if (icon) icon.href = key === "aftertone-dark" ? "/favicon.svg?v=3" : "/assets/trace-relay/" + key + ".svg";
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themes[key].color);
     const picker = document.getElementById("site-theme");
     if (picker) picker.value = key;

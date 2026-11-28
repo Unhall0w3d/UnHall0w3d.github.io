@@ -25,12 +25,9 @@
   <rect width="1200" height="630" fill="url(#grid)"/>
   <path d="M0 48h710l24 24h466M0 582h438l22-22h740" fill="none" stroke="#d8a92f" stroke-opacity=".62" stroke-width="2"/>
   <path d="M0 52h510M790 578h410" fill="none" stroke="#24d9e9" stroke-opacity=".78" stroke-width="3"/>
-  <g transform="translate(98 151)" fill="none" stroke-linejoin="round">
-    <path d="M138 0 258 70v140l-120 70L18 210V70Z" stroke="#d8a92f" stroke-width="5"/>
-    <path d="m79 188 59-105 59 105M88 151h100" stroke="#70f3ef" stroke-width="9" filter="url(#glow)"/>
-    <circle cx="138" cy="140" r="113" stroke="#24d9e9" stroke-opacity=".28" stroke-width="2"/>
-    <circle cx="138" cy="140" r="88" stroke="#d8a92f" stroke-opacity=".28" stroke-width="2" stroke-dasharray="7 12"/>
-  </g>
+  <svg x="96" y="151" width="280" height="280" viewBox="0 0 16 16">
+    <path d="M1 8h3l3-3h3l3 3h2M4 8l3 3h3l3-3" fill="none" stroke="#56f2d0" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
   <g transform="translate(440 178)">
     <text x="0" y="0" fill="#51e7ee" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" letter-spacing="5">TRANSMISSION ACTIVE // SIGNAL 01</text>
     <text x="0" y="105" fill="#edf8f5" font-family="Georgia, 'Times New Roman', serif" font-size="84" letter-spacing="2">NOC THOUGHTS</text>
